@@ -71,7 +71,7 @@ const Contact = () => {
     <section id="contact" className="py-20 md:py-32">
       <div className="container mx-auto px-6 md:px-12">
         <div className="text-center mb-16 md:max-w-2xl mx-auto">
-          <span className="block text-sm font-medium text-primary mb-3">Contact Us</span>
+          <span className="block text-sm font-medium text-accent mb-3">Contact Us</span>
           <h2 className="text-3xl md:text-4xl font-semibold mb-6">Let's start a conversation</h2>
           <p className="text-muted-foreground text-lg">
             Have a project in mind or want to learn more about how we can help your business? We'd love to hear from you.

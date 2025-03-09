@@ -19,7 +19,7 @@ const services = [
   {
     icon: <PenTool className="h-8 w-8" />,
     title: 'Brand Identity',
-    description: 'Developing cohesive visual systems that communicate your brand's unique value proposition.',
+    description: 'Developing cohesive visual systems that communicate your brand\'s unique value proposition.',
     features: ['Logo Design', 'Visual Systems', 'Brand Guidelines', 'Marketing Collateral']
   },
   {

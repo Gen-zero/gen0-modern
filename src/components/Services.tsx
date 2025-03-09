@@ -33,20 +33,20 @@ const services = [
 const ServiceCard = ({ service, index }: { service: typeof services[0], index: number }) => {
   return (
     <div 
-      className="service-card h-full flex flex-col bg-white rounded-xl p-6 md:p-8 shadow-sm border border-border/50"
+      className="service-card h-full flex flex-col rounded-xl p-6 md:p-8 shadow-sm border border-primary/20"
       style={{ animationDelay: `${index * 0.1}s` }}
     >
-      <div className="mb-6 p-3 rounded-lg bg-primary/5 w-fit">
+      <div className="mb-6 p-3 rounded-lg bg-primary/15 w-fit text-accent">
         {service.icon}
       </div>
       <h3 className="text-xl font-semibold mb-3">{service.title}</h3>
       <p className="text-muted-foreground mb-6">{service.description}</p>
       <div className="mt-auto">
-        <h4 className="font-medium text-sm mb-3">Capabilities</h4>
+        <h4 className="font-medium text-sm mb-3 text-accent">Capabilities</h4>
         <ul className="space-y-2">
           {service.features.map((feature, idx) => (
             <li key={idx} className="flex items-center text-sm">
-              <span className="h-1.5 w-1.5 rounded-full bg-primary mr-2"></span>
+              <span className="h-1.5 w-1.5 rounded-full bg-secondary mr-2"></span>
               {feature}
             </li>
           ))}
@@ -90,10 +90,10 @@ const Services = () => {
   }, [currentIndex, cardsToShow]);
 
   return (
-    <section id="services" className="py-20 md:py-32 bg-secondary/30">
+    <section id="services" className="py-20 md:py-32 bg-muted/30">
       <div className="container mx-auto px-6 md:px-12">
         <div className="mb-16 md:max-w-2xl">
-          <span className="block text-sm font-medium text-primary mb-3">Our Services</span>
+          <span className="block text-sm font-medium text-accent mb-3">Our Services</span>
           <h2 className="text-3xl md:text-4xl font-semibold mb-6">Comprehensive solutions for your digital needs</h2>
           <p className="text-muted-foreground text-lg">
             We offer a full range of services to help businesses establish a strong digital presence and achieve their goals.
@@ -101,8 +101,8 @@ const Services = () => {
         </div>
         
         <div className="relative overflow-hidden">
-          <div className="absolute top-0 bottom-0 left-0 w-8 bg-gradient-to-r from-secondary/30 to-transparent z-10"></div>
-          <div className="absolute top-0 bottom-0 right-0 w-8 bg-gradient-to-l from-secondary/30 to-transparent z-10"></div>
+          <div className="absolute top-0 bottom-0 left-0 w-8 bg-gradient-to-r from-background to-transparent z-10"></div>
+          <div className="absolute top-0 bottom-0 right-0 w-8 bg-gradient-to-l from-background to-transparent z-10"></div>
           
           <div className="relative overflow-hidden">
             <div 
@@ -128,7 +128,7 @@ const Services = () => {
               size="icon" 
               onClick={handlePrev} 
               disabled={currentIndex === 0}
-              className="h-10 w-10 rounded-full"
+              className="h-10 w-10 rounded-full border-accent/50 text-accent hover:bg-accent/10 hover:text-accent"
               aria-label="Previous service"
             >
               <ArrowLeft className="h-4 w-4" />
@@ -138,7 +138,7 @@ const Services = () => {
               size="icon" 
               onClick={handleNext} 
               disabled={currentIndex === maxIndex}
-              className="h-10 w-10 rounded-full"
+              className="h-10 w-10 rounded-full border-accent/50 text-accent hover:bg-accent/10 hover:text-accent"
               aria-label="Next service"
             >
               <ArrowRight className="h-4 w-4" />

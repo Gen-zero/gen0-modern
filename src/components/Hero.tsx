@@ -54,9 +54,9 @@ const Hero = () => {
           <div className="absolute inset-0 flex flex-col items-center justify-center text-center px-8">
             <h2 className="text-4xl md:text-6xl font-bold text-white">
               Let us{' '}
-              <span className={`inline-block relative ${isGlitching ? 'terminal-text' : 'transition-all duration-300'}`} style={{
+              <span className={`inline-block relative ${isGlitching ? 'word-shuffle' : 'transition-all duration-300'}`} style={{
                 minWidth: '180px'
-              }} data-text={words[currentWordIndex]}>
+              }}>
                 {words[currentWordIndex]}
               </span>
               {' '}for you

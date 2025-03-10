@@ -1,40 +1,53 @@
-
 import { ArrowRight } from 'lucide-react';
 import { Button } from './ui/button';
 import { Input } from './ui/input';
-
 const Footer = () => {
   const year = new Date().getFullYear();
-  
-  const quickLinks = [
-    { name: 'Home', href: '#home' },
-    { name: 'Services', href: '#services' },
-    { name: 'Projects', href: '#projects' },
-    { name: 'About', href: '#about' },
-    { name: 'Contact', href: '#contact' }
-  ];
-  
-  const services = [
-    { name: 'UI/UX Design', href: '#' },
-    { name: 'Web Development', href: '#' },
-    { name: 'Brand Identity', href: '#' },
-    { name: 'Digital Strategy', href: '#' }
-  ];
-  
-  const legal = [
-    { name: 'Privacy Policy', href: '#' },
-    { name: 'Terms of Service', href: '#' },
-    { name: 'Cookie Policy', href: '#' }
-  ];
-
-  return (
-    <footer className="bg-background border-t border-border">
+  const quickLinks = [{
+    name: 'Home',
+    href: '#home'
+  }, {
+    name: 'Services',
+    href: '#services'
+  }, {
+    name: 'Projects',
+    href: '#projects'
+  }, {
+    name: 'About',
+    href: '#about'
+  }, {
+    name: 'Contact',
+    href: '#contact'
+  }];
+  const services = [{
+    name: 'UI/UX Design',
+    href: '#'
+  }, {
+    name: 'Web Development',
+    href: '#'
+  }, {
+    name: 'Brand Identity',
+    href: '#'
+  }, {
+    name: 'Digital Strategy',
+    href: '#'
+  }];
+  const legal = [{
+    name: 'Privacy Policy',
+    href: '#'
+  }, {
+    name: 'Terms of Service',
+    href: '#'
+  }, {
+    name: 'Cookie Policy',
+    href: '#'
+  }];
+  return <footer className="bg-background border-t border-border">
       <div className="container mx-auto px-6 py-12 md:py-16">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
           <div className="lg:col-span-2">
-            <a href="#" className="block text-2xl font-semibold tracking-tight mb-4">
-              SKYLINE
-            </a>
+            <a href="#" className="block text-2xl font-semibold tracking-tight mb-4">Gen0
+          </a>
             <p className="text-muted-foreground mb-6 max-w-md">
               We create digital experiences that are beautiful, functional, and designed to help your business grow.
             </p>
@@ -52,46 +65,31 @@ const Footer = () => {
           <div>
             <h3 className="text-sm font-medium mb-4">Quick Links</h3>
             <ul className="space-y-2">
-              {quickLinks.map((link) => (
-                <li key={link.name}>
-                  <a 
-                    href={link.href} 
-                    className="text-muted-foreground hover:text-foreground transition-colors"
-                  >
+              {quickLinks.map(link => <li key={link.name}>
+                  <a href={link.href} className="text-muted-foreground hover:text-foreground transition-colors">
                     {link.name}
                   </a>
-                </li>
-              ))}
+                </li>)}
             </ul>
           </div>
           
           <div>
             <h3 className="text-sm font-medium mb-4">Services</h3>
             <ul className="space-y-2">
-              {services.map((service) => (
-                <li key={service.name}>
-                  <a 
-                    href={service.href} 
-                    className="text-muted-foreground hover:text-foreground transition-colors"
-                  >
+              {services.map(service => <li key={service.name}>
+                  <a href={service.href} className="text-muted-foreground hover:text-foreground transition-colors">
                     {service.name}
                   </a>
-                </li>
-              ))}
+                </li>)}
             </ul>
             
             <h3 className="text-sm font-medium mt-8 mb-4">Legal</h3>
             <ul className="space-y-2">
-              {legal.map((item) => (
-                <li key={item.name}>
-                  <a 
-                    href={item.href} 
-                    className="text-muted-foreground hover:text-foreground transition-colors"
-                  >
+              {legal.map(item => <li key={item.name}>
+                  <a href={item.href} className="text-muted-foreground hover:text-foreground transition-colors">
                     {item.name}
                   </a>
-                </li>
-              ))}
+                </li>)}
             </ul>
           </div>
         </div>
@@ -119,8 +117,6 @@ const Footer = () => {
           </div>
         </div>
       </div>
-    </footer>
-  );
+    </footer>;
 };
-
 export default Footer;

@@ -6,30 +6,46 @@ const words = ['Build', 'Code', 'Design', 'Ideate'];
 
 const Hero = () => {
   const [currentWordIndex, setCurrentWordIndex] = useState(0);
-  const [isGlitching, setIsGlitching] = useState(false);
+  const [displayedWord, setDisplayedWord] = useState(words[0]);
   const intervalRef = useRef<NodeJS.Timeout | null>(null);
 
-  useEffect(() => {
-    // Create word changing interval
-    intervalRef.current = setInterval(() => {
-      setIsGlitching(true);
-
-      // Change word after a short delay to allow for glitch effect
-      setTimeout(() => {
-        setCurrentWordIndex(prev => (prev + 1) % words.length);
-
-        // Remove glitch class after word change
-        setTimeout(() => {
-          setIsGlitching(false);
-        }, 200);
-      }, 300);
-    }, 2000);
-
-    return () => {
-      if (intervalRef.current) {
-        clearInterval(intervalRef.current);
+  // Function to run the text scramble (shuffle) animation
+  const scrambleWord = (finalWord: string) => {
+    let iteration = 0;
+    const totalIterations = finalWord.length;
+    const scrambleInterval = setInterval(() => {
+      let newText = '';
+      for (let i = 0; i < finalWord.length; i++) {
+        if (i < iteration) {
+          newText += finalWord[i];
+        } else {
+          // Generate a random uppercase letter
+          newText += String.fromCharCode(65 + Math.floor(Math.random() * 26));
+        }
       }
-    };
+      setDisplayedWord(newText);
+      iteration++;
+      if (iteration > totalIterations) {
+        clearInterval(scrambleInterval);
+        setDisplayedWord(finalWord);
+      }
+    }, 50); // Update every 50ms for the shuffling effect
+  };
+
+  // Update the word every 1.79 seconds
+  useEffect(() => {
+    // Initialize with the first word
+    setDisplayedWord(words[0]);
+    
+    const interval = setInterval(() => {
+      setCurrentWordIndex((prev) => {
+        const nextIndex = (prev + 1) % words.length;
+        scrambleWord(words[nextIndex]);
+        return nextIndex;
+      });
+    }, 1790);
+    
+    return () => clearInterval(interval);
   }, []);
 
   return (
@@ -54,10 +70,10 @@ const Hero = () => {
           <div className="absolute inset-0 flex flex-col items-center justify-center text-center px-8">
             <h2 className="text-4xl md:text-6xl font-bold text-white">
               Let us{' '}
-              <span className={`inline-block relative ${isGlitching ? 'text-scramble' : 'transition-all duration-300'}`} style={{
+              <span className="inline-block relative" style={{
                 minWidth: '180px'
               }}>
-                {words[currentWordIndex]}
+                {displayedWord}
               </span>
               {' '}for you
             </h2>

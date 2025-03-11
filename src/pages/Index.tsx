@@ -19,7 +19,7 @@ const Index = () => {
       });
     }, { threshold: 0.1 });
 
-    const sections = document.querySelectorAll('section:not(#home)');
+    const sections = document.querySelectorAll('section:not(#home):not(#services)');
     sections.forEach((section) => {
       section.classList.add('opacity-0', 'translate-y-10', 'transition-all', 'duration-700');
       observer.observe(section);

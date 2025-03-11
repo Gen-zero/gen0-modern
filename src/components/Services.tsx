@@ -1,5 +1,5 @@
 
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect } from 'react';
 import { ArrowLeft, ArrowRight, Layout, Code, PenTool, Lightbulb } from 'lucide-react';
 import { Button } from './ui/button';
 import { cn } from '@/lib/utils';
@@ -35,7 +35,7 @@ const ServiceSlide = ({ service, isActive }: { service: typeof services[0], isAc
   return (
     <div 
       className={cn(
-        "w-screen h-[100vh] fixed inset-0 transition-opacity duration-700",
+        "w-full h-full absolute transition-opacity duration-700",
         isActive ? "opacity-100 z-10" : "opacity-0 z-0"
       )}
     >
@@ -100,7 +100,7 @@ const Services = () => {
   };
 
   return (
-    <section id="services" className="relative h-[100vh] overflow-hidden">
+    <section id="services" className="relative h-[100vh] w-full">
       {/* Static header */}
       <div className="absolute top-0 inset-x-0 z-20 pt-20 px-6 md:px-12">
         <div className="md:max-w-2xl">
@@ -113,7 +113,7 @@ const Services = () => {
       </div>
       
       {/* Service slides */}
-      <div className="relative">
+      <div className="relative h-full w-full">
         {services.map((service, index) => (
           <ServiceSlide 
             key={index} 

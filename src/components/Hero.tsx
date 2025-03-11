@@ -9,6 +9,8 @@ const Hero = () => {
   const [currentWordIndex, setCurrentWordIndex] = useState(0);
   const [displayedWord, setDisplayedWord] = useState(words[0]);
   const intervalRef = useRef<NodeJS.Timeout | null>(null);
+  const heroRef = useRef<HTMLElement>(null);
+  const vantaEffect = useRef<any>(null);
 
   // Modified function to run the text scramble (shuffle) animation from left to right
   const scrambleWord = (finalWord: string) => {
@@ -49,8 +51,36 @@ const Hero = () => {
     return () => clearInterval(interval);
   }, []);
 
+  // Initialize and cleanup the VANTA effect
+  useEffect(() => {
+    // Check if the window object and the VANTA object exist
+    if (typeof window !== 'undefined' && window.VANTA) {
+      // Initialize the VANTA effect
+      vantaEffect.current = window.VANTA.CELLS({
+        el: heroRef.current,
+        mouseControls: true,
+        touchControls: true,
+        gyroControls: false,
+        minHeight: 200.00,
+        minWidth: 200.00,
+        scale: 1.00,
+        color1: 0x0,
+        color2: 0x8c35f2,
+        size: 3.00,
+        speed: 3.00
+      });
+    }
+
+    // Cleanup function
+    return () => {
+      if (vantaEffect.current) {
+        vantaEffect.current.destroy();
+      }
+    };
+  }, []); // Empty dependency array ensures this runs once on mount
+
   return (
-    <section id="home" className="min-h-screen flex items-center justify-center pt-12 overflow-hidden relative">
+    <section ref={heroRef} id="home" className="min-h-screen flex items-center justify-center pt-12 overflow-hidden relative">
       <div className="absolute inset-0 bg-gradient-to-br from-secondary/20 to-background -z-10"></div>
       
       {/* Background Elements */}

@@ -15,13 +15,13 @@ interface NavMenuLinksProps {
 
 const NavMenuLinks = ({ navLinks, activeSection, toggleMenu }: NavMenuLinksProps) => {
   return (
-    <nav className="flex flex-col space-y-4">
+    <nav className="flex flex-col space-y-2">
       {navLinks.map((link, index) => (
         <a 
           key={link.name} 
           href={link.href} 
           className={cn(
-            "group relative flex items-center text-2xl md:text-3xl font-medium transition-colors",
+            "group relative flex items-center text-lg md:text-xl lg:text-2xl font-medium transition-colors",
             activeSection === link.name ? "text-accent" : "text-foreground/90 hover:text-accent"
           )} 
           onClick={() => toggleMenu()}
@@ -31,7 +31,7 @@ const NavMenuLinks = ({ navLinks, activeSection, toggleMenu }: NavMenuLinksProps
             {link.name}
           </span>
           <ArrowRight className={cn(
-            "ml-2 h-5 w-5 opacity-0 transition-all duration-300", 
+            "ml-2 h-4 w-4 md:h-5 md:w-5 opacity-0 transition-all duration-300", 
             "group-hover:opacity-100 group-hover:translate-x-2"
           )} />
         </a>

@@ -1,12 +1,9 @@
-
 import { useState, useEffect } from 'react';
 import { Menu, X } from 'lucide-react';
 import { Button } from "./ui/button";
-
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 50);
@@ -14,11 +11,9 @@ const Navbar = () => {
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
-
   const toggleMobileMenu = () => {
     setMobileMenuOpen(!mobileMenuOpen);
   };
-
   const navLinks = [{
     name: 'Home',
     href: '#home'
@@ -35,12 +30,11 @@ const Navbar = () => {
     name: 'Contact',
     href: '#contact'
   }];
-
   return <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${isScrolled ? 'bg-background/80 backdrop-blur-md shadow-sm py-3' : 'bg-transparent py-6'}`}>
       <div className="container mx-auto px-6 md:px-12">
         <div className="flex items-center justify-between">
           <a href="#" className="text-2xl font-semibold tracking-tight transition-opacity duration-300">
-            <img src="/lovable-uploads/a9bfe93b-b4a8-45e7-b6ec-0ccf561e4234.png" alt="Gen0 Logo" className="h-8 object-contain" />
+            <img src="/lovable-uploads/a9bfe93b-b4a8-45e7-b6ec-0ccf561e4234.png" alt="Gen0 Logo" className="h-19 object-contain" />
           </a>
           
           {/* Desktop Navigation */}
@@ -71,5 +65,4 @@ const Navbar = () => {
       </div>
     </header>;
 };
-
 export default Navbar;

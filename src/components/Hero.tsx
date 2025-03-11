@@ -1,16 +1,13 @@
 import { useEffect, useState, useRef } from 'react';
 import { Button } from './ui/button';
 import { ArrowRight, UserPlus } from 'lucide-react';
-
 const words = ['BUILD', 'CODE', 'DESIGN', 'IDEATE'];
-
 const Hero = () => {
   const [currentWordIndex, setCurrentWordIndex] = useState(0);
   const [displayedWord, setDisplayedWord] = useState(words[0]);
   const intervalRef = useRef<NodeJS.Timeout | null>(null);
   const heroRef = useRef<HTMLElement>(null);
   const vantaEffect = useRef<any>(null);
-
   const scrambleWord = (finalWord: string) => {
     let iteration = 0;
     const totalIterations = finalWord.length;
@@ -31,7 +28,6 @@ const Hero = () => {
       }
     }, 50);
   };
-
   useEffect(() => {
     setDisplayedWord(words[0]);
     const interval = setInterval(() => {
@@ -43,7 +39,6 @@ const Hero = () => {
     }, 1790);
     return () => clearInterval(interval);
   }, []);
-
   useEffect(() => {
     if (typeof window !== 'undefined' && window.VANTA) {
       vantaEffect.current = window.VANTA.CELLS({
@@ -60,14 +55,12 @@ const Hero = () => {
         speed: 3.00
       });
     }
-
     return () => {
       if (vantaEffect.current) {
         vantaEffect.current.destroy();
       }
     };
   }, []);
-
   return <section ref={heroRef} id="home" className="min-h-screen flex items-center justify-center pt-8 overflow-hidden relative">
       <div className="absolute inset-0 bg-gradient-to-br from-secondary/20 to-background -z-10"></div>
       
@@ -108,7 +101,7 @@ const Hero = () => {
           </Button>
           
           <div className="text-center">
-            <img src="/lovable-uploads/a9bfe93b-b4a8-45e7-b6ec-0ccf561e4234.png" alt="Gen0 Logo" className="h-32 object-contain" />
+            <img alt="Gen0 Logo" className="h-32 object-contain" src="/lovable-uploads/064b72fa-db67-415f-804d-69b24d008e2b.png" />
           </div>
           
           <Button className="uppercase font-medium text-sm px-8 py-6 
@@ -124,5 +117,4 @@ const Hero = () => {
       </div>
     </section>;
 };
-
 export default Hero;

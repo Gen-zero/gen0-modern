@@ -1,3 +1,4 @@
+
 import { ArrowRight } from 'lucide-react';
 import { Button } from './ui/button';
 import { Input } from './ui/input';
@@ -46,8 +47,9 @@ const Footer = () => {
       <div className="container mx-auto px-6 py-12 md:py-16">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
           <div className="lg:col-span-2">
-            <a href="#" className="block text-2xl font-semibold tracking-tight mb-4">Gen0
-          </a>
+            <a href="#" className="block mb-4">
+              <img src="/lovable-uploads/gen0-logo-color.png" alt="Gen0 Logo" className="h-8 object-contain" />
+            </a>
             <p className="text-muted-foreground mb-6 max-w-md">
               We create digital experiences that are beautiful, functional, and designed to help your business grow.
             </p>

@@ -80,7 +80,7 @@ const Hero = () => {
   }, []); // Empty dependency array ensures this runs once on mount
 
   return (
-    <section ref={heroRef} id="home" className="min-h-screen flex items-center justify-center pt-12 overflow-hidden relative">
+    <section ref={heroRef} id="home" className="min-h-screen flex items-center justify-center pt-8 overflow-hidden relative">
       <div className="absolute inset-0 bg-gradient-to-br from-secondary/20 to-background -z-10"></div>
       
       {/* Background Elements */}
@@ -91,17 +91,17 @@ const Hero = () => {
       
       <div className="container mx-auto px-6 py-12">
         <div className="relative h-[40vh] w-full rounded-2xl overflow-hidden shadow-2xl border border-accent/20 animate-fade-in">
-          {/* Image container - removed gradient overlay */}
+          {/* Image container - no gradient overlay */}
           <div className="absolute top-0 left-0 w-full h-full">
             <img src="/lovable-uploads/34a880bd-d1ee-4330-bef2-8f5cd7502a16.png" alt="Programmer with purple neon lighting" className="w-full h-full object-cover" loading="eager" />
           </div>
           
           {/* Text overlay - positioned lower */}
-          <div className="absolute inset-0 flex flex-col items-center justify-end pb-16 text-center px-8">
-            <h2 className="text-4xl md:text-6xl font-bold text-white uppercase mix-blend-exclusion">
+          <div className="absolute inset-0 flex flex-col items-center justify-end pb-20 text-center px-8">
+            <h2 className="text-3xl md:text-5xl font-bold text-white uppercase mix-blend-exclusion">
               LET US {' '}
               <span className="inline-block" style={{
-                minWidth: '180px'
+                minWidth: '160px'
               }}>
                 {displayedWord}
               </span>
@@ -112,17 +112,19 @@ const Hero = () => {
 
         {/* Added buttons section */}
         <div className="flex items-center justify-center mt-8 gap-8">
-          <Button variant="outline" className="uppercase font-medium text-sm px-8 py-6 border-accent/40 hover:bg-accent/10">
+          <Button variant="outline" className="uppercase font-medium text-sm px-8 py-6 border-accent/40 hover:bg-accent/10 hover:border-accent group transition-all duration-300 hover:scale-105 hover:shadow-[0_0_15px_rgba(255,215,0,0.3)]">
             Our Works
-            <ArrowRight className="ml-2" size={16} />
+            <ArrowRight className="ml-2 transition-transform duration-300 group-hover:translate-x-1" size={16} />
           </Button>
           
           {/* Center logo placeholder */}
-          <div className="text-3xl font-bold text-primary">Gen0</div>
+          <div className="text-center">
+            <img src="/lovable-uploads/garet.png" alt="Garet Logo" className="h-12 object-contain" />
+          </div>
           
-          <Button className="uppercase font-medium text-sm px-8 py-6 bg-primary hover:bg-primary/90">
+          <Button className="uppercase font-medium text-sm px-8 py-6 bg-primary hover:bg-primary/90 group transition-all duration-300 hover:scale-105 hover:shadow-[0_0_15px_rgba(138,43,226,0.4)]">
             Join Us
-            <UserPlus className="ml-2" size={16} />
+            <UserPlus className="ml-2 transition-transform duration-300 group-hover:translate-y-[-2px]" size={16} />
           </Button>
         </div>
       </div>

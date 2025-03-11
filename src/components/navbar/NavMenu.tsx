@@ -1,3 +1,4 @@
+
 import { X, ArrowRight, Sparkles } from 'lucide-react';
 import { Button } from "../ui/button";
 import { cn } from "@/lib/utils";
@@ -5,16 +6,14 @@ import NavMenuLinks from './NavMenuLinks';
 import NavMenuServices from './NavMenuServices';
 import NavMenuQuickLinks from './NavMenuQuickLinks';
 import NavMenuLegal from './NavMenuLegal';
+
 interface NavMenuProps {
   menuOpen: boolean;
   toggleMenu: () => void;
   activeSection: string;
 }
-const NavMenu = ({
-  menuOpen,
-  toggleMenu,
-  activeSection
-}: NavMenuProps) => {
+
+const NavMenu = ({ menuOpen, toggleMenu, activeSection }: NavMenuProps) => {
   const navLinks = [{
     name: 'Home',
     href: '#home'
@@ -31,7 +30,9 @@ const NavMenu = ({
     name: 'Contact',
     href: '#contact'
   }];
-  return <>
+
+  return (
+    <>
       {/* Menu Overlay */}
       <div className={`fixed inset-0 bg-black/60 z-40 transition-opacity duration-500 ${menuOpen ? 'opacity-100' : 'opacity-0 pointer-events-none'}`} onClick={toggleMenu} />
       
@@ -39,9 +40,13 @@ const NavMenu = ({
       <div className={`fixed inset-0 z-50 flex items-center justify-center ${menuOpen ? 'opacity-100 visible' : 'opacity-0 invisible'} transition-all duration-500`}>
         <div className="absolute inset-0 bg-gradient-to-br from-background/95 via-background/98 to-background/90 backdrop-blur-md" onClick={toggleMenu}></div>
         
-        <div className="relative w-full max-w-7xl mx-auto h-[90vh] overflow-auto p-6 md:p-10 rounded-xl py-0 px-[28px] my-0">
+        <div className="relative w-full max-w-7xl mx-auto h-[90vh] overflow-auto p-6 md:p-10 rounded-xl">
           {/* Close Button */}
-          <button className="absolute top-6 right-6 z-50 text-foreground/80 hover:text-accent transition-colors duration-300 focus:outline-none" onClick={toggleMenu} aria-label="Close Menu">
+          <button 
+            className="absolute top-6 right-6 z-50 text-foreground/80 hover:text-accent transition-colors duration-300 focus:outline-none"
+            onClick={toggleMenu}
+            aria-label="Close Menu"
+          >
             <X size={32} className="hover:rotate-90 transition-transform duration-300" />
           </button>
           
@@ -67,7 +72,10 @@ const NavMenu = ({
               <div className="space-y-8">
                 <NavMenuLinks navLinks={navLinks} activeSection={activeSection} toggleMenu={toggleMenu} />
                 
-                <Button className="w-full text-base py-6 px-8 mt-8 font-medium rounded-lg transition-all duration-300 hover:shadow-lg hover:shadow-accent/20 group" onClick={() => toggleMenu()}>
+                <Button 
+                  className="w-full text-base py-6 px-8 mt-8 font-medium rounded-lg transition-all duration-300 hover:shadow-lg hover:shadow-accent/20 group" 
+                  onClick={() => toggleMenu()}
+                >
                   Get in Touch
                   <ArrowRight className="ml-2 h-5 w-5 transition-transform duration-300 group-hover:translate-x-1" />
                 </Button>
@@ -100,6 +108,8 @@ const NavMenu = ({
           </div>
         </div>
       </div>
-    </>;
+    </>
+  );
 };
+
 export default NavMenu;

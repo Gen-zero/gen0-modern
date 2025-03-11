@@ -119,7 +119,7 @@ const Hero = () => {
           
           {/* Center logo - using the uploaded Garet logo */}
           <div className="text-center">
-            <img src="/lovable-uploads/bf0f71ee-dc4d-4a57-a9f8-0db1a06c9d7e.png" alt="Garet Logo" className="h-22 object-contain" />
+            <img src="/lovable-uploads/bf0f71ee-dc4d-4a57-a9f8-0db1a06c9d7e.png" alt="Garet Logo" className="h-32 object-contain" />
           </div>
           
           <Button className="uppercase font-medium text-sm px-8 py-6 

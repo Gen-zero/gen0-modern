@@ -1,7 +1,10 @@
+
 import { useEffect, useState, useRef } from 'react';
 import { Button } from './ui/button';
 import { ArrowRight, UserPlus } from 'lucide-react';
+
 const words = ['BUILD', 'CODE', 'DESIGN', 'IDEATE'];
+
 const Hero = () => {
   const [currentWordIndex, setCurrentWordIndex] = useState(0);
   const [displayedWord, setDisplayedWord] = useState(words[0]);
@@ -117,9 +120,9 @@ const Hero = () => {
             <ArrowRight className="ml-2 transition-transform duration-300 group-hover:translate-x-2 relative z-10" size={16} />
           </Button>
           
-          {/* Center logo - using the uploaded Garet logo */}
+          {/* Center logo - using the new Gen0 logo */}
           <div className="text-center">
-            <img src="/lovable-uploads/bf0f71ee-dc4d-4a57-a9f8-0db1a06c9d7e.png" alt="Garet Logo" className="h-32 object-contain" />
+            <img src="/lovable-uploads/a9bfe93b-b4a8-45e7-b6ec-0ccf561e4234.png" alt="Gen0 Logo" className="h-32 object-contain" />
           </div>
           
           <Button className="uppercase font-medium text-sm px-8 py-6 
@@ -135,4 +138,5 @@ const Hero = () => {
       </div>
     </section>;
 };
+
 export default Hero;

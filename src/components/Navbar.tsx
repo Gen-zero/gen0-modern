@@ -1,3 +1,4 @@
+
 import { useState, useEffect } from 'react';
 import { Menu, X } from 'lucide-react';
 import { Button } from "./ui/button";
@@ -39,7 +40,7 @@ const Navbar = () => {
       <div className="container mx-auto px-6 md:px-12">
         <div className="flex items-center justify-between">
           <a href="#" className="text-2xl font-semibold tracking-tight transition-opacity duration-300">
-            <img src="/lovable-uploads/gen0-logo-color.png" alt="Gen0 Logo" className="h-8 object-contain" />
+            <img src="/lovable-uploads/a9bfe93b-b4a8-45e7-b6ec-0ccf561e4234.png" alt="Gen0 Logo" className="h-8 object-contain" />
           </a>
           
           {/* Desktop Navigation */}

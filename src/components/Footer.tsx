@@ -1,24 +1,11 @@
+
 import { ArrowRight } from 'lucide-react';
 import { Button } from './ui/button';
 import { Input } from './ui/input';
+
 const Footer = () => {
   const year = new Date().getFullYear();
-  const quickLinks = [{
-    name: 'Home',
-    href: '#home'
-  }, {
-    name: 'Services',
-    href: '#services'
-  }, {
-    name: 'Projects',
-    href: '#projects'
-  }, {
-    name: 'About',
-    href: '#about'
-  }, {
-    name: 'Contact',
-    href: '#contact'
-  }];
+  
   const services = [{
     name: 'UI/UX Design',
     href: '#'
@@ -32,6 +19,7 @@ const Footer = () => {
     name: 'Digital Strategy',
     href: '#'
   }];
+  
   const legal = [{
     name: 'Privacy Policy',
     href: '#'
@@ -42,9 +30,10 @@ const Footer = () => {
     name: 'Cookie Policy',
     href: '#'
   }];
+  
   return <footer className="bg-background border-t border-border">
       <div className="container mx-auto px-6 py-12 md:py-16">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
           <div className="lg:col-span-2">
             <a href="#" className="block mb-4">
               <img src="/lovable-uploads/a9bfe93b-b4a8-45e7-b6ec-0ccf561e4234.png" alt="Gen0 Logo" className="h-14 object-contain" />
@@ -61,17 +50,6 @@ const Footer = () => {
                 </Button>
               </div>
             </div>
-          </div>
-          
-          <div>
-            <h3 className="text-sm font-medium mb-4">Quick Links</h3>
-            <ul className="space-y-2">
-              {quickLinks.map(link => <li key={link.name}>
-                  <a href={link.href} className="text-muted-foreground hover:text-foreground transition-colors">
-                    {link.name}
-                  </a>
-                </li>)}
-            </ul>
           </div>
           
           <div>
@@ -120,4 +98,5 @@ const Footer = () => {
       </div>
     </footer>;
 };
+
 export default Footer;

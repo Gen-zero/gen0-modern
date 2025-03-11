@@ -53,17 +53,17 @@ const Contact = () => {
     {
       icon: <Mail className="h-5 w-5" />,
       title: 'Email Us',
-      details: 'hello@skyline.com'
+      details: 'kalidas@gen0.xyz'
     },
     {
       icon: <Phone className="h-5 w-5" />,
-      title: 'Call Us',
-      details: '+1 (555) 123-4567'
+      title: 'Text us',
+      details: '+91 9995813930'
     },
     {
       icon: <MapPin className="h-5 w-5" />,
       title: 'Visit Us',
-      details: '123 Design Street, San Francisco, CA'
+      details: 'Adoor, India'
     }
   ];
 

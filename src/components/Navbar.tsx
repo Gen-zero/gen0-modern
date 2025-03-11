@@ -43,15 +43,15 @@ const Navbar = () => {
       {/* Sticky Navbar */}
       <header className={`fixed top-4 left-4 z-50 transition-all duration-300 ${isScrolled ? 'bg-background/80 backdrop-blur-md shadow-sm' : 'bg-background/60 backdrop-blur-sm'} p-3 rounded-lg w-[40vw] max-w-[300px] border border-border/30`}>
         <div className="flex items-center justify-between">
-          <div className="flex items-center gap-3">
-            <button className="text-foreground/90 hover:text-accent transition-colors focus:outline-none" onClick={toggleMenu} aria-label={menuOpen ? "Close Menu" : "Open Menu"}>
-              <Menu size={24} />
-            </button>
-            
+          <button className="text-foreground/90 hover:text-accent transition-colors focus:outline-none" onClick={toggleMenu} aria-label={menuOpen ? "Close Menu" : "Open Menu"}>
+            <Menu size={24} />
+          </button>
+          
+          <div className="flex items-center justify-center mx-auto">
             <img src="/lovable-uploads/a9bfe93b-b4a8-45e7-b6ec-0ccf561e4234.png" alt="Gen0 Logo" className="h-11 object-contain" />
           </div>
           
-          <span className="text-sm font-medium text-foreground/80 ml-auto">
+          <span className="text-sm font-medium text-foreground/80 ml-3 mr-1">
             {activeSection}
           </span>
         </div>

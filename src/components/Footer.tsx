@@ -96,7 +96,7 @@ const Footer = () => {
         
         <div className="border-t border-border mt-12 pt-8 flex flex-col md:flex-row justify-between items-center">
           <p className="text-sm text-muted-foreground mb-4 md:mb-0">
-            © {year} Skyline. All rights reserved.
+            © {year} Aumkami Pvt Ltd. All rights reserved.
           </p>
           <div className="flex space-x-4">
             <a href="#" className="text-muted-foreground hover:text-foreground" aria-label="Twitter">

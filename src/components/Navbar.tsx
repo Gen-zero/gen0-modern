@@ -1,10 +1,12 @@
 import { useState, useEffect } from 'react';
 import { Menu, X } from 'lucide-react';
 import { Button } from "./ui/button";
+
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState('Home');
+
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 50);
@@ -24,9 +26,11 @@ const Navbar = () => {
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
+
   const toggleMenu = () => {
     setMenuOpen(!menuOpen);
   };
+
   const navLinks = [{
     name: 'Home',
     href: '#home'
@@ -43,6 +47,7 @@ const Navbar = () => {
     name: 'Contact',
     href: '#contact'
   }];
+
   const quickLinks = [{
     name: 'Home',
     href: '#home'
@@ -59,6 +64,7 @@ const Navbar = () => {
     name: 'Contact',
     href: '#contact'
   }];
+
   const services = [{
     name: 'UI/UX Design',
     href: '#'
@@ -72,20 +78,22 @@ const Navbar = () => {
     name: 'Digital Strategy',
     href: '#'
   }];
+
   return <>
       {/* Sticky Navbar */}
-      <header className={`fixed top-4 left-4 z-50 transition-all duration-300 ${isScrolled ? 'bg-background/80 backdrop-blur-md shadow-sm' : 'bg-background/60 backdrop-blur-sm'} p-3 rounded-lg w-[40vw] max-w-[300px]`}>
-        <div className="flex items-center gap-3">
-          <button className="text-foreground focus:outline-none" onClick={toggleMenu} aria-label={menuOpen ? "Close Menu" : "Open Menu"}>
-            <Menu size={24} />
-          </button>
-          
-          <div className="flex items-center gap-2">
-            <img src="/lovable-uploads/a9bfe93b-b4a8-45e7-b6ec-0ccf561e4234.png" alt="Gen0 Logo" className="h-8 object-contain" />
-            <span className="text-sm font-medium text-foreground/80">
-              {activeSection}
-            </span>
+      <header className={`fixed top-4 left-4 z-50 transition-all duration-300 ${isScrolled ? 'bg-background/80 backdrop-blur-md shadow-sm' : 'bg-background/60 backdrop-blur-sm'} p-3 rounded-lg w-[40vw] max-w-[300px] border border-border/30`}>
+        <div className="flex items-center justify-between">
+          <div className="flex items-center gap-3">
+            <button className="text-foreground/90 hover:text-accent transition-colors focus:outline-none" onClick={toggleMenu} aria-label={menuOpen ? "Close Menu" : "Open Menu"}>
+              <Menu size={24} />
+            </button>
+            
+            <img src="/lovable-uploads/a9bfe93b-b4a8-45e7-b6ec-0ccf561e4234.png" alt="Gen0 Logo" className="h-[14px] object-contain" />
           </div>
+          
+          <span className="text-sm font-medium text-foreground/80 ml-auto">
+            {activeSection}
+          </span>
         </div>
       </header>
       
@@ -100,7 +108,7 @@ const Navbar = () => {
               <img src="/lovable-uploads/a9bfe93b-b4a8-45e7-b6ec-0ccf561e4234.png" alt="Gen0 Logo" className="h-14 object-contain" />
               
             </a>
-            <button className="text-foreground focus:outline-none" onClick={toggleMenu} aria-label="Close Menu">
+            <button className="text-foreground focus:outline-none hover:text-accent transition-colors" onClick={toggleMenu} aria-label="Close Menu">
               <X size={24} />
             </button>
           </div>
@@ -153,4 +161,5 @@ const Navbar = () => {
       </div>
     </>;
 };
+
 export default Navbar;

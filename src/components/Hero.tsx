@@ -62,7 +62,7 @@ const Hero = () => {
         <div className="relative h-[40vh] w-full rounded-2xl overflow-hidden shadow-2xl border border-accent/20 animate-fade-in">
           {/* Image container */}
           <div className="absolute top-0 left-0 w-full h-full">
-            <img src="https://images.unsplash.com/photo-1559028012-481c04fa702d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1336&q=80" alt="Digital design" className="w-full h-full object-cover" loading="eager" />
+            <img src="/lovable-uploads/34a880bd-d1ee-4330-bef2-8f5cd7502a16.png" alt="Programmer with purple neon lighting" className="w-full h-full object-cover" loading="eager" />
             <div className="absolute inset-0 bg-gradient-to-t from-background/90 via-background/50 to-transparent"></div>
           </div>
           

@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from 'react';
 import { Menu, X, ArrowRight, Sparkles } from 'lucide-react';
 import { Button } from "./ui/button";
@@ -160,11 +159,11 @@ const Navbar = () => {
                 </nav>
                 
                 <Button 
-                  className="w-full text-base py-6 px-8 mt-8 font-medium rounded-lg transition-all duration-300 hover:shadow-lg hover:shadow-accent/20" 
+                  className="w-full text-base py-6 px-8 mt-8 font-medium rounded-lg transition-all duration-300 hover:shadow-lg hover:shadow-accent/20 group" 
                   onClick={() => setMenuOpen(false)}
                 >
                   Get in Touch
-                  <ArrowRight className="ml-2 h-5 w-5" />
+                  <ArrowRight className="ml-2 h-5 w-5 transition-transform duration-300 group-hover:translate-x-1" />
                 </Button>
               </div>
             </div>
@@ -229,11 +228,11 @@ const Navbar = () => {
               
               {/* Decorative Elements */}
               <div className="mt-16 hidden md:block">
-                <div className="relative h-[1px] w-full bg-border/30">
-                  <div className="absolute -top-2 -right-2 h-4 w-4 rounded-full bg-accent animate-pulse-subtle"></div>
-                </div>
-                <div className="mt-8 text-muted-foreground/60 text-sm">
-                  <p>© {new Date().getFullYear()} Gen0. All rights reserved.</p>
+                <div className="relative">
+                  <div className="h-[1px] w-full bg-border/30 relative overflow-hidden">
+                    <div className="absolute inset-0 bg-accent transform -translate-x-full group-hover:translate-x-0 transition-transform duration-700 ease-in-out"></div>
+                  </div>
+                  <div className="absolute -top-2 -right-2 h-4 w-4 rounded-full bg-accent group-hover:bg-white transition-colors duration-300 delay-700 animate-pulse-subtle"></div>
                 </div>
               </div>
             </div>

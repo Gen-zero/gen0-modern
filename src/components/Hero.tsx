@@ -1,4 +1,3 @@
-
 import { useEffect, useState, useRef } from 'react';
 import { Button } from './ui/button';
 import { ArrowRight, UserPlus } from 'lucide-react';
@@ -12,7 +11,6 @@ const Hero = () => {
   const heroRef = useRef<HTMLElement>(null);
   const vantaEffect = useRef<any>(null);
 
-  // Modified function to run the text scramble (shuffle) animation from left to right
   const scrambleWord = (finalWord: string) => {
     let iteration = 0;
     const totalIterations = finalWord.length;
@@ -22,7 +20,6 @@ const Hero = () => {
         if (i < iteration) {
           newText += finalWord[i];
         } else {
-          // Generate a random uppercase letter
           newText += String.fromCharCode(65 + Math.floor(Math.random() * 26));
         }
       }
@@ -32,12 +29,10 @@ const Hero = () => {
         clearInterval(scrambleInterval);
         setDisplayedWord(finalWord);
       }
-    }, 50); // Update every 50ms for the shuffling effect
+    }, 50);
   };
 
-  // Update the word every 1.79 seconds
   useEffect(() => {
-    // Initialize with the first word
     setDisplayedWord(words[0]);
     const interval = setInterval(() => {
       setCurrentWordIndex(prev => {
@@ -49,11 +44,8 @@ const Hero = () => {
     return () => clearInterval(interval);
   }, []);
 
-  // Initialize and cleanup the VANTA effect
   useEffect(() => {
-    // Check if the window object and the VANTA object exist
     if (typeof window !== 'undefined' && window.VANTA) {
-      // Initialize the VANTA effect
       vantaEffect.current = window.VANTA.CELLS({
         el: heroRef.current,
         mouseControls: true,
@@ -69,18 +61,16 @@ const Hero = () => {
       });
     }
 
-    // Cleanup function
     return () => {
       if (vantaEffect.current) {
         vantaEffect.current.destroy();
       }
     };
-  }, []); // Empty dependency array ensures this runs once on mount
+  }, []);
 
   return <section ref={heroRef} id="home" className="min-h-screen flex items-center justify-center pt-8 overflow-hidden relative">
       <div className="absolute inset-0 bg-gradient-to-br from-secondary/20 to-background -z-10"></div>
       
-      {/* Background Elements */}
       <div className="absolute top-1/4 right-[10%] w-64 h-64 bg-primary/5 rounded-full blur-3xl animate-pulse-subtle"></div>
       <div className="absolute bottom-1/4 left-[5%] w-72 h-72 bg-primary/5 rounded-full blur-3xl animate-pulse-subtle" style={{
       animationDelay: '1s'
@@ -88,12 +78,10 @@ const Hero = () => {
       
       <div className="container mx-auto px-6 py-12">
         <div className="relative h-[40vh] w-full rounded-2xl overflow-hidden shadow-2xl border border-accent/20 animate-fade-in">
-          {/* Image container - no gradient overlay */}
           <div className="absolute top-0 left-0 w-full h-full">
             <img src="/lovable-uploads/34a880bd-d1ee-4330-bef2-8f5cd7502a16.png" alt="Programmer with purple neon lighting" className="w-full h-full object-cover" loading="eager" />
           </div>
           
-          {/* Text overlay - positioned lower with smaller text for the scrambled word */}
           <div className="absolute inset-0 flex flex-col items-center justify-end pb-20 text-center px-8">
             <h2 className="text-2xl md:text-4xl font-bold text-white uppercase mix-blend-exclusion">
               LET US {' '}
@@ -107,7 +95,6 @@ const Hero = () => {
           </div>
         </div>
 
-        {/* Enhanced buttons section with logo in center */}
         <div className="flex items-center justify-center mt-8 gap-8">
           <Button variant="outline" className="uppercase font-medium text-sm px-8 py-6 border-accent/40 
                      hover:bg-accent/10 hover:border-accent hover:text-accent 
@@ -120,7 +107,6 @@ const Hero = () => {
             <ArrowRight className="ml-2 transition-transform duration-300 group-hover:translate-x-2 relative z-10" size={16} />
           </Button>
           
-          {/* Center logo - using the new Gen0 logo */}
           <div className="text-center">
             <img src="/lovable-uploads/a9bfe93b-b4a8-45e7-b6ec-0ccf561e4234.png" alt="Gen0 Logo" className="h-32 object-contain" />
           </div>

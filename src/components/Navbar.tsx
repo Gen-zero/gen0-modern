@@ -1,10 +1,13 @@
+
 import { useState, useEffect } from 'react';
 import { Menu, Sparkles } from 'lucide-react';
 import NavMenu from './navbar/NavMenu';
+
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState('Home');
+
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 50);
@@ -21,9 +24,11 @@ const Navbar = () => {
         }
       });
     };
+
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
+
   const toggleMenu = () => {
     setMenuOpen(!menuOpen);
     if (!menuOpen) {
@@ -32,7 +37,9 @@ const Navbar = () => {
       document.body.style.overflow = '';
     }
   };
-  return <>
+
+  return (
+    <>
       {/* Sticky Navbar */}
       <header className={`fixed top-4 left-4 z-50 transition-all duration-300 ${isScrolled ? 'bg-background/80 backdrop-blur-md shadow-sm' : 'bg-background/60 backdrop-blur-sm'} p-3 rounded-lg w-[40vw] max-w-[300px] border border-border/30`}>
         <div className="flex items-center justify-between">
@@ -44,13 +51,15 @@ const Navbar = () => {
             <img src="/lovable-uploads/a9bfe93b-b4a8-45e7-b6ec-0ccf561e4234.png" alt="Gen0 Logo" className="h-11 object-contain" />
           </div>
           
-          <span className="text-sm font-medium text-foreground/80 ml-3 mr-1 my-0 px-[] mx-[25px]">
+          <span className="text-sm font-medium text-foreground/80 ml-3 mr-1">
             {activeSection}
           </span>
         </div>
       </header>
       
       <NavMenu menuOpen={menuOpen} toggleMenu={toggleMenu} activeSection={activeSection} />
-    </>;
+    </>
+  );
 };
+
 export default Navbar;

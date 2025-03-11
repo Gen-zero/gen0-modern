@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from 'react';
 import { Menu, X } from 'lucide-react';
 import { Button } from "./ui/button";
@@ -64,6 +63,17 @@ const Navbar = () => {
     href: '#'
   }];
 
+  const legal = [{
+    name: 'Privacy Policy',
+    href: '#'
+  }, {
+    name: 'Terms of Service',
+    href: '#'
+  }, {
+    name: 'Cookie Policy',
+    href: '#'
+  }];
+
   return <>
       {/* Sticky Navbar */}
       <header className={`fixed top-4 left-4 z-50 transition-all duration-300 ${isScrolled ? 'bg-background/80 backdrop-blur-md shadow-sm' : 'bg-background/60 backdrop-blur-sm'} p-3 rounded-lg w-[40vw] max-w-[300px] border border-border/30`}>
@@ -103,7 +113,7 @@ const Navbar = () => {
             We create digital experiences that are beautiful, functional, and designed to help your business grow.
           </p>
           
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-10">
             {/* Main Navigation */}
             <div>
               <h3 className="text-xl font-medium mb-6">Navigation</h3>
@@ -137,6 +147,18 @@ const Navbar = () => {
                 {services.map(service => <li key={service.name}>
                     <a href={service.href} className="text-muted-foreground hover:text-foreground transition-colors text-base" onClick={() => setMenuOpen(false)}>
                       {service.name}
+                    </a>
+                  </li>)}
+              </ul>
+            </div>
+
+            {/* Legal Links */}
+            <div>
+              <h3 className="text-xl font-medium mb-6">Legal</h3>
+              <ul className="space-y-4">
+                {legal.map(item => <li key={item.name}>
+                    <a href={item.href} className="text-muted-foreground hover:text-foreground transition-colors text-base" onClick={() => setMenuOpen(false)}>
+                      {item.name}
                     </a>
                   </li>)}
               </ul>

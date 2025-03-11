@@ -2,14 +2,14 @@
 import { useEffect, useState, useRef } from 'react';
 import { Button } from './ui/button';
 
-const words = ['Build', 'Code', 'Design', 'Ideate'];
+const words = ['BUILD', 'CODE', 'DESIGN', 'IDEATE'];
 
 const Hero = () => {
   const [currentWordIndex, setCurrentWordIndex] = useState(0);
   const [displayedWord, setDisplayedWord] = useState(words[0]);
   const intervalRef = useRef<NodeJS.Timeout | null>(null);
 
-  // Function to run the text scramble (shuffle) animation
+  // Modified function to run the text scramble (shuffle) animation from left to right
   const scrambleWord = (finalWord: string) => {
     let iteration = 0;
     const totalIterations = finalWord.length;
@@ -66,16 +66,16 @@ const Hero = () => {
             <div className="absolute inset-0 bg-gradient-to-t from-background/90 via-background/50 to-transparent"></div>
           </div>
           
-          {/* Text overlay */}
+          {/* Text overlay - now using uppercase for all text and blend mode */}
           <div className="absolute inset-0 flex flex-col items-center justify-center text-center px-8">
-            <h2 className="text-4xl md:text-6xl font-bold text-white">
-              Let us{' '}
-              <span className="inline-block relative" style={{
+            <h2 className="text-4xl md:text-6xl font-bold text-white uppercase mix-blend-exclusion">
+              LET US {' '}
+              <span className="inline-block" style={{
                 minWidth: '180px'
               }}>
                 {displayedWord}
               </span>
-              {' '}for you
+              {' '}FOR YOU
             </h2>
           </div>
         </div>

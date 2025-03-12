@@ -19,7 +19,8 @@ const Index = () => {
       });
     }, { threshold: 0.1 });
 
-    const sections = document.querySelectorAll('section:not(#home):not(#services)');
+    // Exclude home, services sections from scroll animation
+    const sections = document.querySelectorAll('section:not(#home):not(#services):not(#projects)');
     sections.forEach((section) => {
       section.classList.add('opacity-0', 'translate-y-10', 'transition-all', 'duration-700');
       observer.observe(section);

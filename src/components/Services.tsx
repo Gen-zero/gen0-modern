@@ -20,11 +20,11 @@ const services = [
     features: ['User Research', 'Wireframing', 'Prototyping', 'Usability Testing']
   },
   {
-    title: 'WEB HOSTING',
+    title: '0 TO 1',
     icon: <Database className="h-16 w-16 md:h-20 md:w-20 text-primary-foreground" />,
-    description: 'Reliable, secure, and scalable hosting solutions for your web applications and websites.',
+    description: 'Transform your ideas into reality swiftly with our '0 to 1' service—rapid, robust MVPs built to validate your vision.',
     backgroundGradient: 'linear-gradient(135deg, #4F2398 0%, #8e44ad 100%)',
-    features: ['Cloud Hosting', 'Domain Management', 'SSL Certificates', '24/7 Support']
+    features: ['MVP Development', 'Branding', 'Website and Profile Building', '24/7 Support and Guidance']
   },
   {
     title: 'SEO OPTIMIZATION',

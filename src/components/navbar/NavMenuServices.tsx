@@ -10,17 +10,17 @@ interface NavMenuServicesProps {
 
 const NavMenuServices = ({ toggleMenu }: NavMenuServicesProps) => {
   const services: ServiceLink[] = [{
-    name: 'UI/UX Design',
-    href: '#'
+    name: '0 TO 1',
+    href: '#services'
   }, {
     name: 'Web Development',
-    href: '#'
+    href: '#services'
   }, {
-    name: 'Brand Identity',
-    href: '#'
+    name: 'UI/UX Design',
+    href: '#services'
   }, {
-    name: 'Digital Strategy',
-    href: '#'
+    name: 'SEO Optimization',
+    href: '#services'
   }];
 
   return (

@@ -10,11 +10,18 @@ interface NavMenuQuickLinksProps {
 }
 
 const NavMenuQuickLinks = ({ navLinks, toggleMenu }: NavMenuQuickLinksProps) => {
+  const quickLinks = [
+    {
+      name: 'About Us',
+      href: '/about'
+    }
+  ];
+  
   return (
     <div className="space-y-3">
       <h3 className="text-base md:text-lg font-semibold mb-2 text-accent">Quick Links</h3>
       <ul className="space-y-2">
-        {navLinks.map(link => (
+        {quickLinks.map(link => (
           <li key={link.name}>
             <a 
               href={link.href} 

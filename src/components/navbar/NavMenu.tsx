@@ -1,3 +1,4 @@
+
 import { X, ArrowRight, Sparkles } from 'lucide-react';
 import { Button } from "../ui/button";
 import { cn } from "@/lib/utils";
@@ -24,9 +25,6 @@ const NavMenu = ({
   }, {
     name: 'Projects',
     href: '#projects'
-  }, {
-    name: 'About',
-    href: '#about'
   }, {
     name: 'Contact',
     href: '#contact'

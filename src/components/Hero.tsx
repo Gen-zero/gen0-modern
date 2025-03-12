@@ -1,3 +1,4 @@
+
 import { useEffect, useState, useRef } from 'react';
 import { Button } from './ui/button';
 import { ArrowRight, UserPlus } from 'lucide-react';
@@ -101,7 +102,7 @@ const Hero = () => {
           <Button variant="outline" className="uppercase font-medium text-sm px-8 py-6 border-accent/40 
                      hover:bg-accent/10 hover:border-accent hover:text-accent 
                      group transition-all duration-300 hover:scale-110 
-                     hover:shadow-[0_0_20px_rgba(255,215,0,0.4)] relative overflow-hidden
+                     hover:shadow-[0_0_20px_rgba(140,53,242,0.4)] relative overflow-hidden
                      after:content-[''] after:absolute after:bg-accent/5 after:h-full after:w-full
                      after:left-0 after:top-0 after:transform after:scale-x-0 after:origin-left 
                      hover:after:scale-x-100 after:transition-transform after:duration-500">
@@ -116,11 +117,12 @@ const Hero = () => {
           <Button 
             onClick={() => navigate('/about')}
             className="uppercase font-medium text-sm px-8 py-6 
-                     bg-primary hover:bg-primary/90 group transition-all duration-300 
-                     hover:scale-110 hover:shadow-[0_0_20px_rgba(138,43,226,0.6)] relative overflow-hidden
-                     after:content-[''] after:absolute after:bg-primary-foreground/10 after:h-full after:w-full
-                     after:left-0 after:top-0 after:transform after:scale-y-0 after:origin-bottom 
-                     hover:after:scale-y-100 after:transition-transform after:duration-500">
+                     bg-transparent border border-accent/40 hover:bg-accent/10 hover:border-accent hover:text-accent
+                     group transition-all duration-300 hover:scale-110 
+                     hover:shadow-[0_0_20px_rgba(140,53,242,0.6)] relative overflow-hidden
+                     after:content-[''] after:absolute after:bg-accent/5 after:h-full after:w-full
+                     after:left-0 after:top-0 after:transform after:scale-x-0 after:origin-left 
+                     hover:after:scale-x-100 after:transition-transform after:duration-500">
             <span className="relative z-10">Join Us</span>
             <UserPlus className="ml-2 transition-all duration-300 group-hover:translate-y-[-4px] group-hover:rotate-12 relative z-10" size={16} />
           </Button>

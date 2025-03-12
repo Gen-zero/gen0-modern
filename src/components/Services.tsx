@@ -1,3 +1,4 @@
+
 import { useState, useEffect, useRef } from 'react';
 import { Code, Layout, Database, Globe, ArrowRight, Cpu, Rocket } from 'lucide-react';
 import { Button } from './ui/button';
@@ -5,7 +6,7 @@ import { cn } from '@/lib/utils';
 
 const services = [{
   title: '0 TO 1',
-  icon: <Database className="h-16 w-16 md:h-20 md:w-20 text-primary-foreground" />,
+  icon: <Rocket className="h-16 w-16 md:h-20 md:w-20 text-primary-foreground" />,
   description: "Transform your ideas into reality swiftly with our '0 to 1' service—rapid, robust MVPs built to validate your vision.",
   backgroundGradient: 'linear-gradient(135deg, #4F2398 0%, #7c43ea 100%)',
   features: ['Branding', 'MVP Development', 'Product Website', 'Product Documentation']

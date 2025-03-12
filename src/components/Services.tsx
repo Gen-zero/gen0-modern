@@ -35,6 +35,7 @@ const Services = () => {
   const [isAnimating, setIsAnimating] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
   const servicesRef = useRef<HTMLElement>(null);
+  const serviceDetailsRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const observer = new IntersectionObserver(([entry]) => {
@@ -58,7 +59,17 @@ const Services = () => {
     if (isAnimating || index === currentIndex) return;
     setIsAnimating(true);
     setCurrentIndex(index);
-    setTimeout(() => setIsAnimating(false), 700);
+    
+    // Scroll to the service details section
+    setTimeout(() => {
+      if (serviceDetailsRef.current) {
+        serviceDetailsRef.current.scrollIntoView({ 
+          behavior: 'smooth',
+          block: 'center'
+        });
+      }
+      setIsAnimating(false);
+    }, 100);
   };
 
   return <section ref={servicesRef} id="services" className="min-h-screen w-full py-24 relative overflow-hidden flex flex-col justify-center" style={{
@@ -101,7 +112,10 @@ const Services = () => {
           </div>
         </div>
         
-        <div className={cn("lg:col-span-7 relative min-h-[60vh] lg:min-h-[70vh] flex items-center justify-center transition-all duration-700 transform", isVisible ? "opacity-100 translate-x-0" : "opacity-0 translate-x-10")}>
+        <div 
+          ref={serviceDetailsRef}
+          className={cn("lg:col-span-7 relative min-h-[60vh] lg:min-h-[70vh] flex items-center justify-center transition-all duration-700 transform", isVisible ? "opacity-100 translate-x-0" : "opacity-0 translate-x-10")}
+        >
           {services.map((service, index) => <div key={index} className={cn("absolute inset-0 flex flex-col items-center justify-center p-8 rounded-2xl backdrop-blur-sm transition-all duration-700", currentIndex === index ? "opacity-100 z-10 transform scale-100" : "opacity-0 z-0 transform scale-95")} style={{
           background: currentIndex === index ? service.backgroundGradient : 'transparent'
         }}>

@@ -1,16 +1,18 @@
-
 import { X, ArrowRight, Sparkles } from 'lucide-react';
 import { Button } from "../ui/button";
 import { cn } from "@/lib/utils";
+import { Link } from 'react-router-dom';
 import NavMenuLinks from './NavMenuLinks';
 import NavMenuServices from './NavMenuServices';
 import NavMenuQuickLinks from './NavMenuQuickLinks';
 import NavMenuLegal from './NavMenuLegal';
+
 interface NavMenuProps {
   menuOpen: boolean;
   toggleMenu: () => void;
   activeSection: string;
 }
+
 const NavMenu = ({
   menuOpen,
   toggleMenu,
@@ -29,6 +31,7 @@ const NavMenu = ({
     name: 'Contact',
     href: '#contact'
   }];
+  
   return <>
       {/* Menu Overlay */}
       <div className={`fixed inset-0 bg-black/60 z-40 transition-opacity duration-500 ${menuOpen ? 'opacity-100' : 'opacity-0 pointer-events-none'}`} onClick={toggleMenu} />
@@ -45,13 +48,13 @@ const NavMenu = ({
           
           {/* Header */}
           <div className="flex flex-col mb-10 md:mb-16">
-            <div className="flex items-center gap-4 mb-6">
+            <Link to="/" className="flex items-center gap-4 mb-6" onClick={toggleMenu}>
               <img src="/lovable-uploads/a9bfe93b-b4a8-45e7-b6ec-0ccf561e4234.png" alt="Gen0 Logo" className="h-16 object-contain" />
               <div className="flex items-center gap-3">
                 <Sparkles className="text-accent h-6 w-6 animate-pulse-subtle" />
                 <span className="font-bold text-xl md:text-2xl">GEN<span className="text-accent">Ø</span></span>
               </div>
-            </div>
+            </Link>
             
             {/* Animated Punchline */}
             <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold max-w-3xl mb-4 bg-gradient-to-r from-foreground via-foreground/90 to-foreground/70 bg-clip-text text-transparent">
@@ -60,7 +63,6 @@ const NavMenu = ({
           </div>
           
           <div className="grid grid-cols-1 md:grid-cols-12 gap-10">
-            {/* Main Navigation - Left Column */}
             <div className="md:col-span-5 lg:col-span-4">
               <div className="space-y-8">
                 <NavMenuLinks navLinks={navLinks} activeSection={activeSection} toggleMenu={toggleMenu} />
@@ -72,20 +74,15 @@ const NavMenu = ({
               </div>
             </div>
             
-            {/* Right Column - Secondary Links */}
             <div className="md:col-span-7 lg:col-span-8">
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-                {/* Services Links */}
                 <NavMenuServices toggleMenu={toggleMenu} />
-
-                {/* Quick Links */}
+                
                 <NavMenuQuickLinks navLinks={navLinks} toggleMenu={toggleMenu} />
-
-                {/* Legal Links */}
+                
                 <NavMenuLegal toggleMenu={toggleMenu} />
               </div>
               
-              {/* Decorative Elements */}
               <div className="mt-16 hidden md:block">
                 <div className="relative">
                   <div className="h-[1px] w-full bg-border/30 relative overflow-hidden">
@@ -100,4 +97,5 @@ const NavMenu = ({
       </div>
     </>;
 };
+
 export default NavMenu;

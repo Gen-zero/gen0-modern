@@ -1,13 +1,18 @@
 import { useEffect, useState, useRef } from 'react';
 import { Button } from './ui/button';
 import { ArrowRight, UserPlus } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
+
 const words = ['BUILD', 'CODE', 'DESIGN', 'IDEATE'];
+
 const Hero = () => {
+  const navigate = useNavigate();
   const [currentWordIndex, setCurrentWordIndex] = useState(0);
   const [displayedWord, setDisplayedWord] = useState(words[0]);
   const intervalRef = useRef<NodeJS.Timeout | null>(null);
   const heroRef = useRef<HTMLElement>(null);
   const vantaEffect = useRef<any>(null);
+
   const scrambleWord = (finalWord: string) => {
     let iteration = 0;
     const totalIterations = finalWord.length;
@@ -28,6 +33,7 @@ const Hero = () => {
       }
     }, 50);
   };
+
   useEffect(() => {
     setDisplayedWord(words[0]);
     const interval = setInterval(() => {
@@ -39,6 +45,7 @@ const Hero = () => {
     }, 1790);
     return () => clearInterval(interval);
   }, []);
+
   useEffect(() => {
     if (typeof window !== 'undefined' && window.VANTA) {
       vantaEffect.current = window.VANTA.CELLS({
@@ -61,7 +68,9 @@ const Hero = () => {
       }
     };
   }, []);
-  return <section ref={heroRef} id="home" className="min-h-screen flex items-center justify-center pt-8 overflow-hidden relative">
+
+  return (
+    <section ref={heroRef} id="home" className="min-h-screen flex items-center justify-center pt-8 overflow-hidden relative">
       <div className="absolute inset-0 bg-gradient-to-br from-secondary/20 to-background -z-10"></div>
       
       <div className="absolute top-1/4 right-[10%] w-64 h-64 bg-primary/5 rounded-full blur-3xl animate-pulse-subtle"></div>
@@ -104,7 +113,9 @@ const Hero = () => {
             <img alt="Gen0 Logo" className="h-32 object-contain" src="/lovable-uploads/064b72fa-db67-415f-804d-69b24d008e2b.png" />
           </div>
           
-          <Button className="uppercase font-medium text-sm px-8 py-6 
+          <Button 
+            onClick={() => navigate('/about')}
+            className="uppercase font-medium text-sm px-8 py-6 
                      bg-primary hover:bg-primary/90 group transition-all duration-300 
                      hover:scale-110 hover:shadow-[0_0_20px_rgba(138,43,226,0.6)] relative overflow-hidden
                      after:content-[''] after:absolute after:bg-primary-foreground/10 after:h-full after:w-full
@@ -115,6 +126,8 @@ const Hero = () => {
           </Button>
         </div>
       </div>
-    </section>;
+    </section>
+  );
 };
+
 export default Hero;

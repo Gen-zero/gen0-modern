@@ -22,7 +22,7 @@ const services = [
   {
     title: '0 TO 1',
     icon: <Database className="h-16 w-16 md:h-20 md:w-20 text-primary-foreground" />,
-    description: 'Transform your ideas into reality swiftly with our '0 to 1' service—rapid, robust MVPs built to validate your vision.',
+    description: "Transform your ideas into reality swiftly with our '0 to 1' service—rapid, robust MVPs built to validate your vision.",
     backgroundGradient: 'linear-gradient(135deg, #4F2398 0%, #8e44ad 100%)',
     features: ['MVP Development', 'Branding', 'Website and Profile Building', '24/7 Support and Guidance']
   },

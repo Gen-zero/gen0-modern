@@ -117,7 +117,7 @@ const Hero = () => {
           <Button 
             onClick={() => navigate('/about')}
             className="uppercase font-medium text-sm px-8 py-6 
-                     bg-accent/10 border border-accent/40 hover:bg-accent/10 hover:border-accent hover:text-accent
+                     bg-black border border-accent/40 hover:bg-accent/10 hover:border-accent hover:text-accent
                      group transition-all duration-300 hover:scale-110 
                      hover:shadow-[0_0_20px_rgba(140,53,242,0.6)] relative overflow-hidden
                      after:content-[''] after:absolute after:bg-accent/5 after:h-full after:w-full

@@ -1,4 +1,5 @@
 
+import { Link } from "react-router-dom";
 import { ArrowRight } from 'lucide-react';
 import { cn } from "@/lib/utils";
 
@@ -17,9 +18,9 @@ const NavMenuLinks = ({ navLinks, activeSection, toggleMenu }: NavMenuLinksProps
   return (
     <nav className="flex flex-col space-y-2">
       {navLinks.map((link, index) => (
-        <a 
+        <Link 
           key={link.name} 
-          href={link.href} 
+          to={link.href.startsWith('#') ? link.href : link.href}
           className={cn(
             "group relative flex items-center text-lg md:text-xl lg:text-2xl font-medium transition-colors",
             activeSection === link.name ? "text-accent" : "text-foreground/90 hover:text-accent"
@@ -34,7 +35,7 @@ const NavMenuLinks = ({ navLinks, activeSection, toggleMenu }: NavMenuLinksProps
             "ml-2 h-4 w-4 md:h-5 md:w-5 opacity-0 transition-all duration-300", 
             "group-hover:opacity-100 group-hover:translate-x-2"
           )} />
-        </a>
+        </Link>
       ))}
     </nav>
   );

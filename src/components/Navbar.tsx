@@ -1,4 +1,3 @@
-
 import { useState, useEffect, useRef } from 'react';
 import { Menu, Sparkles, ChevronRight, ChevronLeft } from 'lucide-react';
 import NavMenu from './navbar/NavMenu';
@@ -63,26 +62,22 @@ const Navbar = () => {
     setNavbarExpanded(!navbarExpanded);
     
     if (navbarRef.current) {
-      if (!navbarExpanded) {
-        // Drawer sliding out animation
-        gsap.fromTo(navbarRef.current, 
-          { width: "40vw", maxWidth: "300px" },
+      const expandableContentRef = document.querySelector('.expandable-section-links');
+      
+      if (!navbarExpanded && expandableContentRef) {
+        gsap.fromTo(expandableContentRef, 
+          { width: 0, opacity: 0 },
           {
-            width: "auto",
-            maxWidth: "80vw",
+            width: 'auto',
+            opacity: 1,
             duration: 0.8,
-            ease: "power2.inOut",
-            clearProps: "width,maxWidth",
-            onComplete: () => {
-              gsap.set(navbarRef.current, { width: "auto", maxWidth: "80vw" });
-            }
+            ease: "power2.inOut"
           }
         );
-      } else {
-        // Drawer sliding in animation
-        gsap.to(navbarRef.current, {
-          width: "40vw",
-          maxWidth: "300px",
+      } else if (expandableContentRef) {
+        gsap.to(expandableContentRef, {
+          width: 0,
+          opacity: 0,
           duration: 0.7,
           ease: "power3.inOut"
         });
@@ -164,7 +159,8 @@ const Navbar = () => {
   return <>
       <header 
         ref={navbarRef}
-        className={`fixed top-4 left-4 z-50 transition-colors duration-300 ${isScrolled ? 'bg-background/80 backdrop-blur-md shadow-sm' : 'bg-background/60 backdrop-blur-sm'} p-3 rounded-lg w-[40vw] max-w-[300px] border border-border/30 overflow-hidden`}
+        className={`fixed top-4 left-4 z-50 transition-colors duration-300 ${isScrolled ? 'bg-background/80 backdrop-blur-md shadow-sm' : 'bg-background/60 backdrop-blur-sm'} p-3 rounded-lg border border-border/30 overflow-hidden`}
+        style={{ width: 'auto', maxWidth: navbarExpanded ? '80vw' : '300px' }}
       >
         <div className="flex items-center justify-between">
           <button className="text-foreground/90 hover:text-accent transition-colors focus:outline-none" onClick={toggleMenu} aria-label={menuOpen ? "Close Menu" : "Open Menu"}>
@@ -193,8 +189,8 @@ const Navbar = () => {
                 </span>
               </div>
 
-              <div className={`overflow-hidden transition-all duration-300 ease-in-out flex ${navbarExpanded ? 'max-w-[500px] opacity-100 ml-3' : 'max-w-0 opacity-0 ml-0'}`}>
-                <div className="flex items-center space-x-3">
+              <div className={`expandable-section-links overflow-hidden flex ${navbarExpanded ? 'w-auto opacity-100 ml-3' : 'w-0 opacity-0 ml-0'}`}>
+                <div className="flex items-center space-x-3 whitespace-nowrap">
                   {sections.map((section) => {
                     const isActive = activeSection.toLowerCase() === section.label.toLowerCase();
                     if (!isActive) {
@@ -202,7 +198,7 @@ const Navbar = () => {
                         <a
                           key={section.id}
                           href={`#${section.id}`}
-                          className="px-3 py-1 text-sm rounded-md transition-colors whitespace-nowrap hover:bg-card text-foreground/70 hover:text-foreground"
+                          className="px-3 py-1 text-sm rounded-md transition-colors hover:bg-card text-foreground/70 hover:text-foreground"
                         >
                           {section.label}
                         </a>

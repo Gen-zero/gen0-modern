@@ -50,6 +50,10 @@ export const useNavbarScroll = () => {
   useEffect(() => {
     // Debounce timer for section changes to prevent rapid switching
     let debounceTimer: number | null = null;
+    // Track last detected section to prevent rapid oscillation
+    let lastDetectedSection = activeSection;
+    // Add a minimum time between section changes
+    let lastChangeTime = Date.now();
     
     const handleScroll = () => {
       const currentScrollY = window.scrollY;
@@ -77,6 +81,12 @@ export const useNavbarScroll = () => {
 
       // If currently transitioning, don't detect new sections
       if (isTransitioning) {
+        return;
+      }
+
+      // Enforce minimum time between section changes (500ms)
+      const now = Date.now();
+      if (now - lastChangeTime < 500) {
         return;
       }
 
@@ -133,11 +143,17 @@ export const useNavbarScroll = () => {
       });
       
       // Only update section if we found a valid one and it's different from the current
-      if (currentSection && currentSection !== activeSection) {
+      // Also add hysteresis - require section to be significantly more visible before switching
+      if (currentSection && 
+          currentSection !== activeSection && 
+          currentSection !== lastDetectedSection) {
+          
         // Clear any existing debounce timer
         if (debounceTimer) {
           window.clearTimeout(debounceTimer);
         }
+        
+        lastDetectedSection = currentSection;
         
         // Set a debounce to prevent rapid section changes
         debounceTimer = window.setTimeout(() => {
@@ -151,15 +167,18 @@ export const useNavbarScroll = () => {
               window.clearTimeout(transitionTimeoutRef.current);
             }
             
+            // Update last change time
+            lastChangeTime = Date.now();
+            
             // Set timeout to match the animation duration in useNavbarTextAnimation
             transitionTimeoutRef.current = window.setTimeout(() => {
               setIsTransitioning(false);
               transitionTimeoutRef.current = null;
-            }, 300); // Match this with the GSAP animation duration
+            }, 500); // Increase this to give animations more time to finish
           }
           
           debounceTimer = null;
-        }, 100); // Small debounce to stabilize detection
+        }, 200); // Increase debounce to further stabilize detection
       }
     };
     

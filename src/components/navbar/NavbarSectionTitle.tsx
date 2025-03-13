@@ -1,3 +1,4 @@
+
 import { useNavbar } from '@/contexts/NavbarContext';
 import { useNavbarAnimation } from '@/hooks/useNavbarAnimation';
 import { useLocation } from 'react-router-dom';
@@ -5,8 +6,10 @@ import { useEffect } from 'react';
 
 const NavbarSectionTitle = () => {
   const { activeSection, prevActiveSection, setActiveSection, setPrevActiveSection } = useNavbar();
-  const { activeTextRef, prevTextRef, isAboutPage } = useNavbarAnimation();
+  const { activeTextRef, prevTextRef } = useNavbarAnimation();
   const location = useLocation();
+  
+  const isAboutPage = location.pathname === '/about';
 
   // Set the correct title based on the current route
   useEffect(() => {
@@ -29,8 +32,9 @@ const NavbarSectionTitle = () => {
       setActiveSection('Terms');
     } else if (location.pathname === '/cookie-policy') {
       setActiveSection('Cookies');
-    } else if (location.pathname === '/about') {
-      setActiveSection('About');
+    } else if (location.pathname === '/about' && activeSection === 'Home') {
+      // Only set initial About page section once
+      setActiveSection('Our Story');
     } else if (location.pathname === '/') {
       // Only set to Home if we're actually on the home page
       if (activeSection !== 'Services' && 

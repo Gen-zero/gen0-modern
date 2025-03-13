@@ -108,11 +108,11 @@ const Hero = () => {
         <div className="flex items-center justify-center mt-8 gap-8">
           <Button 
             variant="outline" 
-            className="uppercase font-medium text-sm px-8 py-6 border-accent/40 
-                     hover:bg-purple-500/10 hover:border-purple-500 hover:text-purple-500
+            className="uppercase font-medium text-sm px-8 py-6 bg-background/60 backdrop-blur-sm border-border/30
+                     hover:bg-primary/10 hover:border-primary hover:text-primary
                      group transition-all duration-300 hover:scale-110 
                      hover:shadow-[0_0_20px_rgba(168,85,247,0.6)] relative overflow-hidden
-                     after:content-[''] after:absolute after:bg-purple-500/5 after:h-full after:w-full
+                     after:content-[''] after:absolute after:bg-primary/5 after:h-full after:w-full
                      after:left-0 after:top-0 after:transform after:scale-x-0 after:origin-left 
                      hover:after:scale-x-100 after:transition-transform after:duration-500"
             onClick={scrollToProjects}
@@ -121,17 +121,13 @@ const Hero = () => {
             <ArrowRight className="ml-2 transition-transform duration-300 group-hover:translate-x-2 relative z-10" size={16} />
           </Button>
           
-          <div className="text-center">
-            <img alt="Gen0 Logo" className="h-32 object-contain" src="/lovable-uploads/064b72fa-db67-415f-804d-69b24d008e2b.png" />
-          </div>
-          
           <Button 
             onClick={() => navigate('/about')}
-            className="uppercase font-medium text-sm px-8 py-6 border-accent/40 
-                     bg-[#0a0a0a] border hover:bg-purple-500/10 hover:border-purple-500 hover:text-purple-500
+            className="uppercase font-medium text-sm px-8 py-6 bg-background/60 backdrop-blur-sm border border-border/30
+                     hover:bg-primary/10 hover:border-primary hover:text-primary
                      group transition-all duration-300 hover:scale-110 
                      hover:shadow-[0_0_20px_rgba(168,85,247,0.6)] relative overflow-hidden
-                     after:content-[''] after:absolute after:bg-purple-500/5 after:h-full after:w-full
+                     after:content-[''] after:absolute after:bg-primary/5 after:h-full after:w-full
                      after:left-0 after:top-0 after:transform after:scale-x-0 after:origin-left 
                      hover:after:scale-x-100 after:transition-transform after:duration-500">
             <span className="relative z-10">Join Us</span>

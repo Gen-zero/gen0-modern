@@ -58,7 +58,7 @@ const NavbarContent = () => {
             {!isSmallScreen && (
               <button 
                 onClick={toggleNavbarExpand}
-                className="flex items-center justify-center w-8 h-8 rounded-full bg-accent/10 hover:bg-accent/20 text-accent transition-all ml-1"
+                className="flex items-center justify-center w-8 h-8 rounded-full bg-accent/10 hover:bg-primary/20 text-primary transition-all ml-1"
                 aria-label={navbarExpanded ? "Collapse Navigation" : "Expand Navigation"}
               >
                 {navbarExpanded ? <ChevronLeft size={18} /> : <ChevronRight size={18} />}
@@ -72,7 +72,7 @@ const NavbarContent = () => {
       {!isHomePage && !isMobileScreen && (
         <button
           onClick={handleBackClick}
-          className="fixed top-4 right-4 z-50 p-3 rounded-lg bg-background/60 backdrop-blur-sm border border-border/30 transition-all duration-300 hover:bg-background/80 text-foreground/90 hover:text-accent focus:outline-none"
+          className="fixed top-4 right-4 z-50 p-3 rounded-lg bg-background/60 backdrop-blur-sm border border-border/30 transition-all duration-300 hover:bg-primary/10 text-foreground/90 hover:text-primary focus:outline-none"
           aria-label="Go back"
         >
           <ArrowLeft size={24} />

@@ -8,6 +8,8 @@ const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState('Home');
+  const [prevActiveSection, setPrevActiveSection] = useState('Home');
+  const [isTransitioning, setIsTransitioning] = useState(false);
   const location = useLocation();
   const isAboutPage = location.pathname === '/about';
   
@@ -24,14 +26,20 @@ const Navbar = () => {
           const sectionHeight = (section as HTMLElement).offsetHeight;
           const sectionId = section.getAttribute('id') || '';
           if (scrollY >= sectionTop && scrollY < sectionTop + sectionHeight) {
-            setActiveSection(sectionId.charAt(0).toUpperCase() + sectionId.slice(1));
+            const newSection = sectionId.charAt(0).toUpperCase() + sectionId.slice(1);
+            if (newSection !== activeSection) {
+              setPrevActiveSection(activeSection);
+              setActiveSection(newSection);
+              setIsTransitioning(true);
+              setTimeout(() => setIsTransitioning(false), 500);
+            }
           }
         });
       }
     };
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
-  }, [isAboutPage]);
+  }, [isAboutPage, activeSection]);
   
   const toggleMenu = () => {
     setMenuOpen(!menuOpen);
@@ -54,9 +62,18 @@ const Navbar = () => {
             <img src="/lovable-uploads/a9bfe93b-b4a8-45e7-b6ec-0ccf561e4234.png" alt="Gen0 Logo" className="h-11 object-contain" />
           </Link>
           
-          <span className="text-sm font-medium text-foreground/80 ml-3 mr-1 my-0 px-[] mx-[25px]">
-            {isAboutPage ? "About Us" : activeSection}
-          </span>
+          <div className="relative min-w-[80px] h-6 overflow-hidden">
+            <span 
+              className={`absolute inset-0 text-sm font-medium text-foreground/80 mx-auto text-center transition-transform duration-500 ${isTransitioning ? '-translate-y-8 opacity-0' : 'translate-y-0 opacity-100'}`}
+            >
+              {isAboutPage ? "About Us" : activeSection}
+            </span>
+            <span 
+              className={`absolute inset-0 text-sm font-medium text-foreground/80 mx-auto text-center transition-transform duration-500 ${isTransitioning ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'}`}
+            >
+              {isAboutPage ? "About Us" : prevActiveSection}
+            </span>
+          </div>
         </div>
       </header>
       

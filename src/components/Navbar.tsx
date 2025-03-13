@@ -1,5 +1,5 @@
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { Menu, Sparkles } from 'lucide-react';
 import NavMenu from './navbar/NavMenu';
 import { Link, useLocation } from 'react-router-dom';
@@ -12,6 +12,7 @@ const Navbar = () => {
   const [isTransitioning, setIsTransitioning] = useState(false);
   const [scrollDirection, setScrollDirection] = useState('down');
   const [lastScrollY, setLastScrollY] = useState(0);
+  const transitionTimeoutRef = useRef<number | null>(null);
   const location = useLocation();
   const isAboutPage = location.pathname === '/about';
   
@@ -39,19 +40,35 @@ const Navbar = () => {
           const sectionId = section.getAttribute('id') || '';
           if (currentScrollY >= sectionTop && currentScrollY < sectionTop + sectionHeight) {
             const newSection = sectionId.charAt(0).toUpperCase() + sectionId.slice(1);
-            if (newSection !== activeSection) {
+            if (newSection !== activeSection && !isTransitioning) {
               setPrevActiveSection(activeSection);
               setActiveSection(newSection);
               setIsTransitioning(true);
-              setTimeout(() => setIsTransitioning(false), 500);
+              
+              // Clear any existing timeout
+              if (transitionTimeoutRef.current) {
+                window.clearTimeout(transitionTimeoutRef.current);
+              }
+              
+              // Set new timeout
+              transitionTimeoutRef.current = window.setTimeout(() => {
+                setIsTransitioning(false);
+                transitionTimeoutRef.current = null;
+              }, 500);
             }
           }
         });
       }
     };
+    
     window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, [isAboutPage, activeSection, lastScrollY]);
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      if (transitionTimeoutRef.current) {
+        window.clearTimeout(transitionTimeoutRef.current);
+      }
+    };
+  }, [isAboutPage, activeSection, lastScrollY, isTransitioning]);
   
   const toggleMenu = () => {
     setMenuOpen(!menuOpen);
@@ -77,9 +94,9 @@ const Navbar = () => {
           <div className="relative min-w-[80px] h-6 overflow-hidden">
             {/* Current section text */}
             <span 
-              className={`absolute inset-0 text-sm font-medium text-foreground/80 mx-auto text-center transition-transform duration-500 ${
+              className={`absolute inset-0 text-sm font-medium text-foreground/80 mx-auto text-center transition-transform duration-500 ease-in-out ${
                 isTransitioning 
-                  ? (scrollDirection === 'down' ? '-translate-y-8' : 'translate-y-8') + ' opacity-0' 
+                  ? scrollDirection === 'down' ? '-translate-y-full opacity-0' : 'translate-y-full opacity-0' 
                   : 'translate-y-0 opacity-100'
               }`}
             >
@@ -88,10 +105,10 @@ const Navbar = () => {
             
             {/* Previous section text */}
             <span 
-              className={`absolute inset-0 text-sm font-medium text-foreground/80 mx-auto text-center transition-transform duration-500 ${
+              className={`absolute inset-0 text-sm font-medium text-foreground/80 mx-auto text-center transition-transform duration-500 ease-in-out ${
                 isTransitioning 
                   ? 'translate-y-0 opacity-100' 
-                  : (scrollDirection === 'down' ? 'translate-y-8' : '-translate-y-8') + ' opacity-0'
+                  : scrollDirection === 'down' ? 'translate-y-full opacity-0' : '-translate-y-full opacity-0'
               }`}
             >
               {isAboutPage ? "About Us" : prevActiveSection}

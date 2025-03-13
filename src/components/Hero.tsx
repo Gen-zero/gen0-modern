@@ -1,3 +1,4 @@
+
 import { useEffect, useState, useRef } from 'react';
 import { Button } from './ui/button';
 import { ArrowRight, UserPlus } from 'lucide-react';
@@ -69,6 +70,13 @@ const Hero = () => {
     };
   }, []);
 
+  const scrollToProjects = () => {
+    const projectsSection = document.getElementById('projects');
+    if (projectsSection) {
+      projectsSection.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
   return (
     <section ref={heroRef} id="home" className="min-h-screen flex items-center justify-center pt-8 overflow-hidden relative">
       <div className="absolute inset-0 bg-gradient-to-br from-secondary/20 to-background -z-10"></div>
@@ -98,13 +106,17 @@ const Hero = () => {
         </div>
 
         <div className="flex items-center justify-center mt-8 gap-8">
-          <Button variant="outline" className="uppercase font-medium text-sm px-8 py-6 border-accent/40 
+          <Button 
+            variant="outline" 
+            className="uppercase font-medium text-sm px-8 py-6 border-accent/40 
                      hover:bg-purple-500/10 hover:border-purple-500 hover:text-purple-500
                      group transition-all duration-300 hover:scale-110 
                      hover:shadow-[0_0_20px_rgba(168,85,247,0.6)] relative overflow-hidden
                      after:content-[''] after:absolute after:bg-purple-500/5 after:h-full after:w-full
                      after:left-0 after:top-0 after:transform after:scale-x-0 after:origin-left 
-                     hover:after:scale-x-100 after:transition-transform after:duration-500">
+                     hover:after:scale-x-100 after:transition-transform after:duration-500"
+            onClick={scrollToProjects}
+          >
             <span className="relative z-10">Our Works</span>
             <ArrowRight className="ml-2 transition-transform duration-300 group-hover:translate-x-2 relative z-10" size={16} />
           </Button>

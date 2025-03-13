@@ -32,17 +32,19 @@ export const useNavbarTextAnimation = () => {
       gsap.set(activeTextRef.current, { clearProps: "all" });
       gsap.set(prevTextRef.current, { clearProps: "all" });
       
-      // Ensure prev text is visible and active text is ready to animate in
+      // IMPORTANT: Set initial states before animation
       gsap.set(prevTextRef.current, { 
         y: 0, 
         autoAlpha: 1,
-        immediateRender: true
+        immediateRender: true,
+        force3D: true
       });
       
       gsap.set(activeTextRef.current, { 
         y: direction === 'down' ? 20 : -20, 
         autoAlpha: 0,
-        immediateRender: true
+        immediateRender: true,
+        force3D: true
       });
       
       // Animate out the previous text
@@ -50,7 +52,8 @@ export const useNavbarTextAnimation = () => {
         y: direction === 'down' ? -20 : 20,
         autoAlpha: 0,
         duration: 0.35,
-        ease: 'power2.inOut'
+        ease: 'power2.inOut',
+        force3D: true
       });
       
       // Animate in the new text with a slight delay to prevent overlap
@@ -60,6 +63,7 @@ export const useNavbarTextAnimation = () => {
         duration: 0.35,
         delay: 0.05,
         ease: 'power2.inOut',
+        force3D: true,
         onComplete: () => {
           if (transitionTimeoutRef.current) {
             window.clearTimeout(transitionTimeoutRef.current);
@@ -72,35 +76,59 @@ export const useNavbarTextAnimation = () => {
           // Give a little extra time before allowing new transitions
           setTimeout(() => {
             setIsTransitioning(false);
+            
+            // Force visibility of active text at the end of animation
+            if (activeTextRef.current) {
+              gsap.set(activeTextRef.current, {
+                autoAlpha: 1,
+                y: 0,
+                force3D: true,
+                overwrite: "auto"
+              });
+            }
           }, 150);
         }
       });
     }
   };
 
-  // Initialize text visibility on component mount
+  // Make sure text is visible whenever component renders/mounts
   useEffect(() => {
-    // Make sure active text is fully visible on initial render
-    if (activeTextRef.current) {
-      gsap.set(activeTextRef.current, { 
-        autoAlpha: 1, 
-        y: 0,
-        immediateRender: true,
-        overwrite: true
-      });
-    }
+    const ensureVisibility = () => {
+      // Always make active text visible
+      if (activeTextRef.current) {
+        gsap.set(activeTextRef.current, { 
+          autoAlpha: 1, 
+          y: 0,
+          immediateRender: true,
+          force3D: true,
+          overwrite: "auto"
+        });
+      }
+      
+      // Always hide previous text
+      if (prevTextRef.current) {
+        gsap.set(prevTextRef.current, { 
+          autoAlpha: 0,
+          immediateRender: true,
+          force3D: true,
+          overwrite: "auto"
+        });
+      }
+    };
     
-    // Make sure previous text is hidden on initial render
-    if (prevTextRef.current) {
-      gsap.set(prevTextRef.current, { 
-        autoAlpha: 0,
-        immediateRender: true,
-        overwrite: true
-      });
-    }
+    // Run initially
+    ensureVisibility();
+    
+    // Also run after a short delay to ensure DOM is ready
+    const initialTimer = setTimeout(ensureVisibility, 100);
+    
+    return () => {
+      clearTimeout(initialTimer);
+    };
   }, []);
 
-  // Reinforce visibility when not transitioning
+  // Ensure visibility whenever section changes or when not transitioning
   useEffect(() => {
     if (!isTransitioning && activeTextRef.current) {
       // Ensure active text is visible when not transitioning
@@ -108,7 +136,8 @@ export const useNavbarTextAnimation = () => {
         autoAlpha: 1, 
         y: 0,
         immediateRender: true,
-        overwrite: true 
+        force3D: true,
+        overwrite: "auto" 
       });
     }
   }, [isTransitioning, activeSection]);
@@ -117,10 +146,9 @@ export const useNavbarTextAnimation = () => {
   useEffect(() => {
     if (isTransitioning && !animatingRef.current) {
       // Small delay to ensure the DOM has been updated
-      // This helps prevent glitches when section changes happen in quick succession
       const animateTimer = window.setTimeout(() => {
         animateSectionChange(scrollDirection);
-      }, 50); // Increased delay for better stability
+      }, 50);
       
       return () => {
         window.clearTimeout(animateTimer);

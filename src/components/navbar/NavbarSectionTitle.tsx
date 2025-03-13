@@ -55,18 +55,18 @@ const NavbarSectionTitle = () => {
         <div className="flex items-center">
           <span className="text-sm font-medium text-foreground/80">About/</span>
           
-          <div className="relative overflow-hidden ml-1">
+          <div className="relative overflow-hidden ml-1 min-w-[80px]">
             <span 
               ref={activeTextRef}
-              className="text-sm font-medium text-accent absolute inset-0"
-              style={{ opacity: 1 }} /* Explicitly set to visible */
+              className="text-sm font-medium text-accent absolute inset-0 block" 
+              style={{ opacity: 1, transform: 'translateY(0)' }} /* Explicitly set to fully visible */
             >
               {sectionText}
             </span>
             
             <span 
               ref={prevTextRef}
-              className="text-sm font-medium text-accent absolute inset-0"
+              className="text-sm font-medium text-accent absolute inset-0 block"
               style={{ opacity: 0 }} /* Explicitly set to hidden initially */
             >
               {prevSectionText}
@@ -82,15 +82,15 @@ const NavbarSectionTitle = () => {
     <div className="relative min-w-[80px] h-6 overflow-hidden">
       <span 
         ref={activeTextRef}
-        className="absolute inset-0 text-sm font-medium text-foreground/80 mx-auto text-center"
-        style={{ opacity: 1 }} /* Explicitly set to visible */
+        className="absolute inset-0 text-sm font-medium text-foreground/80 mx-auto text-center block"
+        style={{ opacity: 1, transform: 'translateY(0)' }} /* Explicitly set to fully visible */
       >
         {activeSection}
       </span>
       
       <span 
         ref={prevTextRef}
-        className="absolute inset-0 text-sm font-medium text-foreground/80 mx-auto text-center"
+        className="absolute inset-0 text-sm font-medium text-foreground/80 mx-auto text-center block"
         style={{ opacity: 0 }} /* Explicitly set to hidden initially */
       >
         {prevActiveSection}

@@ -2,6 +2,7 @@
 import { useRef, useEffect } from 'react';
 import gsap from 'gsap';
 import { useNavbar } from '@/contexts/NavbarContext';
+import { useIsMobile } from './use-mobile';
 
 export const useNavbarAnimation = () => {
   const { 
@@ -14,6 +15,7 @@ export const useNavbarAnimation = () => {
     transitionTimeoutRef
   } = useNavbar();
   
+  const isMobile = useIsMobile();
   const activeTextRef = useRef<HTMLSpanElement>(null);
   const prevTextRef = useRef<HTMLSpanElement>(null);
   const navbarRef = useRef<HTMLDivElement>(null);
@@ -66,6 +68,29 @@ export const useNavbarAnimation = () => {
   // -----------------------------------------
   const toggleNavbarExpand = () => {
     setNavbarExpanded(!navbarExpanded);
+    
+    // Skip animations on mobile devices
+    if (isMobile) {
+      const expandableContentRef = document.querySelector('.expandable-section-links');
+      if (expandableContentRef) {
+        if (!navbarExpanded) {
+          // Immediately show content on mobile without animation
+          gsap.set(expandableContentRef, { 
+            display: 'flex',
+            width: 'auto',
+            opacity: 1
+          });
+        } else {
+          // Immediately hide content on mobile without animation
+          gsap.set(expandableContentRef, { 
+            display: 'none',
+            width: 0,
+            opacity: 0
+          });
+        }
+      }
+      return;
+    }
     
     const expandableContentRef = document.querySelector('.expandable-section-links');
     

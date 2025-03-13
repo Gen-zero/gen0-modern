@@ -6,7 +6,7 @@ import { useNavbar } from '@/contexts/NavbarContext';
 export const useNavbarScroll = () => {
   const { 
     setIsScrolled, 
-    activeSection,  // Added activeSection here
+    activeSection,
     setActiveSection, 
     setPrevActiveSection, 
     isTransitioning,
@@ -64,6 +64,11 @@ export const useNavbarScroll = () => {
       
       // Update navbar style when scrolled
       setIsScrolled(currentScrollY > 50);
+
+      // For policy pages, we don't need section detection
+      if (isPrivacyPage || isTermsPage || isCookiePage) {
+        return;
+      }
 
       // Get all sections based on current page
       const sectionsQuery = 'section[id]';
@@ -146,7 +151,7 @@ export const useNavbarScroll = () => {
         window.clearTimeout(transitionTimeoutRef.current);
       }
     };
-  }, [isAboutPage, activeSection, lastScrollY, isTransitioning, setActiveSection, setPrevActiveSection, setIsScrolled, setIsTransitioning, setLastScrollY, setScrollDirection, transitionTimeoutRef]);
+  }, [isAboutPage, isPrivacyPage, isTermsPage, isCookiePage, activeSection, lastScrollY, isTransitioning, setActiveSection, setPrevActiveSection, setIsScrolled, setIsTransitioning, setLastScrollY, setScrollDirection, transitionTimeoutRef]);
 
   return { isAboutPage, isProjectsPage, isPrivacyPage, isTermsPage, isCookiePage, sections };
 };

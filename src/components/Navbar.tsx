@@ -37,8 +37,8 @@ const NavbarContent = () => {
       setPrevActiveSection('Cookies');
       setActiveSection('Cookies');
     } else if (location.pathname === '/about') {
-      setPrevActiveSection('About');
-      setActiveSection('About');
+      setPrevActiveSection('Our Story');
+      setActiveSection('Our Story');
     } else if (location.pathname === '/') {
       setPrevActiveSection('Home');
       setActiveSection('Home');

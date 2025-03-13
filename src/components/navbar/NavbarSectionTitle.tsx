@@ -45,9 +45,8 @@ const NavbarSectionTitle = () => {
 
   // For About page, show in "About/CurrentSection" format with GSAP animations
   if (isAboutPage) {
-    // When initial About is loaded, the activeSection is "About"
-    // So we need to handle that case separately
     const sectionText = activeSection === 'About' ? 'Our Story' : activeSection;
+    const prevSectionText = prevActiveSection === 'About' ? 'Our Story' : prevActiveSection;
     
     return (
       <div className="relative min-w-[160px] h-6 overflow-hidden">
@@ -66,7 +65,7 @@ const NavbarSectionTitle = () => {
               ref={prevTextRef}
               className="absolute inset-0 text-sm font-medium text-accent"
             >
-              {prevActiveSection !== 'About' ? prevActiveSection : 'Our Story'}
+              {prevSectionText}
             </span>
           </div>
         </div>

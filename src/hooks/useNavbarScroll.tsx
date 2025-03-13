@@ -94,9 +94,9 @@ export const useNavbarScroll = () => {
         // Calculate visibility - improved calculation for more accurate detection
         let visibilityRatio = 0;
         
-        if (sectionTop <= windowHeight * 0.5 && sectionTop + sectionHeight >= windowHeight * 0.2) {
-          // Section is in viewport and passing the middle point
-          visibilityRatio = 0.8;
+        if (sectionTop <= windowHeight * 0.3 && sectionTop + sectionHeight >= windowHeight * 0.1) {
+          // Section is in viewport and passing the upper part
+          visibilityRatio = 0.9;
         } else if (sectionTop < 0 && sectionTop + sectionHeight > 0) {
           // Section is partially visible at the top
           const visibleHeight = Math.min(windowHeight, sectionTop + sectionHeight);

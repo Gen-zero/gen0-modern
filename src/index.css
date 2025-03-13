@@ -130,16 +130,20 @@
   
   /* Enhanced scrollbar hiding while maintaining scroll functionality */
   .no-scrollbar {
-    /* For Firefox */
-    scrollbar-width: none;
-    /* For IE and Edge */
-    -ms-overflow-style: none;
-    /* For WebKit browsers (Chrome, Safari) */
+    /* Hide scrollbar for Chrome, Safari and Opera */
     &::-webkit-scrollbar {
       display: none;
       width: 0;
       height: 0;
       background: transparent;
     }
+    
+    /* Hide scrollbar for IE, Edge and Firefox */
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+    
+    /* Ensure touch scrolling works */
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
   }
 }

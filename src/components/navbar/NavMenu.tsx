@@ -43,7 +43,7 @@ const NavMenu = ({
       <div className={`fixed inset-0 z-50 flex items-center justify-center ${menuOpen ? 'opacity-100 visible' : 'opacity-0 invisible'} transition-all duration-500`}>
         <div className="absolute inset-0 bg-gradient-to-br from-background/95 via-background/98 to-background/90 backdrop-blur-md" onClick={toggleMenu}></div>
         
-        <ScrollArea className="relative w-full max-w-7xl mx-auto h-[90vh] no-scrollbar p-6 md:p-10 rounded-xl">
+        <div className="relative w-full max-w-7xl mx-auto h-[90vh] overflow-y-auto no-scrollbar p-6 md:p-10 rounded-xl touch-auto">
           {/* Close Button */}
           <button className="absolute top-6 right-6 z-50 text-foreground/80 hover:text-accent transition-colors duration-300 focus:outline-none" onClick={toggleMenu} aria-label="Close Menu">
             <X size={32} className="hover:rotate-90 transition-transform duration-300" />
@@ -96,7 +96,7 @@ const NavMenu = ({
               </div>
             </div>
           </div>
-        </ScrollArea>
+        </div>
       </div>
     </>
   );

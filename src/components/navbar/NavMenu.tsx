@@ -1,21 +1,24 @@
+
 import { X, ArrowRight, Sparkles } from 'lucide-react';
 import { Button } from "../ui/button";
-import { cn } from "@/lib/utils";
 import { Link } from 'react-router-dom';
 import NavMenuLinks from './NavMenuLinks';
 import NavMenuServices from './NavMenuServices';
 import NavMenuQuickLinks from './NavMenuQuickLinks';
 import NavMenuLegal from './NavMenuLegal';
+import { useNavbar } from '@/contexts/NavbarContext';
+
 interface NavMenuProps {
   menuOpen: boolean;
   toggleMenu: () => void;
-  activeSection: string;
 }
+
 const NavMenu = ({
   menuOpen,
   toggleMenu,
-  activeSection
 }: NavMenuProps) => {
+  const { activeSection } = useNavbar();
+  
   const navLinks = [{
     name: 'Home',
     href: '#home'
@@ -29,7 +32,9 @@ const NavMenu = ({
     name: 'Contact',
     href: '#contact'
   }];
-  return <>
+  
+  return (
+    <>
       {/* Menu Overlay */}
       <div className={`fixed inset-0 bg-black/60 z-40 transition-opacity duration-500 ${menuOpen ? 'opacity-100' : 'opacity-0 pointer-events-none'}`} onClick={toggleMenu} />
       
@@ -92,6 +97,8 @@ const NavMenu = ({
           </div>
         </div>
       </div>
-    </>;
+    </>
+  );
 };
+
 export default NavMenu;

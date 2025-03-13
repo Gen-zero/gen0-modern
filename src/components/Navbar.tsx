@@ -66,15 +66,15 @@ const Navbar = () => {
         gsap.to(navbarRef.current, {
           width: "auto",
           maxWidth: "80vw",
-          duration: 0.4,
-          ease: "power2.out"
+          duration: 0.6,
+          ease: "power3.out"
         });
       } else {
         gsap.to(navbarRef.current, {
           width: "40vw",
           maxWidth: "300px",
-          duration: 0.4,
-          ease: "power2.in"
+          duration: 0.6,
+          ease: "power3.in"
         });
       }
     }
@@ -192,7 +192,7 @@ const Navbar = () => {
                         <a
                           key={section.id}
                           href={`#${section.id}`}
-                          className="px-3 py-1 text-sm rounded-md transition-colors whitespace-nowrap hover:bg-card text-foreground/70 hover:text-foreground shadow-[0_0_10px_#9b87f5] hover:shadow-[0_0_15px_#9b87f5]"
+                          className="px-3 py-1 text-sm rounded-md transition-colors whitespace-nowrap hover:bg-card text-foreground/70 hover:text-foreground"
                         >
                           {section.label}
                         </a>

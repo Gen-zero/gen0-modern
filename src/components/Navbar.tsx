@@ -1,3 +1,4 @@
+
 import { useState, useEffect, useRef } from 'react';
 import { Menu, Sparkles, ChevronRight, ChevronLeft } from 'lucide-react';
 import NavMenu from './navbar/NavMenu';
@@ -63,18 +64,27 @@ const Navbar = () => {
     
     if (navbarRef.current) {
       if (!navbarExpanded) {
-        gsap.to(navbarRef.current, {
-          width: "auto",
-          maxWidth: "80vw",
-          duration: 0.6,
-          ease: "power3.out"
-        });
+        // Drawer sliding out animation
+        gsap.fromTo(navbarRef.current, 
+          { width: "40vw", maxWidth: "300px" },
+          {
+            width: "auto",
+            maxWidth: "80vw",
+            duration: 0.8,
+            ease: "power2.inOut",
+            clearProps: "width,maxWidth",
+            onComplete: () => {
+              gsap.set(navbarRef.current, { width: "auto", maxWidth: "80vw" });
+            }
+          }
+        );
       } else {
+        // Drawer sliding in animation
         gsap.to(navbarRef.current, {
           width: "40vw",
           maxWidth: "300px",
-          duration: 0.6,
-          ease: "power3.in"
+          duration: 0.7,
+          ease: "power3.inOut"
         });
       }
     }
@@ -154,7 +164,7 @@ const Navbar = () => {
   return <>
       <header 
         ref={navbarRef}
-        className={`fixed top-4 left-4 z-50 transition-all duration-300 ${isScrolled ? 'bg-background/80 backdrop-blur-md shadow-sm' : 'bg-background/60 backdrop-blur-sm'} p-3 rounded-lg w-[40vw] max-w-[300px] border border-border/30`}
+        className={`fixed top-4 left-4 z-50 transition-colors duration-300 ${isScrolled ? 'bg-background/80 backdrop-blur-md shadow-sm' : 'bg-background/60 backdrop-blur-sm'} p-3 rounded-lg w-[40vw] max-w-[300px] border border-border/30 overflow-hidden`}
       >
         <div className="flex items-center justify-between">
           <button className="text-foreground/90 hover:text-accent transition-colors focus:outline-none" onClick={toggleMenu} aria-label={menuOpen ? "Close Menu" : "Open Menu"}>

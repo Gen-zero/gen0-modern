@@ -60,7 +60,7 @@ const NavMenuLinks = ({ navLinks, activeSection, toggleMenu }: NavMenuLinksProps
               {link.name}
             </span>
             <ArrowRight className={cn(
-              "ml-2 h-4 w-4 md:h-5 md:w-5 opacity-0 transition-all duration-300", 
+              "ml-2 h-4 w-4 md:h-5 md:w-5 opacity-0 transition-all duration-300 text-white", 
               "group-hover:opacity-100 group-hover:translate-x-2"
             )} />
           </button>

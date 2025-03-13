@@ -62,10 +62,7 @@ export const useNavbarAnimation = () => {
       const expandableContentRef = document.querySelector('.expandable-section-links');
       
       if (!navbarExpanded && expandableContentRef) {
-        // First set initial state
-        gsap.set(expandableContentRef, { width: 0, opacity: 0, marginLeft: 0 });
-        
-        // Then animate to expanded state
+        // Animate to expanded state
         gsap.to(expandableContentRef, {
           width: 'auto',
           opacity: 1,
@@ -80,7 +77,12 @@ export const useNavbarAnimation = () => {
           opacity: 0,
           marginLeft: 0,
           duration: 0.4,
-          ease: "power2.inOut"
+          ease: "power2.inOut",
+          clearProps: "all",
+          onComplete: () => {
+            // Reset styles after animation completes
+            gsap.set(expandableContentRef, { width: 0, opacity: 0 });
+          }
         });
       }
     }
@@ -91,6 +93,14 @@ export const useNavbarAnimation = () => {
       animateSectionChange(scrollDirection);
     }
   }, [activeSection, isTransitioning, scrollDirection]);
+
+  // Initialize expandable section to be hidden on mount
+  useEffect(() => {
+    const expandableContentRef = document.querySelector('.expandable-section-links');
+    if (expandableContentRef && !navbarExpanded) {
+      gsap.set(expandableContentRef, { width: 0, opacity: 0, marginLeft: 0 });
+    }
+  }, []);
 
   return {
     activeTextRef,

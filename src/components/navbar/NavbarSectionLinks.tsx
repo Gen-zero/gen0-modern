@@ -17,7 +17,7 @@ const NavbarSectionLinks = () => {
   ];
 
   return (
-    <div className="expandable-section-links overflow-hidden flex ml-0">
+    <div className="expandable-section-links overflow-hidden flex ml-0 opacity-0" style={{ width: 0 }}>
       <div className="flex items-center space-x-3 whitespace-nowrap">
         {sections.map((section) => {
           const isActive = activeSection.toLowerCase() === section.label.toLowerCase();

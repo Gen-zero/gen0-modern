@@ -27,7 +27,7 @@ const NavbarContent = () => {
     <>
       <header 
         ref={navbarRef}
-        className={`fixed top-4 left-4 z-50 transition-colors duration-300 ${isScrolled ? 'bg-background/80 backdrop-blur-md shadow-sm' : 'bg-background/60 backdrop-blur-sm'} p-3 rounded-lg border border-border/30 overflow-hidden`}
+        className={`fixed top-4 left-4 z-50 transition-all duration-300 ${isScrolled ? 'bg-background/80 backdrop-blur-md shadow-sm' : 'bg-background/60 backdrop-blur-sm'} p-3 rounded-lg border border-border/30 overflow-hidden`}
         style={{ width: navbarExpanded ? 'auto' : '300px', transition: 'width 0.4s ease-in-out' }}
       >
         <div className="flex items-center justify-between">
@@ -35,7 +35,7 @@ const NavbarContent = () => {
             <Menu size={24} />
           </button>
           
-          <Link to="/" className="flex items-center justify-center mx-auto">
+          <Link to="/" className="flex items-center justify-center mx-4">
             <img src="/lovable-uploads/a9bfe93b-b4a8-45e7-b6ec-0ccf561e4234.png" alt="Gen0 Logo" className="h-11 object-contain" />
           </Link>
           

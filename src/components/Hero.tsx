@@ -87,7 +87,7 @@ const Hero = () => {
     }}></div>
       
       <div className="container mx-auto px-6 py-12">
-        <div className="relative h-[40vh] w-full rounded-2xl overflow-hidden shadow-2xl border border-accent/20 animate-fade-in">
+        <div className="relative h-[40vh] w-full rounded-2xl overflow-hidden shadow-2xl border border-[#1f2b87] animate-fade-in">
           <div className="absolute top-0 left-0 w-full h-full">
             <img src="/lovable-uploads/34a880bd-d1ee-4330-bef2-8f5cd7502a16.png" alt="Programmer with purple neon lighting" className="w-full h-full object-cover" loading="eager" />
           </div>

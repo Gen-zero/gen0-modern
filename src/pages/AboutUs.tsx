@@ -1,8 +1,6 @@
-
 import { CheckCircle, Globe, Target } from 'lucide-react';
 import Navbar from "@/components/Navbar";
 import { useEffect, useState, useRef } from "react";
-
 const AboutUs = () => {
   const stats = [{
     value: '10+',
@@ -17,45 +15,37 @@ const AboutUs = () => {
     value: '30+',
     label: 'Global Clients'
   }];
-  
   const values = ['User-centered approach in everything we do', 'Continuous innovation and learning', 'Transparent communication and processes', 'Attention to detail and quality craftsmanship'];
-
-  const teamMembers = [
-    {
-      name: "Sarah Johnson",
-      position: "CEO & Founder",
-      bio: "Sarah brings 15 years of industry experience and a passion for inclusive design. She founded Gen0 with a vision to build digital products that truly matter.",
-      personalDetail: "When not leading the team, Sarah is an avid rock climber and amateur chef.",
-      imgUrl: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"
-    },
-    {
-      name: "Michael Chen",
-      position: "CTO",
-      bio: "Michael's technical leadership has shaped our engineering culture. He specializes in scalable architecture and emerging technologies.",
-      personalDetail: "A former competitive gamer, Michael now spends his free time teaching coding to underprivileged youth.",
-      imgUrl: "https://images.unsplash.com/photo-1568602471122-7832951cc4c5?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"
-    },
-    {
-      name: "Elena Rodriguez",
-      position: "Creative Director",
-      bio: "Elena's award-winning design approach combines aesthetics with functionality. She leads our creative team in delivering visually stunning work.",
-      personalDetail: "Elena is a published photographer and maintains a popular design blog in her spare time.",
-      imgUrl: "https://images.unsplash.com/photo-1580489944761-15a19d654956?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"
-    },
-    {
-      name: "David Okafor",
-      position: "Head of Product",
-      bio: "David excels at translating client needs into product strategies. His background in psychology gives him unique insight into user behavior.",
-      personalDetail: "A devoted father of twins, David is also working on his first science fiction novel.",
-      imgUrl: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"
-    }
-  ];
+  const teamMembers = [{
+    name: "Sarah Johnson",
+    position: "CEO & Founder",
+    bio: "Sarah brings 15 years of industry experience and a passion for inclusive design. She founded Gen0 with a vision to build digital products that truly matter.",
+    personalDetail: "When not leading the team, Sarah is an avid rock climber and amateur chef.",
+    imgUrl: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"
+  }, {
+    name: "Michael Chen",
+    position: "CTO",
+    bio: "Michael's technical leadership has shaped our engineering culture. He specializes in scalable architecture and emerging technologies.",
+    personalDetail: "A former competitive gamer, Michael now spends his free time teaching coding to underprivileged youth.",
+    imgUrl: "https://images.unsplash.com/photo-1568602471122-7832951cc4c5?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"
+  }, {
+    name: "Elena Rodriguez",
+    position: "Creative Director",
+    bio: "Elena's award-winning design approach combines aesthetics with functionality. She leads our creative team in delivering visually stunning work.",
+    personalDetail: "Elena is a published photographer and maintains a popular design blog in her spare time.",
+    imgUrl: "https://images.unsplash.com/photo-1580489944761-15a19d654956?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"
+  }, {
+    name: "David Okafor",
+    position: "Head of Product",
+    bio: "David excels at translating client needs into product strategies. His background in psychology gives him unique insight into user behavior.",
+    personalDetail: "A devoted father of twins, David is also working on his first science fiction novel.",
+    imgUrl: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"
+  }];
 
   // Shuffling words effect
   const words = ['CREATORS', 'IDEATORS', 'PROGRAMMERS', 'DESIGNERS', 'ENGINEERS', 'ENTREPRENEURS', 'STUDENTS'];
   const [currentWordIndex, setCurrentWordIndex] = useState(0);
   const [displayedWord, setDisplayedWord] = useState(words[0]);
-
   const scrambleWord = (finalWord: string) => {
     let iteration = 0;
     const totalIterations = finalWord.length;
@@ -76,7 +66,6 @@ const AboutUs = () => {
       }
     }, 50);
   };
-
   useEffect(() => {
     setDisplayedWord(words[0]);
     const interval = setInterval(() => {
@@ -112,9 +101,7 @@ const AboutUs = () => {
       });
     };
   }, []);
-
-  return (
-    <div className="min-h-screen bg-background">
+  return <div className="min-h-screen bg-background">
       <Navbar />
       
       <section className="py-20 md:py-32 bg-secondary/30">
@@ -127,11 +114,11 @@ const AboutUs = () => {
               </div>
               
               <div className="absolute inset-0 flex flex-col items-center justify-end pb-20 text-center px-8">
-                <h2 className="text-2xl md:text-4xl font-bold text-white uppercase mix-blend-exclusion">
+                <h2 className="text-2xl text-white uppercase mix-blend-exclusion font-extrabold md:text-3xl text-center">
                   WE'RE PASSIONATE {' '}
                   <span className="inline-block" style={{
-                    minWidth: '220px'
-                  }}>
+                  minWidth: '220px'
+                }}>
                     {displayedWord}
                   </span>
                   {' '}DEDICATED TO LEVELLING UP HUMANITY.
@@ -156,19 +143,17 @@ const AboutUs = () => {
               
               <div className="absolute bottom-4 right-4 glass rounded-lg p-6 shadow-xl w-56 animate-float">
                 <div className="flex flex-wrap gap-4 justify-between">
-                  {stats.map((stat, index) => (
-                    <div key={index} className="text-center">
+                  {stats.map((stat, index) => <div key={index} className="text-center">
                       <div className="text-2xl font-bold text-primary">{stat.value}</div>
                       <div className="text-xs text-muted-foreground">{stat.label}</div>
-                    </div>
-                  ))}
+                    </div>)}
                 </div>
               </div>
             </div>
             
             <div className="animate-on-scroll" style={{
-              animationDelay: '0.2s'
-            }}>
+            animationDelay: '0.2s'
+          }}>
               <span className="block text-sm mb-3 text-gray-400 font-semibold">Our Story</span>
               <h2 className="text-3xl md:text-4xl font-semibold mb-6">We're a team of creative problem solvers</h2>
               <p className="text-muted-foreground text-lg mb-8">
@@ -178,12 +163,10 @@ const AboutUs = () => {
               <div className="mb-8">
                 <h3 className="text-xl font-medium mb-4">Our Values</h3>
                 <ul className="space-y-3">
-                  {values.map((value, index) => (
-                    <li key={index} className="flex items-start">
+                  {values.map((value, index) => <li key={index} className="flex items-start">
                       <CheckCircle className="h-5 w-5 text-primary mr-3 mt-0.5 flex-shrink-0" />
                       <span>{value}</span>
-                    </li>
-                  ))}
+                    </li>)}
                 </ul>
               </div>
               
@@ -246,15 +229,9 @@ const AboutUs = () => {
         </div>
         
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-          {teamMembers.map((member, index) => (
-            <div key={index} className="bg-card rounded-xl overflow-hidden shadow-md hover:shadow-xl transition-shadow">
+          {teamMembers.map((member, index) => <div key={index} className="bg-card rounded-xl overflow-hidden shadow-md hover:shadow-xl transition-shadow">
               <div className="aspect-square overflow-hidden">
-                <img 
-                  src={member.imgUrl} 
-                  alt={member.name}
-                  className="w-full h-full object-cover transition-transform hover:scale-105" 
-                  loading="lazy"
-                />
+                <img src={member.imgUrl} alt={member.name} className="w-full h-full object-cover transition-transform hover:scale-105" loading="lazy" />
               </div>
               <div className="p-6">
                 <h3 className="text-xl font-semibold mb-1">{member.name}</h3>
@@ -264,8 +241,7 @@ const AboutUs = () => {
                   {member.personalDetail}
                 </p>
               </div>
-            </div>
-          ))}
+            </div>)}
         </div>
       </section>
       
@@ -280,27 +256,26 @@ const AboutUs = () => {
           {/* Timeline items */}
           <div className="space-y-20">
             {[{
-              year: '2013',
-              title: 'Founded',
-              description: 'Our journey began with a small team of designers passionate about crafting beautiful digital experiences.'
-            }, {
-              year: '2015',
-              title: 'First Major Client',
-              description: 'Landed our first enterprise client and expanded our team to include full-stack developers.'
-            }, {
-              year: '2018',
-              title: 'International Expansion',
-              description: 'Opened our first international office and began serving clients globally.'
-            }, {
-              year: '2021',
-              title: 'Innovation Focus',
-              description: 'Established our innovation lab to explore emerging technologies and their applications.'
-            }, {
-              year: '2023',
-              title: 'Today',
-              description: 'Continuing to grow and evolve, with a team of 50+ creatives serving clients around the world.'
-            }].map((item, index) => (
-              <div key={index} className={`relative flex ${index % 2 === 0 ? 'flex-row-reverse' : 'flex-row'}`}>
+            year: '2013',
+            title: 'Founded',
+            description: 'Our journey began with a small team of designers passionate about crafting beautiful digital experiences.'
+          }, {
+            year: '2015',
+            title: 'First Major Client',
+            description: 'Landed our first enterprise client and expanded our team to include full-stack developers.'
+          }, {
+            year: '2018',
+            title: 'International Expansion',
+            description: 'Opened our first international office and began serving clients globally.'
+          }, {
+            year: '2021',
+            title: 'Innovation Focus',
+            description: 'Established our innovation lab to explore emerging technologies and their applications.'
+          }, {
+            year: '2023',
+            title: 'Today',
+            description: 'Continuing to grow and evolve, with a team of 50+ creatives serving clients around the world.'
+          }].map((item, index) => <div key={index} className={`relative flex ${index % 2 === 0 ? 'flex-row-reverse' : 'flex-row'}`}>
                 <div className="flex-1"></div>
                 <div className="w-10 flex justify-center relative">
                   <div className="h-6 w-6 rounded-full bg-primary absolute top-0"></div>
@@ -310,8 +285,7 @@ const AboutUs = () => {
                   <h3 className="text-xl font-semibold mb-2">{item.title}</h3>
                   <p className="text-muted-foreground">{item.description}</p>
                 </div>
-              </div>
-            ))}
+              </div>)}
           </div>
         </div>
       </section>
@@ -320,8 +294,6 @@ const AboutUs = () => {
       <div className="container mx-auto py-6 text-center text-muted-foreground text-sm border-t border-border/40 mt-10">
         <p>© {new Date().getFullYear()} Gen0. All rights reserved.</p>
       </div>
-    </div>
-  );
+    </div>;
 };
-
 export default AboutUs;

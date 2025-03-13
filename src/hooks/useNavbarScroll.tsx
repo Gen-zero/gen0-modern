@@ -1,5 +1,4 @@
-
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import { useNavbar } from '@/contexts/NavbarContext';
 
@@ -8,18 +7,47 @@ export const useNavbarScroll = () => {
     setIsScrolled, 
     setActiveSection, 
     setPrevActiveSection, 
+    isTransitioning,
     setIsTransitioning,
     setScrollDirection,
-    setLastScrollY,
     lastScrollY,
-    activeSection,
-    isTransitioning,
+    setLastScrollY,
     transitionTimeoutRef
   } = useNavbar();
   
   const location = useLocation();
   const isAboutPage = location.pathname === '/about';
-
+  const isProjectsPage = location.pathname === '/projects';
+  const isPrivacyPage = location.pathname === '/privacy-policy';
+  const isTermsPage = location.pathname === '/terms-of-service';
+  const isCookiePage = location.pathname === '/cookie-policy';
+  
+  const [sections, setSections] = useState<string[]>([]);
+  
+  useEffect(() => {
+    // Set sections based on current page
+    if (isAboutPage) {
+      setSections(['Our Story', 'Mission', 'Team', 'Journey']);
+      setActiveSection('About');
+    } else if (isProjectsPage) {
+      setSections(['Projects']);
+      setActiveSection('Projects');
+    } else if (isPrivacyPage) {
+      setSections(['Privacy']);
+      setActiveSection('Privacy');
+    } else if (isTermsPage) {
+      setSections(['Terms']);
+      setActiveSection('Terms');
+    } else if (isCookiePage) {
+      setSections(['Cookies']);
+      setActiveSection('Cookies');
+    } else {
+      // Default to home page sections
+      setSections(['Home', 'Services', 'Projects', 'Contact']);
+      setActiveSection('Home');
+    }
+  }, [isAboutPage, isProjectsPage, isPrivacyPage, isTermsPage, isCookiePage, setActiveSection]);
+  
   useEffect(() => {
     const handleScroll = () => {
       const currentScrollY = window.scrollY;
@@ -118,5 +146,5 @@ export const useNavbarScroll = () => {
     };
   }, [isAboutPage, activeSection, lastScrollY, isTransitioning, setActiveSection, setPrevActiveSection, setIsScrolled, setIsTransitioning, setLastScrollY, setScrollDirection, transitionTimeoutRef]);
 
-  return { isAboutPage };
+  return { isAboutPage, isProjectsPage, isPrivacyPage, isTermsPage, isCookiePage, sections };
 };

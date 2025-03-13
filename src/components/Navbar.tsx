@@ -10,22 +10,34 @@ const Navbar = () => {
   const [activeSection, setActiveSection] = useState('Home');
   const [prevActiveSection, setPrevActiveSection] = useState('Home');
   const [isTransitioning, setIsTransitioning] = useState(false);
+  const [scrollDirection, setScrollDirection] = useState('down');
+  const [lastScrollY, setLastScrollY] = useState(0);
   const location = useLocation();
   const isAboutPage = location.pathname === '/about';
   
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50);
+      const currentScrollY = window.scrollY;
+      
+      // Determine scroll direction
+      if (currentScrollY > lastScrollY) {
+        setScrollDirection('down');
+      } else {
+        setScrollDirection('up');
+      }
+      setLastScrollY(currentScrollY);
+      
+      // Check if navbar should be scrolled
+      setIsScrolled(currentScrollY > 50);
 
       // Only determine active section on home page
       if (!isAboutPage) {
         const sections = document.querySelectorAll('section[id]');
-        const scrollY = window.scrollY;
         sections.forEach(section => {
           const sectionTop = (section as HTMLElement).offsetTop - 100;
           const sectionHeight = (section as HTMLElement).offsetHeight;
           const sectionId = section.getAttribute('id') || '';
-          if (scrollY >= sectionTop && scrollY < sectionTop + sectionHeight) {
+          if (currentScrollY >= sectionTop && currentScrollY < sectionTop + sectionHeight) {
             const newSection = sectionId.charAt(0).toUpperCase() + sectionId.slice(1);
             if (newSection !== activeSection) {
               setPrevActiveSection(activeSection);
@@ -39,7 +51,7 @@ const Navbar = () => {
     };
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
-  }, [isAboutPage, activeSection]);
+  }, [isAboutPage, activeSection, lastScrollY]);
   
   const toggleMenu = () => {
     setMenuOpen(!menuOpen);
@@ -64,12 +76,26 @@ const Navbar = () => {
           
           <div className="relative min-w-[80px] h-6 overflow-hidden">
             <span 
-              className={`absolute inset-0 text-sm font-medium text-foreground/80 mx-auto text-center transition-transform duration-500 ${isTransitioning ? '-translate-y-8 opacity-0' : 'translate-y-0 opacity-100'}`}
+              className={`absolute inset-0 text-sm font-medium text-foreground/80 mx-auto text-center transition-transform duration-500 ${
+                isTransitioning 
+                  ? scrollDirection === 'down' 
+                    ? '-translate-y-8 opacity-0' 
+                    : 'translate-y-8 opacity-0'
+                  : 'translate-y-0 opacity-100'
+              }`}
             >
               {isAboutPage ? "About Us" : activeSection}
             </span>
             <span 
-              className={`absolute inset-0 text-sm font-medium text-foreground/80 mx-auto text-center transition-transform duration-500 ${isTransitioning ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'}`}
+              className={`absolute inset-0 text-sm font-medium text-foreground/80 mx-auto text-center transition-transform duration-500 ${
+                isTransitioning 
+                  ? scrollDirection === 'down'
+                    ? 'translate-y-0 opacity-100' 
+                    : 'translate-y-0 opacity-100'
+                  : scrollDirection === 'down' 
+                    ? 'translate-y-8 opacity-0' 
+                    : '-translate-y-8 opacity-0'
+              }`}
             >
               {isAboutPage ? "About Us" : prevActiveSection}
             </span>

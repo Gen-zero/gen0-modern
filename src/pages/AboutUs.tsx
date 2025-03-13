@@ -1,6 +1,8 @@
+
 import { CheckCircle, Globe, Target } from 'lucide-react';
 import Navbar from "@/components/Navbar";
 import { useEffect, useState, useRef } from "react";
+
 const AboutUs = () => {
   const stats = [{
     value: '10+',
@@ -74,7 +76,7 @@ const AboutUs = () => {
         scrambleWord(words[nextIndex]);
         return nextIndex;
       });
-    }, 3000);
+    }, 3500); // Made the animation slower by increasing the interval time
     return () => clearInterval(interval);
   }, []);
 
@@ -115,9 +117,9 @@ const AboutUs = () => {
               
               <div className="absolute inset-0 flex flex-col items-center justify-end pb-20 text-center px-8">
                 <h2 className="text-2xl text-white uppercase mix-blend-exclusion font-extrabold md:text-3xl text-center">
-                  WE'RE PASSIONATE
-                  <span>{displayedWord}</span>
-                  DEDICATED TO LEVELLING UP HUMANITY.
+                  WE'RE PASSIONATE{' '}
+                  <span className="inline-block">{displayedWord}</span>
+                  {' '}DEDICATED TO LEVELLING UP HUMANITY.
                 </h2>
               </div>
             </div>

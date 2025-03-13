@@ -49,8 +49,12 @@ const NavbarSectionTitle = () => {
     }
   }, [location.pathname, setActiveSection, setPrevActiveSection, activeSection]);
 
-  // If on About page, show in "About / Current Section" format
-  if (isAboutPage && activeSection && activeSection !== 'About') {
+  // For About page, always show in "About / Current Section" format
+  if (isAboutPage) {
+    // When initial About is loaded, the activeSection is "About"
+    // So we need to handle that case separately
+    const sectionText = activeSection === 'About' ? 'Our Story' : activeSection;
+
     return (
       <div className="relative min-w-[140px] h-6 overflow-hidden">
         <Breadcrumb>
@@ -60,7 +64,7 @@ const NavbarSectionTitle = () => {
             </BreadcrumbItem>
             <BreadcrumbSeparator />
             <BreadcrumbItem>
-              <span className="text-accent">{activeSection}</span>
+              <span className="text-accent">{sectionText}</span>
             </BreadcrumbItem>
           </BreadcrumbList>
         </Breadcrumb>

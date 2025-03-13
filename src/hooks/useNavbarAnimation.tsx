@@ -2,7 +2,6 @@
 import { useRef, useEffect, useState } from 'react';
 import gsap from 'gsap';
 import { useNavbar } from '@/contexts/NavbarContext';
-import { useLocation } from 'react-router-dom';
 
 export const useNavbarAnimation = () => {
   const { 
@@ -19,8 +18,6 @@ export const useNavbarAnimation = () => {
   const activeTextRef = useRef<HTMLSpanElement>(null);
   const prevTextRef = useRef<HTMLSpanElement>(null);
   const navbarRef = useRef<HTMLDivElement>(null);
-  const location = useLocation();
-  const isAboutPage = location.pathname === '/about';
 
   // Check for small screen size (less than 550px)
   useEffect(() => {
@@ -108,7 +105,7 @@ export const useNavbarAnimation = () => {
         // Expand navbar if needed
         if (navbarRef.current) {
           gsap.to(navbarRef.current, {
-            width: isAboutPage ? '350px' : 'auto',  // Make navbar wider for about page
+            width: 'auto',
             duration: 0.3,
             ease: 'power2.inOut'
           });
@@ -147,7 +144,7 @@ export const useNavbarAnimation = () => {
   }, [activeSection, isTransitioning, scrollDirection]);
 
   // -----------------------------------------
-  // 4. Initial Setup for Expandable Section and Navbar Width
+  // 4. Initial Setup for Expandable Section
   // -----------------------------------------
   useEffect(() => {
     const expandableContentRef = document.querySelector('.expandable-section-links');
@@ -159,14 +156,7 @@ export const useNavbarAnimation = () => {
         display: 'none'
       });
     }
-    
-    // Set initial navbar width based on page
-    if (navbarRef.current && isAboutPage) {
-      gsap.set(navbarRef.current, {
-        width: navbarExpanded ? '350px' : '300px'
-      });
-    }
-  }, [isAboutPage, navbarExpanded]);
+  }, []);
 
   return {
     activeTextRef,

@@ -2,6 +2,7 @@
 import { useEffect } from 'react';
 import { useNavbar } from '@/contexts/NavbarContext';
 import { useNavbarRoute } from './useNavbarRoute';
+import { calculateSectionVisibility, formatSectionName } from '@/utils/sectionVisibility';
 
 export const useNavbarSectionDetection = () => {
   const { 
@@ -57,48 +58,15 @@ export const useNavbarSectionDetection = () => {
       let maxVisibility = 0;
       
       sections.forEach(section => {
-        const sectionId = section.getAttribute('id') || '';
-        const rect = section.getBoundingClientRect();
-        const sectionTop = rect.top;
-        const sectionHeight = rect.height;
-        const windowHeight = window.innerHeight;
-        
-        // Calculate visibility with improved threshold for more stable detection
-        let visibilityRatio = 0;
-        
-        // Section is considered active when its top enters the top 40% of the viewport
-        if (sectionTop <= windowHeight * 0.4 && sectionTop + sectionHeight > 0) {
-          // Calculate how much of the section is visible
-          const visibleHeight = Math.min(windowHeight, Math.max(0, sectionTop + sectionHeight));
-          visibilityRatio = visibleHeight / sectionHeight;
-          
-          // Add extra weight to sections near the top of the viewport
-          if (sectionTop >= 0 && sectionTop <= windowHeight * 0.4) {
-            visibilityRatio += 0.5; // Boost priority of sections that have just entered viewport
-          }
-        }
+        const { sectionId, visibilityRatio } = calculateSectionVisibility(section);
         
         if (visibilityRatio > maxVisibility) {
           maxVisibility = visibilityRatio;
-          
-          if (isAboutPage) {
-            // Map section ids to display names for About page
-            switch(sectionId) {
-              case 'team': currentSection = 'Team'; break;
-              case 'journey': currentSection = 'Journey'; break;
-              case 'mission': currentSection = 'Mission'; break;
-              case 'our-story': currentSection = 'Our Story'; break;
-              default: currentSection = sectionId.charAt(0).toUpperCase() + sectionId.slice(1);
-            }
-          } else {
-            // For main page, just capitalize the section id
-            currentSection = sectionId.charAt(0).toUpperCase() + sectionId.slice(1);
-          }
+          currentSection = formatSectionName(sectionId, isAboutPage);
         }
       });
       
       // Only update section if we found a valid one and it's different from the current
-      // Also add hysteresis - require section to be significantly more visible before switching
       if (currentSection && 
           currentSection !== activeSection && 
           currentSection !== lastDetectedSection) {

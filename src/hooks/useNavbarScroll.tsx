@@ -1,3 +1,4 @@
+
 import { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import { useNavbar } from '@/contexts/NavbarContext';
@@ -5,6 +6,7 @@ import { useNavbar } from '@/contexts/NavbarContext';
 export const useNavbarScroll = () => {
   const { 
     setIsScrolled, 
+    activeSection,  // Added activeSection here
     setActiveSection, 
     setPrevActiveSection, 
     isTransitioning,

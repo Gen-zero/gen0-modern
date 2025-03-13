@@ -3,11 +3,18 @@ import { useNavbar } from '@/contexts/NavbarContext';
 import { useNavbarAnimation } from '@/hooks/useNavbarAnimation';
 import { useLocation } from 'react-router-dom';
 import { useEffect } from 'react';
+import { 
+  Breadcrumb,
+  BreadcrumbItem,
+  BreadcrumbList,
+  BreadcrumbSeparator,
+} from "@/components/ui/breadcrumb";
 
 const NavbarSectionTitle = () => {
   const { activeSection, prevActiveSection, setActiveSection, setPrevActiveSection } = useNavbar();
   const { activeTextRef, prevTextRef } = useNavbarAnimation();
   const location = useLocation();
+  const isAboutPage = location.pathname === '/about';
 
   // Set the correct title based on the current route
   useEffect(() => {
@@ -42,6 +49,26 @@ const NavbarSectionTitle = () => {
     }
   }, [location.pathname, setActiveSection, setPrevActiveSection, activeSection]);
 
+  // If on About page, show in "About / Current Section" format
+  if (isAboutPage && activeSection && activeSection !== 'About') {
+    return (
+      <div className="relative min-w-[140px] h-6 overflow-hidden">
+        <Breadcrumb>
+          <BreadcrumbList className="text-sm font-medium">
+            <BreadcrumbItem>
+              <span className="text-muted-foreground">About</span>
+            </BreadcrumbItem>
+            <BreadcrumbSeparator />
+            <BreadcrumbItem>
+              <span className="text-accent">{activeSection}</span>
+            </BreadcrumbItem>
+          </BreadcrumbList>
+        </Breadcrumb>
+      </div>
+    );
+  }
+
+  // Default display for other pages
   return (
     <div className="relative min-w-[80px] h-6 overflow-hidden">
       <span 

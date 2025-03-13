@@ -23,6 +23,8 @@ export const useNavbarSectionDetection = () => {
     let lastDetectedSection = activeSection;
     // Add a minimum time between section changes
     let lastChangeTime = Date.now();
+    // Track if we've scrolled away from the top (specifically for About page)
+    let hasScrolledPastTop = false;
     
     const handleScroll = () => {
       // Skip section detection for fixed title pages
@@ -53,15 +55,35 @@ export const useNavbarSectionDetection = () => {
       // If no sections are found, return early
       if (sections.length === 0) return;
       
-      // Set initial text to "About" ONLY when at the very top of the page for About page
-      if (isAboutPage && window.scrollY < 50) {
-        if (activeSection !== 'About') {
-          setPrevActiveSection(activeSection);
-          setActiveSection('About');
-          lastDetectedSection = 'About';
-          lastChangeTime = Date.now();
+      // For About page, check if we're at the very top
+      if (isAboutPage) {
+        // Update our scrolled state tracker
+        if (window.scrollY >= 50) {
+          hasScrolledPastTop = true;
+        } else if (window.scrollY < 50) {
+          // Only reset to "About" if we're truly at the top of the page
+          hasScrolledPastTop = false;
+          
+          if (activeSection !== 'About') {
+            setPrevActiveSection(activeSection);
+            setActiveSection('About');
+            lastDetectedSection = 'About';
+            lastChangeTime = Date.now();
+          }
+          return;
         }
-        return;
+        
+        // If we've scrolled past the top, never show "About" again until page reload or return to top
+        if (hasScrolledPastTop && activeSection === 'About') {
+          // Find first non-About section to display
+          const firstVisibleSection = findFirstVisibleSection(sections, isAboutPage);
+          if (firstVisibleSection && firstVisibleSection !== 'About') {
+            setPrevActiveSection(activeSection);
+            setActiveSection(firstVisibleSection);
+            lastDetectedSection = firstVisibleSection;
+            lastChangeTime = Date.now();
+          }
+        }
       }
       
       // Find the current visible section with improved detection
@@ -70,10 +92,16 @@ export const useNavbarSectionDetection = () => {
       
       sections.forEach(section => {
         const { sectionId, visibilityRatio } = calculateSectionVisibility(section);
+        const formattedName = formatSectionName(sectionId, isAboutPage);
+        
+        // Skip "About" section once we've scrolled past the top
+        if (isAboutPage && hasScrolledPastTop && formattedName === 'About') {
+          return;
+        }
         
         if (visibilityRatio > maxVisibility) {
           maxVisibility = visibilityRatio;
-          currentSection = formatSectionName(sectionId, isAboutPage);
+          currentSection = formattedName;
         }
       });
       
@@ -93,18 +121,14 @@ export const useNavbarSectionDetection = () => {
         debounceTimer = window.setTimeout(() => {
           // Double check that section is still different after debounce
           if (currentSection !== activeSection) {
-            // Make sure we don't show "About" once we've started scrolling
-            if (isAboutPage && window.scrollY >= 50 && currentSection === 'About') {
-              // Skip setting to About when scrolling - show actual section instead
-              const firstVisibleSection = findFirstVisibleSection(sections, isAboutPage);
-              if (firstVisibleSection && firstVisibleSection !== 'About') {
-                setPrevActiveSection(activeSection);
-                setActiveSection(firstVisibleSection);
-              }
-            } else {
-              setPrevActiveSection(activeSection);
-              setActiveSection(currentSection);
+            // Make sure we never show "About" once we've started scrolling
+            if (isAboutPage && hasScrolledPastTop && currentSection === 'About') {
+              // Skip setting to About when scrolling
+              return;
             }
+            
+            setPrevActiveSection(activeSection);
+            setActiveSection(currentSection);
             
             setIsTransitioning(true);
             

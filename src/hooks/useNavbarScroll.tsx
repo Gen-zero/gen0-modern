@@ -26,8 +26,8 @@ export const useNavbarScroll = () => {
   
   const [sections, setSections] = useState<string[]>([]);
   
+  // Set active section based on current page immediately when location changes
   useEffect(() => {
-    // Set sections based on current page
     if (isAboutPage) {
       setSections(['Our Story', 'Mission', 'Team', 'Journey']);
       setActiveSection('About');
@@ -48,7 +48,7 @@ export const useNavbarScroll = () => {
       setSections(['Home', 'Services', 'Projects', 'Contact']);
       setActiveSection('Home');
     }
-  }, [isAboutPage, isProjectsPage, isPrivacyPage, isTermsPage, isCookiePage, setActiveSection]);
+  }, [location.pathname, isAboutPage, isProjectsPage, isPrivacyPage, isTermsPage, isCookiePage, setActiveSection]);
   
   useEffect(() => {
     const handleScroll = () => {

@@ -75,26 +75,23 @@ const Navbar = () => {
           </Link>
           
           <div className="relative min-w-[80px] h-6 overflow-hidden">
+            {/* Current section text */}
             <span 
               className={`absolute inset-0 text-sm font-medium text-foreground/80 mx-auto text-center transition-transform duration-500 ${
                 isTransitioning 
-                  ? scrollDirection === 'down' 
-                    ? '-translate-y-8 opacity-0' 
-                    : 'translate-y-8 opacity-0'
+                  ? (scrollDirection === 'down' ? '-translate-y-8' : 'translate-y-8') + ' opacity-0' 
                   : 'translate-y-0 opacity-100'
               }`}
             >
               {isAboutPage ? "About Us" : activeSection}
             </span>
+            
+            {/* Previous section text */}
             <span 
               className={`absolute inset-0 text-sm font-medium text-foreground/80 mx-auto text-center transition-transform duration-500 ${
                 isTransitioning 
-                  ? scrollDirection === 'down'
-                    ? 'translate-y-0 opacity-100' 
-                    : 'translate-y-0 opacity-100'
-                  : scrollDirection === 'down' 
-                    ? 'translate-y-8 opacity-0' 
-                    : '-translate-y-8 opacity-0'
+                  ? 'translate-y-0 opacity-100' 
+                  : (scrollDirection === 'down' ? 'translate-y-8' : '-translate-y-8') + ' opacity-0'
               }`}
             >
               {isAboutPage ? "About Us" : prevActiveSection}

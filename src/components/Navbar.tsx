@@ -9,17 +9,17 @@ import { useNavbarAnimation } from '@/hooks/useNavbarAnimation';
 import { useNavbarScroll } from '@/hooks/useNavbarScroll';
 import { useIsMobile } from '@/hooks/use-mobile';
 import { useEffect } from 'react';
+import { useNavbarRoute } from '@/hooks/useNavbarRoute';
 
 const NavbarContent = () => {
   const { isScrolled, menuOpen, setMenuOpen, navbarExpanded, setActiveSection, setPrevActiveSection } = useNavbar();
   const { navbarRef, toggleNavbarExpand, isSmallScreen } = useNavbarAnimation();
+  const { isHomePage } = useNavbarRoute();
   const location = useLocation();
   const navigate = useNavigate();
   const isMobileScreen = useIsMobile();
   
   useNavbarScroll(); // Initialize scroll effects
-  
-  const isHomePage = location.pathname === '/';
   
   // Reset section when route changes to ensure clean transitions
   useEffect(() => {
@@ -63,7 +63,7 @@ const NavbarContent = () => {
         ref={navbarRef}
         className={`fixed top-4 left-4 z-50 transition-all duration-300 ${isScrolled ? 'bg-background/80 backdrop-blur-md shadow-sm' : 'bg-background/60 backdrop-blur-sm'} p-3 rounded-lg border border-border/30 overflow-hidden`}
         style={{ 
-          width: navbarExpanded && !isSmallScreen ? 'auto' : '300px',
+          width: navbarExpanded && !isSmallScreen && isHomePage ? 'auto' : '300px',
           transition: 'width 0.4s ease-in-out' 
         }}
       >
@@ -79,10 +79,10 @@ const NavbarContent = () => {
           <div className="flex items-center gap-2">
             <div className="flex items-center">
               <NavbarSectionTitle />
-              {!isSmallScreen && <NavbarSectionLinks />}
+              {!isSmallScreen && isHomePage && <NavbarSectionLinks />}
             </div>
 
-            {!isSmallScreen && (
+            {!isSmallScreen && isHomePage && (
               <button 
                 onClick={toggleNavbarExpand}
                 className="flex items-center justify-center w-8 h-8 rounded-full bg-accent/10 hover:bg-primary/20 text-primary transition-all ml-1"

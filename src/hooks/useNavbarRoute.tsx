@@ -6,6 +6,7 @@ export const useNavbarRoute = () => {
   const location = useLocation();
   
   // Route-specific flags
+  const isHomePage = location.pathname === '/';
   const isAboutPage = location.pathname === '/about';
   const isProjectsPage = location.pathname === '/projects';
   const isPrivacyPage = location.pathname === '/privacy-policy';
@@ -36,6 +37,7 @@ export const useNavbarRoute = () => {
   }, [location.pathname, isAboutPage, isProjectsPage, isPrivacyPage, isTermsPage, isCookiePage]);
 
   return { 
+    isHomePage,
     isAboutPage, 
     isProjectsPage, 
     isPrivacyPage, 

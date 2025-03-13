@@ -1,4 +1,3 @@
-
 import { useNavbar } from '@/contexts/NavbarContext';
 import { useNavbarAnimation } from '@/hooks/useNavbarAnimation';
 import { useLocation } from 'react-router-dom';
@@ -6,9 +5,8 @@ import { useEffect } from 'react';
 
 const NavbarSectionTitle = () => {
   const { activeSection, prevActiveSection, setActiveSection, setPrevActiveSection } = useNavbar();
-  const { activeTextRef, prevTextRef } = useNavbarAnimation();
+  const { activeTextRef, prevTextRef, isAboutPage } = useNavbarAnimation();
   const location = useLocation();
-  const isAboutPage = location.pathname === '/about';
 
   // Set the correct title based on the current route
   useEffect(() => {

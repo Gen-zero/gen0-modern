@@ -1,4 +1,3 @@
-
 import { Menu, ChevronRight, ChevronLeft, ArrowLeft } from 'lucide-react';
 import NavMenu from './navbar/NavMenu';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
@@ -12,7 +11,7 @@ import { useEffect } from 'react';
 
 const NavbarContent = () => {
   const { isScrolled, menuOpen, setMenuOpen, navbarExpanded, setActiveSection, setPrevActiveSection } = useNavbar();
-  const { navbarRef, toggleNavbarExpand, isSmallScreen } = useNavbarAnimation();
+  const { navbarRef, toggleNavbarExpand, isSmallScreen, isAboutPage } = useNavbarAnimation();
   const location = useLocation();
   const navigate = useNavigate();
   const isMobileScreen = useIsMobile();
@@ -20,7 +19,6 @@ const NavbarContent = () => {
   useNavbarScroll(); // Initialize scroll effects
   
   const isHomePage = location.pathname === '/';
-  const isAboutPage = location.pathname === '/about';
   
   // Reset section when route changes to ensure clean transitions
   useEffect(() => {

@@ -53,6 +53,17 @@ export const useNavbarSectionDetection = () => {
       // If no sections are found, return early
       if (sections.length === 0) return;
       
+      // Set initial text to "About" when at the top of the page for About page
+      if (isAboutPage && window.scrollY < 100) {
+        if (activeSection !== 'About') {
+          setPrevActiveSection(activeSection);
+          setActiveSection('About');
+          lastDetectedSection = 'About';
+          lastChangeTime = Date.now();
+        }
+        return;
+      }
+      
       // Find the current visible section with improved detection
       let currentSection = '';
       let maxVisibility = 0;

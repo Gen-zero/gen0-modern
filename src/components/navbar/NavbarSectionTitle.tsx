@@ -31,7 +31,7 @@ const NavbarSectionTitle = () => {
     } else if (location.pathname === '/cookie-policy') {
       setActiveSection('Cookies');
     } else if (location.pathname === '/about') {
-      // Set to About for simplicity
+      // Initially set to About when page first loads
       setActiveSection('About');
     } else if (location.pathname === '/') {
       // Only set to Home if we're actually on the home page

@@ -1,3 +1,4 @@
+
 import { useRef, useEffect } from 'react';
 import gsap from 'gsap';
 import { useNavbar } from '@/contexts/NavbarContext';
@@ -17,38 +18,32 @@ export const useNavbarAnimation = () => {
   const prevTextRef = useRef<HTMLSpanElement>(null);
   const navbarRef = useRef<HTMLDivElement>(null);
 
-  // -----------------------------------------
-  // 1. Handle Text Transition for Active Section
-  // -----------------------------------------
   const animateSectionChange = (direction: string) => {
     if (activeTextRef.current && prevTextRef.current) {
-      // Stop any ongoing animations on these elements
       gsap.killTweensOf([activeTextRef.current, prevTextRef.current]);
       
-      // Set initial states
       gsap.set(activeTextRef.current, { 
         y: direction === 'down' ? 20 : -20, 
         autoAlpha: 0 
       });
+      
       gsap.set(prevTextRef.current, { 
         y: 0, 
         autoAlpha: 1 
       });
       
-      // Animate out the previous text
       gsap.to(prevTextRef.current, {
         y: direction === 'down' ? -20 : 20,
         autoAlpha: 0,
         duration: 0.4,
-        ease: 'power2.inOut'
+        ease: "power2.inOut"
       });
       
-      // Animate in the new text
       gsap.to(activeTextRef.current, {
         y: 0,
         autoAlpha: 1,
         duration: 0.4,
-        ease: 'power2.inOut',
+        ease: "power2.inOut",
         onComplete: () => {
           setIsTransitioning(false);
           if (transitionTimeoutRef.current) {
@@ -60,69 +55,50 @@ export const useNavbarAnimation = () => {
     }
   };
 
-  // -----------------------------------------
-  // 2. Toggle Navbar Expand / Collapse
-  //    Using scaleX Instead of Width
-  // -----------------------------------------
   const toggleNavbarExpand = () => {
     setNavbarExpanded(!navbarExpanded);
     
     if (navbarRef.current) {
       const expandableContentRef = document.querySelector('.expandable-section-links');
-
+      
       if (!navbarExpanded && expandableContentRef) {
         // Animate to expanded state
-        // Make sure transformOrigin is set so it expands from the left (or right).
-        gsap.set(expandableContentRef, { transformOrigin: 'left' });
-
         gsap.to(expandableContentRef, {
-          scaleX: 1,
+          width: 'auto',
           opacity: 1,
+          marginLeft: 12, // equivalent to ml-3
           duration: 0.4,
-          ease: 'power2.inOut',
-          onStart: () => {
-            // Ensure it's visible (if hidden by display: none or similar)
-            gsap.set(expandableContentRef, { display: 'block' });
-          }
+          ease: "power2.inOut"
         });
       } else if (expandableContentRef) {
         // Animate to collapsed state
         gsap.to(expandableContentRef, {
-          scaleX: 0,
+          width: 0,
           opacity: 0,
+          marginLeft: 0,
           duration: 0.4,
-          ease: 'power2.inOut',
+          ease: "power2.inOut",
+          clearProps: "all",
           onComplete: () => {
-            // Optionally hide the element after collapse
-            gsap.set(expandableContentRef, { display: 'none' });
+            // Reset styles after animation completes
+            gsap.set(expandableContentRef, { width: 0, opacity: 0 });
           }
         });
       }
     }
   };
   
-  // -----------------------------------------
-  // 3. Animate Section Change on isTransitioning
-  // -----------------------------------------
   useEffect(() => {
     if (isTransitioning) {
       animateSectionChange(scrollDirection);
     }
   }, [activeSection, isTransitioning, scrollDirection]);
 
-  // -----------------------------------------
-  // 4. Initial Setup for Expandable Section
-  // -----------------------------------------
+  // Initialize expandable section to be hidden on mount
   useEffect(() => {
     const expandableContentRef = document.querySelector('.expandable-section-links');
     if (expandableContentRef && !navbarExpanded) {
-      // Start collapsed: scaled down and invisible
-      gsap.set(expandableContentRef, {
-        scaleX: 0,
-        opacity: 0,
-        transformOrigin: 'left',
-        display: 'none'
-      });
+      gsap.set(expandableContentRef, { width: 0, opacity: 0, marginLeft: 0 });
     }
   }, []);
 

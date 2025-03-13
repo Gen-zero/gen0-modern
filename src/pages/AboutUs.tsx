@@ -74,7 +74,7 @@ const AboutUs = () => {
         scrambleWord(words[nextIndex]);
         return nextIndex;
       });
-    }, 1790);
+    }, 3000);
     return () => clearInterval(interval);
   }, []);
 
@@ -115,13 +115,9 @@ const AboutUs = () => {
               
               <div className="absolute inset-0 flex flex-col items-center justify-end pb-20 text-center px-8">
                 <h2 className="text-2xl text-white uppercase mix-blend-exclusion font-extrabold md:text-3xl text-center">
-                  WE'RE PASSIONATE {' '}
-                  <span className="inline-block" style={{
-                  minWidth: '220px'
-                }}>
-                    {displayedWord}
-                  </span>
-                  {' '}DEDICATED TO LEVELLING UP HUMANITY.
+                  WE'RE PASSIONATE
+                  <span>{displayedWord}</span>
+                  DEDICATED TO LEVELLING UP HUMANITY.
                 </h2>
               </div>
             </div>
@@ -181,7 +177,6 @@ const AboutUs = () => {
         </div>
       </section>
       
-      {/* Mission and Vision Section */}
       <section className="py-20 bg-primary/5 animate-on-scroll">
         <div className="container mx-auto px-6 md:px-12">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
@@ -219,7 +214,6 @@ const AboutUs = () => {
         </div>
       </section>
       
-      {/* Meet the Team Section */}
       <section className="py-20 container mx-auto px-6 md:px-12 animate-on-scroll">
         <div className="text-center mb-16">
           <h2 className="text-3xl md:text-4xl font-bold mb-6">Meet the Team</h2>
@@ -245,15 +239,12 @@ const AboutUs = () => {
         </div>
       </section>
       
-      {/* Company Timeline Section */}
       <section className="py-20 container mx-auto px-6 md:px-12 animate-on-scroll">
         <h2 className="text-3xl md:text-4xl font-bold text-center mb-16">Our Journey</h2>
         
         <div className="relative">
-          {/* Timeline line */}
           <div className="absolute left-1/2 transform -translate-x-1/2 h-full w-1 bg-border"></div>
           
-          {/* Timeline items */}
           <div className="space-y-20">
             {[{
             year: '2013',
@@ -290,7 +281,6 @@ const AboutUs = () => {
         </div>
       </section>
       
-      {/* Copyright Section */}
       <div className="container mx-auto py-6 text-center text-muted-foreground text-sm border-t border-border/40 mt-10">
         <p>© {new Date().getFullYear()} Gen0. All rights reserved.</p>
       </div>

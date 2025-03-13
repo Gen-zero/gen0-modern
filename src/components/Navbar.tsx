@@ -1,3 +1,4 @@
+
 import { Menu, ChevronRight, ChevronLeft, ArrowLeft } from 'lucide-react';
 import NavMenu from './navbar/NavMenu';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
@@ -11,7 +12,7 @@ import { useEffect } from 'react';
 
 const NavbarContent = () => {
   const { isScrolled, menuOpen, setMenuOpen, navbarExpanded, setActiveSection, setPrevActiveSection } = useNavbar();
-  const { navbarRef, toggleNavbarExpand, isSmallScreen, isAboutPage } = useNavbarAnimation();
+  const { navbarRef, toggleNavbarExpand, isSmallScreen } = useNavbarAnimation();
   const location = useLocation();
   const navigate = useNavigate();
   const isMobileScreen = useIsMobile();
@@ -35,8 +36,8 @@ const NavbarContent = () => {
       setPrevActiveSection('Cookies');
       setActiveSection('Cookies');
     } else if (location.pathname === '/about') {
-      setPrevActiveSection('Our Story');
-      setActiveSection('Our Story');
+      setPrevActiveSection('About');
+      setActiveSection('About');
     } else if (location.pathname === '/') {
       setPrevActiveSection('Home');
       setActiveSection('Home');
@@ -62,7 +63,7 @@ const NavbarContent = () => {
         ref={navbarRef}
         className={`fixed top-4 left-4 z-50 transition-all duration-300 ${isScrolled ? 'bg-background/80 backdrop-blur-md shadow-sm' : 'bg-background/60 backdrop-blur-sm'} p-3 rounded-lg border border-border/30 overflow-hidden`}
         style={{ 
-          width: navbarExpanded && !isSmallScreen ? 'auto' : isAboutPage ? '340px' : '300px',
+          width: navbarExpanded && !isSmallScreen ? 'auto' : '300px',
           transition: 'width 0.4s ease-in-out' 
         }}
       >

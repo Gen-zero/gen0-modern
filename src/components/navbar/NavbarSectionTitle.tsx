@@ -9,8 +9,6 @@ const NavbarSectionTitle = () => {
   const { activeTextRef, prevTextRef } = useNavbarTextAnimation();
   const location = useLocation();
   
-  const isAboutPage = location.pathname === '/about';
-
   // Set the correct title based on the current route
   useEffect(() => {
     // Save previous active section before changing
@@ -32,9 +30,9 @@ const NavbarSectionTitle = () => {
       setActiveSection('Terms');
     } else if (location.pathname === '/cookie-policy') {
       setActiveSection('Cookies');
-    } else if (location.pathname === '/about' && activeSection === 'Home') {
-      // Only set initial About page section once
-      setActiveSection('Our Story');
+    } else if (location.pathname === '/about') {
+      // Set to About for simplicity
+      setActiveSection('About');
     } else if (location.pathname === '/') {
       // Only set to Home if we're actually on the home page
       if (activeSection !== 'Services' && 
@@ -45,37 +43,7 @@ const NavbarSectionTitle = () => {
     }
   }, [location.pathname, setActiveSection, setPrevActiveSection, activeSection]);
 
-  // For About page, show in "About/CurrentSection" format with animations
-  if (isAboutPage) {
-    const sectionText = activeSection === 'About' ? 'Our Story' : activeSection;
-    const prevSectionText = prevActiveSection === 'About' ? 'Our Story' : prevActiveSection;
-    
-    return (
-      <div className="relative min-w-[160px] h-6 overflow-hidden">
-        <div className="flex items-center">
-          <span className="text-sm font-medium text-foreground/80">About/</span>
-          
-          <div className="relative overflow-hidden ml-1 min-w-[80px]">
-            <span 
-              ref={activeTextRef}
-              className="text-sm font-medium text-accent absolute inset-0 block" 
-            >
-              {sectionText}
-            </span>
-            
-            <span 
-              ref={prevTextRef}
-              className="text-sm font-medium text-accent absolute inset-0 block"
-            >
-              {prevSectionText}
-            </span>
-          </div>
-        </div>
-      </div>
-    );
-  }
-
-  // Default display for other pages
+  // Simplified display for all pages, including About page
   return (
     <div className="relative min-w-[80px] h-6 overflow-hidden">
       <span 

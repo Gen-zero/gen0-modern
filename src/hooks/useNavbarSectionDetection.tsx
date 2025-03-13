@@ -1,0 +1,165 @@
+
+import { useEffect } from 'react';
+import { useNavbar } from '@/contexts/NavbarContext';
+import { useNavbarRoute } from './useNavbarRoute';
+
+export const useNavbarSectionDetection = () => {
+  const { 
+    activeSection,
+    setActiveSection, 
+    setPrevActiveSection, 
+    isTransitioning,
+    setIsTransitioning,
+    transitionTimeoutRef
+  } = useNavbar();
+  
+  const { isAboutPage, isFixedTitlePage, location } = useNavbarRoute();
+
+  useEffect(() => {
+    // Debounce timer for section changes to prevent rapid switching
+    let debounceTimer: number | null = null;
+    // Track last detected section to prevent rapid oscillation
+    let lastDetectedSection = activeSection;
+    // Add a minimum time between section changes
+    let lastChangeTime = Date.now();
+    
+    const handleScroll = () => {
+      // Skip section detection for fixed title pages
+      if (isFixedTitlePage) {
+        return;
+      }
+
+      // Only process section detection for home and about pages
+      if (!isAboutPage && location.pathname !== '/') {
+        return;
+      }
+
+      // If currently transitioning, don't detect new sections
+      if (isTransitioning) {
+        return;
+      }
+
+      // Enforce minimum time between section changes (500ms)
+      const now = Date.now();
+      if (now - lastChangeTime < 500) {
+        return;
+      }
+
+      // Get all sections based on current page
+      const sectionsQuery = 'section[id]';
+      const sections = document.querySelectorAll(sectionsQuery);
+      
+      // If no sections are found, return early
+      if (sections.length === 0) return;
+      
+      // Find the current visible section with improved detection
+      let currentSection = '';
+      let maxVisibility = 0;
+      
+      sections.forEach(section => {
+        const sectionId = section.getAttribute('id') || '';
+        const rect = section.getBoundingClientRect();
+        const sectionTop = rect.top;
+        const sectionHeight = rect.height;
+        const windowHeight = window.innerHeight;
+        
+        // Calculate visibility with improved threshold for more stable detection
+        let visibilityRatio = 0;
+        
+        // Section is considered active when its top enters the top 40% of the viewport
+        if (sectionTop <= windowHeight * 0.4 && sectionTop + sectionHeight > 0) {
+          // Calculate how much of the section is visible
+          const visibleHeight = Math.min(windowHeight, Math.max(0, sectionTop + sectionHeight));
+          visibilityRatio = visibleHeight / sectionHeight;
+          
+          // Add extra weight to sections near the top of the viewport
+          if (sectionTop >= 0 && sectionTop <= windowHeight * 0.4) {
+            visibilityRatio += 0.5; // Boost priority of sections that have just entered viewport
+          }
+        }
+        
+        if (visibilityRatio > maxVisibility) {
+          maxVisibility = visibilityRatio;
+          
+          if (isAboutPage) {
+            // Map section ids to display names for About page
+            switch(sectionId) {
+              case 'team': currentSection = 'Team'; break;
+              case 'journey': currentSection = 'Journey'; break;
+              case 'mission': currentSection = 'Mission'; break;
+              case 'our-story': currentSection = 'Our Story'; break;
+              default: currentSection = sectionId.charAt(0).toUpperCase() + sectionId.slice(1);
+            }
+          } else {
+            // For main page, just capitalize the section id
+            currentSection = sectionId.charAt(0).toUpperCase() + sectionId.slice(1);
+          }
+        }
+      });
+      
+      // Only update section if we found a valid one and it's different from the current
+      // Also add hysteresis - require section to be significantly more visible before switching
+      if (currentSection && 
+          currentSection !== activeSection && 
+          currentSection !== lastDetectedSection) {
+          
+        // Clear any existing debounce timer
+        if (debounceTimer) {
+          window.clearTimeout(debounceTimer);
+        }
+        
+        lastDetectedSection = currentSection;
+        
+        // Set a debounce to prevent rapid section changes
+        debounceTimer = window.setTimeout(() => {
+          // Double check that section is still different after debounce
+          if (currentSection !== activeSection) {
+            setPrevActiveSection(activeSection);
+            setActiveSection(currentSection);
+            setIsTransitioning(true);
+            
+            if (transitionTimeoutRef.current) {
+              window.clearTimeout(transitionTimeoutRef.current);
+            }
+            
+            // Update last change time
+            lastChangeTime = Date.now();
+            
+            // Set timeout to match the animation duration in useNavbarTextAnimation
+            transitionTimeoutRef.current = window.setTimeout(() => {
+              setIsTransitioning(false);
+              transitionTimeoutRef.current = null;
+            }, 500); // Increase this to give animations more time to finish
+          }
+          
+          debounceTimer = null;
+        }, 200); // Increase debounce to further stabilize detection
+      }
+    };
+    
+    window.addEventListener('scroll', handleScroll);
+    
+    // Initial call to set correct section on page load
+    handleScroll();
+    
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      if (transitionTimeoutRef.current) {
+        window.clearTimeout(transitionTimeoutRef.current);
+      }
+      if (debounceTimer) {
+        window.clearTimeout(debounceTimer);
+      }
+    };
+  }, [
+    isAboutPage, 
+    isFixedTitlePage, 
+    location.pathname, 
+    activeSection, 
+    isTransitioning, 
+    setActiveSection, 
+    setPrevActiveSection, 
+    setIsTransitioning, 
+    transitionTimeoutRef
+  ]);
+};

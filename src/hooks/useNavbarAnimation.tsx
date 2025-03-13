@@ -2,10 +2,11 @@
 import { useLocation } from 'react-router-dom';
 import { useNavbarTextAnimation } from './useNavbarTextAnimation';
 import { useNavbarExpansion } from './useNavbarExpansion';
+import { useNavbarRoute } from './useNavbarRoute';
 
 export const useNavbarAnimation = () => {
-  const location = useLocation();
-  const isAboutPage = location.pathname === '/about';
+  // Use the route hook to get isAboutPage
+  const { isAboutPage } = useNavbarRoute();
   
   // Get text animation functionality
   const { activeTextRef, prevTextRef } = useNavbarTextAnimation();

@@ -28,6 +28,10 @@ export const useNavbarTextAnimation = () => {
       
       animatingRef.current = true;
       
+      // Reset any inline styles that might be causing stacking issues
+      gsap.set(activeTextRef.current, { clearProps: "all" });
+      gsap.set(prevTextRef.current, { clearProps: "all" });
+      
       // Set initial positions
       gsap.set(activeTextRef.current, { 
         y: direction === 'down' ? 20 : -20, 
@@ -42,15 +46,16 @@ export const useNavbarTextAnimation = () => {
       gsap.to(prevTextRef.current, {
         y: direction === 'down' ? -20 : 20,
         autoAlpha: 0,
-        duration: 0.4,
+        duration: 0.35,
         ease: 'power2.inOut'
       });
       
-      // Animate in the new text with slightly longer duration
+      // Animate in the new text with a slight delay to prevent overlap
       gsap.to(activeTextRef.current, {
         y: 0,
         autoAlpha: 1,
-        duration: 0.4,
+        duration: 0.35,
+        delay: 0.05,
         ease: 'power2.inOut',
         onComplete: () => {
           if (transitionTimeoutRef.current) {
@@ -64,7 +69,7 @@ export const useNavbarTextAnimation = () => {
           // Give a little extra time before allowing new transitions
           setTimeout(() => {
             setIsTransitioning(false);
-          }, 100);
+          }, 150);
         }
       });
     }

@@ -1,12 +1,12 @@
 
 import { useNavbar } from '@/contexts/NavbarContext';
-import { useNavbarAnimation } from '@/hooks/useNavbarAnimation';
+import { useNavbarTextAnimation } from '@/hooks/useNavbarTextAnimation';
 import { useLocation } from 'react-router-dom';
 import { useEffect } from 'react';
 
 const NavbarSectionTitle = () => {
   const { activeSection, prevActiveSection, setActiveSection, setPrevActiveSection } = useNavbar();
-  const { activeTextRef, prevTextRef } = useNavbarAnimation();
+  const { activeTextRef, prevTextRef } = useNavbarTextAnimation();
   const location = useLocation();
   
   const isAboutPage = location.pathname === '/about';
@@ -58,14 +58,15 @@ const NavbarSectionTitle = () => {
           <div className="relative overflow-hidden ml-1">
             <span 
               ref={activeTextRef}
-              className="text-sm font-medium text-accent"
+              className="text-sm font-medium text-accent absolute inset-0"
+              style={{ opacity: 0 }}
             >
               {sectionText}
             </span>
             
             <span 
               ref={prevTextRef}
-              className="absolute inset-0 text-sm font-medium text-accent"
+              className="text-sm font-medium text-accent absolute inset-0"
             >
               {prevSectionText}
             </span>
@@ -81,6 +82,7 @@ const NavbarSectionTitle = () => {
       <span 
         ref={activeTextRef}
         className="absolute inset-0 text-sm font-medium text-foreground/80 mx-auto text-center"
+        style={{ opacity: 0 }}
       >
         {activeSection}
       </span>

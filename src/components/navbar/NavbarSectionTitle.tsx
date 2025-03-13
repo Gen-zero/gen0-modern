@@ -45,7 +45,7 @@ const NavbarSectionTitle = () => {
     }
   }, [location.pathname, setActiveSection, setPrevActiveSection, activeSection]);
 
-  // For About page, show in "About/CurrentSection" format with GSAP animations
+  // For About page, show in "About/CurrentSection" format with animations
   if (isAboutPage) {
     const sectionText = activeSection === 'About' ? 'Our Story' : activeSection;
     const prevSectionText = prevActiveSection === 'About' ? 'Our Story' : prevActiveSection;
@@ -59,7 +59,6 @@ const NavbarSectionTitle = () => {
             <span 
               ref={activeTextRef}
               className="text-sm font-medium text-accent absolute inset-0 block" 
-              style={{ opacity: 1, transform: 'translateY(0)' }} /* Explicitly set to fully visible */
             >
               {sectionText}
             </span>
@@ -67,7 +66,6 @@ const NavbarSectionTitle = () => {
             <span 
               ref={prevTextRef}
               className="text-sm font-medium text-accent absolute inset-0 block"
-              style={{ opacity: 0 }} /* Explicitly set to hidden initially */
             >
               {prevSectionText}
             </span>
@@ -83,7 +81,6 @@ const NavbarSectionTitle = () => {
       <span 
         ref={activeTextRef}
         className="absolute inset-0 text-sm font-medium text-foreground/80 mx-auto text-center block"
-        style={{ opacity: 1, transform: 'translateY(0)' }} /* Explicitly set to fully visible */
       >
         {activeSection}
       </span>
@@ -91,7 +88,6 @@ const NavbarSectionTitle = () => {
       <span 
         ref={prevTextRef}
         className="absolute inset-0 text-sm font-medium text-foreground/80 mx-auto text-center block"
-        style={{ opacity: 0 }} /* Explicitly set to hidden initially */
       >
         {prevActiveSection}
       </span>

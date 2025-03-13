@@ -32,18 +32,16 @@ export const useNavbarTextAnimation = () => {
       gsap.set(activeTextRef.current, { clearProps: "all" });
       gsap.set(prevTextRef.current, { clearProps: "all" });
       
-      // IMPORTANT: Set initial states before animation
+      // IMPORTANT: First make sure previous text is visible and active text is hidden
       gsap.set(prevTextRef.current, { 
         y: 0, 
         autoAlpha: 1,
-        immediateRender: true,
         force3D: true
       });
       
       gsap.set(activeTextRef.current, { 
         y: direction === 'down' ? 20 : -20, 
         autoAlpha: 0,
-        immediateRender: true,
         force3D: true
       });
       
@@ -56,7 +54,7 @@ export const useNavbarTextAnimation = () => {
         force3D: true
       });
       
-      // Animate in the new text with a slight delay to prevent overlap
+      // Animate in the new text with a slight delay
       gsap.to(activeTextRef.current, {
         y: 0,
         autoAlpha: 1,
@@ -73,71 +71,40 @@ export const useNavbarTextAnimation = () => {
           // Mark animation as complete
           animatingRef.current = false;
           
-          // Give a little extra time before allowing new transitions
+          // Give a little time before allowing new transitions
           setTimeout(() => {
             setIsTransitioning(false);
-            
-            // Force visibility of active text at the end of animation
-            if (activeTextRef.current) {
-              gsap.set(activeTextRef.current, {
-                autoAlpha: 1,
-                y: 0,
-                force3D: true,
-                overwrite: "auto"
-              });
-            }
           }, 150);
         }
       });
     }
   };
 
-  // Make sure text is visible whenever component renders/mounts
+  // Ensure the active text is always visible when component mounts
   useEffect(() => {
-    const ensureVisibility = () => {
-      // Always make active text visible
-      if (activeTextRef.current) {
-        gsap.set(activeTextRef.current, { 
-          autoAlpha: 1, 
-          y: 0,
-          immediateRender: true,
-          force3D: true,
-          overwrite: "auto"
-        });
-      }
-      
-      // Always hide previous text
-      if (prevTextRef.current) {
-        gsap.set(prevTextRef.current, { 
-          autoAlpha: 0,
-          immediateRender: true,
-          force3D: true,
-          overwrite: "auto"
-        });
-      }
-    };
-    
-    // Run initially
-    ensureVisibility();
-    
-    // Also run after a short delay to ensure DOM is ready
-    const initialTimer = setTimeout(ensureVisibility, 100);
-    
-    return () => {
-      clearTimeout(initialTimer);
-    };
-  }, []);
-
-  // Ensure visibility whenever section changes or when not transitioning
-  useEffect(() => {
-    if (!isTransitioning && activeTextRef.current) {
-      // Ensure active text is visible when not transitioning
+    if (activeTextRef.current) {
       gsap.set(activeTextRef.current, { 
         autoAlpha: 1, 
         y: 0,
-        immediateRender: true,
-        force3D: true,
-        overwrite: "auto" 
+        force3D: true
+      });
+    }
+    
+    if (prevTextRef.current) {
+      gsap.set(prevTextRef.current, { 
+        autoAlpha: 0,
+        force3D: true
+      });
+    }
+  }, []);
+
+  // Make sure active text is visible whenever the section changes or when not transitioning
+  useEffect(() => {
+    if (!isTransitioning && activeTextRef.current) {
+      gsap.set(activeTextRef.current, { 
+        autoAlpha: 1, 
+        y: 0,
+        force3D: true
       });
     }
   }, [isTransitioning, activeSection]);

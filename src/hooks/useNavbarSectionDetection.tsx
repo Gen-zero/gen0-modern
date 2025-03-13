@@ -72,18 +72,6 @@ export const useNavbarSectionDetection = () => {
           }
           return;
         }
-        
-        // If we've scrolled past the top, never show "About" again until page reload or return to top
-        if (hasScrolledPastTop && activeSection === 'About') {
-          // Find first non-About section to display
-          const firstVisibleSection = findFirstVisibleSection(sections, isAboutPage);
-          if (firstVisibleSection && firstVisibleSection !== 'About') {
-            setPrevActiveSection(activeSection);
-            setActiveSection(firstVisibleSection);
-            lastDetectedSection = firstVisibleSection;
-            lastChangeTime = Date.now();
-          }
-        }
       }
       
       // Find the current visible section with improved detection
@@ -147,7 +135,7 @@ export const useNavbarSectionDetection = () => {
           }
           
           debounceTimer = null;
-        }, 200); // Increase debounce to further stabilize detection
+        }, 100); // Decrease the debounce time to make section changes more responsive
       }
     };
     

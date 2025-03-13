@@ -10,7 +10,7 @@ import { useNavbarScroll } from '@/hooks/useNavbarScroll';
 
 const NavbarContent = () => {
   const { isScrolled, menuOpen, setMenuOpen, navbarExpanded } = useNavbar();
-  const { navbarRef, toggleNavbarExpand } = useNavbarAnimation();
+  const { navbarRef, toggleNavbarExpand, isSmallScreen } = useNavbarAnimation();
   const location = useLocation();
   const navigate = useNavigate();
   
@@ -36,7 +36,7 @@ const NavbarContent = () => {
       <header 
         ref={navbarRef}
         className={`fixed top-4 left-4 z-50 transition-all duration-300 ${isScrolled ? 'bg-background/80 backdrop-blur-md shadow-sm' : 'bg-background/60 backdrop-blur-sm'} p-3 rounded-lg border border-border/30 overflow-hidden`}
-        style={{ width: navbarExpanded ? 'auto' : '300px', transition: 'width 0.4s ease-in-out' }}
+        style={{ width: navbarExpanded && !isSmallScreen ? 'auto' : '300px', transition: 'width 0.4s ease-in-out' }}
       >
         <div className="flex items-center justify-between">
           <button className="text-foreground/90 hover:text-accent transition-colors focus:outline-none" onClick={toggleMenu} aria-label={menuOpen ? "Close Menu" : "Open Menu"}>
@@ -50,16 +50,18 @@ const NavbarContent = () => {
           <div className="flex items-center gap-2">
             <div className="flex items-center">
               <NavbarSectionTitle />
-              <NavbarSectionLinks />
+              {!isSmallScreen && <NavbarSectionLinks />}
             </div>
 
-            <button 
-              onClick={toggleNavbarExpand}
-              className="flex items-center justify-center w-8 h-8 rounded-full bg-accent/10 hover:bg-accent/20 text-accent transition-all ml-1"
-              aria-label={navbarExpanded ? "Collapse Navigation" : "Expand Navigation"}
-            >
-              {navbarExpanded ? <ChevronLeft size={18} /> : <ChevronRight size={18} />}
-            </button>
+            {!isSmallScreen && (
+              <button 
+                onClick={toggleNavbarExpand}
+                className="flex items-center justify-center w-8 h-8 rounded-full bg-accent/10 hover:bg-accent/20 text-accent transition-all ml-1"
+                aria-label={navbarExpanded ? "Collapse Navigation" : "Expand Navigation"}
+              >
+                {navbarExpanded ? <ChevronLeft size={18} /> : <ChevronRight size={18} />}
+              </button>
+            )}
           </div>
         </div>
       </header>

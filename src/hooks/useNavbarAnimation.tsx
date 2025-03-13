@@ -1,5 +1,5 @@
 
-import { useRef, useEffect } from 'react';
+import { useRef, useEffect, useState } from 'react';
 import gsap from 'gsap';
 import { useNavbar } from '@/contexts/NavbarContext';
 
@@ -14,9 +14,26 @@ export const useNavbarAnimation = () => {
     transitionTimeoutRef
   } = useNavbar();
   
+  const [isSmallScreen, setIsSmallScreen] = useState(false);
   const activeTextRef = useRef<HTMLSpanElement>(null);
   const prevTextRef = useRef<HTMLSpanElement>(null);
   const navbarRef = useRef<HTMLDivElement>(null);
+
+  // Check for small screen size (less than 550px)
+  useEffect(() => {
+    const checkScreenSize = () => {
+      setIsSmallScreen(window.innerWidth < 550);
+    };
+    
+    // Initial check
+    checkScreenSize();
+    
+    // Add event listener for window resize
+    window.addEventListener('resize', checkScreenSize);
+    
+    // Clean up
+    return () => window.removeEventListener('resize', checkScreenSize);
+  }, []);
 
   // -----------------------------------------
   // 1. Handle Text Transition for Active Section
@@ -65,6 +82,9 @@ export const useNavbarAnimation = () => {
   // 2. Toggle Navbar Expand / Collapse
   // -----------------------------------------
   const toggleNavbarExpand = () => {
+    // Don't allow expanding on small screens
+    if (isSmallScreen) return;
+    
     setNavbarExpanded(!navbarExpanded);
     
     const expandableContentRef = document.querySelector('.expandable-section-links');
@@ -142,6 +162,7 @@ export const useNavbarAnimation = () => {
     activeTextRef,
     prevTextRef,
     navbarRef,
-    toggleNavbarExpand
+    toggleNavbarExpand,
+    isSmallScreen
   };
 };

@@ -3,12 +3,6 @@ import { useNavbar } from '@/contexts/NavbarContext';
 import { useNavbarAnimation } from '@/hooks/useNavbarAnimation';
 import { useLocation } from 'react-router-dom';
 import { useEffect } from 'react';
-import { 
-  Breadcrumb,
-  BreadcrumbItem,
-  BreadcrumbList,
-  BreadcrumbSeparator,
-} from "@/components/ui/breadcrumb";
 
 const NavbarSectionTitle = () => {
   const { activeSection, prevActiveSection, setActiveSection, setPrevActiveSection } = useNavbar();
@@ -49,25 +43,33 @@ const NavbarSectionTitle = () => {
     }
   }, [location.pathname, setActiveSection, setPrevActiveSection, activeSection]);
 
-  // For About page, always show in "About / Current Section" format
+  // For About page, show in "About/CurrentSection" format with GSAP animations
   if (isAboutPage) {
     // When initial About is loaded, the activeSection is "About"
     // So we need to handle that case separately
     const sectionText = activeSection === 'About' ? 'Our Story' : activeSection;
-
+    
     return (
-      <div className="relative min-w-[140px] h-6 overflow-hidden">
-        <Breadcrumb>
-          <BreadcrumbList className="text-sm font-medium">
-            <BreadcrumbItem>
-              <span className="text-muted-foreground">About</span>
-            </BreadcrumbItem>
-            <BreadcrumbSeparator />
-            <BreadcrumbItem>
-              <span className="text-accent">{sectionText}</span>
-            </BreadcrumbItem>
-          </BreadcrumbList>
-        </Breadcrumb>
+      <div className="relative min-w-[160px] h-6 overflow-hidden">
+        <div className="flex items-center">
+          <span className="text-sm font-medium text-foreground/80">About/</span>
+          
+          <div className="relative overflow-hidden ml-1">
+            <span 
+              ref={activeTextRef}
+              className="text-sm font-medium text-accent"
+            >
+              {sectionText}
+            </span>
+            
+            <span 
+              ref={prevTextRef}
+              className="absolute inset-0 text-sm font-medium text-accent"
+            >
+              {prevActiveSection !== 'About' ? prevActiveSection : 'Our Story'}
+            </span>
+          </div>
+        </div>
       </div>
     );
   }

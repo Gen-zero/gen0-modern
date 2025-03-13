@@ -20,6 +20,7 @@ const NavbarContent = () => {
   useNavbarScroll(); // Initialize scroll effects
   
   const isHomePage = location.pathname === '/';
+  const isAboutPage = location.pathname === '/about';
   
   // Reset section when route changes to ensure clean transitions
   useEffect(() => {
@@ -62,7 +63,10 @@ const NavbarContent = () => {
       <header 
         ref={navbarRef}
         className={`fixed top-4 left-4 z-50 transition-all duration-300 ${isScrolled ? 'bg-background/80 backdrop-blur-md shadow-sm' : 'bg-background/60 backdrop-blur-sm'} p-3 rounded-lg border border-border/30 overflow-hidden`}
-        style={{ width: navbarExpanded && !isSmallScreen ? 'auto' : '300px', transition: 'width 0.4s ease-in-out' }}
+        style={{ 
+          width: navbarExpanded && !isSmallScreen ? 'auto' : isAboutPage ? '340px' : '300px',
+          transition: 'width 0.4s ease-in-out' 
+        }}
       >
         <div className="flex items-center justify-between">
           <button className="text-foreground/90 hover:text-accent transition-colors focus:outline-none" onClick={toggleMenu} aria-label={menuOpen ? "Close Menu" : "Open Menu"}>

@@ -1,7 +1,7 @@
 
-import { Menu, ChevronRight, ChevronLeft } from 'lucide-react';
+import { Menu, ChevronRight, ChevronLeft, ArrowLeft } from 'lucide-react';
 import NavMenu from './navbar/NavMenu';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 import NavbarSectionTitle from './navbar/NavbarSectionTitle';
 import NavbarSectionLinks from './navbar/NavbarSectionLinks';
 import { NavbarProvider, useNavbar } from '@/contexts/NavbarContext';
@@ -11,8 +11,12 @@ import { useNavbarScroll } from '@/hooks/useNavbarScroll';
 const NavbarContent = () => {
   const { isScrolled, menuOpen, setMenuOpen, navbarExpanded } = useNavbar();
   const { navbarRef, toggleNavbarExpand } = useNavbarAnimation();
+  const location = useLocation();
+  const navigate = useNavigate();
   
   useNavbarScroll(); // Initialize scroll effects
+  
+  const isHomePage = location.pathname === '/';
   
   const toggleMenu = () => {
     setMenuOpen(!menuOpen);
@@ -21,6 +25,10 @@ const NavbarContent = () => {
     } else {
       document.body.style.overflow = '';
     }
+  };
+
+  const handleBackClick = () => {
+    navigate(-1); // Navigate back
   };
   
   return (
@@ -55,6 +63,17 @@ const NavbarContent = () => {
           </div>
         </div>
       </header>
+      
+      {/* Back button - only show on non-home pages */}
+      {!isHomePage && (
+        <button
+          onClick={handleBackClick}
+          className="fixed top-4 right-4 z-50 p-3 rounded-lg bg-background/60 backdrop-blur-sm border border-border/30 transition-all duration-300 hover:bg-background/80 text-foreground/90 hover:text-accent focus:outline-none"
+          aria-label="Go back"
+        >
+          <ArrowLeft size={24} />
+        </button>
+      )}
       
       <NavMenu menuOpen={menuOpen} toggleMenu={toggleMenu} />
     </>

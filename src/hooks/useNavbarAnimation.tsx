@@ -62,24 +62,25 @@ export const useNavbarAnimation = () => {
       const expandableContentRef = document.querySelector('.expandable-section-links');
       
       if (!navbarExpanded && expandableContentRef) {
-        // Expand animation
-        gsap.fromTo(expandableContentRef, 
-          { width: 0, opacity: 0 },
-          {
-            width: 'auto',
-            opacity: 1,
-            duration: 0.4,
-            ease: "power2.inOut"
-          }
-        );
+        // First set initial state
+        gsap.set(expandableContentRef, { width: 0, opacity: 0, marginLeft: 0 });
+        
+        // Then animate to expanded state
+        gsap.to(expandableContentRef, {
+          width: 'auto',
+          opacity: 1,
+          marginLeft: 12, // equivalent to ml-3
+          duration: 0.4,
+          ease: "power2.inOut"
+        });
       } else if (expandableContentRef) {
-        // Retract animation - fix the issue with messy retraction
+        // Animate to collapsed state
         gsap.to(expandableContentRef, {
           width: 0,
           opacity: 0,
+          marginLeft: 0,
           duration: 0.4,
-          ease: "power2.inOut",
-          clearProps: "all"
+          ease: "power2.inOut"
         });
       }
     }

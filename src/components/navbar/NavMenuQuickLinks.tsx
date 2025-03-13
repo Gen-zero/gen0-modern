@@ -16,6 +16,10 @@ const NavMenuQuickLinks = ({ navLinks, toggleMenu }: NavMenuQuickLinksProps) => 
     {
       name: 'About Us',
       href: '/about'
+    },
+    {
+      name: 'Projects',
+      href: '/projects'
     }
   ];
   

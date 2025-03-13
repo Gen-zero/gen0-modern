@@ -39,13 +39,14 @@ export const useNavbarTextAnimation = () => {
         force3D: true
       });
       
+      // Position new text based on scroll direction
       gsap.set(activeTextRef.current, { 
         y: direction === 'down' ? 20 : -20, 
         autoAlpha: 0,
         force3D: true
       });
       
-      // Animate out the previous text
+      // Animate out the previous text in the opposite direction
       gsap.to(prevTextRef.current, {
         y: direction === 'down' ? -20 : 20,
         autoAlpha: 0,

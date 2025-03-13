@@ -17,9 +17,11 @@ export const useNavbarScrollPosition = () => {
       // Update scroll direction
       if (currentScrollY > lastScrollY) {
         setScrollDirection('down');
-      } else {
+      } else if (currentScrollY < lastScrollY) {
         setScrollDirection('up');
       }
+      
+      // Save last scroll position
       setLastScrollY(currentScrollY);
       
       // Update navbar style when scrolled

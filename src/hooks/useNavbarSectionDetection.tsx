@@ -11,7 +11,8 @@ export const useNavbarSectionDetection = () => {
     setPrevActiveSection, 
     isTransitioning,
     setIsTransitioning,
-    transitionTimeoutRef
+    transitionTimeoutRef,
+    scrollDirection
   } = useNavbar();
   
   const { isHomePage, location } = useNavbarRoute();
@@ -35,9 +36,9 @@ export const useNavbarSectionDetection = () => {
         return;
       }
 
-      // Enforce minimum time between section changes (500ms)
+      // Enforce minimum time between section changes (300ms)
       const now = Date.now();
-      if (now - lastChangeTime < 500) {
+      if (now - lastChangeTime < 300) {
         return;
       }
 
@@ -94,11 +95,11 @@ export const useNavbarSectionDetection = () => {
             transitionTimeoutRef.current = window.setTimeout(() => {
               setIsTransitioning(false);
               transitionTimeoutRef.current = null;
-            }, 500); // Increase this to give animations more time to finish
+            }, 400); // Slightly longer to ensure animation completes
           }
           
           debounceTimer = null;
-        }, 100); // Fast response for section changes
+        }, 50); // Fast response for section changes
       }
     };
     
@@ -124,6 +125,7 @@ export const useNavbarSectionDetection = () => {
     setActiveSection, 
     setPrevActiveSection, 
     setIsTransitioning, 
-    transitionTimeoutRef
+    transitionTimeoutRef,
+    scrollDirection
   ]);
 };

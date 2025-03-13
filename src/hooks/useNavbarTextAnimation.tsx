@@ -32,15 +32,17 @@ export const useNavbarTextAnimation = () => {
       gsap.set(activeTextRef.current, { clearProps: "all" });
       gsap.set(prevTextRef.current, { clearProps: "all" });
       
-      // Ensure active text is visible if no animation is running
-      gsap.set(activeTextRef.current, { 
-        y: direction === 'down' ? 20 : -20, 
-        autoAlpha: 0 
-      });
-      
+      // Ensure prev text is visible and active text is ready to animate in
       gsap.set(prevTextRef.current, { 
         y: 0, 
-        autoAlpha: 1 
+        autoAlpha: 1,
+        immediateRender: true
+      });
+      
+      gsap.set(activeTextRef.current, { 
+        y: direction === 'down' ? 20 : -20, 
+        autoAlpha: 0,
+        immediateRender: true
       });
       
       // Animate out the previous text
@@ -76,18 +78,40 @@ export const useNavbarTextAnimation = () => {
     }
   };
 
-  // Initialize or reset text visibility on component mount
+  // Initialize text visibility on component mount
   useEffect(() => {
-    // Ensure active text is visible initially
+    // Make sure active text is fully visible on initial render
     if (activeTextRef.current) {
-      gsap.set(activeTextRef.current, { autoAlpha: 1, y: 0 });
+      gsap.set(activeTextRef.current, { 
+        autoAlpha: 1, 
+        y: 0,
+        immediateRender: true,
+        overwrite: true
+      });
     }
     
-    // Ensure previous text is hidden initially
+    // Make sure previous text is hidden on initial render
     if (prevTextRef.current) {
-      gsap.set(prevTextRef.current, { autoAlpha: 0 });
+      gsap.set(prevTextRef.current, { 
+        autoAlpha: 0,
+        immediateRender: true,
+        overwrite: true
+      });
     }
   }, []);
+
+  // Reinforce visibility when not transitioning
+  useEffect(() => {
+    if (!isTransitioning && activeTextRef.current) {
+      // Ensure active text is visible when not transitioning
+      gsap.set(activeTextRef.current, { 
+        autoAlpha: 1, 
+        y: 0,
+        immediateRender: true,
+        overwrite: true 
+      });
+    }
+  }, [isTransitioning, activeSection]);
 
   // Animate section change when isTransitioning changes
   useEffect(() => {
@@ -101,9 +125,6 @@ export const useNavbarTextAnimation = () => {
       return () => {
         window.clearTimeout(animateTimer);
       };
-    } else if (!isTransitioning && activeTextRef.current) {
-      // If not in a transition, make sure active text is visible
-      gsap.set(activeTextRef.current, { autoAlpha: 1, y: 0 });
     }
   }, [isTransitioning, scrollDirection, activeSection]);
 

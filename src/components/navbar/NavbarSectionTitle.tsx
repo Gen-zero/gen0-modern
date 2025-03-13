@@ -59,6 +59,7 @@ const NavbarSectionTitle = () => {
             <span 
               ref={activeTextRef}
               className="text-sm font-medium text-accent absolute inset-0"
+              style={{ opacity: 1 }} /* Explicitly set to visible */
             >
               {sectionText}
             </span>
@@ -66,6 +67,7 @@ const NavbarSectionTitle = () => {
             <span 
               ref={prevTextRef}
               className="text-sm font-medium text-accent absolute inset-0"
+              style={{ opacity: 0 }} /* Explicitly set to hidden initially */
             >
               {prevSectionText}
             </span>
@@ -81,6 +83,7 @@ const NavbarSectionTitle = () => {
       <span 
         ref={activeTextRef}
         className="absolute inset-0 text-sm font-medium text-foreground/80 mx-auto text-center"
+        style={{ opacity: 1 }} /* Explicitly set to visible */
       >
         {activeSection}
       </span>
@@ -88,6 +91,7 @@ const NavbarSectionTitle = () => {
       <span 
         ref={prevTextRef}
         className="absolute inset-0 text-sm font-medium text-foreground/80 mx-auto text-center"
+        style={{ opacity: 0 }} /* Explicitly set to hidden initially */
       >
         {prevActiveSection}
       </span>

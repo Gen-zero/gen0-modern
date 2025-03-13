@@ -128,13 +128,18 @@
     @apply transition-all duration-300 hover:translate-y-[-8px] hover:shadow-lg bg-card;
   }
   
-  /* Hide scrollbar but allow scrolling */
+  /* Enhanced scrollbar hiding while maintaining scroll functionality */
   .no-scrollbar {
-    -ms-overflow-style: none;
+    /* For Firefox */
     scrollbar-width: none;
-  }
-  
-  .no-scrollbar::-webkit-scrollbar {
-    display: none;
+    /* For IE and Edge */
+    -ms-overflow-style: none;
+    /* For WebKit browsers (Chrome, Safari) */
+    &::-webkit-scrollbar {
+      display: none;
+      width: 0;
+      height: 0;
+      background: transparent;
+    }
   }
 }

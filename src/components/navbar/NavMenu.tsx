@@ -7,6 +7,7 @@ import NavMenuServices from './NavMenuServices';
 import NavMenuQuickLinks from './NavMenuQuickLinks';
 import NavMenuLegal from './NavMenuLegal';
 import { useNavbar } from '@/contexts/NavbarContext';
+import { ScrollArea } from "@/components/ui/scroll-area";
 
 interface NavMenuProps {
   menuOpen: boolean;
@@ -42,14 +43,14 @@ const NavMenu = ({
       <div className={`fixed inset-0 z-50 flex items-center justify-center ${menuOpen ? 'opacity-100 visible' : 'opacity-0 invisible'} transition-all duration-500`}>
         <div className="absolute inset-0 bg-gradient-to-br from-background/95 via-background/98 to-background/90 backdrop-blur-md" onClick={toggleMenu}></div>
         
-        <div className="relative w-full max-w-7xl mx-auto h-[90vh] overflow-auto p-6 md:p-10 rounded-xl py-0 px-[28px] my-0 ">
+        <ScrollArea className="relative w-full max-w-7xl mx-auto h-[90vh] no-scrollbar p-6 md:p-10 rounded-xl">
           {/* Close Button */}
           <button className="absolute top-6 right-6 z-50 text-foreground/80 hover:text-accent transition-colors duration-300 focus:outline-none" onClick={toggleMenu} aria-label="Close Menu">
             <X size={32} className="hover:rotate-90 transition-transform duration-300" />
           </button>
           
           {/* Header */}
-          <div className="flex flex-col mb-10 md:mb-16">
+          <div className="flex flex-col mb-10 md:mb-16 px-[28px]">
             <Link to="/" className="flex items-center gap-4 mb-6" onClick={toggleMenu}>
               <img src="/lovable-uploads/a9bfe93b-b4a8-45e7-b6ec-0ccf561e4234.png" alt="Gen0 Logo" className="h-16 object-contain" />
               <div className="flex items-center gap-3">
@@ -64,7 +65,7 @@ const NavMenu = ({
             </h2>
           </div>
           
-          <div className="grid grid-cols-1 md:grid-cols-12 gap-10">
+          <div className="grid grid-cols-1 md:grid-cols-12 gap-10 px-[28px]">
             <div className="md:col-span-5 lg:col-span-4">
               <div className="space-y-8">
                 <NavMenuLinks navLinks={navLinks} activeSection={activeSection} toggleMenu={toggleMenu} />
@@ -95,7 +96,7 @@ const NavMenu = ({
               </div>
             </div>
           </div>
-        </div>
+        </ScrollArea>
       </div>
     </>
   );

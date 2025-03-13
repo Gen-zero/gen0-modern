@@ -7,12 +7,14 @@ import NavbarSectionLinks from './navbar/NavbarSectionLinks';
 import { NavbarProvider, useNavbar } from '@/contexts/NavbarContext';
 import { useNavbarAnimation } from '@/hooks/useNavbarAnimation';
 import { useNavbarScroll } from '@/hooks/useNavbarScroll';
+import { useIsMobile } from '@/hooks/use-mobile';
 
 const NavbarContent = () => {
   const { isScrolled, menuOpen, setMenuOpen, navbarExpanded } = useNavbar();
   const { navbarRef, toggleNavbarExpand, isSmallScreen } = useNavbarAnimation();
   const location = useLocation();
   const navigate = useNavigate();
+  const isMobileScreen = useIsMobile();
   
   useNavbarScroll(); // Initialize scroll effects
   
@@ -66,8 +68,8 @@ const NavbarContent = () => {
         </div>
       </header>
       
-      {/* Back button - only show on non-home pages */}
-      {!isHomePage && (
+      {/* Back button - only show on non-home pages and non-small screens */}
+      {!isHomePage && !isMobileScreen && (
         <button
           onClick={handleBackClick}
           className="fixed top-4 right-4 z-50 p-3 rounded-lg bg-background/60 backdrop-blur-sm border border-border/30 transition-all duration-300 hover:bg-background/80 text-foreground/90 hover:text-accent focus:outline-none"

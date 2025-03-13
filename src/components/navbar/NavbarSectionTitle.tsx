@@ -1,13 +1,28 @@
 
 import { useNavbar } from '@/contexts/NavbarContext';
 import { useNavbarAnimation } from '@/hooks/useNavbarAnimation';
-import { useNavbarScroll } from '@/hooks/useNavbarScroll';
 import { useLocation } from 'react-router-dom';
+import { useEffect } from 'react';
 
 const NavbarSectionTitle = () => {
-  const { activeSection, prevActiveSection } = useNavbar();
+  const { activeSection, prevActiveSection, setActiveSection } = useNavbar();
   const { activeTextRef, prevTextRef } = useNavbarAnimation();
   const location = useLocation();
+
+  // Set the correct title based on the current route
+  useEffect(() => {
+    if (location.pathname === '/projects') {
+      setActiveSection('Projects');
+    } else if (location.pathname === '/privacy-policy') {
+      setActiveSection('Privacy');
+    } else if (location.pathname === '/terms-of-service') {
+      setActiveSection('Terms');
+    } else if (location.pathname === '/cookie-policy') {
+      setActiveSection('Cookies');
+    } else if (location.pathname === '/about') {
+      setActiveSection('About');
+    }
+  }, [location.pathname, setActiveSection]);
 
   return (
     <div className="relative min-w-[80px] h-6 overflow-hidden">

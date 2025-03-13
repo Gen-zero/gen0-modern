@@ -6,7 +6,6 @@ interface LegalLink {
   name: string;
   href: string;
   icon: React.ReactNode;
-  description: string;
 }
 
 interface NavMenuLegalProps {
@@ -18,20 +17,17 @@ const NavMenuLegal = ({ toggleMenu }: NavMenuLegalProps) => {
     {
       name: 'Privacy Policy',
       href: '/privacy-policy',
-      icon: <Shield className="h-4 w-4" />,
-      description: 'How we collect, use, and protect your data'
+      icon: <Shield className="h-4 w-4" />
     }, 
     {
       name: 'Terms of Service',
       href: '/terms-of-service',
-      icon: <FileText className="h-4 w-4" />,
-      description: 'Rules and guidelines for using our services'
+      icon: <FileText className="h-4 w-4" />
     }, 
     {
       name: 'Cookie Policy',
       href: '/cookie-policy',
-      icon: <Cookie className="h-4 w-4" />,
-      description: 'How we use cookies on our website'
+      icon: <Cookie className="h-4 w-4" />
     }
   ];
 
@@ -43,20 +39,15 @@ const NavMenuLegal = ({ toggleMenu }: NavMenuLegalProps) => {
           <li key={item.name}>
             <Link 
               to={item.href} 
-              className="group flex items-start hover:bg-muted/20 p-2 rounded-md transition-colors duration-200" 
+              className="group flex items-center hover:bg-muted/20 p-2 rounded-md transition-colors duration-200" 
               onClick={() => toggleMenu()}
             >
-              <span className="mr-3 text-muted-foreground group-hover:text-accent transition-colors mt-0.5">
+              <span className="mr-3 text-muted-foreground group-hover:text-accent transition-colors">
                 {item.icon}
               </span>
-              <div>
-                <span className="block text-muted-foreground font-medium group-hover:text-foreground transition-colors text-sm md:text-base">
-                  {item.name}
-                </span>
-                <span className="text-xs text-muted-foreground/70 group-hover:text-muted-foreground transition-colors">
-                  {item.description}
-                </span>
-              </div>
+              <span className="text-muted-foreground font-medium group-hover:text-foreground transition-colors text-sm md:text-base">
+                {item.name}
+              </span>
             </Link>
           </li>
         ))}

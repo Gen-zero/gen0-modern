@@ -65,8 +65,13 @@ export const useNavbarScroll = () => {
       // Update navbar style when scrolled
       setIsScrolled(currentScrollY > 50);
 
-      // For policy pages, we don't need section detection
-      if (isPrivacyPage || isTermsPage || isCookiePage) {
+      // Skip section detection for project and policy pages
+      if (isProjectsPage || isPrivacyPage || isTermsPage || isCookiePage) {
+        return;
+      }
+
+      // Only process section detection for home and about pages
+      if (!isAboutPage && location.pathname !== '/') {
         return;
       }
 
@@ -151,7 +156,7 @@ export const useNavbarScroll = () => {
         window.clearTimeout(transitionTimeoutRef.current);
       }
     };
-  }, [isAboutPage, isPrivacyPage, isTermsPage, isCookiePage, activeSection, lastScrollY, isTransitioning, setActiveSection, setPrevActiveSection, setIsScrolled, setIsTransitioning, setLastScrollY, setScrollDirection, transitionTimeoutRef]);
+  }, [isAboutPage, isProjectsPage, isPrivacyPage, isTermsPage, isCookiePage, location.pathname, activeSection, lastScrollY, isTransitioning, setActiveSection, setPrevActiveSection, setIsScrolled, setIsTransitioning, setLastScrollY, setScrollDirection, transitionTimeoutRef]);
 
   return { isAboutPage, isProjectsPage, isPrivacyPage, isTermsPage, isCookiePage, sections };
 };

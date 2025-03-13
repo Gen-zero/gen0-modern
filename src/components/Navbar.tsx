@@ -213,22 +213,25 @@ const Navbar = () => {
           </div>
         </div>
 
-        {/* Horizontal Section Links */}
+        {/* Horizontal Section Links - Updated to expand rightward */}
         <div className={`overflow-hidden transition-all duration-300 ease-in-out ${navbarExpanded ? 'h-12 mt-3 opacity-100' : 'h-0 mt-0 opacity-0'}`}>
           <div className="flex items-center justify-between px-2 py-2 space-x-3 bg-card/40 rounded-lg">
-            {sections.map((section) => (
-              <a
-                key={section.id}
-                href={`#${section.id}`}
-                className={`px-3 py-1 text-sm rounded-md transition-colors whitespace-nowrap ${
-                  activeSection.toLowerCase() === section.label.toLowerCase()
-                    ? 'bg-accent text-accent-foreground font-medium'
-                    : 'hover:bg-card text-foreground/70 hover:text-foreground'
-                }`}
-              >
-                {section.label}
-              </a>
-            ))}
+            {sections.map((section) => {
+              const isActive = activeSection.toLowerCase() === section.label.toLowerCase();
+              return (
+                <a
+                  key={section.id}
+                  href={`#${section.id}`}
+                  className={`px-3 py-1 text-sm rounded-md transition-colors whitespace-nowrap ${
+                    isActive
+                      ? 'bg-accent text-accent-foreground font-medium'
+                      : 'hover:bg-card text-foreground/70 hover:text-foreground shadow-[0_0_10px_#9b87f5] hover:shadow-[0_0_15px_#9b87f5]'
+                  }`}
+                >
+                  {section.label}
+                </a>
+              );
+            })}
           </div>
         </div>
       </header>

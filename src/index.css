@@ -128,6 +128,15 @@
     @apply transition-all duration-300 hover:translate-y-[-8px] hover:shadow-lg bg-card;
   }
   
+  /* Purple glow effect for navbar links */
+  .nav-link-glow {
+    @apply shadow-[0_0_10px_#9b87f5] transition-shadow duration-300;
+  }
+  
+  .nav-link-glow:hover {
+    @apply shadow-[0_0_15px_#9b87f5];
+  }
+  
   /* Hide scrollbar but allow scrolling */
   .no-scrollbar {
     -ms-overflow-style: none;
@@ -137,6 +146,4 @@
   .no-scrollbar::-webkit-scrollbar {
     display: none;
   }
-
-  /* Note: Removed the text-scramble animation since we're now using JS for the animation */
 }

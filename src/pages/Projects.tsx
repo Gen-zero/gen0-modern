@@ -59,7 +59,7 @@ const ProjectsPage = () => {
               Back to Home
             </Link>
             
-            <h1 className="text-4xl md:text-5xl font-bold mb-4">Our Projects</h1>
+            <h1 className="text-4xl md:text-5xl font-bold mb-4">Our Inhouse Projects</h1>
             <p className="text-xl text-muted-foreground max-w-3xl">These are our in-house projects—check them out, vibe with us, and join our mission of levelling up humanity!</p>
           </div>
           

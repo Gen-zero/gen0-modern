@@ -120,7 +120,7 @@ const Contact = () => {
                 <Textarea
                   id="message"
                   name="message"
-                  placeholder="Tell us about your project..."
+                  placeholder="Drop your project ideas, collab plans, investment scenes, or whatever's on your mind—it's all chill!"
                   value={formData.message}
                   onChange={handleChange}
                   required

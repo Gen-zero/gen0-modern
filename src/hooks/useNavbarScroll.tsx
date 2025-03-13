@@ -24,6 +24,7 @@ export const useNavbarScroll = () => {
     const handleScroll = () => {
       const currentScrollY = window.scrollY;
       
+      // Update scroll direction
       if (currentScrollY > lastScrollY) {
         setScrollDirection('down');
       } else {
@@ -31,19 +32,18 @@ export const useNavbarScroll = () => {
       }
       setLastScrollY(currentScrollY);
       
+      // Update navbar style when scrolled
       setIsScrolled(currentScrollY > 50);
 
       // Get all sections based on current page
-      const sectionsQuery = isAboutPage 
-        ? 'section[id]' 
-        : 'section[id]';
+      const sectionsQuery = 'section[id]';
       
       const sections = document.querySelectorAll(sectionsQuery);
       
       // If no sections are found, return early
       if (sections.length === 0) return;
       
-      // Find the current visible section
+      // Find the current visible section with improved detection
       let currentSection = '';
       let maxVisibility = 0;
       
@@ -54,11 +54,23 @@ export const useNavbarScroll = () => {
         const sectionHeight = rect.height;
         const windowHeight = window.innerHeight;
         
-        // Calculate how much of the section is visible in the viewport
-        const visibleHeight = Math.min(windowHeight, sectionTop + sectionHeight) - Math.max(0, sectionTop);
-        const visibilityRatio = visibleHeight / sectionHeight;
+        // Calculate visibility - improved calculation for more accurate detection
+        let visibilityRatio = 0;
         
-        if (visibilityRatio > maxVisibility && visibilityRatio > 0.2) {
+        if (sectionTop <= windowHeight * 0.5 && sectionTop + sectionHeight >= windowHeight * 0.2) {
+          // Section is in viewport and passing the middle point
+          visibilityRatio = 0.8;
+        } else if (sectionTop < 0 && sectionTop + sectionHeight > 0) {
+          // Section is partially visible at the top
+          const visibleHeight = Math.min(windowHeight, sectionTop + sectionHeight);
+          visibilityRatio = visibleHeight / sectionHeight;
+        } else if (sectionTop >= 0 && sectionTop < windowHeight) {
+          // Section is partially visible at the bottom
+          const visibleHeight = Math.min(windowHeight - sectionTop, sectionHeight);
+          visibilityRatio = visibleHeight / sectionHeight;
+        }
+        
+        if (visibilityRatio > maxVisibility) {
           maxVisibility = visibilityRatio;
           
           if (isAboutPage) {
@@ -104,7 +116,7 @@ export const useNavbarScroll = () => {
         window.clearTimeout(transitionTimeoutRef.current);
       }
     };
-  }, [isAboutPage, activeSection, lastScrollY, isTransitioning]);
+  }, [isAboutPage, activeSection, lastScrollY, isTransitioning, setActiveSection, setPrevActiveSection, setIsScrolled, setIsTransitioning, setLastScrollY, setScrollDirection, transitionTimeoutRef]);
 
   return { isAboutPage };
 };

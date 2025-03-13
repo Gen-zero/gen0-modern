@@ -48,6 +48,9 @@ export const useNavbarScroll = () => {
   }, [location.pathname, isAboutPage, isProjectsPage, isPrivacyPage, isTermsPage, isCookiePage]);
   
   useEffect(() => {
+    // Debounce timer for section changes to prevent rapid switching
+    let debounceTimer: number | null = null;
+    
     const handleScroll = () => {
       const currentScrollY = window.scrollY;
       
@@ -72,9 +75,13 @@ export const useNavbarScroll = () => {
         return;
       }
 
+      // If currently transitioning, don't detect new sections
+      if (isTransitioning) {
+        return;
+      }
+
       // Get all sections based on current page
       const sectionsQuery = 'section[id]';
-      
       const sections = document.querySelectorAll(sectionsQuery);
       
       // If no sections are found, return early
@@ -91,20 +98,19 @@ export const useNavbarScroll = () => {
         const sectionHeight = rect.height;
         const windowHeight = window.innerHeight;
         
-        // Calculate visibility - improved calculation for more accurate detection
+        // Calculate visibility with improved threshold for more stable detection
         let visibilityRatio = 0;
         
-        if (sectionTop <= windowHeight * 0.3 && sectionTop + sectionHeight >= windowHeight * 0.1) {
-          // Section is in viewport and passing the upper part
-          visibilityRatio = 0.9;
-        } else if (sectionTop < 0 && sectionTop + sectionHeight > 0) {
-          // Section is partially visible at the top
-          const visibleHeight = Math.min(windowHeight, sectionTop + sectionHeight);
+        // Section is considered active when its top enters the top 40% of the viewport
+        if (sectionTop <= windowHeight * 0.4 && sectionTop + sectionHeight > 0) {
+          // Calculate how much of the section is visible
+          const visibleHeight = Math.min(windowHeight, Math.max(0, sectionTop + sectionHeight));
           visibilityRatio = visibleHeight / sectionHeight;
-        } else if (sectionTop >= 0 && sectionTop < windowHeight) {
-          // Section is partially visible at the bottom
-          const visibleHeight = Math.min(windowHeight - sectionTop, sectionHeight);
-          visibilityRatio = visibleHeight / sectionHeight;
+          
+          // Add extra weight to sections near the top of the viewport
+          if (sectionTop >= 0 && sectionTop <= windowHeight * 0.4) {
+            visibilityRatio += 0.5; // Boost priority of sections that have just entered viewport
+          }
         }
         
         if (visibilityRatio > maxVisibility) {
@@ -126,19 +132,34 @@ export const useNavbarScroll = () => {
         }
       });
       
-      if (currentSection && currentSection !== activeSection && !isTransitioning) {
-        setPrevActiveSection(activeSection);
-        setActiveSection(currentSection);
-        setIsTransitioning(true);
-        
-        if (transitionTimeoutRef.current) {
-          window.clearTimeout(transitionTimeoutRef.current);
+      // Only update section if we found a valid one and it's different from the current
+      if (currentSection && currentSection !== activeSection) {
+        // Clear any existing debounce timer
+        if (debounceTimer) {
+          window.clearTimeout(debounceTimer);
         }
         
-        transitionTimeoutRef.current = window.setTimeout(() => {
-          setIsTransitioning(false);
-          transitionTimeoutRef.current = null;
-        }, 600);
+        // Set a debounce to prevent rapid section changes
+        debounceTimer = window.setTimeout(() => {
+          // Double check that section is still different after debounce
+          if (currentSection !== activeSection) {
+            setPrevActiveSection(activeSection);
+            setActiveSection(currentSection);
+            setIsTransitioning(true);
+            
+            if (transitionTimeoutRef.current) {
+              window.clearTimeout(transitionTimeoutRef.current);
+            }
+            
+            // Set timeout to match the animation duration in useNavbarTextAnimation
+            transitionTimeoutRef.current = window.setTimeout(() => {
+              setIsTransitioning(false);
+              transitionTimeoutRef.current = null;
+            }, 300); // Match this with the GSAP animation duration
+          }
+          
+          debounceTimer = null;
+        }, 100); // Small debounce to stabilize detection
       }
     };
     
@@ -151,6 +172,9 @@ export const useNavbarScroll = () => {
       window.removeEventListener('scroll', handleScroll);
       if (transitionTimeoutRef.current) {
         window.clearTimeout(transitionTimeoutRef.current);
+      }
+      if (debounceTimer) {
+        window.clearTimeout(debounceTimer);
       }
     };
   }, [isAboutPage, isProjectsPage, isPrivacyPage, isTermsPage, isCookiePage, isFixedTitlePage, location.pathname, activeSection, lastScrollY, isTransitioning, setActiveSection, setPrevActiveSection, setIsScrolled, setIsTransitioning, setLastScrollY, setScrollDirection, transitionTimeoutRef]);

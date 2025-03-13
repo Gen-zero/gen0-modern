@@ -46,11 +46,11 @@ export const useNavbarTextAnimation = () => {
         duration: 0.3,
         ease: 'power2.inOut',
         onComplete: () => {
-          setIsTransitioning(false);
           if (transitionTimeoutRef.current) {
             window.clearTimeout(transitionTimeoutRef.current);
             transitionTimeoutRef.current = null;
           }
+          setIsTransitioning(false);
         }
       });
     }
@@ -59,9 +59,17 @@ export const useNavbarTextAnimation = () => {
   // Animate section change when isTransitioning changes
   useEffect(() => {
     if (isTransitioning) {
-      animateSectionChange(scrollDirection);
+      // Small delay to ensure the DOM has been updated
+      // This helps prevent glitches when section changes happen in quick succession
+      const animateTimer = window.setTimeout(() => {
+        animateSectionChange(scrollDirection);
+      }, 10);
+      
+      return () => {
+        window.clearTimeout(animateTimer);
+      };
     }
-  }, [activeSection, isTransitioning, scrollDirection]);
+  }, [isTransitioning, scrollDirection]);
 
   return {
     activeTextRef,

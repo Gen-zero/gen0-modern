@@ -27,9 +27,18 @@ const AboutUs = () => {
         </div>
       </section>
       
-      <MissionVisionSection />
-      <TeamSection />
-      <JourneySection />
+      <section id="mission">
+        <MissionVisionSection />
+      </section>
+      
+      <section id="team">
+        <TeamSection />
+      </section>
+      
+      <section id="journey">
+        <JourneySection />
+      </section>
+      
       <Footer />
     </div>
   );

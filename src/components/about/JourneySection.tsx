@@ -1,4 +1,3 @@
-
 interface JourneyItem {
   year: string;
   title: string;
@@ -35,7 +34,7 @@ const JourneySection = () => {
   ];
 
   return (
-    <section id="journey" className="py-20 container mx-auto px-6 md:px-12 animate-on-scroll">
+    <div className="py-20 container mx-auto px-6 md:px-12 animate-on-scroll">
       <h2 className="text-3xl md:text-4xl font-bold text-center mb-16">Our Journey</h2>
       
       <div className="relative">
@@ -57,7 +56,7 @@ const JourneySection = () => {
           ))}
         </div>
       </div>
-    </section>
+    </div>
   );
 };
 

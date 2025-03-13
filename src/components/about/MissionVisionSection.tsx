@@ -3,7 +3,7 @@ import { Globe, Target } from 'lucide-react';
 
 const MissionVisionSection = () => {
   return (
-    <section id="mission" className="py-20 bg-primary/5 animate-on-scroll">
+    <div className="py-20 bg-primary/5 animate-on-scroll">
       <div className="container mx-auto px-6 md:px-12">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
           <div>
@@ -46,7 +46,7 @@ const MissionVisionSection = () => {
           </div>
         </div>
       </div>
-    </section>
+    </div>
   );
 };
 

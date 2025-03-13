@@ -32,11 +32,12 @@ export const useNavbarTextAnimation = () => {
       gsap.set(activeTextRef.current, { clearProps: "all" });
       gsap.set(prevTextRef.current, { clearProps: "all" });
       
-      // Set initial positions
+      // Ensure active text is visible if no animation is running
       gsap.set(activeTextRef.current, { 
         y: direction === 'down' ? 20 : -20, 
         autoAlpha: 0 
       });
+      
       gsap.set(prevTextRef.current, { 
         y: 0, 
         autoAlpha: 1 
@@ -75,6 +76,19 @@ export const useNavbarTextAnimation = () => {
     }
   };
 
+  // Initialize or reset text visibility on component mount
+  useEffect(() => {
+    // Ensure active text is visible initially
+    if (activeTextRef.current) {
+      gsap.set(activeTextRef.current, { autoAlpha: 1, y: 0 });
+    }
+    
+    // Ensure previous text is hidden initially
+    if (prevTextRef.current) {
+      gsap.set(prevTextRef.current, { autoAlpha: 0 });
+    }
+  }, []);
+
   // Animate section change when isTransitioning changes
   useEffect(() => {
     if (isTransitioning && !animatingRef.current) {
@@ -87,8 +101,11 @@ export const useNavbarTextAnimation = () => {
       return () => {
         window.clearTimeout(animateTimer);
       };
+    } else if (!isTransitioning && activeTextRef.current) {
+      // If not in a transition, make sure active text is visible
+      gsap.set(activeTextRef.current, { autoAlpha: 1, y: 0 });
     }
-  }, [isTransitioning, scrollDirection]);
+  }, [isTransitioning, scrollDirection, activeSection]);
 
   return {
     activeTextRef,

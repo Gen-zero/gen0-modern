@@ -59,7 +59,6 @@ const NavbarSectionTitle = () => {
             <span 
               ref={activeTextRef}
               className="text-sm font-medium text-accent absolute inset-0"
-              style={{ opacity: 0 }}
             >
               {sectionText}
             </span>
@@ -82,7 +81,6 @@ const NavbarSectionTitle = () => {
       <span 
         ref={activeTextRef}
         className="absolute inset-0 text-sm font-medium text-foreground/80 mx-auto text-center"
-        style={{ opacity: 0 }}
       >
         {activeSection}
       </span>

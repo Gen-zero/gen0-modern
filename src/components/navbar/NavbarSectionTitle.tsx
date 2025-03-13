@@ -5,12 +5,23 @@ import { useLocation } from 'react-router-dom';
 import { useEffect } from 'react';
 
 const NavbarSectionTitle = () => {
-  const { activeSection, prevActiveSection, setActiveSection } = useNavbar();
+  const { activeSection, prevActiveSection, setActiveSection, setPrevActiveSection } = useNavbar();
   const { activeTextRef, prevTextRef } = useNavbarAnimation();
   const location = useLocation();
 
   // Set the correct title based on the current route
   useEffect(() => {
+    // Save previous active section before changing
+    if (activeSection !== 'Home' && 
+        activeSection !== 'Projects' && 
+        activeSection !== 'Privacy' && 
+        activeSection !== 'Terms' && 
+        activeSection !== 'Cookies' && 
+        activeSection !== 'About') {
+      setPrevActiveSection(activeSection);
+    }
+    
+    // Set current section based on route
     if (location.pathname === '/projects') {
       setActiveSection('Projects');
     } else if (location.pathname === '/privacy-policy') {
@@ -21,8 +32,15 @@ const NavbarSectionTitle = () => {
       setActiveSection('Cookies');
     } else if (location.pathname === '/about') {
       setActiveSection('About');
+    } else if (location.pathname === '/') {
+      // Only set to Home if we're actually on the home page
+      if (activeSection !== 'Services' && 
+          activeSection !== 'Projects' && 
+          activeSection !== 'Contact') {
+        setActiveSection('Home');
+      }
     }
-  }, [location.pathname, setActiveSection]);
+  }, [location.pathname, setActiveSection, setPrevActiveSection, activeSection]);
 
   return (
     <div className="relative min-w-[80px] h-6 overflow-hidden">

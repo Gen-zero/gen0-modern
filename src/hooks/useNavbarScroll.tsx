@@ -24,31 +24,28 @@ export const useNavbarScroll = () => {
   const isTermsPage = location.pathname === '/terms-of-service';
   const isCookiePage = location.pathname === '/cookie-policy';
   
+  // Determine if we're on a route with fixed section title (non-scrollable)
+  const isFixedTitlePage = isProjectsPage || isPrivacyPage || isTermsPage || isCookiePage;
+  
   const [sections, setSections] = useState<string[]>([]);
   
-  // Set active section based on current page immediately when location changes
+  // Set sections array based on current page
   useEffect(() => {
     if (isAboutPage) {
       setSections(['Our Story', 'Mission', 'Team', 'Journey']);
-      setActiveSection('About');
     } else if (isProjectsPage) {
       setSections(['Projects']);
-      setActiveSection('Projects');
     } else if (isPrivacyPage) {
       setSections(['Privacy']);
-      setActiveSection('Privacy');
     } else if (isTermsPage) {
       setSections(['Terms']);
-      setActiveSection('Terms');
     } else if (isCookiePage) {
       setSections(['Cookies']);
-      setActiveSection('Cookies');
     } else {
       // Default to home page sections
       setSections(['Home', 'Services', 'Projects', 'Contact']);
-      setActiveSection('Home');
     }
-  }, [location.pathname, isAboutPage, isProjectsPage, isPrivacyPage, isTermsPage, isCookiePage, setActiveSection]);
+  }, [location.pathname, isAboutPage, isProjectsPage, isPrivacyPage, isTermsPage, isCookiePage]);
   
   useEffect(() => {
     const handleScroll = () => {
@@ -65,8 +62,8 @@ export const useNavbarScroll = () => {
       // Update navbar style when scrolled
       setIsScrolled(currentScrollY > 50);
 
-      // Skip section detection for project and policy pages
-      if (isProjectsPage || isPrivacyPage || isTermsPage || isCookiePage) {
+      // Skip section detection for fixed title pages
+      if (isFixedTitlePage) {
         return;
       }
 
@@ -156,7 +153,7 @@ export const useNavbarScroll = () => {
         window.clearTimeout(transitionTimeoutRef.current);
       }
     };
-  }, [isAboutPage, isProjectsPage, isPrivacyPage, isTermsPage, isCookiePage, location.pathname, activeSection, lastScrollY, isTransitioning, setActiveSection, setPrevActiveSection, setIsScrolled, setIsTransitioning, setLastScrollY, setScrollDirection, transitionTimeoutRef]);
+  }, [isAboutPage, isProjectsPage, isPrivacyPage, isTermsPage, isCookiePage, isFixedTitlePage, location.pathname, activeSection, lastScrollY, isTransitioning, setActiveSection, setPrevActiveSection, setIsScrolled, setIsTransitioning, setLastScrollY, setScrollDirection, transitionTimeoutRef]);
 
   return { isAboutPage, isProjectsPage, isPrivacyPage, isTermsPage, isCookiePage, sections };
 };

@@ -8,9 +8,10 @@ import { NavbarProvider, useNavbar } from '@/contexts/NavbarContext';
 import { useNavbarAnimation } from '@/hooks/useNavbarAnimation';
 import { useNavbarScroll } from '@/hooks/useNavbarScroll';
 import { useIsMobile } from '@/hooks/use-mobile';
+import { useEffect } from 'react';
 
 const NavbarContent = () => {
-  const { isScrolled, menuOpen, setMenuOpen, navbarExpanded } = useNavbar();
+  const { isScrolled, menuOpen, setMenuOpen, navbarExpanded, setActiveSection, setPrevActiveSection } = useNavbar();
   const { navbarRef, toggleNavbarExpand, isSmallScreen } = useNavbarAnimation();
   const location = useLocation();
   const navigate = useNavigate();
@@ -19,6 +20,29 @@ const NavbarContent = () => {
   useNavbarScroll(); // Initialize scroll effects
   
   const isHomePage = location.pathname === '/';
+  
+  // Reset section when route changes to ensure clean transitions
+  useEffect(() => {
+    if (location.pathname === '/projects') {
+      setPrevActiveSection('Projects');
+      setActiveSection('Projects');
+    } else if (location.pathname === '/privacy-policy') {
+      setPrevActiveSection('Privacy');
+      setActiveSection('Privacy');
+    } else if (location.pathname === '/terms-of-service') {
+      setPrevActiveSection('Terms');
+      setActiveSection('Terms');
+    } else if (location.pathname === '/cookie-policy') {
+      setPrevActiveSection('Cookies');
+      setActiveSection('Cookies');
+    } else if (location.pathname === '/about') {
+      setPrevActiveSection('About');
+      setActiveSection('About');
+    } else if (location.pathname === '/') {
+      setPrevActiveSection('Home');
+      setActiveSection('Home');
+    }
+  }, [location.pathname, setPrevActiveSection, setActiveSection]);
   
   const toggleMenu = () => {
     setMenuOpen(!menuOpen);

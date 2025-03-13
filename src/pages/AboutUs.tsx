@@ -1,7 +1,6 @@
 import { CheckCircle, Globe, Target } from 'lucide-react';
 import Navbar from "@/components/Navbar";
 import { useEffect, useState, useRef } from "react";
-
 const AboutUs = () => {
   const stats = [{
     value: '10+',
@@ -75,7 +74,7 @@ const AboutUs = () => {
         scrambleWord(words[nextIndex]);
         return nextIndex;
       });
-    }, 3500);
+    }, 3500); // Made the animation slower by increasing the interval time
     return () => clearInterval(interval);
   }, []);
 
@@ -105,7 +104,7 @@ const AboutUs = () => {
   return <div className="min-h-screen bg-background">
       <Navbar />
       
-      <section id="our-story" className="py-20 md:py-32 bg-secondary/30">
+      <section className="py-20 md:py-32 bg-secondary/30">
         <div className="container mx-auto px-6 md:px-12">
           {/* Landing page style hero section with image box */}
           <div className="mb-16">
@@ -124,14 +123,18 @@ const AboutUs = () => {
             </div>
             
             <div className="text-center mb-16 animate-on-scroll">
+              
+              
             </div>
           </div>
           
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-24 items-center">
+            
+            
             <div className="animate-on-scroll" style={{
-              animationDelay: '0.2s'
-            }}>
-              <span className="block text-sm mb-3 text-gray-400 font-semibold">Our Story</span>
+            animationDelay: '0.2s'
+          }}>
+              <span className="block text-sm mb-3 text-gray-400 font-semibold">ABOUT US</span>
               <h2 className="text-3xl md:text-4xl font-semibold mb-6">We're a team of creative problem solvers</h2>
               <p className="text-muted-foreground text-lg mb-8">
                 Founded in 2013, we've grown from a small design studio to a full-service digital agency with a global footprint. Our multidisciplinary team combines strategic thinking with technical expertise to deliver exceptional results.
@@ -158,7 +161,7 @@ const AboutUs = () => {
         </div>
       </section>
       
-      <section id="mission" className="py-20 bg-primary/5 animate-on-scroll">
+      <section className="py-20 bg-primary/5 animate-on-scroll">
         <div className="container mx-auto px-6 md:px-12">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
             <div>
@@ -195,7 +198,7 @@ const AboutUs = () => {
         </div>
       </section>
       
-      <section id="team" className="py-20 container mx-auto px-6 md:px-12 animate-on-scroll">
+      <section className="py-20 container mx-auto px-6 md:px-12 animate-on-scroll">
         <div className="text-center mb-16">
           <h2 className="text-3xl md:text-4xl font-bold mb-6">Meet the Team</h2>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
@@ -220,7 +223,7 @@ const AboutUs = () => {
         </div>
       </section>
       
-      <section id="journey" className="py-20 container mx-auto px-6 md:px-12 animate-on-scroll">
+      <section className="py-20 container mx-auto px-6 md:px-12 animate-on-scroll">
         <h2 className="text-3xl md:text-4xl font-bold text-center mb-16">Our Journey</h2>
         
         <div className="relative">
@@ -267,5 +270,4 @@ const AboutUs = () => {
       </div>
     </div>;
 };
-
 export default AboutUs;

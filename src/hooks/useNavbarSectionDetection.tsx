@@ -53,8 +53,8 @@ export const useNavbarSectionDetection = () => {
       // If no sections are found, return early
       if (sections.length === 0) return;
       
-      // Set initial text to "About" when at the top of the page for About page
-      if (isAboutPage && window.scrollY < 100) {
+      // Set initial text to "About" ONLY when at the very top of the page for About page
+      if (isAboutPage && window.scrollY < 50) {
         if (activeSection !== 'About') {
           setPrevActiveSection(activeSection);
           setActiveSection('About');
@@ -93,8 +93,19 @@ export const useNavbarSectionDetection = () => {
         debounceTimer = window.setTimeout(() => {
           // Double check that section is still different after debounce
           if (currentSection !== activeSection) {
-            setPrevActiveSection(activeSection);
-            setActiveSection(currentSection);
+            // Make sure we don't show "About" once we've started scrolling
+            if (isAboutPage && window.scrollY >= 50 && currentSection === 'About') {
+              // Skip setting to About when scrolling - show actual section instead
+              const firstVisibleSection = findFirstVisibleSection(sections, isAboutPage);
+              if (firstVisibleSection && firstVisibleSection !== 'About') {
+                setPrevActiveSection(activeSection);
+                setActiveSection(firstVisibleSection);
+              }
+            } else {
+              setPrevActiveSection(activeSection);
+              setActiveSection(currentSection);
+            }
+            
             setIsTransitioning(true);
             
             if (transitionTimeoutRef.current) {
@@ -114,6 +125,20 @@ export const useNavbarSectionDetection = () => {
           debounceTimer = null;
         }, 200); // Increase debounce to further stabilize detection
       }
+    };
+    
+    // Helper function to find the first visible section when we need to fall back
+    const findFirstVisibleSection = (sections: NodeListOf<Element>, isAboutPage: boolean): string => {
+      for (let i = 0; i < sections.length; i++) {
+        const section = sections[i];
+        const { sectionId } = calculateSectionVisibility(section);
+        const sectionName = formatSectionName(sectionId, isAboutPage);
+        
+        if (sectionName !== 'About') {
+          return sectionName;
+        }
+      }
+      return '';
     };
     
     window.addEventListener('scroll', handleScroll);

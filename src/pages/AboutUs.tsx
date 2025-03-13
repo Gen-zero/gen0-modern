@@ -1,6 +1,8 @@
+
 import { CheckCircle, Globe, Target } from 'lucide-react';
 import Navbar from "@/components/Navbar";
 import { useEffect, useState, useRef } from "react";
+
 const AboutUs = () => {
   const stats = [{
     value: '10+',
@@ -123,8 +125,10 @@ const AboutUs = () => {
             </div>
             
             <div className="text-center mb-16 animate-on-scroll">
-              
-              
+              <h1 className="text-4xl md:text-5xl font-bold mb-6">About Us</h1>
+              <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
+                We're a team of passionate creators dedicated to building exceptional digital experiences.
+              </p>
             </div>
           </div>
           

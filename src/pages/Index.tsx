@@ -5,8 +5,29 @@ import Services from "@/components/Services";
 import Projects from "@/components/Projects";
 import Contact from "@/components/Contact";
 import { useEffect } from "react";
+import { useLocation } from "react-router-dom";
 
 const Index = () => {
+  const location = useLocation();
+  
+  // Handle scrolling to sections
+  useEffect(() => {
+    // Check if we have a section to scroll to from navigation
+    const state = location.state as { scrollTo?: string } | null;
+    if (state && state.scrollTo) {
+      const element = document.getElementById(state.scrollTo);
+      if (element) {
+        // Add a small delay to ensure the page has loaded
+        setTimeout(() => {
+          element.scrollIntoView({ behavior: 'smooth' });
+        }, 100);
+      }
+      
+      // Clear the state after scrolling
+      window.history.replaceState({}, document.title);
+    }
+  }, [location]);
+
   // Smooth reveal animation for sections on scroll
   useEffect(() => {
     const observer = new IntersectionObserver((entries) => {

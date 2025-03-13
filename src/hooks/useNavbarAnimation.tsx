@@ -62,21 +62,24 @@ export const useNavbarAnimation = () => {
       const expandableContentRef = document.querySelector('.expandable-section-links');
       
       if (!navbarExpanded && expandableContentRef) {
+        // Expand animation
         gsap.fromTo(expandableContentRef, 
           { width: 0, opacity: 0 },
           {
             width: 'auto',
             opacity: 1,
-            duration: 0.8,
+            duration: 0.4,
             ease: "power2.inOut"
           }
         );
       } else if (expandableContentRef) {
+        // Retract animation - fix the issue with messy retraction
         gsap.to(expandableContentRef, {
           width: 0,
           opacity: 0,
-          duration: 0.7,
-          ease: "power3.inOut"
+          duration: 0.4,
+          ease: "power2.inOut",
+          clearProps: "all"
         });
       }
     }

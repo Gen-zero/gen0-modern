@@ -28,7 +28,7 @@ const NavbarContent = () => {
       <header 
         ref={navbarRef}
         className={`fixed top-4 left-4 z-50 transition-colors duration-300 ${isScrolled ? 'bg-background/80 backdrop-blur-md shadow-sm' : 'bg-background/60 backdrop-blur-sm'} p-3 rounded-lg border border-border/30 overflow-hidden`}
-        style={{ width: 'auto', maxWidth: navbarExpanded ? '80vw' : '300px' }}
+        style={{ width: navbarExpanded ? 'auto' : '300px' }}
       >
         <div className="flex items-center justify-between">
           <button className="text-foreground/90 hover:text-accent transition-colors focus:outline-none" onClick={toggleMenu} aria-label={menuOpen ? "Close Menu" : "Open Menu"}>

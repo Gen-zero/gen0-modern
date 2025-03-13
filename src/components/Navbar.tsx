@@ -1,4 +1,3 @@
-
 import { useState, useEffect, useRef } from 'react';
 import { Menu, Sparkles, ChevronRight, ChevronLeft } from 'lucide-react';
 import NavMenu from './navbar/NavMenu';
@@ -22,13 +21,10 @@ const Navbar = () => {
   const location = useLocation();
   const isAboutPage = location.pathname === '/about';
   
-  // Animation function using GSAP
   const animateSectionChange = (direction: string) => {
     if (activeTextRef.current && prevTextRef.current) {
-      // Reset any ongoing animations
       gsap.killTweensOf([activeTextRef.current, prevTextRef.current]);
       
-      // Set initial positions
       gsap.set(activeTextRef.current, { 
         y: direction === 'down' ? 20 : -20, 
         autoAlpha: 0 
@@ -39,7 +35,6 @@ const Navbar = () => {
         autoAlpha: 1 
       });
       
-      // Animate previous text out
       gsap.to(prevTextRef.current, {
         y: direction === 'down' ? -20 : 20,
         autoAlpha: 0,
@@ -47,7 +42,6 @@ const Navbar = () => {
         ease: "power2.inOut"
       });
       
-      // Animate current text in
       gsap.to(activeTextRef.current, {
         y: 0,
         autoAlpha: 1,
@@ -64,14 +58,11 @@ const Navbar = () => {
     }
   };
 
-  // Function to toggle navbar expansion
   const toggleNavbarExpand = () => {
     setNavbarExpanded(!navbarExpanded);
     
-    // Animate navbar expansion/collapse
     if (navbarRef.current) {
       if (!navbarExpanded) {
-        // Expanding
         gsap.to(navbarRef.current, {
           width: "auto",
           maxWidth: "80vw",
@@ -79,7 +70,6 @@ const Navbar = () => {
           ease: "power2.out"
         });
       } else {
-        // Collapsing
         gsap.to(navbarRef.current, {
           width: "40vw",
           maxWidth: "300px",
@@ -94,7 +84,6 @@ const Navbar = () => {
     const handleScroll = () => {
       const currentScrollY = window.scrollY;
       
-      // Determine scroll direction
       if (currentScrollY > lastScrollY) {
         setScrollDirection('down');
       } else {
@@ -102,10 +91,8 @@ const Navbar = () => {
       }
       setLastScrollY(currentScrollY);
       
-      // Check if navbar should be scrolled
       setIsScrolled(currentScrollY > 50);
 
-      // Only determine active section on home page
       if (!isAboutPage) {
         const sections = document.querySelectorAll('section[id]');
         sections.forEach(section => {
@@ -119,16 +106,14 @@ const Navbar = () => {
               setActiveSection(newSection);
               setIsTransitioning(true);
               
-              // Clear any existing timeout
               if (transitionTimeoutRef.current) {
                 window.clearTimeout(transitionTimeoutRef.current);
               }
               
-              // Set a safety timeout to reset transitioning state
               transitionTimeoutRef.current = window.setTimeout(() => {
                 setIsTransitioning(false);
                 transitionTimeoutRef.current = null;
-              }, 1000); // Slightly longer timeout as a safety
+              }, 1000);
             }
           }
         });
@@ -144,7 +129,6 @@ const Navbar = () => {
     };
   }, [isAboutPage, activeSection, lastScrollY, isTransitioning]);
   
-  // Trigger GSAP animation when activeSection changes
   useEffect(() => {
     if (isTransitioning) {
       animateSectionChange(scrollDirection);
@@ -160,7 +144,6 @@ const Navbar = () => {
     }
   };
 
-  // The sections available on the site
   const sections = [
     { id: 'home', label: 'Home' },
     { id: 'services', label: 'Services' },
@@ -169,7 +152,6 @@ const Navbar = () => {
   ];
   
   return <>
-      {/* Sticky Navbar */}
       <header 
         ref={navbarRef}
         className={`fixed top-4 left-4 z-50 transition-all duration-300 ${isScrolled ? 'bg-background/80 backdrop-blur-md shadow-sm' : 'bg-background/60 backdrop-blur-sm'} p-3 rounded-lg w-[40vw] max-w-[300px] border border-border/30`}
@@ -184,25 +166,44 @@ const Navbar = () => {
           </Link>
           
           <div className="flex items-center gap-2">
-            <div className="relative min-w-[80px] h-6 overflow-hidden">
-              {/* Current section text - controlled by GSAP */}
-              <span 
-                ref={activeTextRef}
-                className="absolute inset-0 text-sm font-medium text-foreground/80 mx-auto text-center"
-              >
-                {isAboutPage ? "About Us" : activeSection}
-              </span>
-              
-              {/* Previous section text - controlled by GSAP */}
-              <span 
-                ref={prevTextRef}
-                className="absolute inset-0 text-sm font-medium text-foreground/80 mx-auto text-center"
-              >
-                {isAboutPage ? "About Us" : prevActiveSection}
-              </span>
+            <div className="flex items-center">
+              <div className="relative min-w-[80px] h-6 overflow-hidden">
+                <span 
+                  ref={activeTextRef}
+                  className="absolute inset-0 text-sm font-medium text-foreground/80 mx-auto text-center"
+                >
+                  {isAboutPage ? "About Us" : activeSection}
+                </span>
+                
+                <span 
+                  ref={prevTextRef}
+                  className="absolute inset-0 text-sm font-medium text-foreground/80 mx-auto text-center"
+                >
+                  {isAboutPage ? "About Us" : prevActiveSection}
+                </span>
+              </div>
+
+              <div className={`overflow-hidden transition-all duration-300 ease-in-out flex ${navbarExpanded ? 'max-w-[500px] opacity-100 ml-3' : 'max-w-0 opacity-0 ml-0'}`}>
+                <div className="flex items-center space-x-3">
+                  {sections.map((section) => {
+                    const isActive = activeSection.toLowerCase() === section.label.toLowerCase();
+                    if (!isActive) {
+                      return (
+                        <a
+                          key={section.id}
+                          href={`#${section.id}`}
+                          className="px-3 py-1 text-sm rounded-md transition-colors whitespace-nowrap hover:bg-card text-foreground/70 hover:text-foreground shadow-[0_0_10px_#9b87f5] hover:shadow-[0_0_15px_#9b87f5]"
+                        >
+                          {section.label}
+                        </a>
+                      );
+                    }
+                    return null;
+                  })}
+                </div>
+              </div>
             </div>
 
-            {/* Expand/Collapse Button */}
             <button 
               onClick={toggleNavbarExpand}
               className="flex items-center justify-center w-8 h-8 rounded-full bg-accent/10 hover:bg-accent/20 text-accent transition-all ml-1"
@@ -210,28 +211,6 @@ const Navbar = () => {
             >
               {navbarExpanded ? <ChevronLeft size={18} /> : <ChevronRight size={18} />}
             </button>
-          </div>
-        </div>
-
-        {/* Horizontal Section Links - Updated to expand rightward */}
-        <div className={`overflow-hidden transition-all duration-300 ease-in-out ${navbarExpanded ? 'h-12 mt-3 opacity-100' : 'h-0 mt-0 opacity-0'}`}>
-          <div className="flex items-center justify-between px-2 py-2 space-x-3 bg-card/40 rounded-lg">
-            {sections.map((section) => {
-              const isActive = activeSection.toLowerCase() === section.label.toLowerCase();
-              return (
-                <a
-                  key={section.id}
-                  href={`#${section.id}`}
-                  className={`px-3 py-1 text-sm rounded-md transition-colors whitespace-nowrap ${
-                    isActive
-                      ? 'bg-accent text-accent-foreground font-medium'
-                      : 'hover:bg-card text-foreground/70 hover:text-foreground shadow-[0_0_10px_#9b87f5] hover:shadow-[0_0_15px_#9b87f5]'
-                  }`}
-                >
-                  {section.label}
-                </a>
-              );
-            })}
           </div>
         </div>
       </header>

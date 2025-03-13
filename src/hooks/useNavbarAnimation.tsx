@@ -1,3 +1,4 @@
+
 import { useRef, useEffect } from 'react';
 import gsap from 'gsap';
 import { useNavbar } from '@/contexts/NavbarContext';
@@ -39,7 +40,7 @@ export const useNavbarAnimation = () => {
       gsap.to(prevTextRef.current, {
         y: direction === 'down' ? -20 : 20,
         autoAlpha: 0,
-        duration: 0.4,
+        duration: 0.3,
         ease: 'power2.inOut'
       });
       
@@ -47,7 +48,7 @@ export const useNavbarAnimation = () => {
       gsap.to(activeTextRef.current, {
         y: 0,
         autoAlpha: 1,
-        duration: 0.4,
+        duration: 0.3,
         ease: 'power2.inOut',
         onComplete: () => {
           setIsTransitioning(false);
@@ -62,41 +63,53 @@ export const useNavbarAnimation = () => {
 
   // -----------------------------------------
   // 2. Toggle Navbar Expand / Collapse
-  //    Using scaleX Instead of Width
   // -----------------------------------------
   const toggleNavbarExpand = () => {
     setNavbarExpanded(!navbarExpanded);
     
-    if (navbarRef.current) {
-      const expandableContentRef = document.querySelector('.expandable-section-links');
-
-      if (!navbarExpanded && expandableContentRef) {
-        // Animate to expanded state
-        // Make sure transformOrigin is set so it expands from the left (or right).
-        gsap.set(expandableContentRef, { transformOrigin: 'left' });
-
+    const expandableContentRef = document.querySelector('.expandable-section-links');
+    
+    if (expandableContentRef) {
+      if (!navbarExpanded) {
+        // Expand
         gsap.to(expandableContentRef, {
-          scaleX: 1,
+          width: 'auto',
           opacity: 1,
-          duration: 0.4,
+          duration: 0.3,
           ease: 'power2.inOut',
           onStart: () => {
-            // Ensure it's visible (if hidden by display: none or similar)
-            gsap.set(expandableContentRef, { display: 'block' });
+            gsap.set(expandableContentRef, { display: 'flex' });
           }
         });
-      } else if (expandableContentRef) {
-        // Animate to collapsed state
+        
+        // Expand navbar if needed
+        if (navbarRef.current) {
+          gsap.to(navbarRef.current, {
+            width: 'auto',
+            duration: 0.3,
+            ease: 'power2.inOut'
+          });
+        }
+      } else {
+        // Collapse
         gsap.to(expandableContentRef, {
-          scaleX: 0,
+          width: 0,
           opacity: 0,
-          duration: 0.4,
+          duration: 0.3,
           ease: 'power2.inOut',
           onComplete: () => {
-            // Optionally hide the element after collapse
             gsap.set(expandableContentRef, { display: 'none' });
           }
         });
+        
+        // Return navbar to original width
+        if (navbarRef.current) {
+          gsap.to(navbarRef.current, {
+            width: '300px',
+            duration: 0.3,
+            ease: 'power2.inOut'
+          });
+        }
       }
     }
   };
@@ -115,12 +128,11 @@ export const useNavbarAnimation = () => {
   // -----------------------------------------
   useEffect(() => {
     const expandableContentRef = document.querySelector('.expandable-section-links');
-    if (expandableContentRef && !navbarExpanded) {
-      // Start collapsed: scaled down and invisible
+    if (expandableContentRef) {
+      // Start collapsed
       gsap.set(expandableContentRef, {
-        scaleX: 0,
+        width: 0,
         opacity: 0,
-        transformOrigin: 'left',
         display: 'none'
       });
     }

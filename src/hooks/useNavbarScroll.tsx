@@ -35,64 +35,62 @@ export const useNavbarScroll = () => {
 
       // Get all sections based on current page
       const sectionsQuery = isAboutPage 
-        ? 'section.animate-on-scroll' 
+        ? 'section[id]' 
         : 'section[id]';
       
       const sections = document.querySelectorAll(sectionsQuery);
       
+      // If no sections are found, return early
+      if (sections.length === 0) return;
+      
+      // Find the current visible section
+      let currentSection = '';
+      let maxVisibility = 0;
+      
       sections.forEach(section => {
-        const sectionTop = (section as HTMLElement).offsetTop - 100;
-        const sectionHeight = (section as HTMLElement).offsetHeight;
-        let sectionId;
+        const sectionId = section.getAttribute('id') || '';
+        const rect = section.getBoundingClientRect();
+        const sectionTop = rect.top;
+        const sectionHeight = rect.height;
+        const windowHeight = window.innerHeight;
         
-        if (isAboutPage) {
-          // For about page, try to get id or determine section by content
-          sectionId = section.getAttribute('id') || '';
-          
-          // If no id, try to determine section by examining content
-          if (!sectionId) {
-            const headingContent = section.querySelector('h2')?.textContent?.trim().toLowerCase() || '';
-            if (headingContent.includes('team')) sectionId = 'team';
-            else if (headingContent.includes('journey')) sectionId = 'journey';
-            else if (headingContent.includes('mission') || headingContent.includes('vision')) sectionId = 'mission';
-            else sectionId = 'our-story';
-          }
-        } else {
-          sectionId = section.getAttribute('id') || '';
-        }
+        // Calculate how much of the section is visible in the viewport
+        const visibleHeight = Math.min(windowHeight, sectionTop + sectionHeight) - Math.max(0, sectionTop);
+        const visibilityRatio = visibleHeight / sectionHeight;
         
-        if (currentScrollY >= sectionTop && currentScrollY < sectionTop + sectionHeight) {
-          let newSection;
+        if (visibilityRatio > maxVisibility && visibilityRatio > 0.2) {
+          maxVisibility = visibilityRatio;
           
           if (isAboutPage) {
             // Map section ids to display names for About page
             switch(sectionId) {
-              case 'team': newSection = 'Team'; break;
-              case 'journey': newSection = 'Journey'; break;
-              case 'mission': newSection = 'Mission'; break;
-              default: newSection = 'Our Story';
+              case 'team': currentSection = 'Team'; break;
+              case 'journey': currentSection = 'Journey'; break;
+              case 'mission': currentSection = 'Mission'; break;
+              case 'our-story': currentSection = 'Our Story'; break;
+              default: currentSection = sectionId.charAt(0).toUpperCase() + sectionId.slice(1);
             }
           } else {
             // For main page, just capitalize the section id
-            newSection = sectionId.charAt(0).toUpperCase() + sectionId.slice(1);
-          }
-          
-          if (newSection !== activeSection && !isTransitioning) {
-            setPrevActiveSection(activeSection);
-            setActiveSection(newSection);
-            setIsTransitioning(true);
-            
-            if (transitionTimeoutRef.current) {
-              window.clearTimeout(transitionTimeoutRef.current);
-            }
-            
-            transitionTimeoutRef.current = window.setTimeout(() => {
-              setIsTransitioning(false);
-              transitionTimeoutRef.current = null;
-            }, 1000);
+            currentSection = sectionId.charAt(0).toUpperCase() + sectionId.slice(1);
           }
         }
       });
+      
+      if (currentSection && currentSection !== activeSection && !isTransitioning) {
+        setPrevActiveSection(activeSection);
+        setActiveSection(currentSection);
+        setIsTransitioning(true);
+        
+        if (transitionTimeoutRef.current) {
+          window.clearTimeout(transitionTimeoutRef.current);
+        }
+        
+        transitionTimeoutRef.current = window.setTimeout(() => {
+          setIsTransitioning(false);
+          transitionTimeoutRef.current = null;
+        }, 600);
+      }
     };
     
     window.addEventListener('scroll', handleScroll);

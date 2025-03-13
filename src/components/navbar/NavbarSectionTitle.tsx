@@ -9,8 +9,8 @@ const NavbarSectionTitle = () => {
   const { isAboutPage } = useNavbarScroll();
 
   // Define active section based on current page
-  const currentSection = isAboutPage ? "About Us" : activeSection;
-  const previousSection = isAboutPage ? "About Us" : prevActiveSection;
+  const currentSection = activeSection;
+  const previousSection = prevActiveSection;
 
   return (
     <div className="relative min-w-[80px] h-6 overflow-hidden">

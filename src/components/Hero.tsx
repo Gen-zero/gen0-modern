@@ -1,3 +1,4 @@
+
 import { useEffect, useState, useRef } from 'react';
 import { Button } from './ui/button';
 import { ArrowRight, UserPlus } from 'lucide-react';
@@ -104,6 +105,13 @@ const Hero = () => {
               {' '}FOR YOU.
             </h2>
           </div>
+        </div>
+
+        {/* New tagline similar to nav modal */}
+        <div className="text-center mt-6 mb-6">
+          <h3 className="text-xl md:text-2xl font-medium bg-gradient-to-r from-foreground via-foreground/90 to-foreground/70 bg-clip-text text-transparent">
+            Building to level up humanity.
+          </h3>
         </div>
 
         <div className="flex items-center justify-center mt-8 gap-8">

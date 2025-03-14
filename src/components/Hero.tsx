@@ -1,7 +1,7 @@
 
 import { useEffect, useState, useRef } from 'react';
 import { Button } from './ui/button';
-import { ArrowRight, UserPlus } from 'lucide-react';
+import { ArrowRight, UserPlus, TrendingUp } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { useIsSmallScreen } from '@/hooks/use-small-screen';
 
@@ -109,8 +109,8 @@ const Hero = () => {
 
         {/* New tagline similar to nav modal */}
         <div className="text-center mt-6 mb-6">
-          <h3 className="text-xl md:text-2xl font-medium bg-gradient-to-r from-foreground via-foreground/90 to-foreground/70 bg-clip-text text-transparent">
-            Building to level up humanity.
+          <h3 className="text-xl md:text-2xl font-bold uppercase bg-gradient-to-r from-foreground via-foreground/90 to-foreground/70 bg-clip-text text-transparent flex items-center justify-center gap-2">
+            BUILDING TO <TrendingUp className="h-6 w-6 text-accent animate-pulse" /> LEVEL UP HUMANITY.
           </h3>
         </div>
 

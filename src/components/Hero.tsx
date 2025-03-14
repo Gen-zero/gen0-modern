@@ -1,3 +1,4 @@
+
 import { useEffect, useState, useRef } from 'react';
 import { Button } from './ui/button';
 import { ArrowRight, GraduationCap, TrendingUp, Users } from 'lucide-react';
@@ -87,8 +88,8 @@ const Hero = () => {
       animationDelay: '1s'
     }}></div>
       
-      {/* Join Us button in top right corner */}
-      <div className="absolute top-4 right-4 z-40">
+      {/* Join Us button with adjusted position to match the image box container padding */}
+      <div className="absolute top-12 right-6 md:right-6 lg:right-6 z-40">
         <Button 
           onClick={() => navigate('/contact')}
           variant="outline"

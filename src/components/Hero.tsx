@@ -89,7 +89,7 @@ const Hero = () => {
     }}></div>
       
       {/* Join Us button with adjusted position to match the image box container padding */}
-      <div className="absolute top-12 right-6 md:right-6 lg:right-6 z-40">
+      <div className="absolute top-12 right-12 md:right-12 lg:right-12 z-40">
         <Button 
           onClick={() => navigate('/contact')}
           variant="outline"

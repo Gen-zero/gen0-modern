@@ -18,7 +18,7 @@ const NotFound = () => {
 
   useEffect(() => {
     if (typeof window !== 'undefined' && window.VANTA) {
-      vantaEffect.current = window.VANTA.TOPOLOGY({
+      vantaEffect.current = window.VANTA.WAVES({
         el: notFoundRef.current,
         mouseControls: true,
         touchControls: true,
@@ -27,7 +27,11 @@ const NotFound = () => {
         minWidth: 200.00,
         scale: 1.00,
         scaleMobile: 1.00,
-        color: 0x914fff
+        color: 0x570088,
+        shininess: 14.00,
+        waveHeight: 24.50,
+        waveSpeed: 0.65,
+        zoom: 0.74
       });
     }
     return () => {
@@ -45,21 +49,21 @@ const NotFound = () => {
       <div className="container mx-auto px-6 py-12">
         <div className="text-center p-8 glass bg-background/20 backdrop-blur-sm border border-primary/20 rounded-lg max-w-md mx-auto animate-fade-in shadow-lg">
           <div className="flex justify-center mb-6">
-            <Ghost className="h-16 w-16 text-primary/70 animate-float" />
+            <Ghost className="h-16 w-16 text-white animate-float" />
           </div>
           
-          <h1 className="text-5xl font-bold mb-2 text-primary">404</h1>
-          <h2 className="text-lg md:text-xl uppercase font-bold bg-gradient-to-r from-foreground via-foreground/90 to-foreground/70 bg-clip-text text-transparent mb-4">
+          <h1 className="text-5xl font-bold mb-2 text-white">404</h1>
+          <h2 className="text-lg md:text-xl uppercase font-bold bg-gradient-to-r from-white via-white/90 to-white/70 bg-clip-text text-transparent mb-4">
             Page Not Found
           </h2>
-          <p className="text-foreground/70 mb-6">
+          <p className="text-white/90 mb-6">
             We couldn't find the page you're looking for.
           </p>
           
           <Button 
             variant="outline" 
             className="uppercase font-medium text-sm px-6 py-2 bg-background/60 backdrop-blur-sm border border-border/30
-                   hover:bg-primary/10 hover:border-primary hover:text-primary
+                   hover:bg-primary/10 hover:border-primary hover:text-white
                    group transition-all duration-300 relative overflow-hidden
                    after:content-[''] after:absolute after:bg-primary/5 after:h-full after:w-full
                    after:left-0 after:top-0 after:transform after:scale-x-0 after:origin-left 

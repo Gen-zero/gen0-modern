@@ -1,4 +1,3 @@
-
 import { useEffect, useState, useRef } from 'react';
 import { Button } from './ui/button';
 import { ArrowRight, GraduationCap, TrendingUp, Users } from 'lucide-react';
@@ -92,13 +91,17 @@ const Hero = () => {
       <div className="absolute top-4 right-4 z-40">
         <Button 
           onClick={() => navigate('/contact')}
-          className="uppercase font-bold text-sm px-6 py-5 bg-accent text-accent-foreground
-                  hover:bg-accent/90 hover:shadow-[0_0_25px_rgba(255,215,0,0.7)]
-                  group transition-all duration-300 border-2 border-accent/80 hover:scale-105
-                  animate-pulse-subtle"
+          variant="outline"
+          className="uppercase font-medium text-sm px-6 py-2 bg-background/60 backdrop-blur-sm border border-muted
+                  hover:bg-primary/10 hover:border-primary hover:text-primary
+                  group transition-all duration-300 
+                  relative overflow-hidden
+                  after:content-[''] after:absolute after:bg-primary/5 after:h-full after:w-full
+                  after:left-0 after:top-0 after:transform after:scale-x-0 after:origin-left 
+                  hover:after:scale-x-100 after:transition-transform after:duration-500"
         >
           <span className="relative z-10">JOIN US</span>
-          <Users className="ml-2 transition-all duration-300 group-hover:rotate-12 relative z-10" size={16} />
+          <Users className="ml-2 transition-all duration-300 group-hover:translate-x-1 relative z-10" size={16} />
         </Button>
       </div>
       

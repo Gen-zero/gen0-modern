@@ -1,7 +1,7 @@
 
 import { useEffect, useState, useRef } from 'react';
 import { Button } from './ui/button';
-import { ArrowRight, UserPlus, TrendingUp } from 'lucide-react';
+import { ArrowRight, GraduationCap, TrendingUp, Users } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { useIsSmallScreen } from '@/hooks/use-small-screen';
 
@@ -88,6 +88,20 @@ const Hero = () => {
       animationDelay: '1s'
     }}></div>
       
+      {/* Join Us button in top right corner */}
+      <div className="absolute top-4 right-4 z-40">
+        <Button 
+          onClick={() => navigate('/contact')}
+          className="uppercase font-bold text-sm px-6 py-5 bg-accent text-accent-foreground
+                  hover:bg-accent/90 hover:shadow-[0_0_25px_rgba(255,215,0,0.7)]
+                  group transition-all duration-300 border-2 border-accent/80 hover:scale-105
+                  animate-pulse-subtle"
+        >
+          <span className="relative z-10">JOIN US</span>
+          <Users className="ml-2 transition-all duration-300 group-hover:rotate-12 relative z-10" size={16} />
+        </Button>
+      </div>
+      
       <div className="container mx-auto px-6 py-12">
         <div className="relative h-[40vh] w-full rounded-2xl overflow-hidden shadow-2xl border border-[#1f2b87] animate-fade-in">
           <div className="absolute top-0 left-0 w-full h-full">
@@ -117,13 +131,13 @@ const Hero = () => {
         <div className="flex items-center justify-center mt-8 gap-8">
           <Button 
             variant="outline" 
-            className="uppercase font-medium text-sm px-8 py-6 bg-background/60 backdrop-blur-sm border-border/30
+            className="uppercase font-medium text-sm px-8 py-6 bg-background/60 backdrop-blur-sm border border-border/30
                      hover:bg-primary/10 hover:border-primary hover:text-primary
                      group transition-all duration-300 hover:scale-110 
                      hover:shadow-[0_0_20px_rgba(168,85,247,0.6)] relative overflow-hidden
                      after:content-[''] after:absolute after:bg-primary/5 after:h-full after:w-full
                      after:left-0 after:top-0 after:transform after:scale-x-0 after:origin-left 
-                     hover:after:scale-x-100 after:transition-transform after:duration-500 w-36"
+                     hover:after:scale-x-100 after:transition-transform after:duration-500 w-40"
             onClick={scrollToProjects}
           >
             <span className="relative z-10">Our Works</span>
@@ -138,9 +152,9 @@ const Hero = () => {
                      hover:shadow-[0_0_20px_rgba(168,85,247,0.6)] relative overflow-hidden
                      after:content-[''] after:absolute after:bg-primary/5 after:h-full after:w-full
                      after:left-0 after:top-0 after:transform after:scale-x-0 after:origin-left 
-                     hover:after:scale-x-100 after:transition-transform after:duration-500 w-36">
+                     hover:after:scale-x-100 after:transition-transform after:duration-500 w-40">
             <span className="relative z-10">About Us</span>
-            <UserPlus className="ml-2 transition-all duration-300 group-hover:translate-y-[-4px] group-hover:rotate-12 relative z-10" size={16} />
+            <GraduationCap className="ml-2 transition-all duration-300 group-hover:translate-y-[-4px] relative z-10" size={16} />
           </Button>
         </div>
       </div>

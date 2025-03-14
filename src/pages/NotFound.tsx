@@ -1,11 +1,13 @@
 
 import { useLocation, Link } from "react-router-dom";
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import { ArrowLeft, Ghost } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 const NotFound = () => {
   const location = useLocation();
+  const notFoundRef = useRef<HTMLDivElement>(null);
+  const vantaEffect = useRef<any>(null);
 
   useEffect(() => {
     console.error(
@@ -14,12 +16,34 @@ const NotFound = () => {
     );
   }, [location.pathname]);
 
+  useEffect(() => {
+    if (typeof window !== 'undefined' && window.VANTA) {
+      vantaEffect.current = window.VANTA.TOPOLOGY({
+        el: notFoundRef.current,
+        mouseControls: true,
+        touchControls: true,
+        gyroControls: false,
+        minHeight: 200.00,
+        minWidth: 200.00,
+        scale: 1.00,
+        scaleMobile: 1.00,
+        color: 0x914fff
+      });
+    }
+    return () => {
+      if (vantaEffect.current) {
+        vantaEffect.current.destroy();
+      }
+    };
+  }, []);
+
   return (
-    <div className="min-h-screen flex items-center justify-center bg-background relative overflow-hidden">
-      <div className="absolute inset-0 bg-gradient-to-br from-secondary/5 to-background -z-10"></div>
-      
+    <div 
+      ref={notFoundRef} 
+      className="min-h-screen flex items-center justify-center relative overflow-hidden"
+    >
       <div className="container mx-auto px-6 py-12">
-        <div className="text-center p-8 glass bg-background/60 backdrop-blur-sm border border-primary/20 rounded-lg max-w-md mx-auto animate-fade-in shadow-lg">
+        <div className="text-center p-8 glass bg-background/20 backdrop-blur-sm border border-primary/20 rounded-lg max-w-md mx-auto animate-fade-in shadow-lg">
           <div className="flex justify-center mb-6">
             <Ghost className="h-16 w-16 text-primary/70 animate-float" />
           </div>

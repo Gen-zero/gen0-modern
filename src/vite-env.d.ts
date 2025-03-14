@@ -18,5 +18,18 @@ interface Window {
     }) => {
       destroy: () => void;
     };
+    TOPOLOGY: (options: {
+      el: HTMLElement | null;
+      mouseControls: boolean;
+      touchControls: boolean;
+      gyroControls: boolean;
+      minHeight: number;
+      minWidth: number;
+      scale: number;
+      scaleMobile: number;
+      color: number;
+    }) => {
+      destroy: () => void;
+    };
   };
 }

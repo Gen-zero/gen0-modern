@@ -123,7 +123,7 @@ const Hero = () => {
                      hover:shadow-[0_0_20px_rgba(168,85,247,0.6)] relative overflow-hidden
                      after:content-[''] after:absolute after:bg-primary/5 after:h-full after:w-full
                      after:left-0 after:top-0 after:transform after:scale-x-0 after:origin-left 
-                     hover:after:scale-x-100 after:transition-transform after:duration-500"
+                     hover:after:scale-x-100 after:transition-transform after:duration-500 w-36"
             onClick={scrollToProjects}
           >
             <span className="relative z-10">Our Works</span>
@@ -138,8 +138,8 @@ const Hero = () => {
                      hover:shadow-[0_0_20px_rgba(168,85,247,0.6)] relative overflow-hidden
                      after:content-[''] after:absolute after:bg-primary/5 after:h-full after:w-full
                      after:left-0 after:top-0 after:transform after:scale-x-0 after:origin-left 
-                     hover:after:scale-x-100 after:transition-transform after:duration-500">
-            <span className="relative z-10">Join Us</span>
+                     hover:after:scale-x-100 after:transition-transform after:duration-500 w-36">
+            <span className="relative z-10">About Us</span>
             <UserPlus className="ml-2 transition-all duration-300 group-hover:translate-y-[-4px] group-hover:rotate-12 relative z-10" size={16} />
           </Button>
         </div>

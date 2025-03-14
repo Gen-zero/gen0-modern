@@ -100,7 +100,7 @@ const Hero = () => {
             }}>
                 {displayedWord}
               </span>
-              {' '}FOR YOU
+              {' '}FOR YOU.
             </h2>
           </div>
         </div>

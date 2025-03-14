@@ -60,21 +60,23 @@ const NotFound = () => {
             We couldn't find the page you're looking for.
           </p>
           
-          <Button 
-            variant="outline" 
-            className="uppercase font-medium text-sm px-6 py-2 bg-background/60 backdrop-blur-sm border border-border/30
-                   hover:bg-primary/10 hover:border-primary hover:text-white
-                   group transition-all duration-300 relative overflow-hidden
-                   after:content-[''] after:absolute after:bg-primary/5 after:h-full after:w-full
-                   after:left-0 after:top-0 after:transform after:scale-x-0 after:origin-left 
-                   hover:after:scale-x-100 after:transition-transform after:duration-500"
-            asChild
-          >
-            <Link to="/" className="flex items-center gap-2">
-              <ArrowLeft className="transition-transform duration-300 group-hover:-translate-x-2 relative z-10" size={16} />
-              <span className="relative z-10">Return Home</span>
-            </Link>
-          </Button>
+          <div className="mt-8 mb-4 px-4">
+            <Button 
+              variant="outline" 
+              className="uppercase font-medium text-sm px-6 py-2 bg-background/60 backdrop-blur-sm border border-border/30
+                     hover:bg-primary/10 hover:border-primary hover:text-white
+                     group transition-all duration-300 relative overflow-hidden
+                     after:content-[''] after:absolute after:bg-primary/5 after:h-full after:w-full
+                     after:left-0 after:top-0 after:transform after:scale-x-0 after:origin-left 
+                     hover:after:scale-x-100 after:transition-transform after:duration-500"
+              asChild
+            >
+              <Link to="/" className="flex items-center gap-2">
+                <ArrowLeft className="transition-transform duration-300 group-hover:-translate-x-2 relative z-10" size={16} />
+                <span className="relative z-10">Return Home</span>
+              </Link>
+            </Button>
+          </div>
         </div>
       </div>
     </div>

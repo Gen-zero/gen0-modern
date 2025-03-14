@@ -1,15 +1,14 @@
-
 import { useEffect, useState, useRef } from 'react';
 import { Button } from './ui/button';
 import { ArrowRight, UserPlus } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
-import { useIsMobile } from '@/hooks/use-mobile';
+import { useIsSmallScreen } from '@/hooks/use-small-screen';
 
 const words = ['BUILD', 'CODE', 'DESIGN', 'IDEATE'];
 
 const Hero = () => {
   const navigate = useNavigate();
-  const isMobile = useIsMobile();
+  const isSmallScreen = useIsSmallScreen();
   const [currentWordIndex, setCurrentWordIndex] = useState(0);
   const [displayedWord, setDisplayedWord] = useState(words[0]);
   const intervalRef = useRef<NodeJS.Timeout | null>(null);
@@ -61,7 +60,7 @@ const Hero = () => {
         scale: 1.00,
         color1: 0x0,
         color2: 0x8c35f2,
-        size: isMobile ? 1.00 : 3.00,
+        size: isSmallScreen ? 1.00 : 3.00,
         speed: 3.00
       });
     }
@@ -70,7 +69,7 @@ const Hero = () => {
         vantaEffect.current.destroy();
       }
     };
-  }, [isMobile]);
+  }, [isSmallScreen]);
 
   const scrollToProjects = () => {
     const projectsSection = document.getElementById('projects');

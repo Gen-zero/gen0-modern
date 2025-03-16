@@ -21,7 +21,7 @@ const projects = [{
   id: 3,
   title: 'Financial Dashboard',
   category: 'UI/UX Design',
-  image: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80',
+  image: 'https://ik.imagekit.io/kalidaspem/b8a842e9-0b59-4687-8b15-ea15a15a2a0d.jpg',
   description: 'An intuitive financial management dashboard with real-time data visualization and predictive analytics.'
 }];
 

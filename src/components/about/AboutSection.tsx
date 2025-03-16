@@ -10,14 +10,17 @@ const AboutSection: React.FC = () => {
   ];
 
   return (
-    <section className="w-full overflow-hidden">
+    <div
+      className="animate-on-scroll w-full overflow-hidden px-4"
+      style={{ animationDelay: '0.2s' }}
+    >
       {/* 
-        flex-col => stacked on smaller screens
-        lg:flex-row => side-by-side (row) on large screens (≥1024px)
+        flex-col => stacked on small screens
+        lg:flex-row => side-by-side on large screens
         gap-8 => spacing between columns
       */}
-      <div className="flex flex-col gap-8 lg:flex-row">
-        {/* Left Column: About content */}
+      <div className="flex flex-col gap-8 lg:flex-row w-full">
+        {/* Left Column: ABOUT US content */}
         <div className="flex-1 p-8">
           <span className="block mb-3 text-gray-400 font-semibold text-4xl">
             ABOUT US
@@ -32,7 +35,7 @@ const AboutSection: React.FC = () => {
           </p>
         </div>
 
-        {/* Right Column: Values */}
+        {/* Right Column: Our Values + Hidden Approach */}
         <div className="flex-1 p-8">
           <div className="mb-8">
             <h3 className="text-xl font-medium mb-4">Our Values</h3>
@@ -58,8 +61,8 @@ const AboutSection: React.FC = () => {
           </div>
         </div>
       </div>
-    </section>
+    </div>
   );
 };
 
-export default AboutS
+export default AboutSection;

@@ -38,6 +38,8 @@ export const formSchema = z.object({
   courseName: z.string().optional(),
   investmentAmount: z.string().optional(),
   projectsInterested: z.array(z.string()).optional(),
+  resume: z.instanceof(File).optional(),
+  linkedinProfile: z.string().url().optional().or(z.literal('')),
 });
 
 export type FormValues = z.infer<typeof formSchema>;

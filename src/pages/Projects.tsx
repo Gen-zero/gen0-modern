@@ -23,10 +23,10 @@ const projects = [{
   fullDescription: "We created a comprehensive brand identity system for a high-end fashion label. The project encompassed logo design, typography selection, color palette development, and a complete visual language that reflects the brand's luxury positioning. The system was implemented across digital platforms, print materials, packaging design, and in-store experiences."
 }, {
   id: 3,
-  title: "Financial Dashboard",
-  category: "UI/UX Design",
-  image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80",
-  description: "An intuitive financial management dashboard with real-time data visualization and predictive analytics.",
+  title: "Fuel Unit",
+  category: "Web App",
+  image: "https://ik.imagekit.io/kalidaspem/b8a842e9-0b59-4687-8b15-ea15a15a2a0d.jpg",
+  description: "Fuel Unit tracks fuel prices in real-time, spotting the cheapest fuel stops along your route—no cap, just savings!",
   fullDescription: "Our team designed and developed an intuitive financial management dashboard for a fintech startup. The dashboard features real-time data visualization, predictive analytics, and personalized insights. The interface was designed with a focus on clarity and ease of use, allowing users to quickly understand complex financial data through interactive charts and customizable reports."
 }, {
   id: 4,

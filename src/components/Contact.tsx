@@ -1,10 +1,15 @@
 
-import { Mail, Phone, MapPin, Send } from 'lucide-react';
+import { Mail, Phone, MapPin, Send, Handshake, UserPlus, GraduationCap, TrendingUp, HeartHandshake, MailQuestion } from 'lucide-react';
 import { Button } from './ui/button';
 import { Input } from './ui/input';
 import { Textarea } from './ui/textarea';
 import { useState } from 'react';
 import { useToast } from '../hooks/use-toast';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from './ui/select';
+import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from './ui/form';
+import { useForm } from 'react-hook-form';
+import { z } from 'zod';
+import { zodResolver } from '@hookform/resolvers/zod';
 
 const ContactInfo = ({ icon, title, details }: { icon: React.ReactNode, title: string, details: string }) => {
   return (
@@ -20,33 +25,135 @@ const ContactInfo = ({ icon, title, details }: { icon: React.ReactNode, title: s
   );
 };
 
+type InquiryType = 'service' | 'join' | 'volunteer' | 'intern' | 'invest' | 'general';
+
+interface InquiryOption {
+  value: InquiryType;
+  label: string;
+  icon: React.ReactNode;
+  placeholder: string;
+}
+
 const Contact = () => {
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    message: ''
-  });
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [selectedInquiry, setSelectedInquiry] = useState<InquiryType>('general');
   const { toast } = useToast();
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    const { name, value } = e.target;
-    setFormData(prev => ({ ...prev, [name]: value }));
+  const inquiryOptions: InquiryOption[] = [
+    {
+      value: 'general',
+      label: 'General Inquiry',
+      icon: <MailQuestion className="h-4 w-4" />,
+      placeholder: "I have a question about your company..."
+    },
+    {
+      value: 'service',
+      label: 'Avail a Service',
+      icon: <Handshake className="h-4 w-4" />,
+      placeholder: "I'm interested in your services for my project..."
+    },
+    {
+      value: 'join',
+      label: 'Join Our Cause',
+      icon: <HeartHandshake className="h-4 w-4" />,
+      placeholder: "I'm passionate about your mission and would like to contribute by..."
+    },
+    {
+      value: 'volunteer',
+      label: 'Volunteer With Us',
+      icon: <UserPlus className="h-4 w-4" />,
+      placeholder: "I'd like to volunteer my skills in..."
+    },
+    {
+      value: 'intern',
+      label: 'Apply as an Intern',
+      icon: <GraduationCap className="h-4 w-4" />,
+      placeholder: "I'm a student at [university/college] studying [field] and I'm interested in an internship opportunity..."
+    },
+    {
+      value: 'invest',
+      label: 'Invest in Us',
+      icon: <TrendingUp className="h-4 w-4" />,
+      placeholder: "I'm interested in investment opportunities with your company..."
+    }
+  ];
+
+  const getCurrentInquiry = () => {
+    return inquiryOptions.find(option => option.value === selectedInquiry) || inquiryOptions[0];
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
+  // Form validation schema
+  const formSchema = z.object({
+    purpose: z.string(),
+    name: z.string().min(2, {
+      message: "Name must be at least 2 characters.",
+    }),
+    email: z.string().email({
+      message: "Please enter a valid email address.",
+    }),
+    message: z.string().min(10, {
+      message: "Message must be at least 10 characters.",
+    }),
+    company: z.string().optional(),
+    position: z.string().optional(),
+    budget: z.string().optional(),
+    skills: z.string().optional(),
+    portfolio: z.string().optional(),
+    university: z.string().optional(),
+    courseName: z.string().optional(),
+    investmentAmount: z.string().optional(),
+  });
+
+  const form = useForm<z.infer<typeof formSchema>>({
+    resolver: zodResolver(formSchema),
+    defaultValues: {
+      purpose: 'general',
+      name: '',
+      email: '',
+      message: '',
+      company: '',
+      position: '',
+      budget: '',
+      skills: '',
+      portfolio: '',
+      university: '',
+      courseName: '',
+      investmentAmount: '',
+    },
+  });
+
+  const onSubmit = (values: z.infer<typeof formSchema>) => {
     setIsSubmitting(true);
-    
+    console.log('Form values:', values);
+
     // Simulate form submission
     setTimeout(() => {
       toast({
         title: "Message sent successfully",
         description: "We'll get back to you as soon as possible.",
       });
-      setFormData({ name: '', email: '', message: '' });
+      form.reset({
+        purpose: 'general',
+        name: '',
+        email: '',
+        message: '',
+        company: '',
+        position: '',
+        budget: '',
+        skills: '',
+        portfolio: '',
+        university: '',
+        courseName: '',
+        investmentAmount: '',
+      });
+      setSelectedInquiry('general');
       setIsSubmitting(false);
     }, 1500);
+  };
+
+  const handleInquiryChange = (value: string) => {
+    setSelectedInquiry(value as InquiryType);
+    form.setValue('purpose', value);
   };
 
   const contactInfo = [
@@ -81,62 +188,217 @@ const Contact = () => {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-24">
           <div className="animate-fade-in">
             <h3 className="text-xl font-semibold mb-6">Send us a message</h3>
-            <form onSubmit={handleSubmit} className="space-y-6">
-              <div>
-                <label htmlFor="name" className="block text-sm font-medium mb-2">
-                  Your Name
-                </label>
-                <Input
-                  id="name"
-                  name="name"
-                  placeholder="John Doe"
-                  value={formData.name}
-                  onChange={handleChange}
-                  required
-                  className="w-full"
-                />
-              </div>
-              
-              <div>
-                <label htmlFor="email" className="block text-sm font-medium mb-2">
-                  Email Address
-                </label>
-                <Input
-                  id="email"
-                  name="email"
-                  type="email"
-                  placeholder="john@example.com"
-                  value={formData.email}
-                  onChange={handleChange}
-                  required
-                  className="w-full"
-                />
-              </div>
-              
-              <div>
-                <label htmlFor="message" className="block text-sm font-medium mb-2">
-                  Your Message
-                </label>
-                <Textarea
-                  id="message"
+
+            <Form {...form}>
+              <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+                <div className="mb-6">
+                  <FormItem>
+                    <FormLabel>What can we help you with?</FormLabel>
+                    <Select defaultValue="general" onValueChange={handleInquiryChange}>
+                      <FormControl>
+                        <SelectTrigger>
+                          <SelectValue placeholder="Select your inquiry type" />
+                        </SelectTrigger>
+                      </FormControl>
+                      <SelectContent>
+                        {inquiryOptions.map((option) => (
+                          <SelectItem key={option.value} value={option.value} className="flex items-center">
+                            <span className="flex items-center">
+                              {option.icon}
+                              <span className="ml-2">{option.label}</span>
+                            </span>
+                          </SelectItem>
+                        ))}
+                      </SelectContent>
+                    </Select>
+                  </FormItem>
+                </div>
+
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  <FormField
+                    control={form.control}
+                    name="name"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>Your Name</FormLabel>
+                        <FormControl>
+                          <Input placeholder="John Doe" {...field} required />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                  
+                  <FormField
+                    control={form.control}
+                    name="email"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>Email Address</FormLabel>
+                        <FormControl>
+                          <Input placeholder="john@example.com" type="email" {...field} required />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                </div>
+
+                {/* Conditional fields based on inquiry type */}
+                {selectedInquiry === 'service' && (
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <FormField
+                      control={form.control}
+                      name="company"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel>Company Name</FormLabel>
+                          <FormControl>
+                            <Input placeholder="Your company" {...field} />
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+                    <FormField
+                      control={form.control}
+                      name="budget"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel>Budget Range</FormLabel>
+                          <FormControl>
+                            <Input placeholder="e.g., $5,000 - $10,000" {...field} />
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+                  </div>
+                )}
+
+                {selectedInquiry === 'join' && (
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <FormField
+                      control={form.control}
+                      name="skills"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel>Your Skills</FormLabel>
+                          <FormControl>
+                            <Input placeholder="e.g., React, Node.js, Design" {...field} />
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+                    <FormField
+                      control={form.control}
+                      name="portfolio"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel>Portfolio/LinkedIn</FormLabel>
+                          <FormControl>
+                            <Input placeholder="https://..." {...field} />
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+                  </div>
+                )}
+
+                {selectedInquiry === 'volunteer' && (
+                  <FormField
+                    control={form.control}
+                    name="skills"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>Your Skills & Availability</FormLabel>
+                        <FormControl>
+                          <Input placeholder="e.g., Design, 10 hours/week" {...field} />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                )}
+
+                {selectedInquiry === 'intern' && (
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <FormField
+                      control={form.control}
+                      name="university"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel>University/College</FormLabel>
+                          <FormControl>
+                            <Input placeholder="e.g., MIT" {...field} />
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+                    <FormField
+                      control={form.control}
+                      name="courseName"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel>Course/Major</FormLabel>
+                          <FormControl>
+                            <Input placeholder="e.g., Computer Science" {...field} />
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+                  </div>
+                )}
+
+                {selectedInquiry === 'invest' && (
+                  <FormField
+                    control={form.control}
+                    name="investmentAmount"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>Investment Interest Range</FormLabel>
+                        <FormControl>
+                          <Input placeholder="e.g., $10k-$50k" {...field} />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                )}
+                
+                <FormField
+                  control={form.control}
                   name="message"
-                  placeholder="Drop your project ideas, collab plans, investment scenes, or whatever's on your mind—it's all chill!"
-                  value={formData.message}
-                  onChange={handleChange}
-                  required
-                  className="min-h-[120px]"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Your Message</FormLabel>
+                      <FormControl>
+                        <Textarea 
+                          placeholder={getCurrentInquiry().placeholder}
+                          className="min-h-[120px]"
+                          {...field}
+                          required
+                        />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
                 />
-              </div>
-              
-              <Button 
-                type="submit" 
-                className="w-full md:w-auto"
-                disabled={isSubmitting}
-              >
-                {isSubmitting ? 'Sending...' : 'Send Message'}
-                <Send className="ml-2 h-4 w-4" />
-              </Button>
-            </form>
+                
+                <Button 
+                  type="submit" 
+                  className="w-full md:w-auto"
+                  disabled={isSubmitting}
+                >
+                  {isSubmitting ? 'Sending...' : 'Send Message'}
+                  <Send className="ml-2 h-4 w-4" />
+                </Button>
+              </form>
+            </Form>
           </div>
           
           <div className="space-y-10 animate-fade-in" style={{ animationDelay: '0.2s' }}>

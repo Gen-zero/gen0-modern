@@ -10,6 +10,7 @@ import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { Checkbox } from './ui/checkbox';
 
 const ContactInfo = ({ icon, title, details }: { icon: React.ReactNode, title: string, details: string }) => {
   return (
@@ -34,10 +35,45 @@ interface InquiryOption {
   placeholder: string;
 }
 
+interface Project {
+  id: string;
+  name: string;
+  description: string;
+}
+
 const Contact = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [selectedInquiry, setSelectedInquiry] = useState<InquiryType>('general');
+  const [selectedProjects, setSelectedProjects] = useState<string[]>([]);
   const { toast } = useToast();
+
+  const projectOptions: Project[] = [
+    {
+      id: 'ai-solutions',
+      name: 'AI Solutions',
+      description: 'Advanced AI technologies for business automation'
+    },
+    {
+      id: 'blockchain',
+      name: 'Blockchain Ventures',
+      description: 'Decentralized applications and blockchain infrastructure'
+    },
+    {
+      id: 'eco-tech',
+      name: 'Eco-Tech Initiatives',
+      description: 'Sustainable technology solutions for environmental challenges'
+    },
+    {
+      id: 'health-innovations',
+      name: 'Healthcare Innovations',
+      description: 'Digital health platforms and medical technology'
+    },
+    {
+      id: 'education-tech',
+      name: 'Education Technology',
+      description: 'Online learning platforms and educational tools'
+    }
+  ];
 
   const inquiryOptions: InquiryOption[] = [
     {
@@ -102,6 +138,7 @@ const Contact = () => {
     university: z.string().optional(),
     courseName: z.string().optional(),
     investmentAmount: z.string().optional(),
+    projectsInterested: z.array(z.string()).optional(),
   });
 
   const form = useForm<z.infer<typeof formSchema>>({
@@ -119,6 +156,7 @@ const Contact = () => {
       university: '',
       courseName: '',
       investmentAmount: '',
+      projectsInterested: [],
     },
   });
 
@@ -145,8 +183,10 @@ const Contact = () => {
         university: '',
         courseName: '',
         investmentAmount: '',
+        projectsInterested: [],
       });
       setSelectedInquiry('general');
+      setSelectedProjects([]);
       setIsSubmitting(false);
     }, 1500);
   };
@@ -154,6 +194,20 @@ const Contact = () => {
   const handleInquiryChange = (value: string) => {
     setSelectedInquiry(value as InquiryType);
     form.setValue('purpose', value);
+  };
+
+  const handleProjectSelectionChange = (projectId: string) => {
+    setSelectedProjects(prev => {
+      if (prev.includes(projectId)) {
+        const newSelection = prev.filter(id => id !== projectId);
+        form.setValue('projectsInterested', newSelection);
+        return newSelection;
+      } else {
+        const newSelection = [...prev, projectId];
+        form.setValue('projectsInterested', newSelection);
+        return newSelection;
+      }
+    });
   };
 
   const contactInfo = [
@@ -355,19 +409,46 @@ const Contact = () => {
                 )}
 
                 {selectedInquiry === 'invest' && (
-                  <FormField
-                    control={form.control}
-                    name="investmentAmount"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel>Investment Interest Range</FormLabel>
-                        <FormControl>
-                          <Input placeholder="e.g., $10k-$50k" {...field} />
-                        </FormControl>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
+                  <>
+                    <FormField
+                      control={form.control}
+                      name="investmentAmount"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel>Investment Interest Range</FormLabel>
+                          <FormControl>
+                            <Input placeholder="e.g., $10k-$50k" {...field} />
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+                    <div className="space-y-3">
+                      <FormLabel>Projects interested in (select all that apply)</FormLabel>
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                        {projectOptions.map((project) => (
+                          <div key={project.id} className="flex items-start space-x-2">
+                            <Checkbox 
+                              id={`project-${project.id}`} 
+                              checked={selectedProjects.includes(project.id)}
+                              onCheckedChange={() => handleProjectSelectionChange(project.id)}
+                            />
+                            <div className="grid gap-1.5 leading-none">
+                              <label
+                                htmlFor={`project-${project.id}`}
+                                className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                              >
+                                {project.name}
+                              </label>
+                              <p className="text-xs text-muted-foreground">
+                                {project.description}
+                              </p>
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  </>
                 )}
                 
                 <FormField

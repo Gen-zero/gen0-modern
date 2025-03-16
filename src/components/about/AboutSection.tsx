@@ -22,7 +22,7 @@ const AboutSection: React.FC = () => {
       </div>
 
       {/* Right block: "Our Values" + hidden "Approach" */}
-      <div className="p-8">
+      <div className="p-">
         <div className="mb-8">
           <h3 className="text-xl font-medium mb-4">Our Values</h3>
           <ul className="space-y-3">

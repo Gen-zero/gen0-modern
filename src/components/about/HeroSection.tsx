@@ -41,8 +41,8 @@ const HeroSection = () => {
           <img src="https://ik.imagekit.io/kalidaspem/ddecab89-7be1-4a6a-b3ea-a3858c18f235.jpg" alt="Team collaboration" className="w-full h-full object-cover" loading="eager" />
         </div>
         
-        <div className="absolute inset-0 flex flex-col items-center justify-end pb-5 text-center px-[81px]">
-          <h2 className="w-full text-2xl text-white uppercase mix-blend-exclusion font-extrabold text-center md:text-4xl">
+        <div className="absolute inset-0 flex flex-col items-center justify-end pb-5 text-center px-[83px]">
+          <h2 className="w-full text-2xl text-white uppercase mix-blend-exclusion font-extrabold text-center py-[47px] px-0 md:text-4xl">
             WE'RE PASSIONATE{' '}
             <span className="inline-block">{displayedWord}</span>
             {' '}DEDICATED TO LEVELLING UP HUMANITY.

@@ -56,13 +56,13 @@ const NavMenu = ({
             </Link>
             
             {/* Animated Punchline */}
-            <h2 className="text-2xl lg:text-4xl font-bold max-w-3xl mb-4 bg-gradient-to-r from-foreground via-foreground/90 to-foreground/70 bg-clip-text text-transparent md:text-3xl">We ideate, organize, and execute impactful projects dedicated to levelling up humanity. 
-Rooted in India, serving the world.</h2>
+            <h2 className="text-2xl lg:text-4xl font-bold max-w-3xl mb-4 bg-gradient-to-r from-foreground via-foreground/90 to-foreground/70 bg-clip-text md:text-3xl text-gray-50">✨ We ideate 💡, organize 🗂️, and execute 🚀 altruistic projects dedicated to levelling up humanity 🌏—From Bharat, for the world 🕉️.
+          </h2>
           </div>
           
           <div className="grid grid-cols-1 md:grid-cols-12 gap-10 px-[28px]">
             <div className="md:col-span-5 lg:col-span-4">
-              <div className="space-y-8">
+              <div className="space-y-8 mx-0 px-0 py-px my-px">
                 <NavMenuLinks navLinks={navLinks} activeSection={activeSection} toggleMenu={toggleMenu} />
                 
                 <Button className="w-full text-base py-6 px-8 mt-8 font-medium rounded-lg transition-all duration-300 hover:shadow-lg hover:shadow-accent/20 group" onClick={() => toggleMenu()}>

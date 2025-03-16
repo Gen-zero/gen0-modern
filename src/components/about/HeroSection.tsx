@@ -45,14 +45,14 @@ const HeroSection = () => {
       <div className="relative h-[40vh] w-full rounded-2xl overflow-hidden shadow-2xl border border-accent/20 animate-fade-in mb-12">
         <div className="absolute top-0 left-0 w-full h-full">
           <img 
-            src="https://ik.imagekit.io/kalidaspem/ddecab89-7be1-4a6a-b3ea-a3858c18f235.jpg" 
+            src="https://ik.imagekit.io/kalidaspem/e307259b-1b3a-4ca4-ad88-a7fb70f38bc4.jpg" 
             alt="Team collaboration" 
             className="w-full h-full object-cover" 
             loading="eager" 
           />
         </div>
         
-        <div className="absolute inset-0 flex flex-col items-center justify-end pb-30 text-center px-8">
+        <div className="absolute inset-0 flex flex-col items-center justify-end pb-25 text-center px-8">
           <h2 className="text-2xl text-white uppercase mix-blend-exclusion font-extrabold md:text-3xl text-center">
             WE'RE PASSIONATE{' '}
             <span className="inline-block">{displayedWord}</span>

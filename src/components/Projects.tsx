@@ -7,10 +7,10 @@ import { useIsMobile } from '@/hooks/use-mobile';
 
 const projects = [{
   id: 1,
-  title: 'Modern eCommerce Platform',
-  category: 'Web Development',
-  image: 'https://images.unsplash.com/photo-1661956602116-aa6865609028?ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1064&q=80',
-  description: 'A comprehensive eCommerce solution with advanced product filtering, user authentication, and payment processing.'
+  title: 'Guild Board',
+  category: 'Web App',
+  image: '/lovable-uploads/611c98b6-d6c7-4eef-8c6e-2adb0ecc29ef.png',
+  description: 'All-in-one hub for projects, teams, and people — everything your company needs, wrapped up in a gamified interface made for Gen Z.'
 }, {
   id: 2,
   title: 'Luxury Brand Identity',

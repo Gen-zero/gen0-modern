@@ -1,6 +1,6 @@
 
 import { Button } from "@/components/ui/button";
-import { Send } from "lucide-react";
+import { Send, Upload } from "lucide-react";
 
 interface SubmitButtonProps {
   isSubmitting: boolean;

@@ -48,9 +48,9 @@ const Contact = () => {
     },
     {
       value: 'join',
-      label: 'Join Our Cause',
+      label: 'Work with Us',
       icon: <HeartHandshake className="h-4 w-4" />,
-      placeholder: "I'm passionate about your mission and would like to contribute by..."
+      placeholder: "I'm interested in working with your company as..."
     },
     {
       value: 'volunteer',

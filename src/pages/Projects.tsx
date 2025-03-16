@@ -16,10 +16,10 @@ const projects = [{
   fullDescription: "Our team designed and developed a comprehensive eCommerce platform that provides businesses with a scalable, high-performance solution. The platform includes advanced product filtering, user authentication, payment processing integration, and a dashboard for inventory management. Built with React and Node.js, this solution offers excellent performance and maintainability."
 }, {
   id: 2,
-  title: "Luxury Brand Identity",
-  category: "Brand Design",
-  image: "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1064&q=80",
-  description: "Complete brand identity system for a high-end fashion brand, including logo design, typography, and visual language.",
+  title: "Saadhana Board",
+  category: "Web App",
+  image: "https://ik.imagekit.io/kalidaspem/d1660e9c-7a59-4119-9b87-992fd0e28886.jpg",
+  description: "A divine digital space for your Saadhana—pick any deity, manifest your goals, and track your spiritual journey like a boss.",
   fullDescription: "We created a comprehensive brand identity system for a high-end fashion label. The project encompassed logo design, typography selection, color palette development, and a complete visual language that reflects the brand's luxury positioning. The system was implemented across digital platforms, print materials, packaging design, and in-store experiences."
 }, {
   id: 3,

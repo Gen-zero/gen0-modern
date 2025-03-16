@@ -59,9 +59,9 @@ const Projects = () => {
               onMouseLeave={() => setHoveredProject(null)}
             >
               <div 
-                className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent z-10 transition-opacity duration-300" 
+                className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-black/20 z-10 transition-opacity duration-300" 
                 style={{
-                  opacity: isMobile || hoveredProject === project.id ? 0.9 : 0.6
+                  opacity: isMobile || hoveredProject === project.id ? 0.95 : 0.7
                 }}
               ></div>
               

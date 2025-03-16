@@ -52,7 +52,7 @@ const HeroSection = () => {
           />
         </div>
         
-        <div className="absolute inset-0 flex flex-col items-center justify-end pb-15 text-center px-8">
+        <div className="absolute inset-0 flex flex-col items-center justify-end pb-5 text-center px-8">
           <h2 className="text-2xl text-white uppercase mix-blend-exclusion font-extrabold md:text-3xl text-center">
             WE'RE PASSIONATE{' '}
             <span className="inline-block">{displayedWord}</span>

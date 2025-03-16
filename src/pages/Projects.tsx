@@ -33,7 +33,7 @@ const projects = [{
   title: "Kaali Punk",
   category: "Virtual Influencer",
   image: "https://ik.imagekit.io/kalidaspem/5c4ffdbb-03fc-4225-a964-bcd912ac12be.jpg",
-  description: "Kaali Punk is a cyber-mystic avatar dropping truth bombs, mixing Vedic wisdom with futuristic vibes to wake minds and shake the system. 🚀🔥",
+  description: "**Kaali Punk** is where **comic meets reality**—the first **true superhero VI**, blending **human and AI** to guide you through the chaos. More than just digital, he’s your **mentor, big brother, and truth-seeker**, here to awaken your mind and shake the system. 🚀🔥",
   fullDescription: "We developed a comprehensive healthcare mobile application that connects patients with medical professionals. The app features secure messaging, appointment scheduling, health record management, and medication reminders. Using React Native, we created a cross-platform solution that delivers a seamless experience across iOS and Android devices while maintaining strict compliance with healthcare data security standards."
 }, {
   id: 5,

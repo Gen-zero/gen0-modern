@@ -22,7 +22,7 @@ const projects = [{
   title: 'Fuel Unit',
   category: 'Web App',
   image: 'https://ik.imagekit.io/kalidaspem/b8a842e9-0b59-4687-8b15-ea15a15a2a0d.jpg',
-  description: 'FuelScout tracks fuel prices in real-time, spotting the cheapest fuel stops along your route—no cap, just savings!'
+  description: 'Fuel Unit tracks fuel prices in real-time, spotting the cheapest fuel stops along your route—no cap, just savings!'
 }];
 
 const Projects = () => {

@@ -10,7 +10,7 @@ const projects = [{
   title: 'Guild Board',
   category: 'Web App',
   image: '/lovable-uploads/611c98b6-d6c7-4eef-8c6e-2adb0ecc29ef.png',
-  description: 'Organization at your fingertips. Guild Board isnt just another social platform—its where ideas evolve into startups while the rest of social media keeps you consuming. Here, you dont scroll—you build. Create your Guild. Start building. ⚡',
+  description: 'Organization at your fingertips. Guild Board isnt just another social platform—its where ideas evolve into startups while the rest of social media keeps you consuming. Here, you dont scroll—you build. `Create your Guild and build⚡',
 }, {
   id: 2,
   title: 'Saadhana Board',

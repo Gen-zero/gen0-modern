@@ -13,7 +13,7 @@ const AboutUs = () => {
       <Navbar />
       
       <section id="our-story" className="py-20 bg-secondary/30 md:py-[124px]">
-        <div className="container mx-auto px-6 md:px-12">
+        <div className=" mx-auto px-6 md:px-12">
           {/* Hero Section with animated word effect */}
           <HeroSection />
           

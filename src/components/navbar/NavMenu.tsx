@@ -51,12 +51,13 @@ const NavMenu = ({
               <img src="/lovable-uploads/a9bfe93b-b4a8-45e7-b6ec-0ccf561e4234.png" alt="Gen0 Logo" className="h-16 object-contain" />
               <div className="flex items-center gap-3">
                 <Sparkles className="text-accent h-6 w-6 animate-pulse-subtle" />
-                <span className="font-bold text-xl md:text-2xl">GEN<span className="text-accent">Ø</span></span>
+                
               </div>
             </Link>
             
             {/* Animated Punchline */}
-            <h2 className="text-2xl lg:text-4xl font-bold max-w-3xl mb-4 bg-gradient-to-r from-foreground via-foreground/90 to-foreground/70 bg-clip-text text-transparent md:text-3xl">We’re the catalyst for humanity’s glow-up—ideating, building, hustling, sweating and investing in dope ideas and backing visionaries on the same mission. Straight outta India, flexing for the world!</h2>
+            <h2 className="text-2xl lg:text-4xl font-bold max-w-3xl mb-4 bg-gradient-to-r from-foreground via-foreground/90 to-foreground/70 bg-clip-text text-transparent md:text-3xl">We ideate, organize, and execute impactful projects dedicated to levelling up humanity. 
+Rooted in India, serving the world.</h2>
           </div>
           
           <div className="grid grid-cols-1 md:grid-cols-12 gap-10 px-[28px]">

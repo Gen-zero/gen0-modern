@@ -56,7 +56,7 @@ const NavMenu = ({
             </Link>
             
             {/* Animated Punchline */}
-            <h2 className="text-2xl lg:text-4xl font-bold max-w-3xl mb-4 bg-gradient-to-r from-foreground via-foreground/90 to-foreground/70 bg-clip-text md:text-3xl text-gray-50">✨ We ideate 💡, organize 🗂️, and execute 🚀 altruistic projects dedicated to levelling up humanity 🌏—From Bharat, for the world 🕉️.
+            <h2 className="text-2xl lg:text-4xl font-bold max-w-3xl mb-4 bg-gradient-to-r from-foreground via-foreground/90 to-foreground/70 bg-clip-text text-gray-50 md:text-xl">✨ We ideate 💡, organize 🗂️, and execute 🚀 altruistic projects dedicated to levelling up humanity 🌏—From Bharat, for the world 🕉️.
           </h2>
           </div>
           

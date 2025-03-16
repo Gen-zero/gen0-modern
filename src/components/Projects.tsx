@@ -16,7 +16,7 @@ const projects = [{
   title: 'Saadhana Board',
   category: 'Web App',
   image: 'https://ik.imagekit.io/kalidaspem/d1660e9c-7a59-4119-9b87-992fd0e28886.jpg',
-  description: 'A divine digital space for your Saadhana—pick any deity, manifest your goals, and track your spiritual journey like a boss.'
+  description: 'A digital Yantra to connect with your deity and your inner self. This sacred tool helps manifest the deity’s will into reality. 🔱✨'
 }, {
   id: 3,
   title: 'Fuel Unit',

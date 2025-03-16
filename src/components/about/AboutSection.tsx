@@ -1,11 +1,12 @@
+import React from 'react';
 import { CheckCircle } from 'lucide-react';
 
-const AboutSection = () => {
+const AboutSection: React.FC = () => {
   const values = [
     'Evolution: Growing and getting better 🌱',
     'Logical Thinking: Thinking clearly and smartly 🧠',
     'Unity for Humanity: Working together with compassion 🤝',
-    'Innovation: Being brave to create new things 🚀'
+    'Innovation: Being brave to create new things 🚀',
   ];
 
   return (
@@ -13,10 +14,6 @@ const AboutSection = () => {
       className="animate-on-scroll max-w-7xl mx-auto px-4"
       style={{ animationDelay: '0.2s' }}
     >
-      {/* 
-        Use flex-col by default and switch to flex-row at lg screens 
-        so they display side-by-side. gap-8 adds spacing between columns.
-      */}
       <div className="flex flex-col lg:flex-row gap-8">
         {/* Left Column: About content */}
         <div className="flex-1">
@@ -27,12 +24,13 @@ const AboutSection = () => {
             We&apos;re a crew of creative game-changers!
           </h2>
           <p className="w-full text-muted-foreground mb-8 text-lg">
-            We&apos;re a squad 🚀 of multidisciplinary talent 🎨💻 crafting next-gen projects ✨
-            to level up humanity 🌏—They call us GenZ 🌀, but we are GenZero 🕉️.
+            We&apos;re a squad 🚀 of multidisciplinary talent 🎨💻 
+            crafting next-gen projects ✨ to level up humanity 🌏—
+            They call us GenZ 🌀, but we are GenZero 🕉️.
           </p>
         </div>
 
-        {/* Right Column: Values list + hidden section */}
+        {/* Right Column: Values */}
         <div className="flex-1">
           <div className="mb-8">
             <h3 className="text-xl font-medium mb-4">Our Values</h3>
@@ -46,4 +44,20 @@ const AboutSection = () => {
             </ul>
           </div>
 
-          {/* Hidden Approach 
+          {/* Hidden Approach Section */}
+          <div className="hidden">
+            <h3 className="text-xl font-medium mb-4">Our Approach</h3>
+            <p className="w-full text-muted-foreground">
+              We keep it collaborative AF 🤝✨—teaming up closely with our clients 🎯 
+              to vibe with their unique goals 💎 and challenges 🧩. Our process? 
+              Proven 📌 to deliver solutions 🚀 that don&apos;t just hit expectations—
+              they smash them! 🔥
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default AboutSection;

@@ -10,7 +10,7 @@ const AboutSection: React.FC = () => {
 
   return (
     <div
-      className="animate-on-scroll w-full px-4" 
+      className="animate-on-scroll w-screen px-4" 
       style={{ animationDelay: '0.2s' }}
     >
       {/* 

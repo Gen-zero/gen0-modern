@@ -1,4 +1,3 @@
-import React from 'react';
 import { CheckCircle } from 'lucide-react';
 
 const AboutSection: React.FC = () => {
@@ -11,11 +10,16 @@ const AboutSection: React.FC = () => {
 
   return (
     <div
-      className="animate-on-scroll max-w-7xl mx-auto px-4"
+      className="animate-on-scroll w-full px-4" 
       style={{ animationDelay: '0.2s' }}
     >
-      <div className="flex flex-col lg:flex-row gap-8">
-        {/* Left Column: About content */}
+      {/* 
+        Use flex-col on small screens (stacked)
+        and flex-row on large screens (≥1024px).
+        gap-8 adds spacing between columns.
+      */}
+      <div className="flex flex-col lg:flex-row w-full gap-8">
+        {/* Left Column */}
         <div className="flex-1">
           <span className="block mb-3 text-gray-400 font-semibold text-4xl">
             ABOUT US
@@ -24,13 +28,12 @@ const AboutSection: React.FC = () => {
             We&apos;re a crew of creative game-changers!
           </h2>
           <p className="w-full text-muted-foreground mb-8 text-lg">
-            We&apos;re a squad 🚀 of multidisciplinary talent 🎨💻 
-            crafting next-gen projects ✨ to level up humanity 🌏—
-            They call us GenZ 🌀, but we are GenZero 🕉️.
+            We&apos;re a squad 🚀 of multidisciplinary talent 🎨💻 crafting next-gen projects ✨
+            to level up humanity 🌏—They call us GenZ 🌀, but we are GenZero 🕉️.
           </p>
         </div>
 
-        {/* Right Column: Values */}
+        {/* Right Column */}
         <div className="flex-1">
           <div className="mb-8">
             <h3 className="text-xl font-medium mb-4">Our Values</h3>
@@ -49,7 +52,7 @@ const AboutSection: React.FC = () => {
             <h3 className="text-xl font-medium mb-4">Our Approach</h3>
             <p className="w-full text-muted-foreground">
               We keep it collaborative AF 🤝✨—teaming up closely with our clients 🎯 
-              to vibe with their unique goals 💎 and challenges 🧩. Our process? 
+              to vibe with their unique goals 💎 and challenges 🧩. Our process?
               Proven 📌 to deliver solutions 🚀 that don&apos;t just hit expectations—
               they smash them! 🔥
             </p>

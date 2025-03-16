@@ -9,14 +9,12 @@ const AboutSection: React.FC = () => {
     'Innovation: Being brave to create new things 🚀',
   ];
 
-  // Return a Fragment with two top-level <div> siblings
+  // Use a fragment (<>) so we can return two siblings
   return (
     <>
-      {/* Left block: "ABOUT US" content */}
-      <div
-        className="animate-on-scroll w-full overflow-hidden px-4 p-8"
-        style={{ animationDelay: '0.2s' }}
-      >
+      {/* Left "ABOUT US" block */}
+      <div className="animate-on-scroll w-full overflow-hidden px-4 p-8"
+           style={{ animationDelay: '0.2s' }}>
         <span className="block mb-3 text-gray-400 font-semibold text-4xl">
           ABOUT US
         </span>
@@ -30,11 +28,9 @@ const AboutSection: React.FC = () => {
         </p>
       </div>
 
-      {/* Right block: "Our Values" + hidden "Approach" */}
-      <div
-        className="animate-on-scroll w-full overflow-hidden px-4 p-8"
-        style={{ animationDelay: '0.2s' }}
-      >
+      {/* Right "Our Values" block */}
+      <div className="animate-on-scroll w-full overflow-hidden px-4 p-8"
+           style={{ animationDelay: '0.2s' }}>
         <div className="mb-8">
           <h3 className="text-xl font-medium mb-4">Our Values</h3>
           <ul className="space-y-3">

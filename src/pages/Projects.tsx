@@ -30,10 +30,10 @@ const projects = [{
   fullDescription: "Our team designed and developed an intuitive financial management dashboard for a fintech startup. The dashboard features real-time data visualization, predictive analytics, and personalized insights. The interface was designed with a focus on clarity and ease of use, allowing users to quickly understand complex financial data through interactive charts and customizable reports."
 }, {
   id: 4,
-  title: "Healthcare Mobile App",
-  category: "Mobile Development",
-  image: "https://images.unsplash.com/photo-1576091160550-2173dba999ef?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80",
-  description: "A patient-centered healthcare app that connects users with medical professionals and manages health records.",
+  title: "Kaali Punk",
+  category: "Virtual Influencer",
+  image: "https://ik.imagekit.io/kalidaspem/5c4ffdbb-03fc-4225-a964-bcd912ac12be.jpg",
+  description: "Kaali Punk is a cyber-mystic avatar dropping truth bombs, mixing Vedic wisdom with futuristic vibes to wake minds and shake the system. 🚀🔥",
   fullDescription: "We developed a comprehensive healthcare mobile application that connects patients with medical professionals. The app features secure messaging, appointment scheduling, health record management, and medication reminders. Using React Native, we created a cross-platform solution that delivers a seamless experience across iOS and Android devices while maintaining strict compliance with healthcare data security standards."
 }, {
   id: 5,

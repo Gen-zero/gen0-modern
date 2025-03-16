@@ -30,17 +30,17 @@ const projects = [{
   fullDescription: "Our team designed and developed an intuitive financial management dashboard for a fintech startup. The dashboard features real-time data visualization, predictive analytics, and personalized insights. The interface was designed with a focus on clarity and ease of use, allowing users to quickly understand complex financial data through interactive charts and customizable reports."
 }, {
   id: 4,
-  title: "Kaali Punk",
-  category: "Virtual Influencer",
-  image: "https://ik.imagekit.io/kalidaspem/5c4ffdbb-03fc-4225-a964-bcd912ac12be.jpg",
-  description: "Kaali Punk is a cyber-mystic avatar dropping truth bombs, mixing Vedic wisdom with futuristic vibes to wake minds and shake the system. 🚀🔥",
+  title: "Healthcare Mobile App",
+  category: "Mobile Development",
+  image: "https://images.unsplash.com/photo-1576091160550-2173dba999ef?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80",
+  description: "A patient-centered healthcare app that connects users with medical professionals and manages health records.",
   fullDescription: "We developed a comprehensive healthcare mobile application that connects patients with medical professionals. The app features secure messaging, appointment scheduling, health record management, and medication reminders. Using React Native, we created a cross-platform solution that delivers a seamless experience across iOS and Android devices while maintaining strict compliance with healthcare data security standards."
 }, {
   id: 5,
-  title: "Sustainable Packaging Design",
-  category: "Packaging Design",
-  image: "https://images.unsplash.com/photo-1607461194986-4acca4203c5c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1074&q=80",
-  description: "Eco-friendly packaging solutions for a food delivery service, reducing environmental impact while maintaining brand identity.",
+  title: "Prompt Engineering Course",
+  category: "Course",
+  image: "https://ik.imagekit.io/kalidaspem/DALL_E%202025-03-16%2020.20.28%20-%20A%20pure%20minimalistic%20and%20truthful%20visual%20representation%20of%20'Prompt%20Engineering.'%20The%20image%20features%20an%20abstract,%20clean%20depiction%20of%20a%20hand%20subtly%20guidi.webp",
+  description: "Master the art of prompt engineering—learn how to craft killer prompts, unlock AI superpowers, and level up your skills to pro in no time. No fluff, just pure AI mastery!",
   fullDescription: "For a popular food delivery service, we designed a line of eco-friendly packaging solutions that significantly reduced environmental impact while maintaining brand identity. The project involved material research, structural design, and visual branding. The final designs used biodegradable materials, minimized waste, and created a recognizable unboxing experience that enhanced the brand's commitment to sustainability."
 }, {
   id: 6,

@@ -15,7 +15,7 @@ const projects = [{
   id: 2,
   title: 'Saadhana Board',
   category: 'Web App',
-  image: 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1064&q=80',
+  image: 'https://ik.imagekit.io/kalidaspem/d1660e9c-7a59-4119-9b87-992fd0e28886.jpg',
   description: 'A divine digital space for your Saadhana—pick any deity, manifest your goals, and track your spiritual journey like a boss.'
 }, {
   id: 3,

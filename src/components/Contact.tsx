@@ -362,50 +362,104 @@ const Contact = () => {
                 )}
 
                 {selectedInquiry === 'volunteer' && (
-                  <FormField
-                    control={form.control}
-                    name="skills"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel>Your Skills & Availability</FormLabel>
-                        <FormControl>
-                          <Input placeholder="e.g., Design, 10 hours/week" {...field} />
-                        </FormControl>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
+                  <>
+                    <FormField
+                      control={form.control}
+                      name="skills"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel>Your Skills & Availability</FormLabel>
+                          <FormControl>
+                            <Input placeholder="e.g., Design, 10 hours/week" {...field} />
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+                    <div className="space-y-3">
+                      <FormLabel>Projects interested in (select all that apply)</FormLabel>
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                        {projectOptions.map((project) => (
+                          <div key={project.id} className="flex items-start space-x-2">
+                            <Checkbox 
+                              id={`volunteer-project-${project.id}`} 
+                              checked={selectedProjects.includes(project.id)}
+                              onCheckedChange={() => handleProjectSelectionChange(project.id)}
+                            />
+                            <div className="grid gap-1.5 leading-none">
+                              <label
+                                htmlFor={`volunteer-project-${project.id}`}
+                                className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                              >
+                                {project.name}
+                              </label>
+                              <p className="text-xs text-muted-foreground">
+                                {project.description}
+                              </p>
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  </>
                 )}
 
                 {selectedInquiry === 'intern' && (
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <FormField
-                      control={form.control}
-                      name="university"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel>University/College</FormLabel>
-                          <FormControl>
-                            <Input placeholder="e.g., MIT" {...field} />
-                          </FormControl>
-                          <FormMessage />
-                        </FormItem>
-                      )}
-                    />
-                    <FormField
-                      control={form.control}
-                      name="courseName"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel>Course/Major</FormLabel>
-                          <FormControl>
-                            <Input placeholder="e.g., Computer Science" {...field} />
-                          </FormControl>
-                          <FormMessage />
-                        </FormItem>
-                      )}
-                    />
-                  </div>
+                  <>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                      <FormField
+                        control={form.control}
+                        name="university"
+                        render={({ field }) => (
+                          <FormItem>
+                            <FormLabel>University/College</FormLabel>
+                            <FormControl>
+                              <Input placeholder="e.g., MIT" {...field} />
+                            </FormControl>
+                            <FormMessage />
+                          </FormItem>
+                        )}
+                      />
+                      <FormField
+                        control={form.control}
+                        name="courseName"
+                        render={({ field }) => (
+                          <FormItem>
+                            <FormLabel>Course/Major</FormLabel>
+                            <FormControl>
+                              <Input placeholder="e.g., Computer Science" {...field} />
+                            </FormControl>
+                            <FormMessage />
+                          </FormItem>
+                        )}
+                      />
+                    </div>
+                    <div className="space-y-3">
+                      <FormLabel>Projects interested in (select all that apply)</FormLabel>
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                        {projectOptions.map((project) => (
+                          <div key={project.id} className="flex items-start space-x-2">
+                            <Checkbox 
+                              id={`intern-project-${project.id}`} 
+                              checked={selectedProjects.includes(project.id)}
+                              onCheckedChange={() => handleProjectSelectionChange(project.id)}
+                            />
+                            <div className="grid gap-1.5 leading-none">
+                              <label
+                                htmlFor={`intern-project-${project.id}`}
+                                className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                              >
+                                {project.name}
+                              </label>
+                              <p className="text-xs text-muted-foreground">
+                                {project.description}
+                              </p>
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  </>
                 )}
 
                 {selectedInquiry === 'invest' && (

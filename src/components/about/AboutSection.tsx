@@ -6,10 +6,11 @@ const AboutSection: React.FC = () => {
     animationDelay: '0.2s'
   }}>
       {/* Left block: "ABOUT US" content */}
-      <div className="p-">
-        <span className="block mb-3 text-gray-400 font-semibold text-4xl">
+    <span className="block mb-3 text-gray-400 font-semibold text-4xl">
           ABOUT US
         </span>
+      <div className="p-">
+        
         <h2 className="text-3xl font-semibold mb-6 md:text-2xl">
           We&apos;re a crew of creative game-changers!
         </h2>

@@ -18,7 +18,7 @@ const AboutSection: React.FC = () => {
         and flex-row on large screens (≥1024px).
         gap-8 adds spacing between columns.
       */}
-      <div className="flex flex-col lg:flex-row w-full gap-8">
+      <div className="flex flex-col lg:flex-row w-screen gap-8">
         {/* Left Column */}
         <div className="flex-1">
           <span className="block mb-3 text-gray-400 font-semibold text-4xl">

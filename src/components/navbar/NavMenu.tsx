@@ -1,4 +1,3 @@
-
 import { X, ArrowRight, Sparkles } from 'lucide-react';
 import { Button } from "../ui/button";
 import { Link } from 'react-router-dom';
@@ -8,18 +7,17 @@ import NavMenuQuickLinks from './NavMenuQuickLinks';
 import NavMenuLegal from './NavMenuLegal';
 import { useNavbar } from '@/contexts/NavbarContext';
 import { ScrollArea } from "@/components/ui/scroll-area";
-
 interface NavMenuProps {
   menuOpen: boolean;
   toggleMenu: () => void;
 }
-
 const NavMenu = ({
   menuOpen,
-  toggleMenu,
+  toggleMenu
 }: NavMenuProps) => {
-  const { activeSection } = useNavbar();
-  
+  const {
+    activeSection
+  } = useNavbar();
   const navLinks = [{
     name: 'Home',
     href: '#home'
@@ -33,9 +31,7 @@ const NavMenu = ({
     name: 'Contact',
     href: '#contact'
   }];
-  
-  return (
-    <>
+  return <>
       {/* Menu Overlay */}
       <div className={`fixed inset-0 bg-black/60 z-40 transition-opacity duration-500 ${menuOpen ? 'opacity-100' : 'opacity-0 pointer-events-none'}`} onClick={toggleMenu} />
       
@@ -60,9 +56,7 @@ const NavMenu = ({
             </Link>
             
             {/* Animated Punchline */}
-            <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold max-w-3xl mb-4 bg-gradient-to-r from-foreground via-foreground/90 to-foreground/70 bg-clip-text text-transparent">
-              We create digital experiences that are beautiful, functional, and designed to help your business grow.
-            </h2>
+            <h2 className="text-2xl lg:text-4xl font-bold max-w-3xl mb-4 bg-gradient-to-r from-foreground via-foreground/90 to-foreground/70 bg-clip-text text-transparent md:text-3xl">We’re the catalyst for humanity’s glow-up—ideating, building, hustling, sweating and investing in dope ideas and backing visionaries on the same mission. Straight outta India, flexing for the world!</h2>
           </div>
           
           <div className="grid grid-cols-1 md:grid-cols-12 gap-10 px-[28px]">
@@ -98,8 +92,6 @@ const NavMenu = ({
           </div>
         </div>
       </div>
-    </>
-  );
+    </>;
 };
-
 export default NavMenu;

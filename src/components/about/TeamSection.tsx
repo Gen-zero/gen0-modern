@@ -33,8 +33,8 @@ const TeamSection = () => {
   }];
   return <div className="py-20 container mx-auto px-6 md:px-12 animate-on-scroll">
       <div className="text-center mb-16">
-        <h2 className="text-3xl md:text-4xl font-bold mb-6">Meet the Team</h2>
-        <p className="text-xl text-muted-foreground max-w-3xl mx-auto">Get to know our people!</p>
+        <h2 className="text-3xl md:text-4xl font-bold mb-6">The Minds Behind Gen0</h2>
+        <p className="text-xl text-muted-foreground max-w-3xl mx-auto">The architects of change, the ones who move when the signal calls—wheels turn, tides shift, and the unseen hand shapes what’s next. ⚙️🌊✨</p>
       </div>
       
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">

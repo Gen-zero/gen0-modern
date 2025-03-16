@@ -19,7 +19,7 @@ const AboutSection: React.FC = () => {
         gap-8 adds spacing between columns.
       */}
       {/* Left Column: "ABOUT US" content */}
-      <div className="p-8">
+      <div className="">
         <span className="block mb-3 text-gray-400 font-semibold text-4xl">
           ABOUT US
         </span>

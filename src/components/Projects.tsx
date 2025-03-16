@@ -19,10 +19,10 @@ const projects = [{
   description: 'A divine digital space for your Saadhana—pick any deity, manifest your goals, and track your spiritual journey like a boss.'
 }, {
   id: 3,
-  title: 'Financial Dashboard',
-  category: 'UI/UX Design',
+  title: 'Fuel Unit',
+  category: 'Web App',
   image: 'https://ik.imagekit.io/kalidaspem/b8a842e9-0b59-4687-8b15-ea15a15a2a0d.jpg',
-  description: 'An intuitive financial management dashboard with real-time data visualization and predictive analytics.'
+  description: 'FuelScout tracks fuel prices in real-time, spotting the cheapest fuel stops along your route—no cap, just savings!'
 }];
 
 const Projects = () => {

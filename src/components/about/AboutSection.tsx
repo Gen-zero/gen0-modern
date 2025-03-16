@@ -20,7 +20,7 @@ const AboutSection = () => {
       
       <div>
         <h3 className="text-xl font-medium mb-4">Our Approach</h3>
-        <p className="text-muted-foreground">We keep it collaborative AF—teaming up closely with our clients to vibe with their unique goals and challenges. Our process? Proven to deliver solutions that don't just hit expectations, they smash them!</p>
+        <p className="text-muted-foreground">We keep it collaborative AF 🤝✨—teaming up closely with our clients 🎯 to vibe with their unique goals 💎 and challenges 🧩. Our process? Proven 📌 to deliver solutions 🚀 that don't just hit expectations—they smash them! 🔥</p>
       </div>
     </div>;
 };

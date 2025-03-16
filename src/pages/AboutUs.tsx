@@ -17,7 +17,7 @@ const AboutUs = () => {
           {/* Hero Section with animated word effect */}
           <HeroSection />
           
-          <div className="w-full flex flex-col items-center gap-12 lg:flex-row lg:gap-24">
+          <div className="w-full flex flex-col items-center gap-1 lg:flex-row lg:gap-2">
             <AboutSection />
           </div>
         </div>

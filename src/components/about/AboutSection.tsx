@@ -1,21 +1,12 @@
 import React from 'react';
 import { CheckCircle } from 'lucide-react';
-
 const AboutSection: React.FC = () => {
-  const values = [
-    'Evolution: Growing and getting better 🌱',
-    'Logical Thinking: Thinking clearly and smartly 🧠',
-    'Unity for Humanity: Working together with compassion 🤝',
-    'Innovation: Being brave to create new things 🚀',
-  ];
-
-  return (
-    <div
-      className="animate-on-scroll w-full overflow-hidden px-4"
-      style={{ animationDelay: '0.2s' }}
-    >
+  const values = ['Evolution: Growing and getting better 🌱', 'Logical Thinking: Thinking clearly and smartly 🧠', 'Unity for Humanity: Working together with compassion 🤝', 'Innovation: Being brave to create new things 🚀'];
+  return <div className="animate-on-scroll w-full overflow-hidden px-4" style={{
+    animationDelay: '0.2s'
+  }}>
       {/* Left block: "ABOUT US" content */}
-      <div className="p-8">
+      <div className="p-">
         <span className="block mb-3 text-gray-400 font-semibold text-4xl">
           ABOUT US
         </span>
@@ -34,12 +25,10 @@ const AboutSection: React.FC = () => {
         <div className="mb-8">
           <h3 className="text-xl font-medium mb-4">Our Values</h3>
           <ul className="space-y-3">
-            {values.map((value, index) => (
-              <li key={index} className="flex items-start">
+            {values.map((value, index) => <li key={index} className="flex items-start">
                 <CheckCircle className="h-5 w-5 text-primary mr-3 mt-0.5 flex-shrink-0" />
                 <span>{value}</span>
-              </li>
-            ))}
+              </li>)}
           </ul>
         </div>
 
@@ -54,8 +43,6 @@ const AboutSection: React.FC = () => {
           </p>
         </div>
       </div>
-    </div>
-  );
+    </div>;
 };
-
 export default AboutSection;

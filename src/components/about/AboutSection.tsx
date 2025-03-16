@@ -1,6 +1,6 @@
 import { CheckCircle } from 'lucide-react';
 const AboutSection = () => {
-  const values = ['User-centered approach in everything we do', 'Continuous innovation and learning', 'Transparent communication and processes', 'Attention to detail and quality craftsmanship'];
+  const values = ['Evolution: Growing and getting better 🌱', 'Logical Thinking: Thinking clearly and smartly 🧠', 'Unity for Humanity: Working together with compassion 🤝', 'Innovation: Being brave to create new things 🚀'];
   return <div className="animate-on-scroll" style={{
     animationDelay: '0.2s'
   }}>

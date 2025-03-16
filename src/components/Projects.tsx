@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { ArrowRight } from 'lucide-react';
 import { Button } from './ui/button';
 import { Link } from 'react-router-dom';
+import { useIsMobile } from '@/hooks/use-mobile';
 
 const projects = [{
   id: 1,
@@ -26,6 +27,7 @@ const projects = [{
 
 const Projects = () => {
   const [hoveredProject, setHoveredProject] = useState<number | null>(null);
+  const isMobile = useIsMobile();
   
   return (
     <section id="projects" className="py-20 md:py-32">
@@ -59,7 +61,7 @@ const Projects = () => {
               <div 
                 className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent z-10 transition-opacity duration-300" 
                 style={{
-                  opacity: hoveredProject === project.id ? 0.9 : 0.6
+                  opacity: isMobile || hoveredProject === project.id ? 0.9 : 0.6
                 }}
               ></div>
               
@@ -68,7 +70,7 @@ const Projects = () => {
                 alt={project.title} 
                 className="w-full h-[400px] object-cover transition-transform duration-700 ease-out" 
                 style={{
-                  transform: hoveredProject === project.id ? 'scale(1.05)' : 'scale(1)'
+                  transform: isMobile || hoveredProject === project.id ? 'scale(1.05)' : 'scale(1)'
                 }}
                 loading="lazy" 
               />
@@ -79,8 +81,8 @@ const Projects = () => {
                 <p 
                   className="text-white/80 mb-6 transition-opacity duration-300 max-w-sm" 
                   style={{
-                    opacity: hoveredProject === project.id ? 1 : 0,
-                    transform: hoveredProject === project.id ? 'translateY(0)' : 'translateY(20px)',
+                    opacity: isMobile || hoveredProject === project.id ? 1 : 0,
+                    transform: isMobile || hoveredProject === project.id ? 'translateY(0)' : 'translateY(20px)',
                     transition: 'opacity 0.3s ease, transform 0.3s ease'
                   }}
                 >
@@ -91,8 +93,8 @@ const Projects = () => {
                   size="sm" 
                   className="w-fit transition-all duration-300 bg-white/10 hover:bg-white/20 border-white/20 text-white" 
                   style={{
-                    opacity: hoveredProject === project.id ? 1 : 0,
-                    transform: hoveredProject === project.id ? 'translateY(0)' : 'translateY(20px)',
+                    opacity: isMobile || hoveredProject === project.id ? 1 : 0,
+                    transform: isMobile || hoveredProject === project.id ? 'translateY(0)' : 'translateY(20px)',
                     transition: 'opacity 0.3s ease, transform 0.3s ease'
                   }}
                 >

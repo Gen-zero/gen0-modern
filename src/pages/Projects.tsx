@@ -12,7 +12,7 @@ const projects = [{
   title: "Guild Board",
   category: "Web App",
   image: "/lovable-uploads/611c98b6-d6c7-4eef-8c6e-2adb0ecc29ef.png",
-  description: "Organization at your fingertips. Guild Board isn’t just another social platform—Here, you don’t scroll—you build.\n\nCreate your Guild and build⚡"",
+  description: "Organization at your fingertips. Guild Board isn’t just another social platform—Here, you don’t scroll—you build.\n\nCreate your Guild and build⚡",
   fullDescription: "Our team designed and developed a comprehensive eCommerce platform that provides businesses with a scalable, high-performance solution. The platform includes advanced product filtering, user authentication, payment processing integration, and a dashboard for inventory management. Built with React and Node.js, this solution offers excellent performance and maintainability."
 }, {
   id: 2,

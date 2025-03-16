@@ -12,14 +12,14 @@ const projects = [{
   title: "Guild Board",
   category: "Web App",
   image: "/lovable-uploads/611c98b6-d6c7-4eef-8c6e-2adb0ecc29ef.png",
-  description: "All-in-one hub for projects, teams, and people — everything your company needs, wrapped up in a gamified interface made for Gen Z.",
+  description: "Organization at your fingertips. Guild Board isn’t just another social platform—Here, you don’t scroll—you build.\n\nCreate your Guild and build⚡"",
   fullDescription: "Our team designed and developed a comprehensive eCommerce platform that provides businesses with a scalable, high-performance solution. The platform includes advanced product filtering, user authentication, payment processing integration, and a dashboard for inventory management. Built with React and Node.js, this solution offers excellent performance and maintainability."
 }, {
   id: 2,
   title: "Saadhana Board",
   category: "Web App",
   image: "https://ik.imagekit.io/kalidaspem/d1660e9c-7a59-4119-9b87-992fd0e28886.jpg",
-  description: "A divine digital space for your Saadhana—pick any deity, manifest your goals, and track your spiritual journey like a boss.",
+  description: "A digital Yantra to connect with your deity and your inner self. This sacred tool helps manifest the deity’s will into reality. 🔱✨",
   fullDescription: "We created a comprehensive brand identity system for a high-end fashion label. The project encompassed logo design, typography selection, color palette development, and a complete visual language that reflects the brand's luxury positioning. The system was implemented across digital platforms, print materials, packaging design, and in-store experiences."
 }, {
   id: 3,

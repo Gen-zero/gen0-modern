@@ -3,17 +3,14 @@ import { FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/comp
 import { Input } from "@/components/ui/input";
 import { UseFormReturn } from "react-hook-form";
 
-interface FormValues {
-  company?: string;
-  budget?: string;
-  [key: string]: any;
+// Made this generic to accept any form type that has these optional fields
+interface ServiceInquiryFieldsProps<T extends { company?: string; budget?: string }> {
+  form: UseFormReturn<T>;
 }
 
-interface ServiceInquiryFieldsProps {
-  form: UseFormReturn<FormValues>;
-}
-
-const ServiceInquiryFields = ({ form }: ServiceInquiryFieldsProps) => {
+const ServiceInquiryFields = <T extends { company?: string; budget?: string }>({ 
+  form 
+}: ServiceInquiryFieldsProps<T>) => {
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
       <FormField

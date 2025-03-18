@@ -15,6 +15,7 @@ import InternInquiryFields from './inquiries/InternInquiryFields';
 import { useToast } from '../../hooks/use-toast';
 import { Project, InquiryOption } from './types';
 
+// Updated schema to make all fields required that should be required
 const formSchema = z.object({
   firstName: z.string().min(2, 'First name is required'),
   lastName: z.string().min(2, 'Last name is required'),
@@ -34,8 +35,13 @@ const formSchema = z.object({
   interests: z.string().optional(),
   message: z.string().min(10, 'Message is required'),
   projectsInterested: z.array(z.string()).optional(),
+  university: z.string().optional(),
+  courseName: z.string().optional(),
+  linkedinProfile: z.string().optional(),
+  skills: z.string().optional(),
 });
 
+// Define the FormData type from our schema
 type FormData = z.infer<typeof formSchema>;
 
 interface ContactFormProps {
@@ -48,17 +54,20 @@ const ContactForm = ({ inquiryOptions, projectOptions }: ContactFormProps) => {
   const [selectedProjects, setSelectedProjects] = useState<string[]>([]);
   const { toast } = useToast();
   
+  // Use FormData as the type for useForm
   const form = useForm<FormData>({
     resolver: zodResolver(formSchema),
     defaultValues: {
+      firstName: '',
+      lastName: '',
+      email: '',
       inquiryType: 'service',
+      message: '',
       projectsInterested: [],
     },
   });
 
-  const { register, handleSubmit, watch, reset, control, setValue, formState: { errors } } = form;
-
-  const inquiryType = watch('inquiryType');
+  const inquiryType = form.watch('inquiryType');
 
   const handleProjectSelectionChange = (projectId: string) => {
     setSelectedProjects(prev => {
@@ -68,7 +77,7 @@ const ContactForm = ({ inquiryOptions, projectOptions }: ContactFormProps) => {
         : [...prev, projectId];
       
       // Update the form value
-      setValue('projectsInterested', newSelection);
+      form.setValue('projectsInterested', newSelection);
       return newSelection;
     });
   };
@@ -107,7 +116,7 @@ const ContactForm = ({ inquiryOptions, projectOptions }: ContactFormProps) => {
       });
       
       // Reset the form
-      reset();
+      form.reset();
       setSelectedProjects([]);
       
       // Show success toast
@@ -131,7 +140,7 @@ const ContactForm = ({ inquiryOptions, projectOptions }: ContactFormProps) => {
 
   return (
     <form
-      onSubmit={handleSubmit(onSubmit)}
+      onSubmit={form.handleSubmit(onSubmit)}
       className="space-y-6 bg-white/5 backdrop-blur-lg rounded-2xl p-8 border border-white/10"
     >
       <h2 className="text-2xl font-semibold text-white mb-6">Contact Us</h2>
@@ -141,7 +150,7 @@ const ContactForm = ({ inquiryOptions, projectOptions }: ContactFormProps) => {
       <InquiryTypeSelector 
         inquiryOptions={inquiryOptions} 
         defaultValue={inquiryType}
-        onValueChange={(value) => setValue('inquiryType', value)} 
+        onValueChange={(value) => form.setValue('inquiryType', value)} 
       />
 
       {inquiryType === 'service' && <ServiceInquiryFields form={form} />}

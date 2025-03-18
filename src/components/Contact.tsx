@@ -7,29 +7,24 @@ import { InquiryOption, Project } from './contact/types';
 const Contact = () => {
   const projectOptions: Project[] = [
     {
-      id: 'ai-solutions',
-      name: 'AI Solutions',
-      description: 'Advanced AI technologies for business automation'
+      id: '1',
+      name: 'Guild Board',
+      description: 'Your Organization at your fingertips.'
     },
     {
-      id: 'blockchain',
-      name: 'Blockchain Ventures',
-      description: 'Decentralized applications and blockchain infrastructure'
+      id: '2',
+      name: 'Saadhana Board',
+      description: 'A digital Yantra to connect with your deity and your inner self'
     },
     {
-      id: 'eco-tech',
-      name: 'Eco-Tech Initiatives',
-      description: 'Sustainable technology solutions for environmental challenges'
+      id: '3',
+      name: 'Fuel Unit',
+      description: 'Fuel Unit tracks fuel prices in real-time, spotting the cheapest fuel stops along your route'
     },
     {
-      id: 'health-innovations',
-      name: 'Healthcare Innovations',
-      description: 'Digital health platforms and medical technology'
-    },
-    {
-      id: 'education-tech',
-      name: 'Education Technology',
-      description: 'Online learning platforms and educational tools'
+      id: '4',
+      name: 'Kaali Punk',
+      description: 'Kaali Punk is the first real superhero VI, a mix of human and AI.'
     }
   ];
 

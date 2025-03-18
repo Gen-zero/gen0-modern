@@ -3,19 +3,19 @@ import { FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/comp
 import { Textarea } from "@/components/ui/textarea";
 import { UseFormReturn } from "react-hook-form";
 
-interface MessageFieldProps<T extends { message: string }> {
+interface MessageFieldProps<T extends Record<string, any>> {
   form: UseFormReturn<T>;
   placeholder: string;
 }
 
-const MessageField = <T extends { message: string }>({ 
+const MessageField = <T extends Record<string, any>>({ 
   form, 
   placeholder 
 }: MessageFieldProps<T>) => {
   return (
     <FormField
       control={form.control}
-      name="message" as="message"
+      name="message"
       render={({ field }) => (
         <FormItem>
           <FormLabel>Your Message</FormLabel>

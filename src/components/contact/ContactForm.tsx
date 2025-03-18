@@ -45,7 +45,7 @@ const ContactForm = ({ inquiryOptions, projectOptions }: ContactFormProps) => {
       courseName: '',
       investmentAmount: '',
       projectsInterested: [],
-      resume: undefined,
+      resumeLink: '',
       linkedinProfile: '',
     },
   });
@@ -97,6 +97,7 @@ const ContactForm = ({ inquiryOptions, projectOptions }: ContactFormProps) => {
       if (values.courseName) formData.append('courseName', values.courseName);
       if (values.investmentAmount) formData.append('investmentAmount', values.investmentAmount);
       if (values.linkedinProfile) formData.append('linkedinProfile', values.linkedinProfile);
+      if (values.resumeLink) formData.append('resumeLink', values.resumeLink);
       
       // Add project interests as a comma-separated string
       if (values.projectsInterested && values.projectsInterested.length > 0) {
@@ -107,13 +108,6 @@ const ContactForm = ({ inquiryOptions, projectOptions }: ContactFormProps) => {
         formData.append('projectsInterested', projectNames.join(', '));
       }
       
-      // Resume file handling (if available)
-      if (values.resume instanceof File) {
-        // Google Apps Script can't handle file uploads directly
-        // We'll just include the file name for reference
-        formData.append('resumeFileName', values.resume.name);
-      }
-
       // Get timestamp
       formData.append('timestamp', new Date().toISOString());
       
@@ -146,7 +140,7 @@ const ContactForm = ({ inquiryOptions, projectOptions }: ContactFormProps) => {
         courseName: '',
         investmentAmount: '',
         projectsInterested: [],
-        resume: undefined,
+        resumeLink: '',
         linkedinProfile: '',
       });
       

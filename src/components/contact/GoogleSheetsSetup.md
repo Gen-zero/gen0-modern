@@ -23,7 +23,7 @@ This document provides instructions for setting up a Google Sheet to collect con
    - Investment Amount
    - Projects Interested
    - LinkedIn Profile
-   - Resume File Name
+   - Resume Link
 
 ## Step 2: Create a Google Apps Script
 
@@ -56,7 +56,7 @@ function doPost(e) {
       formData.investmentAmount || '',
       formData.projectsInterested || '',
       formData.linkedinProfile || '',
-      formData.resumeFileName || ''
+      formData.resumeLink || ''
     ]);
     
     // Return success
@@ -102,5 +102,5 @@ const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/YOUR_DEPLOYED_SCRI
 ## Notes
 
 - The Google Apps Script web app uses CORS restrictions, which is why we use `mode: 'no-cors'` in the fetch request
-- File uploads (like resumes) cannot be directly handled by Google Apps Script in this simple implementation - we only store the file name for reference
-- For more robust file handling, consider using Google Drive API or a more advanced solution
+- Links to online documents (like Google Drive or OneDrive) are stored directly in the Google Sheet
+- For more robust handling, consider using Google Drive API or a more advanced solution

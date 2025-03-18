@@ -1,5 +1,5 @@
 
-import { FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
+import { FormControl, FormField, FormItem, FormLabel, FormMessage, FormDescription } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { UseFormReturn } from "react-hook-form";
 import { FormValues } from "../types";
@@ -56,24 +56,18 @@ const JoinInquiryFields = ({ form }: JoinInquiryFieldsProps) => {
         />
         <FormField
           control={form.control}
-          name="resume"
-          render={({ field: { value, onChange, ...fieldProps } }) => (
+          name="resumeLink"
+          render={({ field }) => (
             <FormItem>
-              <FormLabel>Resume/CV (PDF)</FormLabel>
+              <FormLabel>Resume/CV Link</FormLabel>
               <FormControl>
                 <Input 
-                  type="file" 
-                  accept=".pdf" 
-                  placeholder="Upload your resume"
-                  onChange={(e) => {
-                    const file = e.target.files?.[0];
-                    if (file) {
-                      onChange(file);
-                    }
-                  }}
-                  {...fieldProps}
+                  type="url" 
+                  placeholder="Google Drive or OneDrive link"
+                  {...field}
                 />
               </FormControl>
+              <FormDescription>Share a link to your resume (Google Drive, OneDrive, etc.)</FormDescription>
               <FormMessage />
             </FormItem>
           )}

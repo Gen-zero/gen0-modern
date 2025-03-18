@@ -38,7 +38,7 @@ export const formSchema = z.object({
   courseName: z.string().optional(),
   investmentAmount: z.string().optional(),
   projectsInterested: z.array(z.string()).optional(),
-  resume: z.instanceof(File).optional(),
+  resumeLink: z.string().url().optional().or(z.literal('')),
   linkedinProfile: z.string().url().optional().or(z.literal('')),
 });
 

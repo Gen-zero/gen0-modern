@@ -42,13 +42,6 @@ const projects = [{
   image: "https://ik.imagekit.io/kalidaspem/DALL_E%202025-03-16%2020.20.28%20-%20A%20pure%20minimalistic%20and%20truthful%20visual%20representation%20of%20'Prompt%20Engineering.'%20The%20image%20features%20an%20abstract,%20clean%20depiction%20of%20a%20hand%20subtly%20guidi.webp",
   description: "Master the art of prompt engineering—learn how to craft killer prompts, unlock AI superpowers, and level up your skills to pro in no time. No fluff, just pure AI mastery!",
   fullDescription: "For a popular food delivery service, we designed a line of eco-friendly packaging solutions that significantly reduced environmental impact while maintaining brand identity. The project involved material research, structural design, and visual branding. The final designs used biodegradable materials, minimized waste, and created a recognizable unboxing experience that enhanced the brand's commitment to sustainability."
-}, {
-  id: 6,
-  title: "Social Media Analytics Platform",
-  category: "Web Development",
-  image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1115&q=80",
-  description: "A comprehensive analytics dashboard for social media marketers to track campaign performance and audience engagement.",
-  fullDescription: "We built a powerful social media analytics platform that helps marketers track campaign performance across multiple channels. The platform aggregates data from various social networks, providing unified insights into audience engagement, content performance, and ROI. Features include customizable dashboards, automated reporting, competitor analysis, and AI-powered recommendations for content optimization."
 }];
 
 const ProjectsPage = () => {

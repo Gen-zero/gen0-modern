@@ -1,11 +1,11 @@
 
-import { Link } from 'react-router-dom';
-import { Shield, FileText, Cookie } from 'lucide-react';
+import { Link } from "react-router-dom";
+import { Shield, FileText, Cookie } from "lucide-react";
 
 interface LegalLink {
   name: string;
   href: string;
-  icon: React.ReactNode;
+  icon: JSX.Element;
 }
 
 interface NavMenuLegalProps {
@@ -13,41 +13,37 @@ interface NavMenuLegalProps {
 }
 
 const NavMenuLegal = ({ toggleMenu }: NavMenuLegalProps) => {
-  const legal: LegalLink[] = [
+  const legalLinks: LegalLink[] = [
     {
       name: 'Privacy Policy',
       href: '/privacy-policy',
-      icon: <Shield className="h-4 w-4" />
-    }, 
+      icon: <Shield className="h-4 w-4 text-accent" />
+    },
     {
       name: 'Terms of Service',
       href: '/terms-of-service',
-      icon: <FileText className="h-4 w-4" />
-    }, 
+      icon: <FileText className="h-4 w-4 text-accent" />
+    },
     {
       name: 'Cookie Policy',
       href: '/cookie-policy',
-      icon: <Cookie className="h-4 w-4" />
+      icon: <Cookie className="h-4 w-4 text-accent" />
     }
   ];
 
   return (
-    <div className="space-y-4">
+    <div className="space-y-3">
       <h3 className="text-base md:text-lg font-semibold mb-2 text-accent">Legal</h3>
-      <ul className="space-y-3">
-        {legal.map(item => (
-          <li key={item.name}>
+      <ul className="space-y-2">
+        {legalLinks.map(link => (
+          <li key={link.name}>
             <Link 
-              to={item.href} 
-              className="group flex items-center hover:bg-muted/20 p-2 rounded-md transition-colors duration-200" 
+              to={link.href} 
+              className="relative inline-flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors duration-300 after:absolute after:w-full after:scale-x-0 after:h-[1px] after:bottom-0 after:left-0 after:bg-accent after:origin-bottom-right after:transition-transform after:duration-300 hover:after:scale-x-100 hover:after:origin-bottom-left text-sm md:text-base" 
               onClick={() => toggleMenu()}
             >
-              <span className="mr-3 text-muted-foreground group-hover:text-accent transition-colors">
-                {item.icon}
-              </span>
-              <span className="text-muted-foreground font-medium group-hover:text-foreground transition-colors text-sm md:text-base">
-                {item.name}
-              </span>
+              {link.icon}
+              {link.name}
             </Link>
           </li>
         ))}

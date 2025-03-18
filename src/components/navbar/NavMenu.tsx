@@ -1,3 +1,4 @@
+
 import { X, ArrowRight, Sparkles } from 'lucide-react';
 import { Button } from "../ui/button";
 import { Link } from 'react-router-dom';
@@ -7,10 +8,12 @@ import NavMenuQuickLinks from './NavMenuQuickLinks';
 import NavMenuLegal from './NavMenuLegal';
 import { useNavbar } from '@/contexts/NavbarContext';
 import { ScrollArea } from "@/components/ui/scroll-area";
+
 interface NavMenuProps {
   menuOpen: boolean;
   toggleMenu: () => void;
 }
+
 const NavMenu = ({
   menuOpen,
   toggleMenu
@@ -18,6 +21,7 @@ const NavMenu = ({
   const {
     activeSection
   } = useNavbar();
+  
   const navLinks = [{
     name: 'Home',
     href: '#home'
@@ -31,6 +35,22 @@ const NavMenu = ({
     name: 'Contact',
     href: '#contact'
   }];
+  
+  // Function to handle scrolling to contact section
+  const handleContactClick = () => {
+    toggleMenu();
+    // If already on home page, scroll to contact section
+    if (window.location.pathname === '/') {
+      const contactSection = document.getElementById('contact');
+      if (contactSection) {
+        contactSection.scrollIntoView({ behavior: 'smooth' });
+      }
+    } else {
+      // Navigate to home page with state to scroll to contact section
+      window.location.href = '/#contact';
+    }
+  };
+  
   return <>
       {/* Menu Overlay */}
       <div className={`fixed inset-0 bg-black/60 z-40 transition-opacity duration-500 ${menuOpen ? 'opacity-100' : 'opacity-0 pointer-events-none'}`} onClick={toggleMenu} />
@@ -56,7 +76,7 @@ const NavMenu = ({
             </Link>
             
             {/* Animated Punchline */}
-            <h2 className="text-2xl lg:text-4xl font-bold max-w-3xl mb-4 bg-gradient-to-r from-foreground via-foreground/90 to-foreground/70 bg-clip-text text-gray-50 md:text-xl">✨ We ideate 💡, organize 🗂️, and execute 🚀 altruistic projects dedicated to levelling up humanity 🌏—From Bharat, for the world 🕉️.
+            <h2 className="text-2xl lg:text-4xl font-bold max-w-3xl mb-4 bg-gradient-to-r from-foreground via-foreground/90 to-foreground/70 bg-clip-text text-gray-50 md:text-xl">✨ We ideate 💡, organize 🗂️, and execute 🚀 altruistic projects dedicated to levelling up humanity 🌏—From Bharat, for the world 🕉️.
           </h2>
           </div>
           
@@ -65,7 +85,10 @@ const NavMenu = ({
               <div className="space-y-8 mx-0 px-0 py-px my-px">
                 <NavMenuLinks navLinks={navLinks} activeSection={activeSection} toggleMenu={toggleMenu} />
                 
-                <Button className="w-full text-base py-6 px-8 mt-8 font-medium rounded-lg transition-all duration-300 hover:shadow-lg hover:shadow-accent/20 group" onClick={() => toggleMenu()}>
+                <Button 
+                  className="w-full text-base py-6 px-8 mt-8 font-medium rounded-lg transition-all duration-300 hover:shadow-lg hover:shadow-accent/20 group" 
+                  onClick={handleContactClick}
+                >
                   Get in Touch
                   <ArrowRight className="ml-2 h-5 w-5 transition-transform duration-300 group-hover:translate-x-1" />
                 </Button>
@@ -95,4 +118,5 @@ const NavMenu = ({
       </div>
     </>;
 };
+
 export default NavMenu;

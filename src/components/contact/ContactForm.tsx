@@ -20,6 +20,9 @@ interface ContactFormProps {
   projectOptions: Project[];
 }
 
+// Google Apps Script deployment URL - REPLACE THIS WITH YOUR DEPLOYMENT URL
+const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/YOUR_GOOGLE_SCRIPT_ID/exec";
+
 const ContactForm = ({ inquiryOptions, projectOptions }: ContactFormProps) => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [selectedInquiry, setSelectedInquiry] = useState<InquiryType>('general');
@@ -42,6 +45,8 @@ const ContactForm = ({ inquiryOptions, projectOptions }: ContactFormProps) => {
       courseName: '',
       investmentAmount: '',
       projectsInterested: [],
+      resume: undefined,
+      linkedinProfile: '',
     },
   });
 
@@ -68,16 +73,65 @@ const ContactForm = ({ inquiryOptions, projectOptions }: ContactFormProps) => {
     });
   };
 
-  const onSubmit = (values: FormValues) => {
+  const onSubmit = async (values: FormValues) => {
     setIsSubmitting(true);
     console.log('Form values:', values);
 
-    // Simulate form submission
-    setTimeout(() => {
+    try {
+      // Prepare form data for Google Sheets
+      const formData = new FormData();
+      
+      // Add basic fields
+      formData.append('name', values.name);
+      formData.append('email', values.email);
+      formData.append('message', values.message);
+      formData.append('purpose', values.purpose);
+      
+      // Add conditional fields based on inquiry type
+      if (values.company) formData.append('company', values.company);
+      if (values.position) formData.append('position', values.position);
+      if (values.budget) formData.append('budget', values.budget);
+      if (values.skills) formData.append('skills', values.skills);
+      if (values.portfolio) formData.append('portfolio', values.portfolio);
+      if (values.university) formData.append('university', values.university);
+      if (values.courseName) formData.append('courseName', values.courseName);
+      if (values.investmentAmount) formData.append('investmentAmount', values.investmentAmount);
+      if (values.linkedinProfile) formData.append('linkedinProfile', values.linkedinProfile);
+      
+      // Add project interests as a comma-separated string
+      if (values.projectsInterested && values.projectsInterested.length > 0) {
+        const projectNames = values.projectsInterested.map(id => {
+          const project = projectOptions.find(p => p.id === id);
+          return project ? project.name : id;
+        });
+        formData.append('projectsInterested', projectNames.join(', '));
+      }
+      
+      // Resume file handling (if available)
+      if (values.resume instanceof File) {
+        // Google Apps Script can't handle file uploads directly
+        // We'll just include the file name for reference
+        formData.append('resumeFileName', values.resume.name);
+      }
+
+      // Get timestamp
+      formData.append('timestamp', new Date().toISOString());
+      
+      // Submit to Google Sheets
+      const response = await fetch(GOOGLE_SCRIPT_URL, {
+        method: 'POST',
+        body: formData,
+        mode: 'no-cors' // Required for Google Apps Script
+      });
+      
+      // Since we're using no-cors, we can't read the response
+      // We'll assume success and notify the user
       toast({
         title: "Message sent successfully",
         description: "We'll get back to you as soon as possible.",
       });
+      
+      // Reset form
       form.reset({
         purpose: 'general',
         name: '',
@@ -92,11 +146,23 @@ const ContactForm = ({ inquiryOptions, projectOptions }: ContactFormProps) => {
         courseName: '',
         investmentAmount: '',
         projectsInterested: [],
+        resume: undefined,
+        linkedinProfile: '',
       });
+      
       setSelectedInquiry('general');
       setSelectedProjects([]);
+      
+    } catch (error) {
+      console.error('Error submitting form:', error);
+      toast({
+        title: "Error",
+        description: "There was a problem sending your message. Please try again.",
+        variant: "destructive",
+      });
+    } finally {
       setIsSubmitting(false);
-    }, 1500);
+    }
   };
 
   return (

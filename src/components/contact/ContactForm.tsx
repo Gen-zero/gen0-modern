@@ -21,7 +21,7 @@ interface ContactFormProps {
 }
 
 // Google Apps Script deployment URL - REPLACE THIS WITH YOUR DEPLOYMENT URL
-const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/YOUR_GOOGLE_SCRIPT_ID/exec";
+const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzkd9YmAsmTLnYuL58YDatywu6i6Rqi4BlRQtPHVL00fi6eQ0KO_tj469EUzLxAesaiCw/exec";
 
 const ContactForm = ({ inquiryOptions, projectOptions }: ContactFormProps) => {
   const [isSubmitting, setIsSubmitting] = useState(false);

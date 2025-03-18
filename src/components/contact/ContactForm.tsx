@@ -12,9 +12,8 @@ import JoinInquiryFields from './inquiries/JoinInquiryFields';
 import InvestInquiryFields from './inquiries/InvestInquiryFields';
 import VolunteerInquiryFields from './inquiries/VolunteerInquiryFields';
 import InternInquiryFields from './inquiries/InternInquiryFields';
-import { Button } from '../ui/button';
 import { useToast } from '../../hooks/use-toast';
-import { Loader2 } from 'lucide-react';
+import { Project, InquiryOption } from './types';
 
 const formSchema = z.object({
   firstName: z.string().min(2, 'First name is required'),
@@ -34,28 +33,49 @@ const formSchema = z.object({
   hoursPerWeek: z.string().optional(),
   interests: z.string().optional(),
   message: z.string().min(10, 'Message is required'),
+  projectsInterested: z.array(z.string()).optional(),
 });
 
 type FormData = z.infer<typeof formSchema>;
 
-const ContactForm = () => {
+interface ContactFormProps {
+  inquiryOptions: InquiryOption[];
+  projectOptions: Project[];
+}
+
+const ContactForm = ({ inquiryOptions, projectOptions }: ContactFormProps) => {
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [selectedProjects, setSelectedProjects] = useState<string[]>([]);
   const { toast } = useToast();
   
-  const {
-    register,
-    handleSubmit,
-    watch,
-    reset,
-    formState: { errors },
-  } = useForm<FormData>({
+  const form = useForm<FormData>({
     resolver: zodResolver(formSchema),
     defaultValues: {
       inquiryType: 'service',
+      projectsInterested: [],
     },
   });
 
+  const { register, handleSubmit, watch, reset, control, setValue, formState: { errors } } = form;
+
   const inquiryType = watch('inquiryType');
+
+  const handleProjectSelectionChange = (projectId: string) => {
+    setSelectedProjects(prev => {
+      const isSelected = prev.includes(projectId);
+      const newSelection = isSelected
+        ? prev.filter(id => id !== projectId)
+        : [...prev, projectId];
+      
+      // Update the form value
+      setValue('projectsInterested', newSelection);
+      return newSelection;
+    });
+  };
+
+  const getCurrentInquiryOption = () => {
+    return inquiryOptions.find(option => option.value === inquiryType) || inquiryOptions[0];
+  };
 
   const onSubmit = async (data: FormData) => {
     setIsSubmitting(true);
@@ -67,14 +87,20 @@ const ContactForm = () => {
       const formData = new FormData();
       // Add all form fields to FormData
       Object.entries(data).forEach(([key, value]) => {
-        if (value) formData.append(key, value.toString());
+        if (value) {
+          if (Array.isArray(value)) {
+            formData.append(key, value.join(','));
+          } else {
+            formData.append(key, value.toString());
+          }
+        }
       });
       
       // Add timestamp
       formData.append('timestamp', new Date().toISOString());
       
       // Using fetch with no-cors mode for cross-origin requests
-      const response = await fetch(SCRIPT_URL, {
+      await fetch(SCRIPT_URL, {
         method: 'POST',
         body: formData,
         mode: 'no-cors',
@@ -82,6 +108,7 @@ const ContactForm = () => {
       
       // Reset the form
       reset();
+      setSelectedProjects([]);
       
       // Show success toast
       toast({
@@ -109,33 +136,45 @@ const ContactForm = () => {
     >
       <h2 className="text-2xl font-semibold text-white mb-6">Contact Us</h2>
 
-      <CommonFormFields register={register} errors={errors} />
+      <CommonFormFields form={form} />
 
-      <InquiryTypeSelector register={register} />
+      <InquiryTypeSelector 
+        inquiryOptions={inquiryOptions} 
+        defaultValue={inquiryType}
+        onValueChange={(value) => setValue('inquiryType', value)} 
+      />
 
-      {inquiryType === 'service' && <ServiceInquiryFields register={register} errors={errors} />}
-      {inquiryType === 'join' && <JoinInquiryFields register={register} errors={errors} />}
-      {inquiryType === 'invest' && <InvestInquiryFields register={register} errors={errors} />}
-      {inquiryType === 'volunteer' && <VolunteerInquiryFields register={register} errors={errors} />}
-      {inquiryType === 'intern' && <InternInquiryFields register={register} errors={errors} />}
+      {inquiryType === 'service' && <ServiceInquiryFields form={form} />}
+      {inquiryType === 'join' && <JoinInquiryFields form={form} />}
+      {inquiryType === 'invest' && (
+        <InvestInquiryFields 
+          form={form} 
+          projectOptions={projectOptions} 
+          selectedProjects={selectedProjects} 
+          handleProjectSelectionChange={handleProjectSelectionChange} 
+        />
+      )}
+      {inquiryType === 'volunteer' && (
+        <VolunteerInquiryFields 
+          form={form} 
+          projectOptions={projectOptions} 
+          selectedProjects={selectedProjects} 
+          handleProjectSelectionChange={handleProjectSelectionChange} 
+        />
+      )}
+      {inquiryType === 'intern' && (
+        <InternInquiryFields 
+          form={form} 
+          projectOptions={projectOptions} 
+          selectedProjects={selectedProjects} 
+          handleProjectSelectionChange={handleProjectSelectionChange} 
+        />
+      )}
 
-      <MessageField register={register} errors={errors} />
+      <MessageField form={form} placeholder={getCurrentInquiryOption().placeholder} />
 
       <div className="flex justify-end">
-        <Button 
-          type="submit" 
-          disabled={isSubmitting}
-          className="rounded-full bg-blue-500 hover:bg-blue-600 text-white px-6 py-2 transition-all duration-300 ease-in-out transform hover:scale-105 hover:shadow-lg"
-        >
-          {isSubmitting ? (
-            <>
-              <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-              Sending...
-            </>
-          ) : (
-            'Send Message'
-          )}
-        </Button>
+        <SubmitButton isSubmitting={isSubmitting} />
       </div>
     </form>
   );

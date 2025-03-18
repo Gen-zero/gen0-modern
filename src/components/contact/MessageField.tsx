@@ -2,7 +2,13 @@
 import { FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Textarea } from "@/components/ui/textarea";
 import { UseFormReturn } from "react-hook-form";
-import { FormValues, InquiryOption } from "./types";
+import { z } from "zod";
+
+// Define the expected form values type
+interface FormValues {
+  message: string;
+  [key: string]: any;
+}
 
 interface MessageFieldProps {
   form: UseFormReturn<FormValues>;

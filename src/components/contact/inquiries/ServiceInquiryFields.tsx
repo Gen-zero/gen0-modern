@@ -2,7 +2,12 @@
 import { FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { UseFormReturn } from "react-hook-form";
-import { FormValues } from "../types";
+
+interface FormValues {
+  company?: string;
+  budget?: string;
+  [key: string]: any;
+}
 
 interface ServiceInquiryFieldsProps {
   form: UseFormReturn<FormValues>;

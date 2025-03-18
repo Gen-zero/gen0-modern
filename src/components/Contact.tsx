@@ -14,17 +14,17 @@ const Contact = () => {
     {
       id: '2',
       name: 'Saadhana Board',
-      description: 'A digital Yantra to connect with your deity and your inner self'
+      description: 'A digital Yantra to connect with your deity and your inner self.'
     },
     {
       id: '3',
       name: 'Fuel Unit',
-      description: 'Fuel Unit tracks fuel prices in real-time, spotting the cheapest fuel stops along your route'
+      description: 'Fuel Unit tracks fuel prices in real-time, spotting the cheapest fuel stops along your route.'
     },
     {
       id: '4',
       name: 'Kaali Punk',
-      description: 'Kaali Punk is the first real superhero VI, a mix of human and AI.'
+      description: 'Kaali Punk is the first real superhero VI, a mix of human and AI, your mentor, big bro, and truth-seeker in a world of illusions 🕉️.'
     }
   ];
 

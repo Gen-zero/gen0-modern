@@ -2,17 +2,14 @@
 import { FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Textarea } from "@/components/ui/textarea";
 import { UseFormReturn } from "react-hook-form";
+import { FormValues, InquiryOption } from "./types";
 
-// Define the generic form values type
-interface MessageFieldProps<T extends { message: string }> {
-  form: UseFormReturn<T>;
+interface MessageFieldProps {
+  form: UseFormReturn<FormValues>;
   placeholder: string;
 }
 
-const MessageField = <T extends { message: string }>({ 
-  form, 
-  placeholder 
-}: MessageFieldProps<T>) => {
+const MessageField = ({ form, placeholder }: MessageFieldProps) => {
   return (
     <FormField
       control={form.control}
@@ -25,6 +22,7 @@ const MessageField = <T extends { message: string }>({
               placeholder={placeholder}
               className="min-h-[120px]"
               {...field}
+              required
             />
           </FormControl>
           <FormMessage />

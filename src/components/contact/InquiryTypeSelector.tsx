@@ -5,7 +5,7 @@ import { InquiryOption, InquiryType } from "./types";
 
 interface InquiryTypeSelectorProps {
   inquiryOptions: InquiryOption[];
-  defaultValue?: string;
+  defaultValue?: InquiryType;
   onValueChange: (value: string) => void;
 }
 

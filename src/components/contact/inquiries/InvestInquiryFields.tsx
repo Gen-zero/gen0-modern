@@ -2,14 +2,8 @@
 import { FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { UseFormReturn } from "react-hook-form";
-import { Project } from "../types";
+import { FormValues, Project } from "../types";
 import ProjectSelection from "../ProjectSelection";
-
-interface FormValues {
-  investmentAmount?: string;
-  projectsInterested?: string[];
-  [key: string]: any;
-}
 
 interface InvestInquiryFieldsProps {
   form: UseFormReturn<FormValues>;

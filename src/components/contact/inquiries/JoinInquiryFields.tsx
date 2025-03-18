@@ -2,14 +2,7 @@
 import { FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { UseFormReturn } from "react-hook-form";
-
-interface FormValues {
-  position?: string;
-  skills?: string;
-  linkedinProfile?: string;
-  resume?: FileList | null;
-  [key: string]: any;
-}
+import { FormValues } from "../types";
 
 interface JoinInquiryFieldsProps {
   form: UseFormReturn<FormValues>;
@@ -73,9 +66,9 @@ const JoinInquiryFields = ({ form }: JoinInquiryFieldsProps) => {
                   accept=".pdf" 
                   placeholder="Upload your resume"
                   onChange={(e) => {
-                    const files = e.target.files;
-                    if (files?.length) {
-                      onChange(files);
+                    const file = e.target.files?.[0];
+                    if (file) {
+                      onChange(file);
                     }
                   }}
                   {...fieldProps}

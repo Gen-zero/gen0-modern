@@ -1,20 +1,10 @@
-
 import { FormControl, FormField, FormItem, FormLabel, FormMessage, FormDescription } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { UseFormReturn } from "react-hook-form";
-import { Project } from "../types";
+import { FormValues, Project } from "../types";
 import ProjectSelection from "../ProjectSelection";
 import { AlertCircle } from "lucide-react";
 import { useEffect } from "react";
-
-interface FormValues {
-  university?: string;
-  courseName?: string;
-  linkedinProfile?: string;
-  resume?: FileList | null;
-  projectsInterested?: string[];
-  [key: string]: any;
-}
 
 interface InternInquiryFieldsProps {
   form: UseFormReturn<FormValues>;
@@ -115,9 +105,9 @@ const InternInquiryFields = ({
                   type="file"
                   accept=".pdf"
                   onChange={(e) => {
-                    const files = e.target.files;
-                    if (files?.length) {
-                      onChange(files);
+                    const file = e.target.files?.[0];
+                    if (file) {
+                      onChange(file);
                     }
                   }}
                   {...fieldProps}

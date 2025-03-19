@@ -4,6 +4,7 @@ import { Code, Layout, Database, Globe, ArrowRight, Rocket, Zap, Sparkles, WandS
 import { Button } from './ui/button';
 import { cn } from '@/lib/utils';
 import { motion, AnimatePresence, useInView } from 'framer-motion';
+import { useIsSmallScreen } from '@/hooks/use-small-screen';
 
 // More detailed service descriptions with bullet points
 const services = [{
@@ -64,11 +65,23 @@ const Services = () => {
   const [activeService, setActiveService] = useState<string | null>(null);
   const sectionRef = useRef<HTMLElement>(null);
   const isInView = useInView(sectionRef, { once: false, amount: 0.2 });
+  const isSmallScreen = useIsSmallScreen();
   
   const handleToggleService = (title: string) => {
-    // Toggle: if the same service is clicked, close it; otherwise, open the clicked one
+    // Set to null if clicking the already active service, otherwise set to the clicked one
     setActiveService(activeService === title ? null : title);
   };
+
+  // Return the expanded service to its proper place in the grid
+  useEffect(() => {
+    // This effect helps reflow the layout when a service is expanded or collapsed
+    if (!isSmallScreen) {
+      const timer = setTimeout(() => {
+        window.dispatchEvent(new Event('resize'));
+      }, 50);
+      return () => clearTimeout(timer);
+    }
+  }, [activeService, isSmallScreen]);
 
   return (
     <motion.section 
@@ -179,13 +192,21 @@ const Services = () => {
         </div>
       </motion.div>
       
-      {/* Services Grid */}
+      {/* Services Grid - Responsive Layout */}
       <div className="container mx-auto px-6 max-w-5xl">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div className={cn(
+          "grid gap-6",
+          isSmallScreen 
+            ? "grid-cols-1" 
+            : activeService 
+              ? "grid-cols-1 md:grid-cols-2" 
+              : "grid-cols-1 md:grid-cols-2"
+        )}>
           <AnimatePresence>
             {services.map((service, index) => (
               <motion.div
                 key={service.title}
+                layout
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ 
                   opacity: isInView ? 1 : 0, 
@@ -196,20 +217,23 @@ const Services = () => {
                   }
                 }}
                 exit={{ opacity: 0, y: -20 }}
-                layout
-                className="relative"
+                className={cn(
+                  "relative",
+                  !isSmallScreen && activeService === service.title && "md:col-span-2"
+                )}
               >
                 <motion.div
+                  layout
                   className={cn(
                     "rounded-xl overflow-hidden transition-all duration-500 h-full",
                     activeService === service.title 
                       ? "shadow-lg shadow-primary/20" 
                       : "hover:shadow-md hover:shadow-primary/10"
                   )}
-                  layout
                 >
                   {/* Service Card Header - Always Visible */}
                   <motion.div 
+                    layout
                     className={cn(
                       "p-6 cursor-pointer transition-all duration-300",
                       activeService === service.title 
@@ -222,7 +246,6 @@ const Services = () => {
                         : "linear-gradient(to bottom, rgba(25, 25, 35, 0.7), rgba(15, 15, 25, 0.8))"
                     }}
                     onClick={() => handleToggleService(service.title)}
-                    layout
                     whileHover={{ 
                       scale: activeService === service.title ? 1 : 1.02,
                       transition: { duration: 0.2 }
@@ -232,13 +255,13 @@ const Services = () => {
                     <div className="flex flex-col space-y-4">
                       <div className="flex justify-between items-start">
                         <motion.div 
+                          layout="position"
                           className={cn(
                             "p-4 rounded-lg mr-4 transition-all",
                             activeService === service.title 
                               ? "bg-gradient-to-br from-primary to-primary/80 text-white" 
                               : "bg-primary/20 text-primary/80 group-hover:bg-primary/30"
                           )}
-                          layout="position"
                           whileHover={{ 
                             rotate: [0, -10, 10, -10, 0],
                             transition: { 
@@ -272,25 +295,25 @@ const Services = () => {
                       
                       <motion.div layout="position" className="flex-1">
                         <motion.h3 
+                          layout="position"
                           className={cn(
                             "font-bold text-xl md:text-2xl tracking-tight transition-all mb-2", 
                             activeService === service.title 
                               ? "text-white" 
                               : "text-white/90 group-hover:text-white"
                           )}
-                          layout="position"
                         >
                           {service.title}
                         </motion.h3>
                         
                         <motion.p 
+                          layout="position"
                           className={cn(
                             "text-white/70 transition-all",
                             activeService === service.title
                               ? "line-clamp-none"
                               : "line-clamp-2"
                           )}
-                          layout="position"
                         >
                           {service.description}
                         </motion.p>
@@ -334,10 +357,13 @@ const Services = () => {
                             transition: { delay: 0.1, duration: 0.4 }
                           }}
                         >
-                          <div className="flex flex-col space-y-6">
+                          <div className={cn(
+                            "flex flex-col space-y-6",
+                            !isSmallScreen && "md:grid md:grid-cols-2 md:gap-8 md:space-y-0"
+                          )}>
                             {/* Long Description */}
-                            <motion.p
-                              className="text-white/90 text-base mt-2 mb-4"
+                            <motion.div
+                              className="space-y-6"
                               initial={{ opacity: 0, y: 10 }}
                               animate={{ 
                                 opacity: 1, 
@@ -345,22 +371,67 @@ const Services = () => {
                                 transition: { delay: 0.2, duration: 0.4 }
                               }}
                             >
-                              {service.longDescription}
-                            </motion.p>
+                              <p className="text-white/90 text-base">
+                                {service.longDescription}
+                              </p>
 
-                            {/* Detailed Features */}
-                            <motion.div 
+                              {/* Detailed Features - First Column */}
+                              <div className="space-y-4">
+                                <h4 className="text-lg font-semibold text-white">Key Benefits</h4>
+                                
+                                <div className="space-y-3">
+                                  {service.detailedFeatures.slice(0, 2).map((feature, idx) => (
+                                    <motion.div 
+                                      key={idx} 
+                                      className="bg-white/10 backdrop-blur-md rounded-lg p-4"
+                                      initial={{ x: -10, opacity: 0 }}
+                                      animate={{ 
+                                        x: 0, 
+                                        opacity: 1,
+                                        transition: { 
+                                          delay: 0.3 + (idx * 0.1), 
+                                          duration: 0.4 
+                                        }
+                                      }}
+                                    >
+                                      <div className="flex items-start">
+                                        <motion.div
+                                          className="mt-1 bg-primary/30 p-1 rounded-full mr-3 flex-shrink-0"
+                                          animate={{ 
+                                            scale: [1, 1.3, 1],
+                                            rotate: [0, 5, 0, -5, 0]
+                                          }}
+                                          transition={{ 
+                                            duration: 0.5,
+                                            delay: 0.4 + (idx * 0.1),
+                                            repeat: 1,
+                                            repeatType: "reverse"
+                                          }}
+                                        >
+                                          <Check className="h-4 w-4 text-primary" />
+                                        </motion.div>
+                                        <div>
+                                          <h5 className="font-medium text-white">{feature.title}</h5>
+                                          <p className="text-white/70 text-sm mt-1">{feature.description}</p>
+                                        </div>
+                                      </div>
+                                    </motion.div>
+                                  ))}
+                                </div>
+                              </div>
+                            </motion.div>
+
+                            {/* Detailed Features - Second Column */}
+                            <motion.div
                               className="space-y-4"
                               initial={{ opacity: 0 }}
                               animate={{ 
                                 opacity: 1,
-                                transition: { delay: 0.2, duration: 0.4 }
+                                transition: { delay: 0.3, duration: 0.4 }
                               }}
                             >
-                              <h4 className="text-lg font-semibold text-white">Key Benefits</h4>
-                              
-                              <div className="space-y-3">
-                                {service.detailedFeatures.map((feature, idx) => (
+                              <div className="space-y-3 pt-4 md:pt-16">
+                                {service.detailedFeatures.slice(2, 4).map((feature, idx) => (
                                   <motion.div 
                                     key={idx} 
                                     className="bg-white/10 backdrop-blur-md rounded-lg p-4"
@@ -369,7 +440,7 @@ const Services = () => {
                                       x: 0, 
                                       opacity: 1,
                                       transition: { 
-                                        delay: 0.3 + (idx * 0.1), 
+                                        delay: 0.5 + (idx * 0.1), 
                                         duration: 0.4 
                                       }
                                     }}
@@ -383,7 +454,7 @@ const Services = () => {
                                         }}
                                         transition={{ 
                                           duration: 0.5,
-                                          delay: 0.4 + (idx * 0.1),
+                                          delay: 0.6 + (idx * 0.1),
                                           repeat: 1,
                                           repeatType: "reverse"
                                         }}
@@ -398,48 +469,48 @@ const Services = () => {
                                   </motion.div>
                                 ))}
                               </div>
-                            </motion.div>
-                            
-                            <motion.div
-                              initial={{ y: 10, opacity: 0 }}
-                              animate={{ 
-                                y: 0, 
-                                opacity: 1,
-                                transition: { delay: 0.6, duration: 0.3 }
-                              }}
-                              className="flex justify-center mt-4"
-                            >
+
                               <motion.div
-                                whileHover={{ 
-                                  scale: 1.03,
-                                  transition: { duration: 0.2 }
+                                initial={{ y: 10, opacity: 0 }}
+                                animate={{ 
+                                  y: 0, 
+                                  opacity: 1,
+                                  transition: { delay: 0.7, duration: 0.3 }
                                 }}
-                                whileTap={{ scale: 0.97 }}
+                                className="flex justify-center mt-6"
                               >
-                                <Button 
-                                  className="px-6 py-5 rounded-full font-medium text-white bg-white/20 hover:bg-white/30 backdrop-blur-md transition-all duration-300"
-                                  onClick={(e) => {
-                                    e.stopPropagation();
-                                    const contactSection = document.getElementById('contact');
-                                    if (contactSection) {
-                                      contactSection.scrollIntoView({ behavior: 'smooth' });
-                                    }
+                                <motion.div
+                                  whileHover={{ 
+                                    scale: 1.03,
+                                    transition: { duration: 0.2 }
                                   }}
+                                  whileTap={{ scale: 0.97 }}
                                 >
-                                  <span>Start Now</span>
-                                  <motion.div
-                                    animate={{ 
-                                      x: [0, 5, 0],
-                                    }}
-                                    transition={{ 
-                                      duration: 1,
-                                      repeat: Infinity,
-                                      repeatType: "reverse"
+                                  <Button 
+                                    className="px-6 py-5 rounded-full font-medium text-white bg-white/20 hover:bg-white/30 backdrop-blur-md transition-all duration-300"
+                                    onClick={(e) => {
+                                      e.stopPropagation();
+                                      const contactSection = document.getElementById('contact');
+                                      if (contactSection) {
+                                        contactSection.scrollIntoView({ behavior: 'smooth' });
+                                      }
                                     }}
                                   >
-                                    <ArrowRight className="ml-1 h-4 w-4" />
-                                  </motion.div>
-                                </Button>
+                                    <span>Start Now</span>
+                                    <motion.div
+                                      animate={{ 
+                                        x: [0, 5, 0],
+                                      }}
+                                      transition={{ 
+                                        duration: 1,
+                                        repeat: Infinity,
+                                        repeatType: "reverse"
+                                      }}
+                                    >
+                                      <ArrowRight className="ml-1 h-4 w-4" />
+                                    </motion.div>
+                                  </Button>
+                                </motion.div>
                               </motion.div>
                             </motion.div>
                           </div>

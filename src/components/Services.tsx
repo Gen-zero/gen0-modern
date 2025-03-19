@@ -1,8 +1,9 @@
 
 import { useState, useEffect, useRef } from 'react';
-import { Code, Layout, Database, Globe, ArrowRight, Cpu, Rocket } from 'lucide-react';
+import { Code, Layout, Database, Globe, ArrowRight, ArrowDown, ArrowUp, Rocket, Cpu } from 'lucide-react';
 import { Button } from './ui/button';
 import { cn } from '@/lib/utils';
+import { Collapsible, CollapsibleContent, CollapsibleTrigger } from './ui/collapsible';
 
 const services = [{
   title: '0 TO 1',
@@ -31,11 +32,9 @@ const services = [{
 }];
 
 const Services = () => {
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const [isAnimating, setIsAnimating] = useState(false);
+  const [openService, setOpenService] = useState<string | null>(null);
   const [isVisible, setIsVisible] = useState(false);
   const servicesRef = useRef<HTMLElement>(null);
-  const serviceDetailsRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const observer = new IntersectionObserver(([entry]) => {
@@ -55,21 +54,8 @@ const Services = () => {
     };
   }, []);
 
-  const handleChangeService = (index: number) => {
-    if (isAnimating || index === currentIndex) return;
-    setIsAnimating(true);
-    setCurrentIndex(index);
-    
-    // Scroll to the service details section
-    setTimeout(() => {
-      if (serviceDetailsRef.current) {
-        serviceDetailsRef.current.scrollIntoView({ 
-          behavior: 'smooth',
-          block: 'center'
-        });
-      }
-      setIsAnimating(false);
-    }, 100);
+  const handleToggleService = (title: string) => {
+    setOpenService(openService === title ? null : title);
   };
 
   return <section ref={servicesRef} id="services" className="min-h-screen w-full py-24 relative overflow-hidden flex flex-col justify-center" style={{
@@ -90,72 +76,97 @@ const Services = () => {
         <div className="mt-4 w-24 h-1 bg-gradient-to-r from-secondary via-primary to-accent mx-auto bg-[#9eb8c2]/[0.48] rounded-sm" />
       </div>
       
-      <div className="container mx-auto px-6 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-        <div className={cn("lg:col-span-5 transition-all duration-700 transform", isVisible ? "opacity-100 translate-x-0" : "opacity-0 -translate-x-10")}>
-          <div className="space-y-4">
-            {services.map((service, index) => <div key={index} onClick={() => handleChangeService(index)} className={cn("p-6 rounded-xl cursor-pointer transition-all duration-300 transform group", currentIndex === index ? "bg-gradient-to-r from-primary/20 to-primary/10 border-l-4 border-primary" : "hover:bg-gradient-to-r hover:from-primary/10 hover:to-primary/5 border-l-4 border-transparent")}>
-                <div className="flex items-center">
-                  <div className={cn("p-3 rounded-lg mr-4 transition-all", currentIndex === index ? "bg-primary text-white" : "bg-primary/10 text-primary group-hover:bg-primary/20")}>
-                    {service.icon}
+      <div className="container mx-auto px-6 grid lg:grid-cols-1 gap-6 max-w-4xl">
+        {services.map((service, index) => (
+          <Collapsible 
+            key={service.title}
+            open={openService === service.title}
+            onOpenChange={() => handleToggleService(service.title)}
+            className={cn(
+              "rounded-xl overflow-hidden transition-all duration-500",
+              openService === service.title ? "shadow-lg shadow-primary/20" : ""
+            )}
+          >
+            <CollapsibleTrigger className="w-full">
+              <div 
+                className={cn(
+                  "p-6 cursor-pointer transition-all duration-300 transform",
+                  openService === service.title 
+                    ? "bg-gradient-to-r from-primary/20 to-primary/10 border-l-4 border-primary" 
+                    : "hover:bg-gradient-to-r hover:from-primary/10 hover:to-primary/5 border-l-4 border-transparent"
+                )}
+              >
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center">
+                    <div className={cn("p-3 rounded-lg mr-4 transition-all", 
+                      openService === service.title 
+                        ? "bg-primary text-white" 
+                        : "bg-primary/10 text-primary group-hover:bg-primary/20"
+                    )}>
+                      {service.icon}
+                    </div>
+                    <div>
+                      <h3 className={cn("font-bold text-lg transition-all", 
+                        openService === service.title 
+                          ? "text-white" 
+                          : "text-white/80 group-hover:text-white"
+                      )}>
+                        {service.title}
+                      </h3>
+                      <p className="text-white/60 text-sm mt-1 line-clamp-1">
+                        {service.description}
+                      </p>
+                    </div>
                   </div>
-                  <div>
-                    <h3 className={cn("font-bold text-lg transition-all", currentIndex === index ? "text-white" : "text-white/80 group-hover:text-white")}>
-                      {service.title}
-                    </h3>
-                    <p className="text-white/60 text-sm mt-1 line-clamp-1">
-                      {service.description}
-                    </p>
-                  </div>
-                  <ArrowRight className={cn("ml-auto transition-all", currentIndex === index ? "opacity-100 text-primary" : "opacity-0 text-white/40 group-hover:opacity-70 group-hover:translate-x-1")} />
+                  {openService === service.title ? (
+                    <ArrowUp className="text-primary" />
+                  ) : (
+                    <ArrowDown className="text-white/40" />
+                  )}
                 </div>
-              </div>)}
-          </div>
-        </div>
-        
-        <div 
-          ref={serviceDetailsRef}
-          className={cn("lg:col-span-7 relative min-h-[60vh] lg:min-h-[70vh] flex items-center justify-center transition-all duration-700 transform", isVisible ? "opacity-100 translate-x-0" : "opacity-0 translate-x-10")}
-        >
-          {services.map((service, index) => <div key={index} className={cn("absolute inset-0 flex flex-col items-center justify-center p-8 rounded-2xl backdrop-blur-sm transition-all duration-700", currentIndex === index ? "opacity-100 z-10 transform scale-100" : "opacity-0 z-0 transform scale-95")} style={{
-          background: currentIndex === index ? service.backgroundGradient : 'transparent'
-        }}>
-              <div className="absolute inset-0 flex items-center justify-center opacity-10">
-                {service.icon}
               </div>
-              
-              <div className="text-center z-10 max-w-xl mx-auto relative transform transition-all duration-700">
-                <div className="mb-6 text-white">
-                  <div className="inline-flex items-center justify-center h-24 w-24 rounded-full bg-white/10 backdrop-blur-sm">
-                    {service.icon}
+            </CollapsibleTrigger>
+
+            <CollapsibleContent 
+              className="overflow-hidden transition-all duration-500"
+            >
+              <div 
+                className="p-8 rounded-b-xl"
+                style={{ background: service.backgroundGradient }}
+              >
+                <div className="text-center max-w-xl mx-auto relative">
+                  <div className="mb-6 text-white">
+                    <div className="inline-flex items-center justify-center h-24 w-24 rounded-full bg-white/10 backdrop-blur-sm">
+                      {service.icon}
+                    </div>
                   </div>
+                  
+                  <h3 className="text-3xl md:text-4xl font-bold text-white mb-6 tracking-tight">
+                    {service.title}
+                  </h3>
+                  
+                  <p className="text-lg text-white/90 mb-8 max-w-lg mx-auto">
+                    {service.description}
+                  </p>
+                  
+                  <div className="grid grid-cols-2 gap-4 mb-10">
+                    {service.features.map((feature, idx) => (
+                      <div key={idx} className="flex items-center">
+                        <div className="h-2 w-2 rounded-full bg-accent mr-2"></div>
+                        <span className="text-white/80">{feature}</span>
+                      </div>
+                    ))}
+                  </div>
+                  
+                  <Button className="px-8 py-6 rounded-full text-lg font-medium text-white bg-gradient-to-r from-accent/90 to-accent hover:from-accent hover:to-accent/90 hover:scale-105 transition-all duration-300 hover:shadow-lg hover:shadow-accent/20">
+                    Start Now
+                    <Rocket className="ml-2 h-5 w-5 animate-pulse" />
+                  </Button>
                 </div>
-                
-                <h3 className="text-4xl md:text-5xl font-bold text-white mb-6 tracking-tight">
-                  {service.title}
-                </h3>
-                
-                <p className="text-lg text-white/90 mb-8 max-w-lg mx-auto">
-                  {service.description}
-                </p>
-                
-                <div className="grid grid-cols-2 gap-4 mb-10">
-                  {service.features.map((feature, idx) => <div key={idx} className="flex items-center">
-                      <div className="h-2 w-2 rounded-full bg-accent mr-2"></div>
-                      <span className="text-white/80">{feature}</span>
-                    </div>)}
-                </div>
-                
-                <Button className="px-8 py-6 rounded-full text-lg font-medium text-white bg-gradient-to-r from-accent/90 to-accent hover:from-accent hover:to-accent/90 hover:scale-105 transition-all duration-300 hover:shadow-lg hover:shadow-accent/20">
-                  Start Now
-                  <Rocket className="ml-2 h-5 w-5 animate-pulse" />
-                </Button>
               </div>
-            </div>)}
-        </div>
-      </div>
-      
-      <div className={cn("flex justify-center gap-2 mt-12 container mx-auto transition-all duration-700", isVisible ? "opacity-100" : "opacity-0")}>
-        {services.map((_, index) => <button key={index} onClick={() => handleChangeService(index)} className={cn("transition-all duration-300 rounded-full focus:outline-none", currentIndex === index ? "w-8 h-2 bg-primary" : "w-2 h-2 bg-white/20 hover:bg-white/40")} aria-label={`View service ${index + 1}`} />)}
+            </CollapsibleContent>
+          </Collapsible>
+        ))}
       </div>
     </section>;
 };

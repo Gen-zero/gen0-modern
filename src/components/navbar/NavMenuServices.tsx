@@ -1,5 +1,5 @@
 
-import { Code, Layout, Palette, Search } from 'lucide-react';
+import { Code, Layout, Palette, Search, Rocket } from 'lucide-react';
 
 interface ServiceLink {
   name: string;
@@ -16,12 +16,12 @@ const NavMenuServices = ({ toggleMenu }: NavMenuServicesProps) => {
     {
       name: '0 TO 1',
       href: '#services',
-      icon: <Code className="h-4 w-4 text-accent" />
+      icon: <Rocket className="h-4 w-4 text-accent" />
     }, 
     {
       name: 'Web Development',
       href: '#services',
-      icon: <Layout className="h-4 w-4 text-accent" />
+      icon: <Code className="h-4 w-4 text-accent" />
     }, 
     {
       name: 'UI/UX Design',

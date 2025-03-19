@@ -4,11 +4,23 @@ import Hero from "@/components/Hero";
 import Services from "@/components/Services";
 import Projects from "@/components/Projects";
 import Contact from "@/components/Contact";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
+import { motion, AnimatePresence } from "framer-motion";
 
 const Index = () => {
   const location = useLocation();
+  const [isLoaded, setIsLoaded] = useState(false);
+
+  // Animation variants for page sections
+  const sectionVariants = {
+    hidden: { opacity: 0, y: 50 },
+    visible: { 
+      opacity: 1, 
+      y: 0,
+      transition: { duration: 0.8, ease: "easeOut" }
+    }
+  };
   
   // Handle scrolling to sections
   useEffect(() => {
@@ -46,6 +58,8 @@ const Index = () => {
       observer.observe(section);
     });
 
+    setIsLoaded(true);
+
     return () => {
       sections.forEach((section) => {
         observer.unobserve(section);
@@ -54,18 +68,53 @@ const Index = () => {
   }, []);
 
   return (
-    <div className="min-h-screen bg-background">
-      <Navbar />
-      <Hero />
-      <Services />
-      <Projects />
-      <Contact />
-      
-      {/* Copyright Section */}
-      <div className="container mx-auto py-6 text-center text-muted-foreground text-sm border-t border-border/40 mt-10">
-        <p>© {new Date().getFullYear()} Gen0. All rights reserved.</p>
-      </div>
-    </div>
+    <AnimatePresence>
+      <motion.div 
+        className="min-h-screen bg-background"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.5 }}
+      >
+        <Navbar />
+        
+        <Hero />
+        
+        <Services />
+        
+        <motion.div
+          variants={sectionVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.2 }}
+        >
+          <Projects />
+        </motion.div>
+        
+        <motion.div
+          variants={sectionVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.2 }}
+        >
+          <Contact />
+        </motion.div>
+        
+        {/* Copyright Section with subtle animation */}
+        <motion.div 
+          className="container mx-auto py-6 text-center text-muted-foreground text-sm border-t border-border/40 mt-10"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 1, duration: 0.8 }}
+        >
+          <motion.p
+            whileHover={{ color: "hsl(var(--accent))" }}
+            transition={{ duration: 0.3 }}
+          >
+            © {new Date().getFullYear()} Gen0. All rights reserved.
+          </motion.p>
+        </motion.div>
+      </motion.div>
+    </AnimatePresence>
   );
 };
 

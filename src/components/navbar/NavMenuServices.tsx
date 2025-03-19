@@ -1,5 +1,6 @@
 
 import { Code, Layout, Palette, Search, Rocket } from 'lucide-react';
+import { motion } from 'framer-motion';
 
 interface ServiceLink {
   name: string;
@@ -35,24 +36,66 @@ const NavMenuServices = ({ toggleMenu }: NavMenuServicesProps) => {
     }
   ];
 
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.1
+      }
+    }
+  };
+
+  const itemVariants = {
+    hidden: { x: -20, opacity: 0 },
+    visible: {
+      x: 0,
+      opacity: 1,
+      transition: { duration: 0.4 }
+    }
+  };
+
   return (
-    <div className="space-y-3">
-      <h3 className="text-base md:text-lg font-semibold mb-2 text-accent">Services</h3>
-      <ul className="space-y-2">
+    <motion.div 
+      className="space-y-3"
+      initial="hidden"
+      animate="visible"
+      variants={containerVariants}
+    >
+      <motion.h3 
+        className="text-base md:text-lg font-semibold mb-2 text-accent"
+        variants={itemVariants}
+      >
+        Services
+      </motion.h3>
+      <motion.ul 
+        className="space-y-2"
+        variants={containerVariants}
+      >
         {services.map(service => (
-          <li key={service.name}>
+          <motion.li 
+            key={service.name}
+            variants={itemVariants}
+            whileHover={{ x: 5 }}
+            transition={{ duration: 0.2 }}
+          >
             <a 
               href={service.href} 
               className="relative inline-flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors duration-300 after:absolute after:w-full after:scale-x-0 after:h-[1px] after:bottom-0 after:left-0 after:bg-accent after:origin-bottom-right after:transition-transform after:duration-300 hover:after:scale-x-100 hover:after:origin-bottom-left text-sm md:text-base" 
               onClick={() => toggleMenu()}
             >
-              {service.icon}
+              <motion.div
+                whileHover={{ rotate: [0, -10, 10, -10, 0] }}
+                transition={{ duration: 0.5 }}
+              >
+                {service.icon}
+              </motion.div>
               {service.name}
             </a>
-          </li>
+          </motion.li>
         ))}
-      </ul>
-    </div>
+      </motion.ul>
+    </motion.div>
   );
 };
 

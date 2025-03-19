@@ -1,5 +1,6 @@
 
-import { Mail, MapPin, Phone } from "lucide-react";
+import { Mail, MapPin, Phone, Sparkles } from "lucide-react";
+import { motion } from "framer-motion";
 import ContactInfo from "./ContactInfo";
 import SocialLinks from "./SocialLinks";
 
@@ -22,33 +23,89 @@ const ContactSidebar = () => {
     }
   ];
 
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.2
+      }
+    }
+  };
+
+  const itemVariants = {
+    hidden: { y: 20, opacity: 0 },
+    visible: {
+      y: 0,
+      opacity: 1,
+      transition: { duration: 0.5 }
+    }
+  };
+
   return (
-    <div className="space-y-10 animate-fade-in" style={{ animationDelay: '0.2s' }}>
-      <div>
-        <h3 className="text-xl font-semibold mb-6">Get in touch</h3>
+    <motion.div 
+      className="space-y-10"
+      initial="hidden"
+      animate="visible"
+      variants={containerVariants}
+    >
+      <motion.div variants={itemVariants}>
+        <h3 className="text-xl font-semibold mb-6 flex items-center gap-2">
+          Get in touch
+          <motion.span
+            animate={{ 
+              rotate: [0, 10, -10, 10, 0],
+            }}
+            transition={{ duration: 2, repeat: Infinity, repeatDelay: 5 }}
+          >
+            <Sparkles className="h-4 w-4 text-accent" />
+          </motion.span>
+        </h3>
         <div className="space-y-6">
           {contactInfo.map((info, index) => (
-            <ContactInfo 
+            <motion.div
               key={index}
-              icon={info.icon}
-              title={info.title}
-              details={info.details}
-            />
+              initial={{ x: -20, opacity: 0 }}
+              animate={{ x: 0, opacity: 1 }}
+              transition={{ delay: 0.3 + (index * 0.1), duration: 0.5 }}
+              whileHover={{ 
+                scale: 1.03,
+                transition: { duration: 0.2 }
+              }}
+            >
+              <ContactInfo 
+                icon={info.icon}
+                title={info.title}
+                details={info.details}
+              />
+            </motion.div>
           ))}
         </div>
-      </div>
+      </motion.div>
       
-      <div>
+      <motion.div variants={itemVariants}>
         <h3 className="text-xl font-semibold mb-6">Working hours</h3>
-        <p className="text-muted-foreground mb-1">Monday - Friday: 9:00 AM - 6:00 PM</p>
-        <p className="text-muted-foreground">Weekend: Closed</p>
-      </div>
+        <motion.p 
+          className="text-muted-foreground mb-1"
+          whileHover={{ color: "hsl(var(--accent))" }}
+          transition={{ duration: 0.3 }}
+        >
+          Monday - Friday: 9:00 AM - 6:00 PM
+        </motion.p>
+        <motion.p 
+          className="text-muted-foreground"
+          whileHover={{ color: "hsl(var(--accent))" }}
+          transition={{ duration: 0.3 }}
+        >
+          Weekend: Closed
+        </motion.p>
+      </motion.div>
       
-      <div>
+      <motion.div variants={itemVariants}>
         <h3 className="text-xl font-semibold mb-6">Follow us</h3>
         <SocialLinks />
-      </div>
-    </div>
+      </motion.div>
+    </motion.div>
   );
 };
 

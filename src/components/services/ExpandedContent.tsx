@@ -134,10 +134,8 @@ const FeatureCard = ({ feature, index }: { feature: ServiceFeature, index: numbe
       <div className="flex items-start">
         <motion.div
           className="mt-1 bg-primary/30 p-1 rounded-full mr-3 flex-shrink-0"
-          // Fixed animation to use only two keyframes
           animate={{ 
-            scale: [1, 1.2],
-            rotate: [0, 5]
+            scale: 1.2,
           }}
           transition={{ 
             duration: 0.5,
@@ -169,10 +167,7 @@ const StartNowButton = () => {
       className="flex justify-center mt-6"
     >
       <motion.div
-        whileHover={{ 
-          scale: 1.05,
-          transition: { duration: 0.2 }
-        }}
+        whileHover={{ scale: 1.05 }}
         whileTap={{ scale: 0.97 }}
       >
         <Button 
@@ -187,10 +182,7 @@ const StartNowButton = () => {
         >
           <span>Start Now</span>
           <motion.div
-            // Fixed animation to use only two keyframes
-            animate={{ 
-              x: [0, 5],
-            }}
+            animate={{ x: 5 }}
             transition={{ 
               duration: 1,
               repeat: Infinity,
@@ -210,10 +202,7 @@ const BackgroundElements = () => {
     <div className="absolute inset-0 overflow-hidden pointer-events-none z-0">
       <motion.div 
         className="absolute -top-10 -right-10 w-40 h-40 bg-accent/5 rounded-full blur-2xl" 
-        animate={{ 
-          scale: [1, 1.2],
-          opacity: [0.1, 0.3],
-        }}
+        animate={{ scale: 1.2 }}
         transition={{ 
           duration: 4, 
           repeat: Infinity,
@@ -222,11 +211,7 @@ const BackgroundElements = () => {
       />
       <motion.div 
         className="absolute bottom-0 left-10 w-20 h-20 bg-primary/10 rounded-full blur-xl" 
-        animate={{ 
-          scale: [1.2, 0.8],
-          opacity: [0.3, 0.1],
-          y: [0, 10]
-        }}
+        animate={{ y: 10 }}
         transition={{ 
           duration: 5, 
           repeat: Infinity,
@@ -235,10 +220,7 @@ const BackgroundElements = () => {
       />
       <motion.div 
         className="absolute top-1/4 left-1/4 w-4 h-4 bg-secondary/30 rounded-full blur-sm" 
-        animate={{ 
-          scale: [1, 2],
-          opacity: [0.4, 0.1],
-        }}
+        animate={{ scale: 2 }}
         transition={{ 
           duration: 3, 
           repeat: Infinity,

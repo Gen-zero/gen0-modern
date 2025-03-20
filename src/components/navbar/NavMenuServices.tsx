@@ -85,8 +85,8 @@ const NavMenuServices = ({ toggleMenu }: NavMenuServicesProps) => {
               onClick={() => toggleMenu()}
             >
               <motion.div
-                whileHover={{ rotate: [0, -10, 10, -10, 0] }}
-                transition={{ duration: 0.5 }}
+                whileHover={{ rotate: 10 }}
+                transition={{ duration: 0.3 }}
               >
                 {service.icon}
               </motion.div>

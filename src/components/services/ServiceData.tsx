@@ -1,5 +1,5 @@
 
-import { ReactNode } from 'react';
+import React, { ReactNode } from 'react';
 import { Code, Layout, Database, Globe, Rocket } from 'lucide-react';
 
 export interface ServiceFeature {

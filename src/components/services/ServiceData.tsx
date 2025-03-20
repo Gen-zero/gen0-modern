@@ -1,5 +1,5 @@
 
-import React, { ReactNode } from 'react';
+import React, { ReactElement } from 'react';
 import { Code, Layout, Database, Globe, Rocket } from 'lucide-react';
 
 export interface ServiceFeature {
@@ -9,7 +9,7 @@ export interface ServiceFeature {
 
 export interface ServiceData {
   title: string;
-  icon: ReactNode;
+  icon: ReactElement;
   description: string;
   longDescription: string;
   backgroundGradient: string;

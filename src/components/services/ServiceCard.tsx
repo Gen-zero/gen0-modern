@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Check, Zap } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import ExpandedContent from './ExpandedContent';
+import { ReactElement } from 'react';
 
 interface ServiceFeature {
   title: string;
@@ -11,7 +12,7 @@ interface ServiceFeature {
 
 interface ServiceCardProps {
   title: string;
-  icon: JSX.Element;
+  icon: ReactElement;
   description: string;
   longDescription: string;
   backgroundGradient: string;
@@ -85,19 +86,21 @@ const ServiceCard = ({
 
 export default ServiceCard;
 
+interface CardHeaderProps {
+  title: string;
+  icon: ReactElement;
+  description: string;
+  isActive: boolean;
+  onToggle: () => void;
+}
+
 const CardHeader = ({ 
   title, 
   icon, 
   description, 
   isActive, 
   onToggle 
-}: { 
-  title: string;
-  icon: JSX.Element;
-  description: string;
-  isActive: boolean;
-  onToggle: () => void;
-}) => {
+}: CardHeaderProps) => {
   return (
     <motion.div 
       layout

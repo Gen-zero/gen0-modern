@@ -133,14 +133,15 @@ const CardHeader = ({
                 : "bg-primary/20 text-primary/80 group-hover:bg-primary/30"
             )}
             whileHover={{ 
-              rotate: [0, -10, 10, -10, 0],
+              rotate: [-10, 10, -5, 5, 0],
               transition: { 
                 duration: 0.5,
                 ease: "easeInOut"
               }
             }}
+            // Fixed animation to use only two keyframes
             animate={{ 
-              scale: isActive ? [1, 1.1, 1] : 1,
+              scale: isActive ? [1, 1.1] : 1,
               transition: { duration: 0.5 }
             }}
           >

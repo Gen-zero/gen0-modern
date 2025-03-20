@@ -1,4 +1,3 @@
-
 import { useState, useEffect, useRef } from 'react';
 import { Code, Layout, Database, Globe, ArrowRight, Rocket, Zap, Sparkles, WandSparkles, Check } from 'lucide-react';
 import { Button } from './ui/button';
@@ -6,7 +5,6 @@ import { cn } from '@/lib/utils';
 import { motion, AnimatePresence, useInView } from 'framer-motion';
 import { useIsSmallScreen } from '@/hooks/use-small-screen';
 
-// More detailed service descriptions with bullet points
 const services = [{
   title: '0 TO 1',
   icon: <Rocket className="h-16 w-16 md:h-20 md:w-20" />,
@@ -68,13 +66,10 @@ const Services = () => {
   const isSmallScreen = useIsSmallScreen();
   
   const handleToggleService = (title: string) => {
-    // Set to null if clicking the already active service, otherwise set to the clicked one
     setActiveService(activeService === title ? null : title);
   };
 
-  // Return the expanded service to its proper place in the grid
   useEffect(() => {
-    // This effect helps reflow the layout when a service is expanded or collapsed
     if (!isSmallScreen) {
       const timer = setTimeout(() => {
         window.dispatchEvent(new Event('resize'));
@@ -93,7 +88,6 @@ const Services = () => {
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
     >
-      {/* Background Elements */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <motion.div 
           className="absolute -top-40 -right-40 w-96 h-96 bg-primary/10 rounded-full blur-3xl" 
@@ -134,7 +128,6 @@ const Services = () => {
         />
       </div>
       
-      {/* Section Header */}
       <motion.div 
         className="container mx-auto px-6 mb-12"
         initial={{ opacity: 0, y: 30 }}
@@ -192,16 +185,8 @@ const Services = () => {
         </div>
       </motion.div>
       
-      {/* Services Grid - Responsive Layout */}
-      <div className="container mx-auto px-6 max-w-5xl">
-        <div className={cn(
-          "grid gap-6",
-          isSmallScreen 
-            ? "grid-cols-1" 
-            : activeService 
-              ? "grid-cols-1 md:grid-cols-2" 
-              : "grid-cols-1 md:grid-cols-2"
-        )}>
+      <div className="container mx-auto px-6 max-w-3xl">
+        <div className="grid grid-cols-1 gap-6">
           <AnimatePresence>
             {services.map((service, index) => (
               <motion.div
@@ -217,10 +202,7 @@ const Services = () => {
                   }
                 }}
                 exit={{ opacity: 0, y: -20 }}
-                className={cn(
-                  "relative",
-                  !isSmallScreen && activeService === service.title && "md:col-span-2"
-                )}
+                className="relative"
               >
                 <motion.div
                   layout
@@ -231,7 +213,6 @@ const Services = () => {
                       : "hover:shadow-md hover:shadow-primary/10"
                   )}
                 >
-                  {/* Service Card Header - Always Visible */}
                   <motion.div 
                     layout
                     className={cn(
@@ -321,7 +302,6 @@ const Services = () => {
                     </div>
                   </motion.div>
 
-                  {/* Expanded Content */}
                   <AnimatePresence>
                     {activeService === service.title && (
                       <motion.div 
@@ -357,11 +337,7 @@ const Services = () => {
                             transition: { delay: 0.1, duration: 0.4 }
                           }}
                         >
-                          <div className={cn(
-                            "flex flex-col space-y-6",
-                            !isSmallScreen && "md:grid md:grid-cols-2 md:gap-8 md:space-y-0"
-                          )}>
-                            {/* Long Description */}
+                          <div className="flex flex-col space-y-6">
                             <motion.div
                               className="space-y-6"
                               initial={{ opacity: 0, y: 10 }}
@@ -375,7 +351,6 @@ const Services = () => {
                                 {service.longDescription}
                               </p>
 
-                              {/* Detailed Features - First Column */}
                               <div className="space-y-4">
                                 <h4 className="text-lg font-semibold text-white">Key Benefits</h4>
                                 
@@ -421,7 +396,6 @@ const Services = () => {
                               </div>
                             </motion.div>
 
-                            {/* Detailed Features - Second Column */}
                             <motion.div
                               className="space-y-4"
                               initial={{ opacity: 0 }}
@@ -515,7 +489,6 @@ const Services = () => {
                             </motion.div>
                           </div>
 
-                          {/* Background Elements for Expanded Content */}
                           <div className="absolute inset-0 overflow-hidden pointer-events-none z-0">
                             <motion.div 
                               className="absolute -top-10 -right-10 w-40 h-40 bg-white/5 rounded-full blur-2xl" 
@@ -561,7 +534,6 @@ const Services = () => {
                   </AnimatePresence>
                 </motion.div>
                 
-                {/* Sparkle Effect */}
                 <AnimatePresence>
                   {activeService === service.title && (
                     <>

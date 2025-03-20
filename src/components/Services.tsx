@@ -32,8 +32,8 @@ const Services = () => {
       
       <ServiceHeader isInView={isInView} />
       
-      <div className="container mx-auto px-6 max-w-3xl">
-        <div className="grid grid-cols-1 gap-6">
+      <div className="container mx-auto px-4 sm:px-6 max-w-[90vw]">
+        <div className="grid grid-cols-1 gap-8">
           {services.map((service, index) => (
             <div key={service.title} className="relative">
               <ServiceCard

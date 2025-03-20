@@ -7,42 +7,58 @@ interface ServiceHeaderProps {
 }
 
 const ServiceHeader = ({ isInView }: ServiceHeaderProps) => {
+  // Animation variants
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: { 
+      opacity: 1,
+      transition: { 
+        staggerChildren: 0.2,
+        delayChildren: 0.3
+      }
+    }
+  };
+  
+  const itemVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: { 
+      opacity: 1, 
+      y: 0,
+      transition: { duration: 0.8, ease: "easeOut" }
+    }
+  };
+
   return (
     <motion.div 
-      className="container mx-auto px-6 mb-12"
-      initial={{ opacity: 0, y: 30 }}
-      animate={{ 
-        opacity: isInView ? 1 : 0, 
-        y: isInView ? 0 : 30,
-        transition: { duration: 0.7 }
-      }}
+      className="container mx-auto px-4 sm:px-6 mb-12 max-w-[90vw]"
+      variants={containerVariants}
+      initial="hidden"
+      animate={isInView ? "visible" : "hidden"}
     >
       <div className="flex flex-col items-center">
         <motion.div
-          initial={{ scale: 0 }}
+          initial={{ scale: 0, rotate: -180 }}
           animate={{ 
             scale: isInView ? 1 : 0,
-            transition: { delay: 0.2, duration: 0.5 }
+            rotate: isInView ? 0 : -180,
+            transition: { delay: 0.2, duration: 0.6, type: "spring" }
           }}
-          className="mb-4"
+          className="mb-6"
         >
-          <div className="p-3 bg-primary/20 rounded-full">
-            <WandSparkles className="h-6 w-6 text-primary" />
+          <div className="p-4 bg-gradient-to-tr from-primary/30 to-secondary/20 rounded-full shadow-lg">
+            <WandSparkles className="h-7 w-7 text-primary" />
           </div>
         </motion.div>
+        
         <motion.h2 
           className="text-3xl md:text-5xl font-bold text-center"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ 
-            opacity: isInView ? 1 : 0, 
-            y: isInView ? 0 : 20,
-            transition: { delay: 0.3, duration: 0.6 }
-          }}
+          variants={itemVariants}
         >
           <span className="bg-gradient-to-r from-secondary via-primary to-accent bg-clip-text text-transparent">
             Our Services
           </span>
         </motion.h2>
+        
         <motion.div 
           className="mt-4 w-24 h-1 bg-gradient-to-r from-secondary via-primary to-accent rounded-sm"
           initial={{ width: 0 }}
@@ -51,13 +67,10 @@ const ServiceHeader = ({ isInView }: ServiceHeaderProps) => {
             transition: { delay: 0.5, duration: 0.6 }
           }}
         />
+        
         <motion.p
           className="mt-6 text-center text-gray-400 max-w-2xl mx-auto"
-          initial={{ opacity: 0 }}
-          animate={{ 
-            opacity: isInView ? 1 : 0,
-            transition: { delay: 0.6, duration: 0.6 }
-          }}
+          variants={itemVariants}
         >
           We craft exceptional digital experiences that drive growth and deliver results. 
           Explore our comprehensive suite of services.

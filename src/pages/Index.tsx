@@ -7,10 +7,14 @@ import Contact from "@/components/Contact";
 import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
+import useScrollAnimation from "@/hooks/useScrollAnimation";
 
 const Index = () => {
   const location = useLocation();
   const [isLoaded, setIsLoaded] = useState(false);
+  
+  // Use scroll animations
+  useScrollAnimation();
 
   // Animation variants for page sections
   const sectionVariants = {
@@ -40,46 +44,41 @@ const Index = () => {
     }
   }, [location]);
 
-  // Smooth reveal animation for sections on scroll
   useEffect(() => {
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('opacity-100');
-          entry.target.classList.remove('opacity-0', 'translate-y-10');
-        }
-      });
-    }, { threshold: 0.1 });
-
-    // Exclude home, services sections from scroll animation
-    const sections = document.querySelectorAll('section:not(#home):not(#services):not(#projects)');
-    sections.forEach((section) => {
-      section.classList.add('opacity-0', 'translate-y-10', 'transition-all', 'duration-700');
-      observer.observe(section);
-    });
-
     setIsLoaded(true);
-
-    return () => {
-      sections.forEach((section) => {
-        observer.unobserve(section);
-      });
-    };
   }, []);
 
+  // Page entry animation
+  const pageVariants = {
+    initial: { opacity: 0 },
+    animate: { 
+      opacity: 1,
+      transition: { 
+        duration: 0.5, 
+        staggerChildren: 0.2,
+      }
+    },
+    exit: { opacity: 0 }
+  };
+
   return (
-    <AnimatePresence>
+    <AnimatePresence mode="wait">
       <motion.div 
         className="min-h-screen bg-background"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 0.5 }}
+        initial="initial"
+        animate="animate"
+        exit="exit"
+        variants={pageVariants}
       >
         <Navbar />
         
-        <Hero />
+        <motion.div variants={sectionVariants}>
+          <Hero />
+        </motion.div>
         
-        <Services />
+        <motion.div variants={sectionVariants}>
+          <Services />
+        </motion.div>
         
         <motion.div
           variants={sectionVariants}

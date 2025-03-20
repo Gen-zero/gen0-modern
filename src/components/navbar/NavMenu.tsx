@@ -1,5 +1,5 @@
 
-import { X, ArrowRight, Sparkles } from 'lucide-react';
+import { X, ArrowRight, Sparkles, Home, Layers, Briefcase, Mail } from 'lucide-react';
 import { Button } from "../ui/button";
 import { Link } from 'react-router-dom';
 import NavMenuLinks from './NavMenuLinks';
@@ -24,16 +24,20 @@ const NavMenu = ({
   
   const navLinks = [{
     name: 'Home',
-    href: '#home'
+    href: '#home',
+    icon: <Home size={18} />
   }, {
     name: 'Services',
-    href: '#services'
+    href: '#services',
+    icon: <Layers size={18} />
   }, {
     name: 'Projects',
-    href: '#projects'
+    href: '#projects',
+    icon: <Briefcase size={18} />
   }, {
     name: 'Contact',
-    href: '#contact'
+    href: '#contact',
+    icon: <Mail size={18} />
   }];
   
   // Function to handle scrolling to contact section

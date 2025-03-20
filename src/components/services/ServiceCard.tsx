@@ -2,6 +2,7 @@
 import { motion, AnimatePresence } from 'framer-motion';
 import { Check, Zap } from 'lucide-react';
 import { cn } from '@/lib/utils';
+import ExpandedContent from './ExpandedContent';
 
 interface ServiceFeature {
   title: string;
@@ -47,7 +48,9 @@ const ServiceCard = ({
         }
       }}
       exit={{ opacity: 0, y: -20 }}
-      className="relative"
+      className="relative w-full transform-gpu will-change-transform"
+      whileHover={{ scale: 1.01 }}
+      transition={{ type: "spring", damping: 15, stiffness: 400 }}
     >
       <motion.div
         layout

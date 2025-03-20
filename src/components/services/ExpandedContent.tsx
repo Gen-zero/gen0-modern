@@ -63,7 +63,7 @@ const ExpandedContent = ({
               transition: { delay: 0.2, duration: 0.4 }
             }}
           >
-            <p className="text-white/90 text-base">
+            <p className="text-white/90 text-base leading-relaxed">
               {longDescription}
             </p>
 
@@ -90,7 +90,7 @@ const ExpandedContent = ({
               transition: { delay: 0.3, duration: 0.4 }
             }}
           >
-            <div className="space-y-3 pt-4 md:pt-16">
+            <div className="space-y-3 pt-4 md:pt-8">
               {detailedFeatures.slice(2, 4).map((feature, idx) => (
                 <FeatureCard 
                   key={idx}
@@ -125,6 +125,11 @@ const FeatureCard = ({ feature, index }: { feature: ServiceFeature, index: numbe
           duration: 0.4 
         }
       }}
+      whileHover={{ 
+        scale: 1.02, 
+        boxShadow: "0 10px 30px -10px rgba(0,0,0,0.2)",
+        transition: { duration: 0.2 }
+      }}
     >
       <div className="flex items-start">
         <motion.div
@@ -144,7 +149,7 @@ const FeatureCard = ({ feature, index }: { feature: ServiceFeature, index: numbe
         </motion.div>
         <div>
           <h5 className="font-medium text-white">{feature.title}</h5>
-          <p className="text-white/70 text-sm mt-1">{feature.description}</p>
+          <p className="text-white/70 text-sm mt-1 leading-relaxed">{feature.description}</p>
         </div>
       </div>
     </motion.div>
@@ -164,13 +169,13 @@ const StartNowButton = () => {
     >
       <motion.div
         whileHover={{ 
-          scale: 1.03,
+          scale: 1.05,
           transition: { duration: 0.2 }
         }}
         whileTap={{ scale: 0.97 }}
       >
         <Button 
-          className="px-6 py-5 rounded-full font-medium text-white bg-white/20 hover:bg-white/30 backdrop-blur-md transition-all duration-300"
+          className="px-6 py-5 rounded-full font-medium text-white bg-gradient-to-r from-primary to-secondary hover:bg-white/30 backdrop-blur-md transition-all duration-300 shadow-[0_5px_15px_rgba(0,0,0,0.3)] hover:shadow-[0_10px_25px_rgba(0,0,0,0.5)]"
           onClick={(e) => {
             e.stopPropagation();
             const contactSection = document.getElementById('contact');
@@ -190,7 +195,7 @@ const StartNowButton = () => {
               repeatType: "reverse"
             }}
           >
-            <ArrowRight className="ml-1 h-4 w-4" />
+            <ArrowRight className="ml-2 h-4 w-4" />
           </motion.div>
         </Button>
       </motion.div>
@@ -202,7 +207,7 @@ const BackgroundElements = () => {
   return (
     <div className="absolute inset-0 overflow-hidden pointer-events-none z-0">
       <motion.div 
-        className="absolute -top-10 -right-10 w-40 h-40 bg-white/5 rounded-full blur-2xl" 
+        className="absolute -top-10 -right-10 w-40 h-40 bg-accent/5 rounded-full blur-2xl" 
         animate={{ 
           scale: [1, 1.2, 1],
           opacity: [0.1, 0.3, 0.1],
@@ -214,7 +219,7 @@ const BackgroundElements = () => {
         }}
       />
       <motion.div 
-        className="absolute bottom-0 left-10 w-20 h-20 bg-white/10 rounded-full blur-xl" 
+        className="absolute bottom-0 left-10 w-20 h-20 bg-primary/10 rounded-full blur-xl" 
         animate={{ 
           scale: [1.2, 0.8, 1.2],
           opacity: [0.3, 0.1, 0.3],
@@ -227,7 +232,7 @@ const BackgroundElements = () => {
         }}
       />
       <motion.div 
-        className="absolute top-1/4 left-1/4 w-4 h-4 bg-white/30 rounded-full blur-sm" 
+        className="absolute top-1/4 left-1/4 w-4 h-4 bg-secondary/30 rounded-full blur-sm" 
         animate={{ 
           scale: [1, 2, 1],
           opacity: [0.4, 0.1, 0.4],

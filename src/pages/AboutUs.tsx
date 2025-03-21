@@ -90,7 +90,7 @@ const AboutUs = () => {
         whileInView="visible" 
         viewport={{ once: true, amount: 0.2 }}
       >
-        <JourneySection />
+        <JourneySection className="hidden" />
       </motion.section>
       
       <motion.footer

@@ -82,7 +82,14 @@ const NavMenuServices = ({ toggleMenu }: NavMenuServicesProps) => {
             <a 
               href={service.href} 
               className="relative inline-flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors duration-300 after:absolute after:w-full after:scale-x-0 after:h-[1px] after:bottom-0 after:left-0 after:bg-accent after:origin-bottom-right after:transition-transform after:duration-300 hover:after:scale-x-100 hover:after:origin-bottom-left text-sm md:text-base" 
-              onClick={() => toggleMenu()}
+              onClick={(e) => {
+                e.preventDefault();
+                const servicesSection = document.getElementById('services');
+                if (servicesSection) {
+                  servicesSection.scrollIntoView({ behavior: 'smooth' });
+                }
+                toggleMenu();
+              }}
             >
               <motion.div
                 whileHover={{ rotate: 10 }}

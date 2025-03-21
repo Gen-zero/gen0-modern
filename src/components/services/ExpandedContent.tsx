@@ -45,7 +45,7 @@ const ExpandedContent = ({
       }}
     >
       <motion.div 
-        className="p-8 relative"
+        className="p-8 relative z-10"
         initial={{ y: 20, opacity: 0 }}
         animate={{ 
           y: 0, 
@@ -134,9 +134,7 @@ const FeatureCard = ({ feature, index }: { feature: ServiceFeature, index: numbe
       <div className="flex items-start">
         <motion.div
           className="mt-1 bg-primary/30 p-1 rounded-full mr-3 flex-shrink-0"
-          animate={{ 
-            scale: 1.2,
-          }}
+          animate={{ scale: 1.2 }}
           transition={{ 
             duration: 0.5,
             delay: 0.4 + (index * 0.1),

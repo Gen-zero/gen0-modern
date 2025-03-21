@@ -50,7 +50,7 @@ const ServiceCard = ({
       }}
       exit={{ opacity: 0, y: -20 }}
       className="relative w-full transform-gpu will-change-transform"
-      whileHover={{ scale: 1.01 }}
+      whileHover={{ scale: isActive ? 1 : 1.01 }}
       transition={{ type: "spring", damping: 15, stiffness: 400 }}
     >
       <motion.div

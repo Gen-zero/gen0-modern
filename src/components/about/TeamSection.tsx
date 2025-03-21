@@ -7,26 +7,26 @@ interface TeamMember {
 }
 const TeamSection = () => {
   const teamMembers: TeamMember[] = [{
-    name: "Sarah Johnson",
-    position: "CEO & Founder",
+    name: "Manu Narayanan",
+    position: "Founder & Advisor",
     bio: "Sarah brings 15 years of industry experience and a passion for inclusive design. She founded Gen0 with a vision to build digital products that truly matter.",
     personalDetail: "When not leading the team, Sarah is an avid rock climber and amateur chef.",
     imgUrl: "https://ik.imagekit.io/kalidaspem/c46019ce-faea-4d33-b80c-b78d9da6d500.jpg?updatedAt=1742559972141"
   }, {
-    name: "Michael Chen",
-    position: "CTO",
+    name: "Kalidasan P E M",
+    position: "Co-Founder and CTO",
     bio: "Michael's technical leadership has shaped our engineering culture. He specializes in scalable architecture and emerging technologies.",
     personalDetail: "A former competitive gamer, Michael now spends his free time teaching coding to underprivileged youth.",
     imgUrl: "https://ik.imagekit.io/kalidaspem/894146aa-4ab3-4820-b55b-55478d7507a9.jpg?updatedAt=1742559972090"
   }, {
-    name: "Elena Rodriguez",
+    name: "Yedhu Krishna",
     position: "Creative Director",
     bio: "Elena's award-winning design approach combines aesthetics with functionality. She leads our creative team in delivering visually stunning work.",
     personalDetail: "Elena is a published photographer and maintains a popular design blog in her spare time.",
     imgUrl: "https://ik.imagekit.io/kalidaspem/yedhukrishnan.jpg"
   }, {
-    name: "David Okafor",
-    position: "Head of Product",
+    name: "Kannan S",
+    position: "Backend Developer",
     bio: "David excels at translating client needs into product strategies. His background in psychology gives him unique insight into user behavior.",
     personalDetail: "A devoted father of twins, David is also working on his first science fiction novel.",
     imgUrl: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"

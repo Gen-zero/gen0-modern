@@ -48,7 +48,6 @@ const ServiceCard = ({
         duration: 0.5, 
         delay: isInView ? 0.2 + (index * 0.1) : 0 
       }}
-      exit={{ opacity: 0, y: -20 }}
       className="relative w-full transform-gpu will-change-transform"
       whileHover={{ scale: isActive ? 1 : 1.01 }}
     >

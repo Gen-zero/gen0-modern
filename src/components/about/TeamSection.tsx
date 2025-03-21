@@ -11,19 +11,19 @@ const TeamSection = () => {
     position: "CEO & Founder",
     bio: "Sarah brings 15 years of industry experience and a passion for inclusive design. She founded Gen0 with a vision to build digital products that truly matter.",
     personalDetail: "When not leading the team, Sarah is an avid rock climber and amateur chef.",
-    imgUrl: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"
+    imgUrl: "https://ik.imagekit.io/kalidaspem/c46019ce-faea-4d33-b80c-b78d9da6d500.jpg?updatedAt=1742559972141"
   }, {
     name: "Michael Chen",
     position: "CTO",
     bio: "Michael's technical leadership has shaped our engineering culture. He specializes in scalable architecture and emerging technologies.",
     personalDetail: "A former competitive gamer, Michael now spends his free time teaching coding to underprivileged youth.",
-    imgUrl: "https://images.unsplash.com/photo-1568602471122-7832951cc4c5?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"
+    imgUrl: "https://ik.imagekit.io/kalidaspem/894146aa-4ab3-4820-b55b-55478d7507a9.jpg?updatedAt=1742559972090"
   }, {
     name: "Elena Rodriguez",
     position: "Creative Director",
     bio: "Elena's award-winning design approach combines aesthetics with functionality. She leads our creative team in delivering visually stunning work.",
     personalDetail: "Elena is a published photographer and maintains a popular design blog in her spare time.",
-    imgUrl: "https://images.unsplash.com/photo-1580489944761-15a19d654956?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80"
+    imgUrl: "https://ik.imagekit.io/kalidaspem/yedhukrishnan.jpg"
   }, {
     name: "David Okafor",
     position: "Head of Product",

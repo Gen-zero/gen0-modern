@@ -83,8 +83,7 @@ const AboutUs = () => {
         <TeamSection />
       </motion.section>
       
-      
-      
+            
       <motion.footer
         variants={sectionVariants}
         initial="hidden"
@@ -98,3 +97,13 @@ const AboutUs = () => {
 };
 
 export default AboutUs;
+
+/*<motion.section 
+        id="journey"
+        variants={sectionVariants}
+        initial="hidden"
+        whileInView="visible" 
+        viewport={{ once: true, amount: 0.2 }}
+      >
+        <JourneySection className="hidden" />
+      </motion.section>*/

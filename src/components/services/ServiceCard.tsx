@@ -42,11 +42,11 @@ const ServiceCard = ({
       initial={{ opacity: 0, y: 30 }}
       animate={{ 
         opacity: isInView ? 1 : 0, 
-        y: isInView ? 0 : 30,
-        transition: { 
-          duration: 0.5, 
-          delay: isInView ? 0.2 + (index * 0.1) : 0 
-        }
+        y: isInView ? 0 : 30
+      }}
+      transition={{ 
+        duration: 0.5, 
+        delay: isInView ? 0.2 + (index * 0.1) : 0 
       }}
       exit={{ opacity: 0, y: -20 }}
       className="relative w-full transform-gpu will-change-transform"
@@ -117,9 +117,9 @@ const CardHeader = ({
       }}
       onClick={onToggle}
       whileHover={{ 
-        scale: isActive ? 1 : 1.02,
-        transition: { duration: 0.2 }
+        scale: isActive ? 1 : 1.02
       }}
+      transition={{ duration: 0.2 }}
       whileTap={{ scale: 0.98 }}
     >
       <div className="flex flex-col space-y-4">
@@ -132,26 +132,17 @@ const CardHeader = ({
                 ? "bg-gradient-to-br from-primary to-primary/80 text-white" 
                 : "bg-primary/20 text-primary/80 group-hover:bg-primary/30"
             )}
-            whileHover={{ 
-              rotate: 10,
-              transition: { 
-                duration: 0.3,
-                ease: "easeInOut"
-              }
-            }}
-            animate={{ 
-              scale: isActive ? 1.1 : 1,
-              transition: { duration: 0.5 }
-            }}
+            whileHover={{ rotate: 10 }}
+            transition={{ duration: 0.3, ease: "easeInOut" }}
+            animate={{ scale: isActive ? 1.1 : 1 }}
+            transition={{ duration: 0.5 }}
           >
             {icon}
           </motion.div>
           
           <motion.div
             className="p-2 rounded-full bg-white/5"
-            animate={{
-              rotate: isActive ? 180 : 0
-            }}
+            animate={{ rotate: isActive ? 180 : 0 }}
             transition={{ duration: 0.3 }}
           >
             <Zap className={cn(

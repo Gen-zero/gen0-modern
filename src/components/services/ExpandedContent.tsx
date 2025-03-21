@@ -21,23 +21,23 @@ const ExpandedContent = ({
 }: ExpandedContentProps) => {
   return (
     <motion.div 
-      className="overflow-hidden"
+      className="overflow-hidden relative"
       initial={{ opacity: 0, height: 0 }}
       animate={{ 
         opacity: 1, 
-        height: "auto",
-        transition: { 
-          duration: 0.5,
-          ease: [0.04, 0.62, 0.23, 0.98]
-        } 
+        height: "auto"
       }}
+      transition={{ 
+        duration: 0.5,
+        ease: [0.04, 0.62, 0.23, 0.98]
+      }} 
       exit={{ 
         opacity: 0, 
-        height: 0,
-        transition: { 
-          duration: 0.3,
-          ease: [0.04, 0.62, 0.23, 0.98]
-        }
+        height: 0
+      }}
+      transition={{ 
+        duration: 0.3,
+        ease: [0.04, 0.62, 0.23, 0.98]
       }}
       style={{ 
         background: `linear-gradient(to bottom, rgba(15, 15, 25, 0.95), ${backgroundGradient})`,
@@ -45,23 +45,17 @@ const ExpandedContent = ({
       }}
     >
       <motion.div 
-        className="p-8 relative z-10"
+        className="p-8 relative z-20"
         initial={{ y: 20, opacity: 0 }}
-        animate={{ 
-          y: 0, 
-          opacity: 1,
-          transition: { delay: 0.1, duration: 0.4 }
-        }}
+        animate={{ y: 0, opacity: 1 }}
+        transition={{ delay: 0.1, duration: 0.4 }}
       >
         <div className="flex flex-col space-y-6">
           <motion.div
             className="space-y-6"
             initial={{ opacity: 0, y: 10 }}
-            animate={{ 
-              opacity: 1, 
-              y: 0,
-              transition: { delay: 0.2, duration: 0.4 }
-            }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.2, duration: 0.4 }}
           >
             <p className="text-white/90 text-base leading-relaxed">
               {longDescription}
@@ -85,10 +79,8 @@ const ExpandedContent = ({
           <motion.div
             className="space-y-4"
             initial={{ opacity: 0 }}
-            animate={{ 
-              opacity: 1,
-              transition: { delay: 0.3, duration: 0.4 }
-            }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.3, duration: 0.4 }}
           >
             <div className="space-y-3 pt-4 md:pt-8">
               {detailedFeatures.slice(2, 4).map((feature, idx) => (
@@ -115,21 +107,15 @@ export default ExpandedContent;
 const FeatureCard = ({ feature, index }: { feature: ServiceFeature, index: number }) => {
   return (
     <motion.div 
-      className="bg-white/10 backdrop-blur-md rounded-lg p-4"
+      className="bg-white/10 backdrop-blur-md rounded-lg p-4 relative z-10"
       initial={{ x: -10, opacity: 0 }}
-      animate={{ 
-        x: 0, 
-        opacity: 1,
-        transition: { 
-          delay: 0.3 + (index * 0.1), 
-          duration: 0.4 
-        }
+      animate={{ x: 0, opacity: 1 }}
+      transition={{ 
+        delay: 0.3 + (index * 0.1), 
+        duration: 0.4 
       }}
-      whileHover={{ 
-        scale: 1.02, 
-        boxShadow: "0 10px 30px -10px rgba(0,0,0,0.2)",
-        transition: { duration: 0.2 }
-      }}
+      whileHover={{ scale: 1.02 }}
+      transition={{ duration: 0.2 }}
     >
       <div className="flex items-start">
         <motion.div
@@ -157,19 +143,17 @@ const StartNowButton = () => {
   return (
     <motion.div
       initial={{ y: 10, opacity: 0 }}
-      animate={{ 
-        y: 0, 
-        opacity: 1,
-        transition: { delay: 0.7, duration: 0.3 }
-      }}
-      className="flex justify-center mt-6"
+      animate={{ y: 0, opacity: 1 }}
+      transition={{ delay: 0.7, duration: 0.3 }}
+      className="flex justify-center mt-6 relative z-30"
     >
       <motion.div
         whileHover={{ scale: 1.05 }}
         whileTap={{ scale: 0.97 }}
+        className="relative z-30"
       >
         <Button 
-          className="px-6 py-5 rounded-full font-medium text-white bg-gradient-to-r from-primary to-secondary hover:bg-white/30 backdrop-blur-md transition-all duration-300 shadow-[0_5px_15px_rgba(0,0,0,0.3)] hover:shadow-[0_10px_25px_rgba(0,0,0,0.5)]"
+          className="px-6 py-5 rounded-full font-medium text-white bg-gradient-to-r from-primary to-secondary hover:bg-white/30 backdrop-blur-md transition-all duration-300 shadow-[0_5px_15px_rgba(0,0,0,0.3)] hover:shadow-[0_10px_25px_rgba(0,0,0,0.5)] relative z-30"
           onClick={(e) => {
             e.stopPropagation();
             const contactSection = document.getElementById('contact');
@@ -180,11 +164,11 @@ const StartNowButton = () => {
         >
           <span>Start Now</span>
           <motion.div
-            animate={{ x: 5 }}
+            animate={{ x: [0, 5, 0] }}
             transition={{ 
-              duration: 1,
+              duration: 1.5,
               repeat: Infinity,
-              repeatType: "reverse"
+              repeatType: "loop"
             }}
           >
             <ArrowRight className="ml-2 h-4 w-4" />
@@ -200,29 +184,29 @@ const BackgroundElements = () => {
     <div className="absolute inset-0 overflow-hidden pointer-events-none z-0">
       <motion.div 
         className="absolute -top-10 -right-10 w-40 h-40 bg-accent/5 rounded-full blur-2xl" 
-        animate={{ scale: 1.2 }}
+        animate={{ scale: [1, 1.2, 1] }}
         transition={{ 
           duration: 4, 
           repeat: Infinity,
-          repeatType: "reverse" 
+          repeatType: "loop" 
         }}
       />
       <motion.div 
         className="absolute bottom-0 left-10 w-20 h-20 bg-primary/10 rounded-full blur-xl" 
-        animate={{ y: 10 }}
+        animate={{ y: [0, 10, 0] }}
         transition={{ 
           duration: 5, 
           repeat: Infinity,
-          repeatType: "reverse" 
+          repeatType: "loop" 
         }}
       />
       <motion.div 
         className="absolute top-1/4 left-1/4 w-4 h-4 bg-secondary/30 rounded-full blur-sm" 
-        animate={{ scale: 2 }}
+        animate={{ scale: [1, 2, 1] }}
         transition={{ 
           duration: 3, 
           repeat: Infinity,
-          repeatType: "reverse" 
+          repeatType: "loop" 
         }}
       />
     </div>

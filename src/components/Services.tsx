@@ -15,7 +15,12 @@ const Services = () => {
   const isSmallScreen = useIsSmallScreen();
   
   const handleToggleService = (title: string) => {
-    setActiveService(prev => (prev === title ? null : title));
+    try {
+      console.log("Toggling service:", title, "Current active:", activeService);
+      setActiveService(prev => (prev === title ? null : title));
+    } catch (error) {
+      console.error("Error toggling service:", error);
+    }
   };
   
   return (

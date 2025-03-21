@@ -33,11 +33,11 @@ const ExpandedContent = ({
       }} 
       exit={{ 
         opacity: 0, 
-        height: 0
-      }}
-      transition={{ 
-        duration: 0.3,
-        ease: [0.04, 0.62, 0.23, 0.98]
+        height: 0,
+        transition: { 
+          duration: 0.3,
+          ease: [0.04, 0.62, 0.23, 0.98]
+        }
       }}
       style={{ 
         background: `linear-gradient(to bottom, rgba(15, 15, 25, 0.95), ${backgroundGradient})`,
@@ -115,12 +115,11 @@ const FeatureCard = ({ feature, index }: { feature: ServiceFeature, index: numbe
         duration: 0.4 
       }}
       whileHover={{ scale: 1.02 }}
-      transition={{ duration: 0.2 }}
     >
       <div className="flex items-start">
         <motion.div
           className="mt-1 bg-primary/30 p-1 rounded-full mr-3 flex-shrink-0"
-          animate={{ scale: 1.2 }}
+          animate={{ scale: [1, 1.2, 1] }}
           transition={{ 
             duration: 0.5,
             delay: 0.4 + (index * 0.1),

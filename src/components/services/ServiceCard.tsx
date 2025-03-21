@@ -51,7 +51,6 @@ const ServiceCard = ({
       exit={{ opacity: 0, y: -20 }}
       className="relative w-full transform-gpu will-change-transform"
       whileHover={{ scale: isActive ? 1 : 1.01 }}
-      transition={{ type: "spring", damping: 15, stiffness: 400 }}
     >
       <motion.div
         layout
@@ -135,7 +134,6 @@ const CardHeader = ({
             whileHover={{ rotate: 10 }}
             transition={{ duration: 0.3, ease: "easeInOut" }}
             animate={{ scale: isActive ? 1.1 : 1 }}
-            transition={{ duration: 0.5 }}
           >
             {icon}
           </motion.div>

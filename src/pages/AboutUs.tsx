@@ -87,7 +87,7 @@ const AboutUs = () => {
         id="journey"
         variants={sectionVariants}
         initial="hidden"
-        whileInView="visible" 
+        whileInView="hidden" 
         viewport={{ once: true, amount: 0.2 }}
       >
         <JourneySection className="hidden" />

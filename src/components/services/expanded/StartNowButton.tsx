@@ -28,11 +28,12 @@ const StartNowButton = () => {
         >
           <span>Start Now</span>
           <motion.div
-            animate={{ x: [0, 5, 0] }}
+            initial={{ x: 0 }}
+            animate={{ x: 5 }}
             transition={{ 
-              duration: 1.5,
+              duration: 0.75,
               repeat: Infinity,
-              repeatType: "loop"
+              repeatType: "reverse"
             }}
           >
             <ArrowRight className="ml-2 h-4 w-4" />

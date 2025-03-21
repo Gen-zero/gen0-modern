@@ -27,7 +27,8 @@ const FeatureCard = ({ feature, index }: FeatureCardProps) => {
       <div className="flex items-start">
         <motion.div
           className="mt-1 bg-primary/30 p-1 rounded-full mr-3 flex-shrink-0"
-          animate={{ scale: [1, 1.2, 1] }}
+          initial={{ scale: 1 }}
+          animate={{ scale: 1.2 }}
           transition={{ 
             duration: 0.5,
             delay: 0.4 + (index * 0.1),

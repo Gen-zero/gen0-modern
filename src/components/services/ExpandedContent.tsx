@@ -23,17 +23,11 @@ const ExpandedContent = ({
     <motion.div 
       className="overflow-hidden relative"
       initial={{ opacity: 0, height: 0 }}
-      animate={{ 
-        opacity: 1, 
-        height: "auto"
-      }}
-      exit={{ 
-        opacity: 0, 
-        height: 0
-      }}
+      animate={{ opacity: 1, height: "auto" }}
+      exit={{ opacity: 0, height: 0 }}
       transition={{ 
         duration: 0.5,
-        ease: [0.04, 0.62, 0.23, 0.98]
+        ease: "easeInOut"
       }}
       style={{ 
         background: `linear-gradient(to bottom, rgba(15, 15, 25, 0.95), ${backgroundGradient})`,

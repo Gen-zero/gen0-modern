@@ -37,7 +37,7 @@ const TeamSection = () => {
     position: "Backend Developer",
     bio: "Kannan excels at translating client needs into product strategies. His background in psychology gives him unique insight into user behavior and digital experiences.",
     personalDetail: "A devoted father of twins, Kannan is also working on his first science fiction novel.",
-    imgUrl: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80",
+    imgUrl: "https://ik.imagekit.io/kalidaspem/DeWatermark.ai_1742651326709.png",
     expertise: ["Backend Development", "Database Architecture", "API Design", "System Integration"]
   }];
 

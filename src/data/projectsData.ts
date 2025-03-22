@@ -30,7 +30,7 @@ export const projects: Project[] = [
     title: 'Saadhana Board',
     category: 'Web App',
     image: 'https://ik.imagekit.io/kalidaspem/d1660e9c-7a59-4119-9b87-992fd0e28886.jpg',
-    description: 'A digital Yantra to connect with your deity and your inner self. This sacred tool helps manifest the deity's will into reality. 🔱✨',
+    description: 'A digital Yantra to connect with your deity and your inner self. This sacred tool helps manifest the deity\'s will into reality. 🔱✨',
     longDescription: "Saadhana Board is a digital spiritual platform that bridges ancient practices with modern technology. It serves as a digital Yantra, helping users connect with their deity and inner selves through guided meditation, prayer tracking, and community support. The platform respects tradition while making spiritual practices accessible in today's digital world.",
     technologies: ['React', 'Firebase', 'WebGL', 'Redux'],
     url: 'https://sadhanaboard.com',

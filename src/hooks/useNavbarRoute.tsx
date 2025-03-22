@@ -9,12 +9,13 @@ export const useNavbarRoute = () => {
   const isHomePage = location.pathname === '/';
   const isAboutPage = location.pathname === '/about';
   const isProjectsPage = location.pathname === '/projects';
+  const isJoinUsPage = location.pathname === '/join-us';
   const isPrivacyPage = location.pathname === '/privacy-policy';
   const isTermsPage = location.pathname === '/terms-of-service';
   const isCookiePage = location.pathname === '/cookie-policy';
   
   // Determine if we're on a route with fixed section title (non-scrollable)
-  const isFixedTitlePage = isProjectsPage || isPrivacyPage || isTermsPage || isCookiePage;
+  const isFixedTitlePage = isProjectsPage || isJoinUsPage || isPrivacyPage || isTermsPage || isCookiePage;
   
   const [sections, setSections] = useState<string[]>([]);
   
@@ -24,6 +25,8 @@ export const useNavbarRoute = () => {
       setSections(['Our Story', 'Mission', 'Team', 'Journey']);
     } else if (isProjectsPage) {
       setSections(['Projects']);
+    } else if (isJoinUsPage) {
+      setSections(['Join Us']);
     } else if (isPrivacyPage) {
       setSections(['Privacy']);
     } else if (isTermsPage) {
@@ -34,12 +37,13 @@ export const useNavbarRoute = () => {
       // Default to home page sections
       setSections(['Home', 'Services', 'Projects', 'Contact']);
     }
-  }, [location.pathname, isAboutPage, isProjectsPage, isPrivacyPage, isTermsPage, isCookiePage]);
+  }, [location.pathname, isAboutPage, isProjectsPage, isJoinUsPage, isPrivacyPage, isTermsPage, isCookiePage]);
 
   return { 
     isHomePage,
     isAboutPage, 
-    isProjectsPage, 
+    isProjectsPage,
+    isJoinUsPage,
     isPrivacyPage, 
     isTermsPage, 
     isCookiePage, 

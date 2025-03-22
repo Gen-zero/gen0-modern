@@ -91,7 +91,7 @@ const Hero = () => {
       {/* Join Us button with adjusted position to match the image box container padding */}
       <div className="absolute top-12 right-12 md:right-12 lg:right-12 z-40">
         <Button 
-          onClick={() => navigate('/contact')}
+          onClick={() => navigate('/join-us')}
           variant="outline"
           className="uppercase font-medium text-sm px-6 py-2 bg-background/60 backdrop-blur-sm border border-muted
                   hover:bg-primary/10 hover:border-primary hover:text-primary

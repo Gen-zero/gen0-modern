@@ -54,9 +54,13 @@ const ContactSidebar = () => {
           Get in touch
           <motion.span
             animate={{ 
-              rotate: [0, 10, -10, 10, 0],
+              rotate: 10,
             }}
-            transition={{ duration: 2, repeat: Infinity, repeatDelay: 5 }}
+            transition={{ 
+              duration: 2, 
+              repeat: Infinity, 
+              repeatType: "reverse" 
+            }}
           >
             <Sparkles className="h-4 w-4 text-accent" />
           </motion.span>

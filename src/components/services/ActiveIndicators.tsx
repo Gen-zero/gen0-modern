@@ -15,8 +15,8 @@ const ActiveIndicators = ({ isActive }: ActiveIndicatorsProps) => {
             className="absolute -top-3 -right-3 text-primary"
             initial={{ scale: 0, rotate: 0 }}
             animate={{ 
-              scale: [0, 1.2, 1],
-              rotate: [0, 20],
+              scale: 1,
+              rotate: 20,
               transition: { duration: 0.4, type: "spring" }
             }}
             exit={{ 
@@ -27,7 +27,7 @@ const ActiveIndicators = ({ isActive }: ActiveIndicatorsProps) => {
           >
             <motion.div
               animate={{
-                rotate: [0, 360],
+                rotate: 360,
                 transition: { duration: 10, repeat: Infinity, ease: "linear" }
               }}
             >
@@ -39,8 +39,8 @@ const ActiveIndicators = ({ isActive }: ActiveIndicatorsProps) => {
             className="absolute -bottom-3 -left-3 text-accent"
             initial={{ scale: 0, rotate: 0 }}
             animate={{ 
-              scale: [0, 1.2, 1],
-              rotate: [0, -20],
+              scale: 1,
+              rotate: -20,
               transition: { duration: 0.4, delay: 0.1, type: "spring" }
             }}
             exit={{ 
@@ -51,7 +51,7 @@ const ActiveIndicators = ({ isActive }: ActiveIndicatorsProps) => {
           >
             <motion.div
               animate={{
-                rotate: [0, -360],
+                rotate: -360,
                 transition: { duration: 10, repeat: Infinity, ease: "linear" }
               }}
             >

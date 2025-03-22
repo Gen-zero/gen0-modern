@@ -4,7 +4,6 @@ import HeroSection from "@/components/about/HeroSection";
 import AboutSection from "@/components/about/AboutSection";
 import MissionVisionSection from "@/components/about/MissionVisionSection";
 import TeamSection from "@/components/about/TeamSection";
-import JourneySection from "@/components/about/JourneySection";
 import Footer from "@/components/about/Footer";
 import useScrollAnimation from "@/hooks/useScrollAnimation";
 import { motion } from "framer-motion";
@@ -154,13 +153,3 @@ const AboutUs = () => {
 };
 
 export default AboutUs;
-
-/*<motion.section 
-        id="journey"
-        variants={sectionVariants}
-        initial="hidden"
-        whileInView="visible" 
-        viewport={{ once: true, amount: 0.2 }}
-      >
-        <JourneySection className="hidden" />
-      </motion.section>*/

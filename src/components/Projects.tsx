@@ -4,30 +4,14 @@ import { ArrowRight } from 'lucide-react';
 import { Button } from './ui/button';
 import { Link } from 'react-router-dom';
 import { useIsMobile } from '@/hooks/use-mobile';
-
-const projects = [{
-  id: 1,
-  title: 'Guild Board',
-  category: 'Web App',
-  image: '/lovable-uploads/611c98b6-d6c7-4eef-8c6e-2adb0ecc29ef.png',
-  description: "Organization at your fingertips. Guild Board isn’t just another social platform—Here, you don’t scroll—you build.\n\nCreate your Guild and build⚡",
-}, {
-  id: 2,
-  title: 'Saadhana Board',
-  category: 'Web App',
-  image: 'https://ik.imagekit.io/kalidaspem/d1660e9c-7a59-4119-9b87-992fd0e28886.jpg',
-  description: 'A digital Yantra to connect with your deity and your inner self. This sacred tool helps manifest the deity’s will into reality. 🔱✨'
-}, {
-  id: 3,
-  title: 'Fuel Unit',
-  category: 'Web App',
-  image: 'https://ik.imagekit.io/kalidaspem/b8a842e9-0b59-4687-8b15-ea15a15a2a0d.jpg',
-  description: 'Fuel Unit tracks fuel prices in real-time, spotting the cheapest fuel stops along your route—no cap, just savings!'
-}];
+import { projects } from '@/data/projectsData';
 
 const Projects = () => {
   const [hoveredProject, setHoveredProject] = useState<number | null>(null);
   const isMobile = useIsMobile();
+  
+  // Use the first 3 projects from the data file
+  const featuredProjects = projects.filter(project => project.featured !== false).slice(0, 3);
   
   return (
     <section id="projects" className="py-20 md:py-32">
@@ -48,7 +32,7 @@ const Projects = () => {
         </div>
         
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
-          {projects.map((project, index) => (
+          {featuredProjects.map((project, index) => (
             <div 
               key={project.id} 
               className="group relative overflow-hidden rounded-xl animate-fade-in" 
@@ -88,18 +72,20 @@ const Projects = () => {
                 >
                   {project.description}
                 </p>
-                <Button 
-                  variant="outline" 
-                  size="sm" 
-                  className="w-fit transition-all duration-300 bg-white/10 hover:bg-white/20 border-white/20 text-white" 
-                  style={{
-                    opacity: isMobile || hoveredProject === project.id ? 1 : 0,
-                    transform: isMobile || hoveredProject === project.id ? 'translateY(0)' : 'translateY(20px)',
-                    transition: 'opacity 0.3s ease, transform 0.3s ease'
-                  }}
-                >
-                  View project
-                </Button>
+                <Link to={`/projects/${project.id}`}>
+                  <Button 
+                    variant="outline" 
+                    size="sm" 
+                    className="w-fit transition-all duration-300 bg-white/10 hover:bg-white/20 border-white/20 text-white" 
+                    style={{
+                      opacity: isMobile || hoveredProject === project.id ? 1 : 0,
+                      transform: isMobile || hoveredProject === project.id ? 'translateY(0)' : 'translateY(20px)',
+                      transition: 'opacity 0.3s ease, transform 0.3s ease'
+                    }}
+                  >
+                    View project
+                  </Button>
+                </Link>
               </div>
             </div>
           ))}

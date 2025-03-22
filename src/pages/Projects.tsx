@@ -1,3 +1,4 @@
+
 import Navbar from "@/components/Navbar";
 import { useState } from "react";
 import { ArrowRight, ArrowLeft } from "lucide-react";
@@ -5,51 +6,41 @@ import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { useIsMobile } from "@/hooks/use-mobile";
-
-const projects = [{
-  id: 1,
-  title: "Guild Board",
-  category: "Web App",
-  image: "/lovable-uploads/611c98b6-d6c7-4eef-8c6e-2adb0ecc29ef.png",
-  description: "Organization at your fingertips. Guild Board isn’t just another social platform—Here, you don’t scroll—you build.\n\nCreate your Guild and build⚡",
-  fullDescription: "Our team designed and developed a comprehensive eCommerce platform that provides businesses with a scalable, high-performance solution. The platform includes advanced product filtering, user authentication, payment processing integration, and a dashboard for inventory management. Built with React and Node.js, this solution offers excellent performance and maintainability."
-}, {
-  id: 2,
-  title: "Saadhana Board",
-  category: "Web App",
-  image: "https://ik.imagekit.io/kalidaspem/d1660e9c-7a59-4119-9b87-992fd0e28886.jpg",
-  description: "A digital Yantra to connect with your deity and your inner self. This sacred tool helps manifest the deity’s will into reality. 🔱✨",
-  fullDescription: "We created a comprehensive brand identity system for a high-end fashion label. The project encompassed logo design, typography selection, color palette development, and a complete visual language that reflects the brand's luxury positioning. The system was implemented across digital platforms, print materials, packaging design, and in-store experiences."
-}, {
-  id: 3,
-  title: "Fuel Unit",
-  category: "Web App",
-  image: "https://ik.imagekit.io/kalidaspem/b8a842e9-0b59-4687-8b15-ea15a15a2a0d.jpg",
-  description: "Fuel Unit tracks fuel prices in real-time, spotting the cheapest fuel stops along your route—no cap, just savings!",
-  fullDescription: "Our team designed and developed an intuitive financial management dashboard for a fintech startup. The dashboard features real-time data visualization, predictive analytics, and personalized insights. The interface was designed with a focus on clarity and ease of use, allowing users to quickly understand complex financial data through interactive charts and customizable reports."
-}, {
-  id: 4,
-  title: "Kaali Punk",
-  category: "Virtual Influencer",
-  image: "https://ik.imagekit.io/kalidaspem/5c4ffdbb-03fc-4225-a964-bcd912ac12be.jpg",
-  description: "Kaali Punk is the first real superhero VI, a mix of human and AI, your mentor, big bro, and truth-seeker in a world of illusions 🕉️.",
-  fullDescription: "We developed a comprehensive healthcare mobile application that connects patients with medical professionals. The app features secure messaging, appointment scheduling, health record management, and medication reminders. Using React Native, we created a cross-platform solution that delivers a seamless experience across iOS and Android devices while maintaining strict compliance with healthcare data security standards."
-}, {
-  id: 5,
-  title: "Prompt Engineering Course",
-  category: "Course",
-  image: "https://ik.imagekit.io/kalidaspem/DALL_E%202025-03-16%2020.20.28%20-%20A%20pure%20minimalistic%20and%20truthful%20visual%20representation%20of%20'Prompt%20Engineering.'%20The%20image%20features%20an%20abstract,%20clean%20depiction%20of%20a%20hand%20subtly%20guidi.webp",
-  description: "Master the art of prompt engineering—learn how to craft killer prompts, unlock AI superpowers, and level up your skills to pro in no time. No fluff, just pure AI mastery!",
-  fullDescription: "For a popular food delivery service, we designed a line of eco-friendly packaging solutions that significantly reduced environmental impact while maintaining brand identity. The project involved material research, structural design, and visual branding. The final designs used biodegradable materials, minimized waste, and created a recognizable unboxing experience that enhanced the brand's commitment to sustainability."
-}];
+import { projects } from "@/data/projectsData";
+import SEO from "@/components/SEO";
 
 const ProjectsPage = () => {
   const [hoveredProject, setHoveredProject] = useState<number | null>(null);
   const isMobile = useIsMobile();
   
+  // SEO structured data
+  const structuredData = {
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    "name": "Gen0 Projects",
+    "description": "Explore our in-house projects at Gen0 - Guild Board, Saadhana Board, Fuel Unit, and more.",
+    "url": "https://gen0.design/projects",
+    "mainEntity": {
+      "@type": "ItemList",
+      "itemListElement": projects.map((project, index) => ({
+        "@type": "ListItem",
+        "position": index + 1,
+        "url": `https://gen0.design/projects/${project.id}`,
+        "name": project.title
+      }))
+    }
+  };
+  
   return (
     <div className="min-h-screen bg-background">
       <Navbar />
+      <SEO 
+        title="Gen0 Projects - Our Inhouse Design & Development Work" 
+        description="Explore Gen0's projects including Guild Board, Saadhana Board, Fuel Unit, and more innovative solutions for GenZ and beyond."
+        keywords="Gen0 projects, Guild Board, Saadhana Board, Fuel Unit, Kaali Punk, Prompt Engineering Course, MVP development, web development, GenZ"
+        canonicalUrl="https://gen0.design/projects"
+        structuredData={structuredData}
+      />
       
       <ScrollArea className="h-screen no-scrollbar">
         <main className="pt-32 pb-20">

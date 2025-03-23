@@ -21,6 +21,7 @@ const JoinInquiryFields = ({ form }: JoinInquiryFieldsProps) => {
               <FormControl>
                 <Input placeholder="e.g., Developer, Designer, Manager" {...field} />
               </FormControl>
+              <FormDescription>Check for open posts in the join us page, if you don't find a position you are interested in send us an open post.</FormDescription>
               <FormMessage />
             </FormItem>
           )}

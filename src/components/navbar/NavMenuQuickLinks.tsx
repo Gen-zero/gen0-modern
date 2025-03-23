@@ -1,6 +1,6 @@
 
 import { Link } from "react-router-dom";
-import { Info, FileCode, BookOpen } from "lucide-react";
+import { Info, FileCode } from "lucide-react";
 
 interface NavLink {
   name: string;
@@ -24,11 +24,6 @@ const NavMenuQuickLinks = ({ navLinks, toggleMenu }: NavMenuQuickLinksProps) => 
       name: 'Projects',
       href: '/projects',
       icon: <FileCode className="h-4 w-4 text-accent" />
-    },
-    {
-      name: 'Blog',
-      href: '/blog',
-      icon: <BookOpen className="h-4 w-4 text-accent" />
     }
   ];
   

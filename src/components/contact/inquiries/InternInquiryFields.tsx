@@ -41,6 +41,7 @@ const InternInquiryFields = ({
               <FormControl>
                 <Input placeholder="e.g., MIT" {...field} />
               </FormControl>
+              <FormDescription>If you are not a college student [ dropout, or under 18 ] fill it with "None".</FormDescription>
               <FormMessage />
             </FormItem>
           )}
@@ -54,7 +55,6 @@ const InternInquiryFields = ({
               <FormControl>
                 <Input placeholder="e.g., Computer Science" {...field} />
               </FormControl>
-              <FormDescription>This can also stand for your area of expertise that is not certified.Ps, Impress us with your works.</FormDescription>
               <FormMessage />
             </FormItem>
           )}

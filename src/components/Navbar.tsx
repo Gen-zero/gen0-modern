@@ -14,7 +14,7 @@ import { useNavbarRoute } from '@/hooks/useNavbarRoute';
 const NavbarContent = () => {
   const { isScrolled, menuOpen, setMenuOpen, navbarExpanded, setActiveSection, setPrevActiveSection } = useNavbar();
   const { navbarRef, toggleNavbarExpand, isSmallScreen } = useNavbarAnimation();
-  const { isHomePage } = useNavbarRoute();
+  const { isHomePage, isProjectDetailPage, isBlogPage, projectName } = useNavbarRoute();
   const location = useLocation();
   const navigate = useNavigate();
   const isMobileScreen = useIsMobile();
@@ -26,6 +26,9 @@ const NavbarContent = () => {
     if (location.pathname === '/projects') {
       setPrevActiveSection('Projects');
       setActiveSection('Projects');
+    } else if (location.pathname.startsWith('/projects/') && isProjectDetailPage) {
+      setPrevActiveSection('Projects');
+      setActiveSection(projectName || 'Project');
     } else if (location.pathname === '/privacy-policy') {
       setPrevActiveSection('Privacy');
       setActiveSection('Privacy');
@@ -38,11 +41,14 @@ const NavbarContent = () => {
     } else if (location.pathname === '/about') {
       setPrevActiveSection('About');
       setActiveSection('About');
+    } else if (location.pathname.startsWith('/blog')) {
+      setPrevActiveSection('Blog');
+      setActiveSection('Blog');
     } else if (location.pathname === '/') {
       setPrevActiveSection('Home');
       setActiveSection('Home');
     }
-  }, [location.pathname, setPrevActiveSection, setActiveSection]);
+  }, [location.pathname, setPrevActiveSection, setActiveSection, isProjectDetailPage, projectName, isBlogPage]);
   
   const toggleMenu = () => {
     setMenuOpen(!menuOpen);

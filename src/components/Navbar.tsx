@@ -1,9 +1,8 @@
 
-import { Menu, ChevronRight, ChevronLeft, ArrowLeft } from 'lucide-react';
+import { Menu, ArrowLeft } from 'lucide-react';
 import NavMenu from './navbar/NavMenu';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import NavbarSectionTitle from './navbar/NavbarSectionTitle';
-import NavbarSectionLinks from './navbar/NavbarSectionLinks';
 import { NavbarProvider, useNavbar } from '@/contexts/NavbarContext';
 import { useNavbarAnimation } from '@/hooks/useNavbarAnimation';
 import { useNavbarScroll } from '@/hooks/useNavbarScroll';
@@ -13,7 +12,7 @@ import { useNavbarRoute } from '@/hooks/useNavbarRoute';
 
 const NavbarContent = () => {
   const { isScrolled, menuOpen, setMenuOpen, navbarExpanded, setActiveSection, setPrevActiveSection } = useNavbar();
-  const { navbarRef, toggleNavbarExpand, isSmallScreen } = useNavbarAnimation();
+  const { navbarRef, isSmallScreen } = useNavbarAnimation();
   const { isHomePage, isProjectDetailPage, isBlogPage, projectName } = useNavbarRoute();
   const location = useLocation();
   const navigate = useNavigate();
@@ -69,7 +68,7 @@ const NavbarContent = () => {
         ref={navbarRef}
         className={`fixed top-4 left-4 z-50 transition-all duration-300 ${isScrolled ? 'bg-background/80 backdrop-blur-md shadow-sm' : 'bg-background/60 backdrop-blur-sm'} p-3 rounded-lg border border-border/30 overflow-hidden`}
         style={{ 
-          width: navbarExpanded && !isSmallScreen && isHomePage ? 'auto' : '300px',
+          width: '300px',
           transition: 'width 0.4s ease-in-out' 
         }}
       >
@@ -85,18 +84,7 @@ const NavbarContent = () => {
           <div className="flex items-center gap-2">
             <div className="flex items-center">
               <NavbarSectionTitle />
-              {!isSmallScreen && isHomePage && <NavbarSectionLinks />}
             </div>
-
-            {!isSmallScreen && isHomePage && (
-              <button 
-                onClick={toggleNavbarExpand}
-                className="flex items-center justify-center w-8 h-8 rounded-full bg-accent/10 hover:bg-primary/20 text-white transition-all ml-1"
-                aria-label={navbarExpanded ? "Collapse Navigation" : "Expand Navigation"}
-              >
-                {navbarExpanded ? <ChevronLeft size={18} /> : <ChevronRight size={18} />}
-              </button>
-            )}
           </div>
         </div>
       </header>

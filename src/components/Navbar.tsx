@@ -66,10 +66,15 @@ const NavbarContent = () => {
     <>
       <header 
         ref={navbarRef}
-        className={`fixed top-4 left-4 z-50 transition-all duration-300 ${isScrolled ? 'bg-background/80 backdrop-blur-md shadow-sm' : 'bg-background/60 backdrop-blur-sm'} p-3 rounded-lg border border-border/30 overflow-hidden`}
+        className={`fixed top-4 left-4 z-50 transition-all duration-300 ${
+          isScrolled 
+            ? 'bg-background/40 backdrop-blur-xl shadow-lg border-primary/10' 
+            : 'bg-background/30 backdrop-blur-md'
+        } p-3 rounded-lg border border-white/10 overflow-hidden`}
         style={{ 
           width: '300px',
-          transition: 'width 0.4s ease-in-out' 
+          transition: 'width 0.4s ease-in-out',
+          boxShadow: isScrolled ? '0 4px 20px rgba(0, 0, 0, 0.1)' : '0 2px 10px rgba(0, 0, 0, 0.05)'
         }}
       >
         <div className="flex items-center justify-between">
@@ -93,7 +98,7 @@ const NavbarContent = () => {
       {!isHomePage && !isMobileScreen && (
         <button
           onClick={handleBackClick}
-          className="fixed top-4 right-4 z-50 p-3 rounded-lg bg-background/60 backdrop-blur-sm border border-border/30 transition-all duration-300 hover:bg-primary/10 text-white hover:text-primary focus:outline-none"
+          className="fixed top-4 right-4 z-50 p-3 rounded-lg bg-background/30 backdrop-blur-md border border-white/10 transition-all duration-300 hover:bg-primary/10 text-white hover:text-primary focus:outline-none"
           aria-label="Go back"
         >
           <ArrowLeft size={24} />

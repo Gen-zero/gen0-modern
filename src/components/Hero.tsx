@@ -1,4 +1,3 @@
-
 import { useEffect, useState, useRef } from 'react';
 import { Button } from './ui/button';
 import { ArrowRight, GraduationCap, TrendingUp, Users } from 'lucide-react';
@@ -88,23 +87,24 @@ const Hero = () => {
       animationDelay: '1s'
     }}></div>
       
-      {/* Join Us button with adjusted position to match the image box container padding */}
-      <div className="absolute top-12 right-12 md:right-12 lg:right-12 z-40">
-        <Button 
-          onClick={() => navigate('/join-us')}
-          variant="outline"
-          className="uppercase font-medium text-sm px-6 py-2 bg-background/60 backdrop-blur-sm border border-muted
-                  hover:bg-primary/10 hover:border-primary hover:text-primary
-                  group transition-all duration-300 
-                  relative overflow-hidden
-                  after:content-[''] after:absolute after:bg-primary/5 after:h-full after:w-full
-                  after:left-0 after:top-0 after:transform after:scale-x-0 after:origin-left 
-                  hover:after:scale-x-100 after:transition-transform after:duration-500"
-        >
-          <span className="relative z-10">JOIN US</span>
-          <Users className="ml-2 transition-all duration-300 group-hover:translate-x-1 relative z-10" size={16} />
-        </Button>
-      </div>
+      {!isSmallScreen && (
+        <div className="absolute top-12 right-12 md:right-12 lg:right-12 z-40">
+          <Button 
+            onClick={() => navigate('/join-us')}
+            variant="outline"
+            className="uppercase font-medium text-sm px-6 py-2 bg-background/60 backdrop-blur-sm border border-muted
+                    hover:bg-primary/10 hover:border-primary hover:text-primary
+                    group transition-all duration-300 
+                    relative overflow-hidden
+                    after:content-[''] after:absolute after:bg-primary/5 after:h-full after:w-full
+                    after:left-0 after:top-0 after:transform after:scale-x-0 after:origin-left 
+                    hover:after:scale-x-100 after:transition-transform after:duration-500"
+          >
+            <span className="relative z-10">JOIN US</span>
+            <Users className="ml-2 transition-all duration-300 group-hover:translate-x-1 relative z-10" size={16} />
+          </Button>
+        </div>
+      )}
       
       <div className="container mx-auto px-6 py-12">
         <div className="relative h-[40vh] w-full rounded-2xl overflow-hidden shadow-2xl border border-[#1f2b87] animate-fade-in">
@@ -125,14 +125,13 @@ const Hero = () => {
           </div>
         </div>
 
-        {/* New tagline similar to nav modal */}
         <div className="text-center mt-6 mb-6">
           <h3 className="text-xl md:text-2xl font-bold uppercase bg-gradient-to-r from-foreground via-foreground/90 to-foreground/70 bg-clip-text text-transparent flex items-center justify-center gap-2">
             BUILDING TO <TrendingUp className="h-6 w-6 text-accent animate-pulse" /> LEVEL UP HUMANITY.
           </h3>
         </div>
 
-        <div className="flex items-center justify-center mt-8 gap-8">
+        <div className="flex flex-col sm:flex-row items-center justify-center mt-8 gap-8">
           <Button 
             variant="outline" 
             className="uppercase font-medium text-sm px-8 py-6 bg-background/60 backdrop-blur-sm border border-border/30
@@ -141,7 +140,7 @@ const Hero = () => {
                      hover:shadow-[0_0_20px_rgba(168,85,247,0.6)] relative overflow-hidden
                      after:content-[''] after:absolute after:bg-primary/5 after:h-full after:w-full
                      after:left-0 after:top-0 after:transform after:scale-x-0 after:origin-left 
-                     hover:after:scale-x-100 after:transition-transform after:duration-500 w-40"
+                     hover:after:scale-x-100 after:transition-transform after:duration-500 w-40 sm:w-40"
             onClick={scrollToProjects}
           >
             <span className="relative z-10">Our Works</span>
@@ -156,10 +155,27 @@ const Hero = () => {
                      hover:shadow-[0_0_20px_rgba(168,85,247,0.6)] relative overflow-hidden
                      after:content-[''] after:absolute after:bg-primary/5 after:h-full after:w-full
                      after:left-0 after:top-0 after:transform after:scale-x-0 after:origin-left 
-                     hover:after:scale-x-100 after:transition-transform after:duration-500 w-40">
+                     hover:after:scale-x-100 after:transition-transform after:duration-500 w-40 sm:w-40">
             <span className="relative z-10">About Us</span>
             <GraduationCap className="ml-2 transition-all duration-300 group-hover:translate-y-[-4px] relative z-10" size={16} />
           </Button>
+          
+          {isSmallScreen && (
+            <Button 
+              onClick={() => navigate('/join-us')}
+              variant="outline"
+              className="uppercase font-medium text-sm px-8 py-6 bg-background/60 backdrop-blur-sm border border-muted
+                      hover:bg-primary/10 hover:border-primary hover:text-primary
+                      group transition-all duration-300 hover:scale-110
+                      hover:shadow-[0_0_20px_rgba(168,85,247,0.6)] relative overflow-hidden
+                      after:content-[''] after:absolute after:bg-primary/5 after:h-full after:w-full
+                      after:left-0 after:top-0 after:transform after:scale-x-0 after:origin-left 
+                      hover:after:scale-x-100 after:transition-transform after:duration-500 w-40"
+            >
+              <span className="relative z-10">JOIN US</span>
+              <Users className="ml-2 transition-all duration-300 group-hover:translate-x-1 relative z-10" size={16} />
+            </Button>
+          )}
         </div>
       </div>
     </section>

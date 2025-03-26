@@ -23,10 +23,10 @@ const MissionVisionSection = () => {
           
           <div className="relative">
             <div className="aspect-video bg-white p-1 rounded-xl shadow-xl rotate-3">
-              <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" alt="Team brainstorming session" className="rounded-lg w-full h-full object-cover" />
+              <img src="https://ik.imagekit.io/kalidaspem/an%20office%20setting%20inside%20a%20computer%20screen,%20resembling%20a%20metaverse-style%20office%20setting,%20where%20someone%20is%20playing%20video%20games%20in%20the%20pc,%20but%20the%20game%20is%20work%20itself%20-%20enforcing%20the%20work%20as%20game%20into%20them..png" alt="Team brainstorming session" className="rounded-lg w-full h-full object-cover" />
             </div>
             <div className="absolute -bottom-4 -left-4 aspect-square w-48 bg-white p-1 rounded-xl shadow-xl -rotate-6">
-              <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Team collaboration" className="rounded-lg w-full h-full object-cover" />
+              <img src="https://ik.imagekit.io/kalidaspem/Alex.png" alt="Team collaboration" className="rounded-lg w-full h-full object-cover" />
             </div>
           </div>
         </div>

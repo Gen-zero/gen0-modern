@@ -29,8 +29,8 @@ const BlogPostContent = () => {
     );
   }
   
-  // Convert content string to paragraphs
-  const paragraphs = post.content?.split('\n\n') || [];
+  // Convert content string to sections, identifying headings vs paragraphs
+  const contentSections = post.content?.split('\n\n') || [];
   
   // Animation variants
   const containerVariants = {
@@ -47,6 +47,29 @@ const BlogPostContent = () => {
   const itemVariants = {
     hidden: { opacity: 0, y: 20 },
     visible: { opacity: 1, y: 0 }
+  };
+
+  // Function to render content with proper formatting
+  const renderContent = () => {
+    return contentSections.map((section, index) => {
+      // Check if the section is a heading (contains a question-like phrase)
+      if (section.startsWith("What") || 
+          section.startsWith("Challenging") || 
+          section.startsWith("Photographers") || 
+          section.startsWith("Other") || 
+          section.startsWith("The Bigger") || 
+          section.startsWith("Real-World") || 
+          section.startsWith("The Road")) {
+        // This is a heading
+        return <h2 key={index} className="text-2xl font-bold mt-10 mb-4">{section}</h2>;
+      } else if (index === 0) {
+        // The first paragraph is the main title/heading
+        return <h1 key={index} className="text-3xl md:text-4xl font-bold mt-2 mb-6">{section}</h1>;
+      } else {
+        // Regular paragraph
+        return <p key={index} className="mb-6 leading-relaxed text-muted-foreground">{section}</p>;
+      }
+    });
   };
 
   return (
@@ -84,10 +107,6 @@ const BlogPostContent = () => {
                 </Badge>
               ))}
             </div>
-            
-            <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold leading-tight mb-6">
-              {post.title}
-            </h1>
             
             <div className="flex items-center gap-6 text-sm text-muted-foreground mb-6">
               <div className="flex items-center gap-2">
@@ -130,16 +149,7 @@ const BlogPostContent = () => {
           <Separator className="mb-8" />
           
           <motion.div variants={itemVariants} className="prose prose-lg dark:prose-invert max-w-none">
-            {paragraphs.map((paragraph, index) => {
-              // Check if paragraph is a heading (starts with #)
-              if (paragraph.startsWith('What') || paragraph.startsWith('Challenging') || 
-                  paragraph.startsWith('Photographers') || paragraph.startsWith('Other') || 
-                  paragraph.startsWith('The Bigger') || paragraph.startsWith('Real-World') || 
-                  paragraph.startsWith('The Road')) {
-                return <h2 key={index} className="text-2xl font-bold mt-8 mb-4">{paragraph}</h2>;
-              }
-              return <p key={index} className="mb-6 leading-relaxed">{paragraph}</p>;
-            })}
+            {renderContent()}
           </motion.div>
           
           <Separator className="my-12" />

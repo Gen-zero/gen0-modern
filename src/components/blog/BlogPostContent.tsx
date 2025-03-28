@@ -3,7 +3,6 @@ import { useParams } from "react-router-dom";
 import { blogPosts } from "@/data/blogData";
 import { motion } from "framer-motion";
 import { Separator } from "@/components/ui/separator";
-import SEO from "@/components/SEO";
 import BlogPostHeader from "./BlogPostHeader";
 import BlogPostCoverImage from "./BlogPostCoverImage";
 import BlogPostAuthor from "./BlogPostAuthor";
@@ -32,51 +31,39 @@ const BlogPostContent = () => {
   };
 
   return (
-    <>
-      <SEO 
-        title={`${post.title} | Gen0 Blog`}
-        description={post.excerpt}
-        keywords={post.categories.join(', ')}
-        canonicalUrl={`https://gen0.design/blog/${post.slug}`}
-        ogTitle={post.title}
-        ogDescription={post.excerpt}
-        ogImage={post.coverImage}
-      />
-      
-      <div className="container mx-auto px-6 md:px-8 py-16 md:py-24">
-        <motion.div 
-          initial="hidden"
-          animate="visible"
-          variants={containerVariants}
-          className="max-w-3xl mx-auto"
-        >
-          <BlogPostHeader post={post} />
-          
-          <BlogPostCoverImage 
-            imageUrl={post.coverImage} 
-            title={post.title} 
+    <div className="container mx-auto px-6 md:px-8 py-16 md:py-24">
+      <motion.div 
+        initial="hidden"
+        animate="visible"
+        variants={containerVariants}
+        className="max-w-3xl mx-auto"
+      >
+        <BlogPostHeader post={post} />
+        
+        <BlogPostCoverImage 
+          imageUrl={post.coverImage} 
+          title={post.title} 
+        />
+        
+        <BlogPostAuthor 
+          name={post.author.name} 
+          avatar={post.author.avatar} 
+        />
+        
+        <Separator className="mb-12" />
+        
+        {post.content && (
+          <BlogPostMainContent 
+            title={post.content.mainTitle} 
+            sections={post.content.sections} 
           />
-          
-          <BlogPostAuthor 
-            name={post.author.name} 
-            avatar={post.author.avatar} 
-          />
-          
-          <Separator className="mb-12" />
-          
-          {post.content && (
-            <BlogPostMainContent 
-              title={post.content.mainTitle} 
-              sections={post.content.sections} 
-            />
-          )}
-          
-          <Separator className="my-20" />
-          
-          <BlogPostShareLinks />
-        </motion.div>
-      </div>
-    </>
+        )}
+        
+        <Separator className="my-20" />
+        
+        <BlogPostShareLinks />
+      </motion.div>
+    </div>
   );
 };
 

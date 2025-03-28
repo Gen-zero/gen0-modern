@@ -29,9 +29,6 @@ const BlogPostContent = () => {
     );
   }
   
-  // Convert content string to sections, identifying headings vs paragraphs
-  const contentSections = post.content?.split('\n\n') || [];
-  
   // Animation variants
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -49,38 +46,33 @@ const BlogPostContent = () => {
     visible: { opacity: 1, y: 0 }
   };
 
-  // List of known headings/titles in the blog post
-  const knownHeadings = [
-    "What Are ChatGPT's New Image Generation Capabilities?",
-    "Challenging Comic Artists: Speed vs. Soul",
-    "Photographers Under Pressure: Efficiency Meets Artistry",
-    "Other Artists: A Shift for Illustrators and Designers",
-    "The Bigger Picture: Opportunities and Risks for Entertainment",
-    "Real-World Buzz: Excitement and Concern",
-    "The Road Ahead: Balancing Innovation and Humanity"
-  ];
-
   // Function to render content with proper formatting
   const renderContent = () => {
-    return contentSections.map((section, index) => {
-      // Check if the section matches one of our known headings
-      if (knownHeadings.includes(section)) {
-        // This is a confirmed heading - apply special styling
-        return (
-          <div key={index} className="mb-10 mt-20">
-            <h2 className="text-2xl md:text-3xl font-bold text-primary border-l-4 border-primary pl-4 py-2">
-              {section}
-            </h2>
+    if (!post.content) return null;
+    
+    return (
+      <>
+        <h1 className="text-3xl md:text-4xl font-bold mt-4 mb-12">{post.content.mainTitle}</h1>
+        
+        {post.content.sections.map((section, sectionIndex) => (
+          <div key={sectionIndex}>
+            {section.heading && (
+              <div className="mb-10 mt-20">
+                <h2 className="text-2xl md:text-3xl font-bold text-primary border-l-4 border-primary pl-4 py-2">
+                  {section.heading}
+                </h2>
+              </div>
+            )}
+            
+            {section.paragraphs.map((paragraph, paraIndex) => (
+              <p key={`${sectionIndex}-${paraIndex}`} className="mb-10 leading-relaxed text-muted-foreground text-lg">
+                {paragraph}
+              </p>
+            ))}
           </div>
-        );
-      } else if (index === 0) {
-        // The first paragraph is the main title/heading
-        return <h1 key={index} className="text-3xl md:text-4xl font-bold mt-4 mb-12">{section}</h1>;
-      } else {
-        // Regular paragraph
-        return <p key={index} className="mb-10 leading-relaxed text-muted-foreground text-lg">{section}</p>;
-      }
-    });
+        ))}
+      </>
+    );
   };
 
   return (

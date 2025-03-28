@@ -14,15 +14,15 @@ const TeamSection = () => {
   const teamMembers: TeamMember[] = [{
     name: "Manu Narayanan",
     position: "Founder & Advisor",
-    bio: "With 15 years of industry experience and a passion for inclusive design, Manu founded Gen0 with a vision to build digital products that truly matter for GenZ and beyond.",
-    personalDetail: "When not leading the team, Manu is an avid rock climber and amateur chef.",
+    bio: "Lowkey a mad scientist, highkey a visionary—he’s all about building cool stuff that actually moves humanity forward. Obsessed with innovation, stacked with ideas, and always clocking what’s really going on around him. He gets the daily grind Gen Z pros go through (been there, felt that) and is out here tryna flip the game with solutions that actually hit.",
+    personalDetail: "He’s the guru Gen Z didn’t know they needed—got a knack for spotting untapped potential and bringing it to the surface just by vibing with people.",
     imgUrl: "https://ik.imagekit.io/kalidaspem/c46019ce-faea-4d33-b80c-b78d9da6d500.jpg?updatedAt=1742559972141",
     expertise: ["Prompt Engineering", "0 to 1 Product Development", "UI/UX Design", "Strategic Planning"]
   }, {
     name: "Kalidasan P E M",
     position: "Co-Founder and CTO",
-    bio: "Kalidasan's technical leadership has shaped our engineering culture. He specializes in scalable architecture, prompt engineering, and emerging technologies for digital transformation.",
-    personalDetail: "A former competitive gamer, Kalidasan now spends his free time teaching coding to underprivileged youth.",
+    bio: "Once a freelancer stacking wins with websites and webapps, now a full-time dream chaser who dropped out of college to build this vision from the ground up. He codes like a wizard, thinks like a strategist, and lives like it’s all one big open-world game—where even failures just level him up with extra XP.",
+    personalDetail: "When he’s not building worlds in code, he’s conjuring them in words—poems and tales that stir souls and leave echoes in the hearts of those who read them.",
     imgUrl: "https://ik.imagekit.io/kalidaspem/894146aa-4ab3-4820-b55b-55478d7507a9.jpg?updatedAt=1742559972090",
     expertise: ["Web Development", "MVP Building", "Prompt Engineering", "Backend Systems"]
   }, {

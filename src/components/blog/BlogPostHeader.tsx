@@ -19,16 +19,16 @@ const BlogPostHeader = ({ post }: BlogPostHeaderProps) => {
   };
 
   return (
-    <motion.div variants={itemVariants} className="mb-12">
+    <motion.div variants={itemVariants} className="mb-8">
       <button
         onClick={() => navigate('/blog')}
-        className="flex items-center gap-2 text-muted-foreground hover:text-primary transition-colors mb-10"
+        className="flex items-center gap-2 text-muted-foreground hover:text-primary transition-colors mb-6"
       >
         <ArrowLeft size={16} />
         <span>Back to all articles</span>
       </button>
       
-      <div className="flex flex-wrap gap-2 mb-6">
+      <div className="flex flex-wrap gap-2 mb-4">
         {post.categories.map(category => (
           <Badge key={category} variant="secondary" className="font-medium">
             {category}
@@ -36,7 +36,7 @@ const BlogPostHeader = ({ post }: BlogPostHeaderProps) => {
         ))}
       </div>
       
-      <div className="flex items-center gap-6 text-sm text-muted-foreground mb-8">
+      <div className="flex items-center gap-6 text-sm text-muted-foreground mb-6">
         <div className="flex items-center gap-2">
           <Calendar size={14} />
           <span>{post.date}</span>

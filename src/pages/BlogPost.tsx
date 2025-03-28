@@ -43,7 +43,7 @@ const BlogPost = () => {
         
         <Navbar />
         
-        <div className="pt-24 md:pt-28">
+        <div className="pt-10 md:pt-16">
           <BlogPostContent />
         </div>
         

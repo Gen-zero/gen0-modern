@@ -49,29 +49,36 @@ const BlogPostContent = () => {
     visible: { opacity: 1, y: 0 }
   };
 
+  // List of known headings/titles in the blog post
+  const knownHeadings = [
+    "What Are ChatGPT's New Image Generation Capabilities?",
+    "Challenging Comic Artists: Speed vs. Soul",
+    "Photographers Under Pressure: Efficiency Meets Artistry",
+    "Other Artists: A Shift for Illustrators and Designers",
+    "The Bigger Picture: Opportunities and Risks for Entertainment",
+    "Real-World Buzz: Excitement and Concern",
+    "The Road Ahead: Balancing Innovation and Humanity"
+  ];
+
   // Function to render content with proper formatting
   const renderContent = () => {
     return contentSections.map((section, index) => {
       // Check if the section matches one of our known headings
-      const knownHeadings = [
-        "What Are ChatGPT's New Image Generation Capabilities?",
-        "Challenging Comic Artists: Speed vs. Soul",
-        "Photographers Under Pressure: Efficiency Meets Artistry",
-        "Other Artists: A Shift for Illustrators and Designers",
-        "The Bigger Picture: Opportunities and Risks for Entertainment",
-        "Real-World Buzz: Excitement and Concern",
-        "The Road Ahead: Balancing Innovation and Humanity"
-      ];
-      
       if (knownHeadings.includes(section)) {
-        // This is a confirmed heading
-        return <h2 key={index} className="text-2xl font-bold mt-16 mb-6">{section}</h2>;
+        // This is a confirmed heading - apply special styling
+        return (
+          <div key={index} className="mb-10 mt-20">
+            <h2 className="text-2xl md:text-3xl font-bold text-primary border-l-4 border-primary pl-4 py-2">
+              {section}
+            </h2>
+          </div>
+        );
       } else if (index === 0) {
         // The first paragraph is the main title/heading
-        return <h1 key={index} className="text-3xl md:text-4xl font-bold mt-2 mb-8">{section}</h1>;
+        return <h1 key={index} className="text-3xl md:text-4xl font-bold mt-4 mb-12">{section}</h1>;
       } else {
         // Regular paragraph
-        return <p key={index} className="mb-8 leading-relaxed text-muted-foreground text-lg">{section}</p>;
+        return <p key={index} className="mb-10 leading-relaxed text-muted-foreground text-lg">{section}</p>;
       }
     });
   };
@@ -126,7 +133,7 @@ const BlogPostContent = () => {
           
           <motion.div 
             variants={itemVariants}
-            className="relative w-full h-[300px] md:h-[500px] mb-12 rounded-xl overflow-hidden"
+            className="relative w-full h-[300px] md:h-[500px] mb-16 rounded-xl overflow-hidden"
           >
             <img 
               src={post.coverImage} 
@@ -135,7 +142,7 @@ const BlogPostContent = () => {
             />
           </motion.div>
           
-          <motion.div variants={itemVariants} className="flex items-center gap-3 mb-10">
+          <motion.div variants={itemVariants} className="flex items-center gap-3 mb-12">
             <img 
               src={post.author.avatar} 
               alt={post.author.name} 
@@ -150,13 +157,13 @@ const BlogPostContent = () => {
             </div>
           </motion.div>
           
-          <Separator className="mb-10" />
+          <Separator className="mb-12" />
           
           <motion.div variants={itemVariants} className="prose prose-lg dark:prose-invert max-w-none">
             {renderContent()}
           </motion.div>
           
-          <Separator className="my-16" />
+          <Separator className="my-20" />
           
           <motion.div variants={itemVariants} className="bg-muted/50 p-8 rounded-lg">
             <h3 className="text-xl font-bold mb-6">Share this article</h3>

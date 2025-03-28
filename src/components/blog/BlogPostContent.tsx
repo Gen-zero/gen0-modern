@@ -52,22 +52,26 @@ const BlogPostContent = () => {
   // Function to render content with proper formatting
   const renderContent = () => {
     return contentSections.map((section, index) => {
-      // Check if the section is a heading (contains a question-like phrase)
-      if (section.startsWith("What") || 
-          section.startsWith("Challenging") || 
-          section.startsWith("Photographers") || 
-          section.startsWith("Other") || 
-          section.startsWith("The Bigger") || 
-          section.startsWith("Real-World") || 
-          section.startsWith("The Road")) {
-        // This is a heading
-        return <h2 key={index} className="text-2xl font-bold mt-10 mb-4">{section}</h2>;
+      // Check if the section matches one of our known headings
+      const knownHeadings = [
+        "What Are ChatGPT's New Image Generation Capabilities?",
+        "Challenging Comic Artists: Speed vs. Soul",
+        "Photographers Under Pressure: Efficiency Meets Artistry",
+        "Other Artists: A Shift for Illustrators and Designers",
+        "The Bigger Picture: Opportunities and Risks for Entertainment",
+        "Real-World Buzz: Excitement and Concern",
+        "The Road Ahead: Balancing Innovation and Humanity"
+      ];
+      
+      if (knownHeadings.includes(section)) {
+        // This is a confirmed heading
+        return <h2 key={index} className="text-2xl font-bold mt-16 mb-6">{section}</h2>;
       } else if (index === 0) {
         // The first paragraph is the main title/heading
-        return <h1 key={index} className="text-3xl md:text-4xl font-bold mt-2 mb-6">{section}</h1>;
+        return <h1 key={index} className="text-3xl md:text-4xl font-bold mt-2 mb-8">{section}</h1>;
       } else {
         // Regular paragraph
-        return <p key={index} className="mb-6 leading-relaxed text-muted-foreground">{section}</p>;
+        return <p key={index} className="mb-8 leading-relaxed text-muted-foreground text-lg">{section}</p>;
       }
     });
   };
@@ -84,23 +88,23 @@ const BlogPostContent = () => {
         ogImage={post.coverImage}
       />
       
-      <div className="container mx-auto px-4 py-12 md:py-20">
+      <div className="container mx-auto px-6 md:px-8 py-16 md:py-24">
         <motion.div 
           initial="hidden"
           animate="visible"
           variants={containerVariants}
-          className="max-w-4xl mx-auto"
+          className="max-w-3xl mx-auto"
         >
-          <motion.div variants={itemVariants} className="mb-8">
+          <motion.div variants={itemVariants} className="mb-12">
             <button
               onClick={() => navigate('/blog')}
-              className="flex items-center gap-2 text-muted-foreground hover:text-primary transition-colors mb-8"
+              className="flex items-center gap-2 text-muted-foreground hover:text-primary transition-colors mb-10"
             >
               <ArrowLeft size={16} />
               <span>Back to all articles</span>
             </button>
             
-            <div className="flex flex-wrap gap-2 mb-4">
+            <div className="flex flex-wrap gap-2 mb-6">
               {post.categories.map(category => (
                 <Badge key={category} variant="secondary" className="font-medium">
                   {category}
@@ -108,7 +112,7 @@ const BlogPostContent = () => {
               ))}
             </div>
             
-            <div className="flex items-center gap-6 text-sm text-muted-foreground mb-6">
+            <div className="flex items-center gap-6 text-sm text-muted-foreground mb-8">
               <div className="flex items-center gap-2">
                 <Calendar size={14} />
                 <span>{post.date}</span>
@@ -122,7 +126,7 @@ const BlogPostContent = () => {
           
           <motion.div 
             variants={itemVariants}
-            className="relative w-full h-[300px] md:h-[500px] mb-10 rounded-xl overflow-hidden"
+            className="relative w-full h-[300px] md:h-[500px] mb-12 rounded-xl overflow-hidden"
           >
             <img 
               src={post.coverImage} 
@@ -131,7 +135,7 @@ const BlogPostContent = () => {
             />
           </motion.div>
           
-          <motion.div variants={itemVariants} className="flex items-center gap-3 mb-8">
+          <motion.div variants={itemVariants} className="flex items-center gap-3 mb-10">
             <img 
               src={post.author.avatar} 
               alt={post.author.name} 
@@ -146,16 +150,16 @@ const BlogPostContent = () => {
             </div>
           </motion.div>
           
-          <Separator className="mb-8" />
+          <Separator className="mb-10" />
           
           <motion.div variants={itemVariants} className="prose prose-lg dark:prose-invert max-w-none">
             {renderContent()}
           </motion.div>
           
-          <Separator className="my-12" />
+          <Separator className="my-16" />
           
-          <motion.div variants={itemVariants} className="bg-muted/50 p-6 rounded-lg">
-            <h3 className="text-xl font-bold mb-4">Share this article</h3>
+          <motion.div variants={itemVariants} className="bg-muted/50 p-8 rounded-lg">
+            <h3 className="text-xl font-bold mb-6">Share this article</h3>
             <div className="flex gap-4">
               <a href="#" className="p-3 bg-background rounded-full hover:bg-primary/10 transition-colors">
                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">

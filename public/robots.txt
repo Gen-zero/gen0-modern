@@ -2,4 +2,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://gen0.design/sitemap.xml
+Sitemap: https://gen0.xyz/sitemap.xml

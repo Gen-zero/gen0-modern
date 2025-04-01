@@ -67,7 +67,7 @@ const BlogPost = () => {
           title={seoTitle}
           description={seoDescription}
           keywords={post?.categories.join(', ')}
-          canonicalUrl={post ? `https://gen0.design/blog/${post.slug}` : 'https://gen0.design/blog'}
+          canonicalUrl={post ? `https://gen0.xyz/blog/${post.slug}` : 'https://gen0.xyz/blog'}
           ogTitle={post?.title}
           ogDescription={seoDescription}
           ogImage={post?.coverImage}

@@ -6,7 +6,7 @@ import { toast } from "sonner";
 
 const BlogPostShareLinks = () => {
   const location = useLocation();
-  const currentUrl = `https://gen0.design${location.pathname}`;
+  const currentUrl = `https://gen0.xyz${location.pathname}`;
   const pageTitle = document.title || "Check out this article from Gen0";
   const pageDescription = "Explore this fascinating article about AI, design, and technology from Gen0.";
   

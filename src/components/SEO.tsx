@@ -19,7 +19,7 @@ const SEO = ({
   title,
   description,
   keywords,
-  canonicalUrl = 'https://gen0.design',
+  canonicalUrl = 'https://gen0.xyz',
   ogTitle,
   ogDescription,
   ogImage = '/lovable-uploads/82543c4a-707b-40ad-9352-e934e6252d4f.png',

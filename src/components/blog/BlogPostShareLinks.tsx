@@ -1,12 +1,13 @@
 
 import { motion } from "framer-motion";
-import { Share2, Facebook, Twitter, Linkedin, Instagram } from "lucide-react";
+import { Share2, Facebook, Twitter, Linkedin, Instagram, MessageCircle, Send } from "lucide-react";
 import { useLocation } from "react-router-dom";
 
 const BlogPostShareLinks = () => {
   const location = useLocation();
   const currentUrl = `https://gen0.design${location.pathname}`;
   const pageTitle = document.title || "Check out this article from Gen0";
+  const pageDescription = "Explore this fascinating article about AI, design, and technology from Gen0.";
   
   // Animation variants
   const itemVariants = {
@@ -14,11 +15,13 @@ const BlogPostShareLinks = () => {
     visible: { opacity: 1, y: 0 }
   };
 
-  // Social share URLs
+  // Social share URLs with proper parameters for rich previews
   const shareLinks = {
-    facebook: `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(currentUrl)}`,
+    facebook: `https://www.facebook.com/dialog/share?app_id=966242223397117&display=popup&href=${encodeURIComponent(currentUrl)}&quote=${encodeURIComponent(pageTitle)}`,
     twitter: `https://twitter.com/intent/tweet?url=${encodeURIComponent(currentUrl)}&text=${encodeURIComponent(pageTitle)}`,
-    linkedin: `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(currentUrl)}`,
+    linkedin: `https://www.linkedin.com/shareArticle?mini=true&url=${encodeURIComponent(currentUrl)}&title=${encodeURIComponent(pageTitle)}&summary=${encodeURIComponent(pageDescription)}`,
+    whatsapp: `https://api.whatsapp.com/send?text=${encodeURIComponent(`${pageTitle} ${currentUrl}`)}`,
+    telegram: `https://t.me/share/url?url=${encodeURIComponent(currentUrl)}&text=${encodeURIComponent(pageTitle)}`,
     instagram: `https://www.instagram.com/` // Instagram doesn't support direct sharing via URL
   };
 
@@ -30,6 +33,7 @@ const BlogPostShareLinks = () => {
       return;
     }
     
+    // For all other platforms, open a popup window with appropriate dimensions
     window.open(url, '_blank', 'noopener,noreferrer,width=600,height=500');
   };
 
@@ -40,7 +44,7 @@ const BlogPostShareLinks = () => {
         <h3 className="text-xl font-bold">Share this article</h3>
       </div>
       
-      <div className="flex gap-4">
+      <div className="flex flex-wrap gap-4">
         <button 
           onClick={() => handleShare(shareLinks.facebook, 'facebook')} 
           className="p-3 bg-background rounded-full hover:bg-primary/10 transition-colors"
@@ -71,6 +75,22 @@ const BlogPostShareLinks = () => {
           aria-label="Open Instagram"
         >
           <Instagram className="h-5 w-5" />
+        </button>
+        
+        <button 
+          onClick={() => handleShare(shareLinks.whatsapp, 'whatsapp')} 
+          className="p-3 bg-background rounded-full hover:bg-primary/10 transition-colors"
+          aria-label="Share on WhatsApp"
+        >
+          <MessageCircle className="h-5 w-5" />
+        </button>
+        
+        <button 
+          onClick={() => handleShare(shareLinks.telegram, 'telegram')} 
+          className="p-3 bg-background rounded-full hover:bg-primary/10 transition-colors"
+          aria-label="Share on Telegram"
+        >
+          <Send className="h-5 w-5" />
         </button>
       </div>
     </motion.div>

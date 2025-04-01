@@ -1,7 +1,8 @@
 
 import { motion } from "framer-motion";
-import { Share2, Facebook, Twitter, Linkedin, Instagram, MessageCircle, Send } from "lucide-react";
+import { Share2, Facebook, Twitter, Linkedin, Instagram, Copy } from "lucide-react";
 import { useLocation } from "react-router-dom";
+import { toast } from "sonner";
 
 const BlogPostShareLinks = () => {
   const location = useLocation();
@@ -20,8 +21,6 @@ const BlogPostShareLinks = () => {
     facebook: `https://www.facebook.com/dialog/share?app_id=966242223397117&display=popup&href=${encodeURIComponent(currentUrl)}&quote=${encodeURIComponent(pageTitle)}`,
     twitter: `https://twitter.com/intent/tweet?url=${encodeURIComponent(currentUrl)}&text=${encodeURIComponent(pageTitle)}`,
     linkedin: `https://www.linkedin.com/shareArticle?mini=true&url=${encodeURIComponent(currentUrl)}&title=${encodeURIComponent(pageTitle)}&summary=${encodeURIComponent(pageDescription)}`,
-    whatsapp: `https://api.whatsapp.com/send?text=${encodeURIComponent(`${pageTitle} ${currentUrl}`)}`,
-    telegram: `https://t.me/share/url?url=${encodeURIComponent(currentUrl)}&text=${encodeURIComponent(pageTitle)}`,
     instagram: `https://www.instagram.com/` // Instagram doesn't support direct sharing via URL
   };
 
@@ -35,6 +34,22 @@ const BlogPostShareLinks = () => {
     
     // For all other platforms, open a popup window with appropriate dimensions
     window.open(url, '_blank', 'noopener,noreferrer,width=600,height=500');
+  };
+
+  // Copy the current URL to clipboard
+  const handleCopyLink = async () => {
+    try {
+      await navigator.clipboard.writeText(currentUrl);
+      toast.success("Link copied to clipboard!", {
+        description: "Share this article with your friends and colleagues.",
+        duration: 3000,
+      });
+    } catch (err) {
+      toast.error("Failed to copy link", {
+        description: "Please try again or copy the URL manually.",
+        duration: 3000,
+      });
+    }
   };
 
   return (
@@ -78,19 +93,11 @@ const BlogPostShareLinks = () => {
         </button>
         
         <button 
-          onClick={() => handleShare(shareLinks.whatsapp, 'whatsapp')} 
+          onClick={handleCopyLink} 
           className="p-3 bg-background rounded-full hover:bg-primary/10 transition-colors"
-          aria-label="Share on WhatsApp"
+          aria-label="Copy link to clipboard"
         >
-          <MessageCircle className="h-5 w-5" />
-        </button>
-        
-        <button 
-          onClick={() => handleShare(shareLinks.telegram, 'telegram')} 
-          className="p-3 bg-background rounded-full hover:bg-primary/10 transition-colors"
-          aria-label="Share on Telegram"
-        >
-          <Send className="h-5 w-5" />
+          <Copy className="h-5 w-5" />
         </button>
       </div>
     </motion.div>

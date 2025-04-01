@@ -15,7 +15,8 @@ import TermsOfService from "./pages/TermsOfService";
 import CookiePolicy from "./pages/CookiePolicy";
 import NotFound from "./pages/NotFound";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { Toaster } from "@/components/ui/toaster";
+import { Toaster as ShadcnToaster } from "@/components/ui/toaster";
+import { Toaster as SonnerToaster } from "@/components/ui/sonner";
 import { HelmetProvider } from 'react-helmet-async';
 import Blog from "./pages/Blog";
 import BlogPost from "./pages/BlogPost";
@@ -41,7 +42,8 @@ function App() {
               <Route path="/blog/:slug" element={<BlogPost />} />
               <Route path="*" element={<NotFound />} />
             </Routes>
-            <Toaster />
+            <ShadcnToaster />
+            <SonnerToaster position="top-center" />
           </div>
         </BrowserRouter>
       </HelmetProvider>

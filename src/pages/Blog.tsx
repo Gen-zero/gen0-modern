@@ -2,12 +2,12 @@
 import Navbar from "@/components/Navbar";
 import { motion, AnimatePresence } from "framer-motion";
 import useScrollAnimation from "@/hooks/useScrollAnimation";
-import { Helmet } from "react-helmet-async";
 import BlogHeader from "@/components/blog/BlogHeader";
 import BlogPosts from "@/components/blog/BlogPosts";
 import BlogCategories from "@/components/blog/BlogCategories";
 import BlogNewsletter from "@/components/blog/BlogNewsletter";
 import Footer from "@/components/about/Footer";
+import SEO from "@/components/SEO";
 
 const Blog = () => {
   // Use scroll animations
@@ -36,15 +36,30 @@ const Blog = () => {
     exit: { opacity: 0 }
   };
 
+  const blogTitle = "Blog | Gen0 Digital Studio";
+  const blogDescription = "Explore the latest insights on digital transformation, UI/UX design, and web development from the Gen0 team.";
+  const blogKeywords = "Gen0 blog, digital transformation, web development blog, UI UX design blog, tech insights";
+  const canonicalUrl = "https://gen0.xyz/blog";
+
+  // Define structured data for the blog
+  const structuredData = {
+    "@context": "https://schema.org",
+    "@type": "Blog",
+    "name": "Gen0 Blog",
+    "description": "Insights on digital transformation, product development, and design thinking",
+    "url": canonicalUrl,
+    "publisher": {
+      "@type": "Organization",
+      "name": "Gen0",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "/lovable-uploads/82543c4a-707b-40ad-9352-e934e6252d4f.png"
+      }
+    }
+  };
+
   return (
     <AnimatePresence mode="wait">
-      <Helmet>
-        <title>Blog | Gen0 Digital Studio</title>
-        <meta name="description" content="Explore the latest insights on digital transformation, UI/UX design, and web development from the Gen0 team." />
-        <meta name="keywords" content="Gen0 blog, digital transformation, web development blog, UI UX design blog, tech insights" />
-        <link rel="canonical" href="https://gen0.design/blog" />
-      </Helmet>
-      
       <motion.div 
         className="min-h-screen bg-background"
         initial="initial"
@@ -52,6 +67,19 @@ const Blog = () => {
         exit="exit"
         variants={pageVariants}
       >
+        <SEO 
+          title={blogTitle}
+          description={blogDescription}
+          keywords={blogKeywords}
+          canonicalUrl={canonicalUrl}
+          ogTitle="Gen0 Blog | Digital Innovation Insights"
+          ogDescription={blogDescription}
+          ogType="website"
+          linkedinTitle="Gen0 Blog | Digital Transformation Insights"
+          linkedinDescription="Follow our blog for the latest thinking on digital products, UI/UX design, and web development best practices."
+          structuredData={structuredData}
+        />
+        
         <Navbar />
         
         <motion.div 

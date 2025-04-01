@@ -30,6 +30,7 @@ const BlogPost = () => {
   // If post not found, still render the page but BlogPostContent will show not found message
   const seoTitle = post ? `${post.title} | Gen0 Blog` : 'Blog Post Not Found | Gen0';
   const seoDescription = post?.excerpt || 'This blog post could not be found or has been removed.';
+  const canonicalUrl = post ? `https://gen0.xyz/blog/${post.slug}` : 'https://gen0.xyz/blog';
   
   // Create structured data for blog post
   const structuredData = post ? {
@@ -67,10 +68,14 @@ const BlogPost = () => {
           title={seoTitle}
           description={seoDescription}
           keywords={post?.categories.join(', ')}
-          canonicalUrl={post ? `https://gen0.xyz/blog/${post.slug}` : 'https://gen0.xyz/blog'}
+          canonicalUrl={canonicalUrl}
           ogTitle={post?.title}
           ogDescription={seoDescription}
           ogImage={post?.coverImage}
+          ogType="article"
+          linkedinTitle={post?.title}
+          linkedinDescription={seoDescription}
+          linkedinImage={post?.coverImage}
           structuredData={structuredData}
         />
         

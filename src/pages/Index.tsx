@@ -8,7 +8,7 @@ import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import useScrollAnimation from "@/hooks/useScrollAnimation";
-import { Helmet } from "react-helmet-async";
+import SEO from "@/components/SEO";
 
 const Index = () => {
   const location = useLocation();
@@ -62,64 +62,51 @@ const Index = () => {
     exit: { opacity: 0 }
   };
 
+  const homeTitle = "Gen0 | Digital Studio for 0 to 1 Transformation & Product Development";
+  const homeDescription = "Turn your ideas into reality with Gen0's specialized 0 to 1 development services. We build MVPs, design UIs, and develop web applications that stand out.";
+  const homeKeywords = "Gen0, Gen zero, 0 to 1, MVP building, web development, UI UX designing, prompt engineering, digital transformation, Guild Board, Saadhana Board, Fuel Unit";
+  const canonicalUrl = "https://gen0.xyz/";
+
+  // Structured data for services
+  const structuredData = {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "name": "Gen0 Digital Studio",
+    "description": "Digital studio specializing in 0 to 1 product development, MVP building, web development, and UI/UX design.",
+    "provider": {
+      "@type": "Organization",
+      "name": "Gen0",
+      "url": "https://gen0.xyz/"
+    },
+    "offers": {
+      "@type": "Offer",
+      "itemOffered": [
+        {
+          "@type": "Service",
+          "name": "0 to 1 Product Development",
+          "description": "Transform your ideas into reality with our MVP development services"
+        },
+        {
+          "@type": "Service",
+          "name": "Web Development",
+          "description": "Custom web applications built with modern technologies"
+        },
+        {
+          "@type": "Service",
+          "name": "UI/UX Design",
+          "description": "User-centered design that delivers exceptional experiences"
+        },
+        {
+          "@type": "Service",
+          "name": "SEO Optimization",
+          "description": "Boost your online visibility and drive traffic to your website"
+        }
+      ]
+    }
+  };
+
   return (
     <AnimatePresence mode="wait">
-      <Helmet>
-        <title>Gen0 | Digital Studio for 0 to 1 Transformation & Product Development</title>
-        <meta name="description" content="Turn your ideas into reality with Gen0's specialized 0 to 1 development services. We build MVPs, design UIs, and develop web applications that stand out." />
-        <meta name="keywords" content="Gen0, Gen zero, 0 to 1, MVP building, web development, UI UX designing, prompt engineering, digital transformation, Guild Board, Saadhana Board, Fuel Unit" />
-        <link rel="canonical" href="https://gen0.design/" />
-        
-        {/* Open Graph / Facebook */}
-        <meta property="og:type" content="website" />
-        <meta property="og:title" content="Gen0 | Digital Product Development Studio" />
-        <meta property="og:description" content="We transform ideas into digital products. Specializing in 0 to 1 MVP development, web design, and UI/UX for startups and enterprises." />
-        
-        {/* Twitter */}
-        <meta name="twitter:title" content="Gen0 | From 0 to 1 Digital Studio" />
-        <meta name="twitter:description" content="Digital product development, MVP building, web design, prompt engineering, and more - all under one roof." />
-        
-        {/* Structured data - Rich Snippet for Services */}
-        <script type="application/ld+json">{`
-          {
-            "@context": "https://schema.org",
-            "@type": "WebPage",
-            "name": "Gen0 Digital Studio",
-            "description": "Digital studio specializing in 0 to 1 product development, MVP building, web development, and UI/UX design.",
-            "provider": {
-              "@type": "Organization",
-              "name": "Gen0",
-              "url": "https://gen0.design/"
-            },
-            "offers": {
-              "@type": "Offer",
-              "itemOffered": [
-                {
-                  "@type": "Service",
-                  "name": "0 to 1 Product Development",
-                  "description": "Transform your ideas into reality with our MVP development services"
-                },
-                {
-                  "@type": "Service",
-                  "name": "Web Development",
-                  "description": "Custom web applications built with modern technologies"
-                },
-                {
-                  "@type": "Service",
-                  "name": "UI/UX Design",
-                  "description": "User-centered design that delivers exceptional experiences"
-                },
-                {
-                  "@type": "Service",
-                  "name": "SEO Optimization",
-                  "description": "Boost your online visibility and drive traffic to your website"
-                }
-              ]
-            }
-          }
-        `}</script>
-      </Helmet>
-      
       <motion.div 
         className="min-h-screen bg-background"
         initial="initial"
@@ -127,6 +114,21 @@ const Index = () => {
         exit="exit"
         variants={pageVariants}
       >
+        <SEO 
+          title={homeTitle}
+          description={homeDescription}
+          keywords={homeKeywords}
+          canonicalUrl={canonicalUrl}
+          ogTitle="Gen0 | Digital Product Development Studio"
+          ogDescription="We transform ideas into digital products. Specializing in 0 to 1 MVP development, web design, and UI/UX for startups and enterprises."
+          ogType="website"
+          twitterTitle="Gen0 | From 0 to 1 Digital Studio"
+          twitterDescription="Digital product development, MVP building, web design, prompt engineering, and more - all under one roof."
+          linkedinTitle="Gen0 | Digital Innovation Studio"
+          linkedinDescription="Transforming ideas into impactful digital products. Specializing in MVP development, web design, UI/UX, and prompt engineering."
+          structuredData={structuredData}
+        />
+        
         <Navbar />
         
         <motion.div variants={sectionVariants}>

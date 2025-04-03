@@ -92,7 +92,7 @@ export const blogPosts: BlogPost[] = [
       ]
     },
     coverImage: "https://images.unsplash.com/photo-1620712943543-bcc4688e7485?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80",
-    date: "June 15, 2023",
+    date: "March 15, 2025",
     author: {
       name: "Kalidasan P E M",
       avatar: "https://ik.imagekit.io/kalidaspem/894146aa-4ab3-4820-b55b-55478d7507a9.jpg?updatedAt=1742559972090"

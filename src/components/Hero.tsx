@@ -113,7 +113,7 @@ const Hero = () => {
           </div>
           
           <div className="absolute inset-0 flex flex-col items-center justify-end pb-20 text-center px-8">
-            <h2 className="text-2xl md:text-4xl font-bold text-white uppercase mix-blend-soft-light">
+            <h2 className="text-2xl md:text-4xl font-bold text-white uppercase mix-blend-exclusion">
               LET US {' '}
               <span className="inline-block" style={{
               minWidth: '120px'

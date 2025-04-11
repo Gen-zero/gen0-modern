@@ -1,6 +1,7 @@
 
 import Navbar from "@/components/Navbar";
 import { motion, AnimatePresence } from "framer-motion";
+import { useState } from "react";
 import useScrollAnimation from "@/hooks/useScrollAnimation";
 import BlogHeader from "@/components/blog/BlogHeader";
 import BlogPosts from "@/components/blog/BlogPosts";
@@ -12,6 +13,9 @@ import SEO from "@/components/SEO";
 const Blog = () => {
   // Use scroll animations
   useScrollAnimation();
+  
+  // State for selected category
+  const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
 
   // Animation variants for page sections
   const sectionVariants = {
@@ -98,7 +102,7 @@ const Blog = () => {
               whileInView="visible"
               viewport={{ once: true, amount: 0.2 }}
             >
-              <BlogPosts />
+              <BlogPosts selectedCategory={selectedCategory} />
             </motion.div>
             
             <motion.div 
@@ -108,7 +112,10 @@ const Blog = () => {
               whileInView="visible"
               viewport={{ once: true, amount: 0.2 }}
             >
-              <BlogCategories />
+              <BlogCategories 
+                selectedCategory={selectedCategory} 
+                setSelectedCategory={setSelectedCategory} 
+              />
               <BlogNewsletter />
             </motion.div>
           </div>

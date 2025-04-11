@@ -54,7 +54,7 @@ const ServiceCard = ({
       <motion.div
         layout
         className={cn(
-          "rounded-xl overflow-hidden transition-all duration-500 h-full",
+          "rounded-xl overflow-hidden transition-all duration-500 h-full relative z-20",
           isActive 
             ? "shadow-lg shadow-primary/20" 
             : "hover:shadow-md hover:shadow-primary/10"
@@ -103,7 +103,7 @@ const CardHeader = ({
     <motion.div 
       layout
       className={cn(
-        "p-6 cursor-pointer transition-all duration-300",
+        "p-6 cursor-pointer transition-all duration-300 relative z-20",
         isActive 
           ? "rounded-t-xl"
           : "rounded-xl"

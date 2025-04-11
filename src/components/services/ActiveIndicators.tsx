@@ -12,7 +12,7 @@ const ActiveIndicators = ({ isActive }: ActiveIndicatorsProps) => {
       {isActive && (
         <>
           <motion.div
-            className="absolute -top-3 -right-3 text-primary"
+            className="absolute -top-3 -right-3 text-primary z-10"
             initial={{ scale: 0, rotate: 0 }}
             animate={{ 
               scale: 1,
@@ -36,7 +36,7 @@ const ActiveIndicators = ({ isActive }: ActiveIndicatorsProps) => {
           </motion.div>
           
           <motion.div
-            className="absolute -bottom-3 -left-3 text-accent"
+            className="absolute -bottom-3 -left-3 text-accent z-10"
             initial={{ scale: 0, rotate: 0 }}
             animate={{ 
               scale: 1,
@@ -59,9 +59,9 @@ const ActiveIndicators = ({ isActive }: ActiveIndicatorsProps) => {
             </motion.div>
           </motion.div>
           
-          {/* Animated pulse rings */}
+          {/* Animated pulse rings - Now with z-index -1 to place it below content */}
           <motion.div
-            className="absolute inset-0 rounded-xl"
+            className="absolute inset-0 rounded-xl -z-10"
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{
               opacity: [0, 0.2, 0],

@@ -404,9 +404,9 @@ const JoinUs = () => {
                     <div className="bg-accent/20 text-accent px-3 py-1 rounded-full text-xs font-medium inline-block mb-3">
                       Full-time Remote
                     </div>
-                    <h3 className="text-xl font-semibold mb-2">Backend Developer</h3>
+                    <h3 className="text-xl font-semibold mb-2">UI/UX Designer</h3>
                     <p className="text-muted-foreground max-w-xl">
-                     We're looking for a forward-thinking Backend Developer who can transform complex challenges into robust, scalable server-side solutions.
+                      We're looking for a creative UI/UX designer who can translate complex problems into intuitive user experiences.
                     </p>
                   </div>
                   <Button 
@@ -427,9 +427,9 @@ const JoinUs = () => {
                     <div className="bg-accent/20 text-accent px-3 py-1 rounded-full text-xs font-medium inline-block mb-3">
                       Full-time Remote
                     </div>
-                    <h3 className="text-xl font-semibold mb-2">Content Creator</h3>
+                    <h3 className="text-xl font-semibold mb-2">Frontend Developer</h3>
                     <p className="text-muted-foreground max-w-xl">
-                      We're looking for a creative YouTube Content Creator & Video Editor who can transform complex ideas into engaging, visually appealing stories.
+                      Join us in building beautiful, responsive, and accessible user interfaces using modern web technologies.
                     </p>
                   </div>
                   <Button 

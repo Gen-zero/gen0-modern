@@ -1,3 +1,4 @@
+
 import { useEffect, useState } from 'react';
 import { useNavbar } from '@/contexts/NavbarContext';
 
@@ -54,7 +55,7 @@ const CustomCursor = () => {
         style={{ 
           left: `${position.x}px`, 
           top: `${position.y}px`,
-          zIndex: menuOpen ? 100 : 40,
+          zIndex: menuOpen ? 100 : 60, // Increased from 40 to 60 to be above dropdowns
           transform: `translate(-50%, -50%) scale(${menuOpen ? 1.2 : 1})`,
           transition: 'transform 0.3s ease-out, opacity 0.3s ease-out, background-color 0.3s ease-out'
         }}
@@ -77,7 +78,7 @@ const CustomCursor = () => {
         style={{ 
           left: `${position.x}px`, 
           top: `${position.y}px`,
-          zIndex: menuOpen ? 99 : 39,
+          zIndex: menuOpen ? 99 : 59, // Increased from 39 to 59 to be above dropdowns but below main cursor
           transition: 'left 0.15s ease-out, top 0.15s ease-out, opacity 0.3s ease-out',
         }}
       />

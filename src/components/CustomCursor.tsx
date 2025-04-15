@@ -1,3 +1,4 @@
+
 import { useEffect, useState } from 'react';
 import { useNavbar } from '@/contexts/NavbarContext';
 
@@ -6,6 +7,7 @@ const CustomCursor = () => {
   const [clicking, setClicking] = useState(false);
   const [hovering, setHovering] = useState(false);
   const [hidden, setHidden] = useState(false);
+  const [hoveringDropdown, setHoveringDropdown] = useState(false);
   const { menuOpen } = useNavbar();
 
   useEffect(() => {
@@ -19,13 +21,27 @@ const CustomCursor = () => {
     const handleMouseEnter = () => setHidden(false);
     const handleMouseLeave = () => setHidden(true);
 
-    const handleLinkHover = (e: MouseEvent) => {
+    const handleElementHover = (e: MouseEvent) => {
       const target = e.target as HTMLElement;
+      // Check if it's a link or button
       const isLink = target.tagName.toLowerCase() === 'a' || 
                     target.tagName.toLowerCase() === 'button' ||
                     target.closest('a') || 
                     target.closest('button');
+      
+      // Check if it's a dropdown element - target is or is inside dropdown elements
+      const isDropdown = target.classList.contains('dropdown-trigger') || 
+                         target.closest('[data-state="open"]') ||
+                         target.closest('[role="menu"]') ||
+                         target.closest('[role="menuitem"]') ||
+                         target.closest('.dropdown-content') ||
+                         target.classList.contains('radix-dropdown-item') ||
+                         target.closest('[role="listbox"]') ||
+                         target.closest('[role="option"]') ||
+                         target.closest('[data-radix-popper-content-wrapper]');
+      
       setHovering(!!isLink);
+      setHoveringDropdown(!!isDropdown);
     };
 
     window.addEventListener('mousemove', updateCursorPosition);
@@ -33,7 +49,7 @@ const CustomCursor = () => {
     window.addEventListener('mouseup', handleMouseUp);
     window.addEventListener('mouseenter', handleMouseEnter);
     window.addEventListener('mouseleave', handleMouseLeave);
-    window.addEventListener('mouseover', handleLinkHover);
+    window.addEventListener('mouseover', handleElementHover);
 
     // Clean up
     return () => {
@@ -42,7 +58,7 @@ const CustomCursor = () => {
       window.removeEventListener('mouseup', handleMouseUp);
       window.removeEventListener('mouseenter', handleMouseEnter);
       window.removeEventListener('mouseleave', handleMouseLeave);
-      window.removeEventListener('mouseover', handleLinkHover);
+      window.removeEventListener('mouseover', handleElementHover);
     };
   }, []);
 
@@ -54,12 +70,12 @@ const CustomCursor = () => {
         style={{ 
           left: `${position.x}px`, 
           top: `${position.y}px`,
-          zIndex: 40,
-          transform: `translate(-50%, -50%) scale(${menuOpen ? 1.2 : 1}) ${menuOpen ? 'translateY(-10px)' : ''}`,
-          transition: menuOpen 
+          zIndex: hoveringDropdown || menuOpen ? 100 : 40,
+          transform: `translate(-50%, -50%) scale(${menuOpen || hoveringDropdown ? 1.2 : 1}) ${menuOpen || hoveringDropdown ? 'translateY(-10px)' : ''}`,
+          transition: (menuOpen || hoveringDropdown) 
             ? 'transform 0.9s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.4s ease-out, background-color 0.4s ease-out, z-index 0s'
             : 'transform 0.4s ease-out, opacity 0.4s ease-out, background-color 0.4s ease-out, z-index 0.4s',
-          animation: menuOpen ? 'cursorRiseUp 0.9s cubic-bezier(0.34, 1.56, 0.64, 1) forwards' : 'none'
+          animation: (menuOpen || hoveringDropdown) ? 'cursorRiseUp 0.9s cubic-bezier(0.34, 1.56, 0.64, 1) forwards' : 'none'
         }}
       >
         <div 
@@ -70,7 +86,7 @@ const CustomCursor = () => {
             transition-all duration-200 ease-out
             ${clicking ? 'scale-90 opacity-70' : 'scale-100 opacity-100'}
             ${hovering ? 'w-8 h-8 scale-150' : 'w-6 h-6'}
-            ${menuOpen ? 'animate-pulse-slow' : ''}
+            ${menuOpen || hoveringDropdown ? 'animate-pulse-slow' : ''}
           `}
         />
       </div>
@@ -81,9 +97,9 @@ const CustomCursor = () => {
         style={{ 
           left: `${position.x}px`, 
           top: `${position.y}px`,
-          zIndex: 39,
+          zIndex: hoveringDropdown || menuOpen ? 99 : 39,
           transition: 'left 0.2s ease-out, top 0.2s ease-out, opacity 0.4s ease-out',
-          animation: menuOpen ? 'cursorTrailRiseUp 1s cubic-bezier(0.34, 1.56, 0.64, 1) forwards' : 'none'
+          animation: (menuOpen || hoveringDropdown) ? 'cursorTrailRiseUp 1s cubic-bezier(0.34, 1.56, 0.64, 1) forwards' : 'none'
         }}
       />
 
@@ -124,6 +140,15 @@ const CustomCursor = () => {
           100% {
             transform: translate(-50%, -50%);
             z-index: 99;
+          }
+        }
+        
+        @keyframes pulse-slow {
+          0%, 100% {
+            box-shadow: 0 0 15px rgba(255, 215, 0, 0.7);
+          }
+          50% {
+            box-shadow: 0 0 25px rgba(255, 215, 0, 1);
           }
         }
       `}</style>

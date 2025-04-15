@@ -3,9 +3,7 @@ import { Button } from './ui/button';
 import { ArrowRight, GraduationCap, TrendingUp, Users } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { useIsSmallScreen } from '@/hooks/use-small-screen';
-
 const words = ['BUILD', 'CODE', 'DESIGN', 'IDEATE'];
-
 const Hero = () => {
   const navigate = useNavigate();
   const isSmallScreen = useIsSmallScreen();
@@ -14,7 +12,6 @@ const Hero = () => {
   const intervalRef = useRef<NodeJS.Timeout | null>(null);
   const heroRef = useRef<HTMLElement>(null);
   const vantaEffect = useRef<any>(null);
-
   const scrambleWord = (finalWord: string) => {
     let iteration = 0;
     const totalIterations = finalWord.length;
@@ -35,7 +32,6 @@ const Hero = () => {
       }
     }, 50);
   };
-
   useEffect(() => {
     setDisplayedWord(words[0]);
     const interval = setInterval(() => {
@@ -47,7 +43,6 @@ const Hero = () => {
     }, 1790);
     return () => clearInterval(interval);
   }, []);
-
   useEffect(() => {
     if (typeof window !== 'undefined' && window.VANTA) {
       vantaEffect.current = window.VANTA.CELLS({
@@ -70,16 +65,15 @@ const Hero = () => {
       }
     };
   }, [isSmallScreen]);
-
   const scrollToProjects = () => {
     const projectsSection = document.getElementById('projects');
     if (projectsSection) {
-      projectsSection.scrollIntoView({ behavior: 'smooth' });
+      projectsSection.scrollIntoView({
+        behavior: 'smooth'
+      });
     }
   };
-
-  return (
-    <section ref={heroRef} id="home" className="min-h-screen flex items-center justify-center pt-8 overflow-hidden relative">
+  return <section ref={heroRef} id="home" className="min-h-screen flex items-center justify-center pt-8 overflow-hidden relative">
       <div className="absolute inset-0 bg-gradient-to-br from-secondary/20 to-background -z-10"></div>
       
       <div className="absolute top-1/4 right-[10%] w-64 h-64 bg-primary/5 rounded-full blur-3xl animate-pulse-subtle"></div>
@@ -87,24 +81,18 @@ const Hero = () => {
       animationDelay: '1s'
     }}></div>
       
-      {!isSmallScreen && (
-        <div className="absolute top-12 right-12 md:right-12 lg:right-12 z-40">
-          <Button 
-            onClick={() => navigate('/join-us')}
-            variant="outline"
-            className="uppercase font-medium text-sm px-6 py-2 bg-background/60 backdrop-blur-sm border border-muted
+      {!isSmallScreen && <div className="absolute top-12 right-12 md:right-12 lg:right-12 z-40">
+          <Button onClick={() => navigate('/join-us')} variant="outline" className="uppercase font-medium text-sm px-6 py-2 bg-background/60 backdrop-blur-sm border border-muted
                     hover:bg-primary/10 hover:border-primary hover:text-primary
                     group transition-all duration-300 
                     relative overflow-hidden
                     after:content-[''] after:absolute after:bg-primary/5 after:h-full after:w-full
                     after:left-0 after:top-0 after:transform after:scale-x-0 after:origin-left 
-                    hover:after:scale-x-100 after:transition-transform after:duration-500"
-          >
+                    hover:after:scale-x-100 after:transition-transform after:duration-500">
             <span className="relative z-10">JOIN US</span>
             <Users className="ml-2 transition-all duration-300 group-hover:translate-x-1 relative z-10" size={16} />
           </Button>
-        </div>
-      )}
+        </div>}
       
       <div className="container mx-auto px-6 py-12">
         <div className="relative h-[40vh] w-full rounded-2xl overflow-hidden shadow-2xl border border-[#1f2b87] animate-fade-in">
@@ -113,7 +101,7 @@ const Hero = () => {
           </div>
           
           <div className="absolute inset-0 flex flex-col items-center justify-end pb-20 text-center px-8">
-            <h2 className="text-2xl md:text-4xl font-bold text-white uppercase mix-blend-exclusion">
+            <h2 className="text-2xl font-bold uppercase text-stone-50 md:text-5xl">
               LET US {' '}
               <span className="inline-block" style={{
               minWidth: '120px'
@@ -132,24 +120,18 @@ const Hero = () => {
         </div>
 
         <div className="flex flex-col sm:flex-row items-center justify-center mt-8 gap-8">
-          <Button 
-            variant="outline" 
-            className="uppercase font-medium text-sm px-8 py-6 bg-background/60 backdrop-blur-sm border border-border/30
+          <Button variant="outline" className="uppercase font-medium text-sm px-8 py-6 bg-background/60 backdrop-blur-sm border border-border/30
                      hover:bg-primary/10 hover:border-primary hover:text-primary
                      group transition-all duration-300 hover:scale-110 
                      hover:shadow-[0_0_20px_rgba(168,85,247,0.6)] relative overflow-hidden
                      after:content-[''] after:absolute after:bg-primary/5 after:h-full after:w-full
                      after:left-0 after:top-0 after:transform after:scale-x-0 after:origin-left 
-                     hover:after:scale-x-100 after:transition-transform after:duration-500 w-40 sm:w-40"
-            onClick={scrollToProjects}
-          >
+                     hover:after:scale-x-100 after:transition-transform after:duration-500 w-40 sm:w-40" onClick={scrollToProjects}>
             <span className="relative z-10">Our Works</span>
             <ArrowRight className="ml-2 transition-transform duration-300 group-hover:translate-x-2 relative z-10" size={16} />
           </Button>
           
-          <Button 
-            onClick={() => navigate('/about')}
-            className="uppercase font-medium text-sm px-8 py-6 bg-background/60 backdrop-blur-sm border border-border/30
+          <Button onClick={() => navigate('/about')} className="uppercase font-medium text-sm px-8 py-6 bg-background/60 backdrop-blur-sm border border-border/30
                      hover:bg-primary/10 hover:border-primary hover:text-primary
                      group transition-all duration-300 hover:scale-110 
                      hover:shadow-[0_0_20px_rgba(168,85,247,0.6)] relative overflow-hidden
@@ -160,26 +142,18 @@ const Hero = () => {
             <GraduationCap className="ml-2 transition-all duration-300 group-hover:translate-y-[-4px] relative z-10" size={16} />
           </Button>
           
-          {isSmallScreen && (
-            <Button 
-              onClick={() => navigate('/join-us')}
-              variant="outline"
-              className="uppercase font-medium text-sm px-8 py-6 bg-background/60 backdrop-blur-sm border border-muted
+          {isSmallScreen && <Button onClick={() => navigate('/join-us')} variant="outline" className="uppercase font-medium text-sm px-8 py-6 bg-background/60 backdrop-blur-sm border border-muted
                       hover:bg-primary/10 hover:border-primary hover:text-primary
                       group transition-all duration-300 hover:scale-110
                       hover:shadow-[0_0_20px_rgba(168,85,247,0.6)] relative overflow-hidden
                       after:content-[''] after:absolute after:bg-primary/5 after:h-full after:w-full
                       after:left-0 after:top-0 after:transform after:scale-x-0 after:origin-left 
-                      hover:after:scale-x-100 after:transition-transform after:duration-500 w-40"
-            >
+                      hover:after:scale-x-100 after:transition-transform after:duration-500 w-40">
               <span className="relative z-10">JOIN US</span>
               <Users className="ml-2 transition-all duration-300 group-hover:translate-x-1 relative z-10" size={16} />
-            </Button>
-          )}
+            </Button>}
         </div>
       </div>
-    </section>
-  );
+    </section>;
 };
-
 export default Hero;

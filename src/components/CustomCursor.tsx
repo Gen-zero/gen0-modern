@@ -55,9 +55,12 @@ const CustomCursor = () => {
         style={{ 
           left: `${position.x}px`, 
           top: `${position.y}px`,
-          zIndex: menuOpen ? 100 : 60, // Increased from 40 to 60 to be above dropdowns
-          transform: `translate(-50%, -50%) scale(${menuOpen ? 1.2 : 1})`,
-          transition: 'transform 0.3s ease-out, opacity 0.3s ease-out, background-color 0.3s ease-out'
+          zIndex: 40,
+          transform: `translate(-50%, -50%) scale(${menuOpen ? 1.2 : 1}) ${menuOpen ? 'translateY(-10px)' : ''}`,
+          transition: menuOpen 
+            ? 'transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.3s ease-out, background-color 0.3s ease-out, z-index 0s'
+            : 'transform 0.3s ease-out, opacity 0.3s ease-out, background-color 0.3s ease-out, z-index 0.3s',
+          animation: menuOpen ? 'cursorRiseUp 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) forwards' : 'none'
         }}
       >
         <div 
@@ -68,6 +71,7 @@ const CustomCursor = () => {
             transition-all duration-200 ease-out
             ${clicking ? 'scale-90 opacity-70' : 'scale-100 opacity-100'}
             ${hovering ? 'w-8 h-8 scale-150' : 'w-6 h-6'}
+            ${menuOpen ? 'animate-pulse-slow' : ''}
           `}
         />
       </div>
@@ -78,10 +82,61 @@ const CustomCursor = () => {
         style={{ 
           left: `${position.x}px`, 
           top: `${position.y}px`,
-          zIndex: menuOpen ? 99 : 59, // Increased from 39 to 59 to be above dropdowns but below main cursor
+          zIndex: 39,
           transition: 'left 0.15s ease-out, top 0.15s ease-out, opacity 0.3s ease-out',
+          animation: menuOpen ? 'cursorTrailRiseUp 0.7s cubic-bezier(0.34, 1.56, 0.64, 1) forwards' : 'none'
         }}
       />
+
+      {/* CSS Animation Keyframes */}
+      <style jsx>{`
+        @keyframes cursorRiseUp {
+          0% {
+            transform: translate(-50%, -50%) scale(1);
+            z-index: 40;
+          }
+          30% {
+            transform: translate(-50%, -80%) scale(0.8);
+            z-index: 40;
+          }
+          60% {
+            transform: translate(-50%, -50%) scale(1.4);
+            z-index: 100;
+          }
+          100% {
+            transform: translate(-50%, -50%) scale(1.2);
+            z-index: 100;
+          }
+        }
+        
+        @keyframes cursorTrailRiseUp {
+          0% {
+            transform: translate(-50%, -50%);
+            z-index: 39;
+          }
+          40% {
+            transform: translate(-50%, -70%);
+            z-index: 39;
+          }
+          70% {
+            transform: translate(-50%, -40%);
+            z-index: 99; 
+          }
+          100% {
+            transform: translate(-50%, -50%);
+            z-index: 99;
+          }
+        }
+
+        @keyframes pulse-slow {
+          0%, 100% {
+            box-shadow: 0 0 15px rgba(255, 215, 0, 0.7);
+          }
+          50% {
+            box-shadow: 0 0 25px rgba(255, 215, 0, 1);
+          }
+        }
+      `}</style>
     </>
   );
 };

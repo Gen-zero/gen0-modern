@@ -1,11 +1,12 @@
-
 import { useEffect, useState } from 'react';
+import { useNavbar } from '@/contexts/NavbarContext';
 
 const CustomCursor = () => {
   const [position, setPosition] = useState({ x: 0, y: 0 });
   const [clicking, setClicking] = useState(false);
   const [hovering, setHovering] = useState(false);
   const [hidden, setHidden] = useState(false);
+  const { menuOpen } = useNavbar();
 
   useEffect(() => {
     const updateCursorPosition = (e: MouseEvent) => {
@@ -49,10 +50,13 @@ const CustomCursor = () => {
     <>
       {/* Main cursor */}
       <div 
-        className={`fixed pointer-events-none z-50 transform -translate-x-1/2 -translate-y-1/2 transition-transform duration-100 mix-blend-difference ${hidden ? 'opacity-0' : 'opacity-100'}`}
+        className={`fixed pointer-events-none transform -translate-x-1/2 -translate-y-1/2 transition-all duration-300 mix-blend-difference ${hidden ? 'opacity-0' : 'opacity-100'}`}
         style={{ 
           left: `${position.x}px`, 
           top: `${position.y}px`,
+          zIndex: menuOpen ? 100 : 40,
+          transform: `translate(-50%, -50%) scale(${menuOpen ? 1.2 : 1})`,
+          transition: 'transform 0.3s ease-out, opacity 0.3s ease-out, background-color 0.3s ease-out'
         }}
       >
         <div 
@@ -69,10 +73,11 @@ const CustomCursor = () => {
       
       {/* Trail effect */}
       <div 
-        className={`fixed pointer-events-none z-40 w-3 h-3 rounded-full bg-primary/70 transform -translate-x-1/2 -translate-y-1/2 ${hidden ? 'opacity-0' : 'opacity-60'}`} 
+        className={`fixed pointer-events-none w-3 h-3 rounded-full bg-primary/70 transform -translate-x-1/2 -translate-y-1/2 ${hidden ? 'opacity-0' : 'opacity-60'}`} 
         style={{ 
           left: `${position.x}px`, 
           top: `${position.y}px`,
+          zIndex: menuOpen ? 99 : 39,
           transition: 'left 0.15s ease-out, top 0.15s ease-out, opacity 0.3s ease-out',
         }}
       />

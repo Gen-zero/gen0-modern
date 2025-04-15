@@ -17,10 +17,16 @@ import { Toaster as ShadcnToaster } from "@/components/ui/toaster";
 import { Toaster as SonnerToaster } from "@/components/ui/sonner";
 import Blog from "./pages/Blog";
 import BlogPost from "./pages/BlogPost";
+import CustomCursor from "./components/CustomCursor";
+import useIsTouchDevice from "./hooks/useIsTouchDevice";
 
 function App() {
+  const isTouchDevice = useIsTouchDevice();
+
   return (
     <div className="min-h-screen flex flex-col">
+      {/* Only show custom cursor on non-touch devices */}
+      {!isTouchDevice && <CustomCursor />}
       <Routes>
         <Route path="/" element={<Index />} />
         <Route path="/about" element={<AboutUs />} />

@@ -93,6 +93,15 @@
     @apply border-border;
   }
   
+  /* Hide default cursor when custom cursor is active */
+  html:not(.touch) {
+    cursor: none !important;
+  }
+  
+  html:not(.touch) * {
+    cursor: none !important;
+  }
+  
   html {
     font-family: 'Inter', sans-serif;
     scroll-behavior: smooth;

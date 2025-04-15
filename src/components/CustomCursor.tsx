@@ -1,4 +1,3 @@
-
 import { useEffect, useState } from 'react';
 import { useNavbar } from '@/contexts/NavbarContext';
 
@@ -58,9 +57,9 @@ const CustomCursor = () => {
           zIndex: 40,
           transform: `translate(-50%, -50%) scale(${menuOpen ? 1.2 : 1}) ${menuOpen ? 'translateY(-10px)' : ''}`,
           transition: menuOpen 
-            ? 'transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.3s ease-out, background-color 0.3s ease-out, z-index 0s'
-            : 'transform 0.3s ease-out, opacity 0.3s ease-out, background-color 0.3s ease-out, z-index 0.3s',
-          animation: menuOpen ? 'cursorRiseUp 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) forwards' : 'none'
+            ? 'transform 0.9s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.4s ease-out, background-color 0.4s ease-out, z-index 0s'
+            : 'transform 0.4s ease-out, opacity 0.4s ease-out, background-color 0.4s ease-out, z-index 0.4s',
+          animation: menuOpen ? 'cursorRiseUp 0.9s cubic-bezier(0.34, 1.56, 0.64, 1) forwards' : 'none'
         }}
       >
         <div 
@@ -83,8 +82,8 @@ const CustomCursor = () => {
           left: `${position.x}px`, 
           top: `${position.y}px`,
           zIndex: 39,
-          transition: 'left 0.15s ease-out, top 0.15s ease-out, opacity 0.3s ease-out',
-          animation: menuOpen ? 'cursorTrailRiseUp 0.7s cubic-bezier(0.34, 1.56, 0.64, 1) forwards' : 'none'
+          transition: 'left 0.2s ease-out, top 0.2s ease-out, opacity 0.4s ease-out',
+          animation: menuOpen ? 'cursorTrailRiseUp 1s cubic-bezier(0.34, 1.56, 0.64, 1) forwards' : 'none'
         }}
       />
 
@@ -125,15 +124,6 @@ const CustomCursor = () => {
           100% {
             transform: translate(-50%, -50%);
             z-index: 99;
-          }
-        }
-
-        @keyframes pulse-slow {
-          0%, 100% {
-            box-shadow: 0 0 15px rgba(255, 215, 0, 0.7);
-          }
-          50% {
-            box-shadow: 0 0 25px rgba(255, 215, 0, 1);
           }
         }
       `}</style>

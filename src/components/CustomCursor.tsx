@@ -8,6 +8,7 @@ const CustomCursor = () => {
   const [hovering, setHovering] = useState(false);
   const [hidden, setHidden] = useState(false);
   const [hoveringDropdown, setHoveringDropdown] = useState(false);
+  const [hoveringTextField, setHoveringTextField] = useState(false);
   const { menuOpen } = useNavbar();
 
   useEffect(() => {
@@ -40,8 +41,22 @@ const CustomCursor = () => {
                          target.closest('[role="option"]') ||
                          target.closest('[data-radix-popper-content-wrapper]');
       
+      // Check if it's a text input field
+      const isTextField = target.tagName.toLowerCase() === 'input' && 
+                         (target.getAttribute('type') === 'text' || 
+                          target.getAttribute('type') === 'email' ||
+                          target.getAttribute('type') === 'search' ||
+                          target.getAttribute('type') === 'tel' ||
+                          target.getAttribute('type') === 'url' ||
+                          target.getAttribute('type') === 'password' ||
+                          target.getAttribute('type') === null) || 
+                         target.tagName.toLowerCase() === 'textarea' ||
+                         target.closest('input') ||
+                         target.closest('textarea');
+      
       setHovering(!!isLink);
       setHoveringDropdown(!!isDropdown);
+      setHoveringTextField(!!isTextField);
     };
 
     window.addEventListener('mousemove', updateCursorPosition);
@@ -70,30 +85,30 @@ const CustomCursor = () => {
         style={{ 
           left: `${position.x}px`, 
           top: `${position.y}px`,
-          zIndex: hoveringDropdown || menuOpen ? 100 : 40,
+          zIndex: hoveringDropdown || menuOpen || hoveringTextField ? 100 : 40,
           transform: `translate(-50%, -50%) scale(${menuOpen || hoveringDropdown ? 1.2 : 1}) ${menuOpen || hoveringDropdown ? 'translateY(-10px)' : ''}`,
           transition: (menuOpen || hoveringDropdown) 
             ? 'transform 0.9s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.4s ease-out, background-color 0.4s ease-out, z-index 0s'
             : 'transform 0.4s ease-out, opacity 0.4s ease-out, background-color 0.4s ease-out, z-index 0.4s',
-          animation: (menuOpen || hoveringDropdown) ? 'cursorRiseUp 0.9s cubic-bezier(0.34, 1.56, 0.64, 1) forwards' : 'none'
+          animation: (menuOpen || hoveringDropdown) ? 'cursorRiseUp 0.9s cubic-bezier(0.34, 1.56, 0.64, 1) forwards' : 
+                     hoveringTextField ? 'cursorTextFieldAnim 0.8s cubic-bezier(0.22, 1, 0.36, 1) forwards' : 'none'
         }}
       >
         <div 
           className={`
             rounded-full 
-            bg-accent 
-            shadow-[0_0_10px_rgba(255,215,0,0.7)] 
             transition-all duration-200 ease-out
             ${clicking ? 'scale-90 opacity-70' : 'scale-100 opacity-100'}
             ${hovering ? 'w-8 h-8 scale-150' : 'w-6 h-6'}
-            ${menuOpen || hoveringDropdown ? 'animate-pulse-slow' : ''}
+            ${menuOpen || hoveringDropdown ? 'animate-pulse-slow bg-accent shadow-[0_0_10px_rgba(255,215,0,0.7)]' : ''}
+            ${hoveringTextField ? 'w-[2px] h-[18px] bg-sky-400 shadow-[0_0_8px_rgba(56,189,248,0.8)] rounded-sm animate-blink' : 'bg-accent shadow-[0_0_10px_rgba(255,215,0,0.7)]'}
           `}
         />
       </div>
       
       {/* Trail effect */}
       <div 
-        className={`fixed pointer-events-none w-3 h-3 rounded-full bg-primary/70 transform -translate-x-1/2 -translate-y-1/2 ${hidden ? 'opacity-0' : 'opacity-60'}`} 
+        className={`fixed pointer-events-none w-3 h-3 rounded-full bg-primary/70 transform -translate-x-1/2 -translate-y-1/2 ${hidden ? 'opacity-0' : 'opacity-60'} ${hoveringTextField ? 'opacity-0' : ''}`} 
         style={{ 
           left: `${position.x}px`, 
           top: `${position.y}px`,
@@ -104,7 +119,8 @@ const CustomCursor = () => {
       />
 
       {/* CSS Animation Keyframes */}
-      <style>{`
+      <style>
+        {`
         @keyframes cursorRiseUp {
           0% {
             transform: translate(-50%, -50%) scale(1);
@@ -151,7 +167,43 @@ const CustomCursor = () => {
             box-shadow: 0 0 25px rgba(255, 215, 0, 1);
           }
         }
-      `}</style>
+        
+        @keyframes cursorTextFieldAnim {
+          0% {
+            transform: translate(-50%, -50%) rotate(0deg);
+            height: 24px;
+            width: 24px;
+            border-radius: 50%;
+          }
+          40% {
+            transform: translate(-50%, -50%) rotate(45deg);
+            height: 20px;
+            width: 5px;
+          }
+          80% {
+            transform: translate(-50%, -50%) rotate(90deg);
+            height: 18px;
+            width: 2px;
+            border-radius: 1px;
+          }
+          100% {
+            transform: translate(-50%, -50%) rotate(0deg);
+            height: 18px;
+            width: 2px;
+            border-radius: 1px;
+          }
+        }
+        
+        @keyframes blink {
+          0%, 100% {
+            opacity: 1;
+          }
+          50% {
+            opacity: 0.3;
+          }
+        }
+        `}
+      </style>
     </>
   );
 };

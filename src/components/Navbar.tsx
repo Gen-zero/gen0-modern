@@ -3,14 +3,14 @@ import { Menu, ArrowLeft } from 'lucide-react';
 import NavMenu from './navbar/NavMenu';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import NavbarSectionTitle from './navbar/NavbarSectionTitle';
-import { NavbarProvider, useNavbar } from '@/contexts/NavbarContext';
+import { useNavbar } from '@/contexts/NavbarContext';
 import { useNavbarAnimation } from '@/hooks/useNavbarAnimation';
 import { useNavbarScroll } from '@/hooks/useNavbarScroll';
 import { useIsMobile } from '@/hooks/use-mobile';
 import { useEffect } from 'react';
 import { useNavbarRoute } from '@/hooks/useNavbarRoute';
 
-const NavbarContent = () => {
+const Navbar = () => {
   const { isScrolled, menuOpen, setMenuOpen, navbarExpanded, setActiveSection, setPrevActiveSection } = useNavbar();
   const { navbarRef, isSmallScreen } = useNavbarAnimation();
   const { isHomePage, isProjectDetailPage, isBlogPage, projectName } = useNavbarRoute();
@@ -107,14 +107,6 @@ const NavbarContent = () => {
       
       <NavMenu menuOpen={menuOpen} toggleMenu={toggleMenu} />
     </>
-  );
-};
-
-const Navbar = () => {
-  return (
-    <NavbarProvider>
-      <NavbarContent />
-    </NavbarProvider>
   );
 };
 

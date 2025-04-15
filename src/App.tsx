@@ -19,29 +19,33 @@ import Blog from "./pages/Blog";
 import BlogPost from "./pages/BlogPost";
 import CustomCursor from "./components/CustomCursor";
 import useIsTouchDevice from "./hooks/useIsTouchDevice";
+import { NavbarProvider } from "@/contexts/NavbarContext";
 
 function App() {
   const isTouchDevice = useIsTouchDevice();
 
   return (
     <div className="min-h-screen flex flex-col">
-      {/* Only show custom cursor on non-touch devices */}
-      {!isTouchDevice && <CustomCursor />}
-      <Routes>
-        <Route path="/" element={<Index />} />
-        <Route path="/about" element={<AboutUs />} />
-        <Route path="/projects" element={<Projects />} />
-        <Route path="/projects/:id" element={<ProductPage />} />
-        <Route path="/join-us" element={<JoinUs />} />
-        <Route path="/privacy-policy" element={<PrivacyPolicy />} />
-        <Route path="/terms-of-service" element={<TermsOfService />} />
-        <Route path="/cookie-policy" element={<CookiePolicy />} />
-        <Route path="/blog" element={<Blog />} />
-        <Route path="/blog/:slug" element={<BlogPost />} />
-        <Route path="*" element={<NotFound />} />
-      </Routes>
-      <ShadcnToaster />
-      <SonnerToaster position="top-center" />
+      {/* Wrap the entire app with NavbarProvider to make context available everywhere */}
+      <NavbarProvider>
+        {/* Only show custom cursor on non-touch devices */}
+        {!isTouchDevice && <CustomCursor />}
+        <Routes>
+          <Route path="/" element={<Index />} />
+          <Route path="/about" element={<AboutUs />} />
+          <Route path="/projects" element={<Projects />} />
+          <Route path="/projects/:id" element={<ProductPage />} />
+          <Route path="/join-us" element={<JoinUs />} />
+          <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+          <Route path="/terms-of-service" element={<TermsOfService />} />
+          <Route path="/cookie-policy" element={<CookiePolicy />} />
+          <Route path="/blog" element={<Blog />} />
+          <Route path="/blog/:slug" element={<BlogPost />} />
+          <Route path="*" element={<NotFound />} />
+        </Routes>
+        <ShadcnToaster />
+        <SonnerToaster position="top-center" />
+      </NavbarProvider>
     </div>
   );
 }

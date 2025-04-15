@@ -57,10 +57,10 @@ const NavMenu = ({
   
   return <>
       {/* Menu Overlay */}
-      <div className={`fixed inset-0 bg-black/60 z-70 transition-opacity duration-500 ${menuOpen ? 'opacity-100' : 'opacity-0 pointer-events-none'}`} onClick={toggleMenu} />
+      <div className={`fixed inset-0 bg-black/60 z-40 transition-opacity duration-500 ${menuOpen ? 'opacity-100' : 'opacity-0 pointer-events-none'}`} onClick={toggleMenu} />
       
       {/* Modern Navigation Modal */}
-      <div className={`fixed inset-0 z-80 flex items-center justify-center ${menuOpen ? 'opacity-100 visible' : 'opacity-0 invisible'} transition-all duration-500`}>
+      <div className={`fixed inset-0 z-50 flex items-center justify-center ${menuOpen ? 'opacity-100 visible' : 'opacity-0 invisible'} transition-all duration-500`}>
         <div className="absolute inset-0 bg-gradient-to-br from-background/95 via-background/98 to-background/90 backdrop-blur-md" onClick={toggleMenu}></div>
         
         <div className="relative w-full max-w-7xl mx-auto h-[90vh] overflow-y-auto no-scrollbar p-6 md:p-10 rounded-xl touch-auto">

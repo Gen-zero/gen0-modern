@@ -1,3 +1,4 @@
+
 import { Menu, ArrowLeft } from 'lucide-react';
 import NavMenu from './navbar/NavMenu';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
@@ -19,6 +20,7 @@ const Navbar = () => {
   
   useNavbarScroll(); // Initialize scroll effects
   
+  // Reset section when route changes to ensure clean transitions
   useEffect(() => {
     if (location.pathname === '/projects') {
       setPrevActiveSection('Projects');
@@ -64,7 +66,7 @@ const Navbar = () => {
     <>
       <header 
         ref={navbarRef}
-        className={`fixed top-4 left-4 z-[60] transition-all duration-300 ${
+        className={`fixed top-4 left-4 z-50 transition-all duration-300 ${
           isScrolled 
             ? 'bg-background/40 backdrop-blur-xl shadow-lg border-primary/10' 
             : 'bg-background/30 backdrop-blur-md'
@@ -92,10 +94,11 @@ const Navbar = () => {
         </div>
       </header>
       
+      {/* Back button - only show on non-home pages and non-small screens */}
       {!isHomePage && !isMobileScreen && (
         <button
           onClick={handleBackClick}
-          className="fixed top-4 right-4 z-[60] p-3 rounded-lg bg-background/30 backdrop-blur-md border border-white/10 transition-all duration-300 hover:bg-primary/10 text-white hover:text-primary focus:outline-none"
+          className="fixed top-4 right-4 z-50 p-3 rounded-lg bg-background/30 backdrop-blur-md border border-white/10 transition-all duration-300 hover:bg-primary/10 text-white hover:text-primary focus:outline-none"
           aria-label="Go back"
         >
           <ArrowLeft size={24} />

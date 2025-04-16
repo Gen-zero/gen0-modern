@@ -63,7 +63,7 @@ export default {
 					border: 'hsl(var(--sidebar-border))',
 					ring: 'hsl(var(--sidebar-ring))'
 				},
-				// Adding custom cursor color for consistency
+				// Cursor glow color
 				cursor: {
 					glow: '#FEF7CD' // Yellowish glow color
 				}

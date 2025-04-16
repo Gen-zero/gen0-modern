@@ -8,10 +8,16 @@ import { Card, CardContent } from "@/components/ui/card";
 import { ArrowDown, Clock, Code, FileCheck, MessageSquareMore, Sparkles, Users, Zap } from "lucide-react";
 import useScrollAnimation from "@/hooks/useScrollAnimation";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const JoinUs = () => {
   useScrollAnimation();
   const [activeTab, setActiveTab] = useState("culture");
+  const navigate = useNavigate();
+  
+  const goToContactSection = () => {
+    navigate('/#contact');
+  };
   
   const pageVariants = {
     initial: { opacity: 0 },
@@ -410,8 +416,8 @@ const JoinUs = () => {
                     </p>
                   </div>
                   <Button 
-                    className="shrink-0"
-                    onClick={() => window.location.href = '/#contact'}
+                    className="shrink-0 hover:bg-cursor-glow hover:text-black hover:border-yellow-300 hover:shadow-[0_0_20px_rgba(254,240,138,0.7)]"
+                    onClick={goToContactSection}
                   >
                     Apply Now
                   </Button>
@@ -433,8 +439,8 @@ const JoinUs = () => {
                     </p>
                   </div>
                   <Button 
-                    className="shrink-0"
-                    onClick={() => window.location.href = '/#contact'}
+                    className="shrink-0 hover:bg-cursor-glow hover:text-black hover:border-yellow-300 hover:shadow-[0_0_20px_rgba(254,240,138,0.7)]"
+                    onClick={goToContactSection}
                   >
                     Apply Now
                   </Button>
@@ -456,8 +462,8 @@ const JoinUs = () => {
                     </p>
                   </div>
                   <Button 
-                    className="shrink-0"
-                    onClick={() => window.location.href = '/#contact'}
+                    className="shrink-0 hover:bg-cursor-glow hover:text-black hover:border-yellow-300 hover:shadow-[0_0_20px_rgba(254,240,138,0.7)]"
+                    onClick={goToContactSection}
                   >
                     Apply Now
                   </Button>
@@ -473,8 +479,8 @@ const JoinUs = () => {
               <Button 
                 variant="outline"
                 size="lg"
-                onClick={() => window.location.href = '/#contact'}
-                className="border-primary/20 hover:bg-yellow-200 hover:text-black hover:border-yellow-300"
+                onClick={goToContactSection}
+                className="border-primary/20 hover:bg-cursor-glow hover:text-black hover:border-yellow-300 hover:shadow-[0_0_20px_rgba(254,240,138,0.7)]"
               >
                 Send Open Application
                 <ArrowDown className="ml-2 h-4 w-4" />
@@ -500,8 +506,8 @@ const JoinUs = () => {
             </p>
             <Button 
               size="lg"
-              onClick={() => window.location.href = '/#contact'}
-              className="bg-primary text-white hover:bg-primary/90"
+              onClick={goToContactSection}
+              className="bg-primary text-white hover:bg-cursor-glow hover:text-black hover:shadow-[0_0_20px_rgba(254,240,138,0.7)]"
             >
               Apply Today
             </Button>

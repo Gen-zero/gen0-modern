@@ -62,6 +62,10 @@ export default {
 					'accent-foreground': 'hsl(var(--sidebar-accent-foreground))',
 					border: 'hsl(var(--sidebar-border))',
 					ring: 'hsl(var(--sidebar-ring))'
+				},
+				// Adding custom cursor color for consistency
+				cursor: {
+					glow: '#FEF7CD' // Yellowish glow color
 				}
 			},
 			borderRadius: {
@@ -113,6 +117,10 @@ export default {
 				'blink': {
 					'0%, 100%': { opacity: '1' },
 					'50%': { opacity: '0.5' }
+				},
+				'glow-pulse': {
+					'0%, 100%': { boxShadow: '0 0 15px 2px rgba(254, 240, 138, 0.6)' },
+					'50%': { boxShadow: '0 0 25px 5px rgba(254, 240, 138, 0.8)' }
 				}
 			},
 			animation: {
@@ -126,7 +134,8 @@ export default {
 				'slide-out': 'slide-out 0.4s ease-out',
 				'float': 'float 6s ease-in-out infinite',
 				'pulse-subtle': 'pulse-subtle 3s ease-in-out infinite',
-				'blink': 'blink 1s ease-in-out infinite'
+				'blink': 'blink 1s ease-in-out infinite',
+				'glow-pulse': 'glow-pulse 2s infinite'
 			}
 		}
 	},

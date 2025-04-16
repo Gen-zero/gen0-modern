@@ -140,7 +140,7 @@ const JoinUs = () => {
               
               <Button variant="outline" size="lg" onClick={() => {
                 document.getElementById('culture')?.scrollIntoView({ behavior: 'smooth' });
-              }} className="border-primary/20 hover:bg-primary/10">
+              }} className="border-primary/20 hover:bg-yellow-200 hover:text-black hover:border-yellow-300">
                 Learn About Our Culture
               </Button>
             </motion.div>
@@ -474,7 +474,7 @@ const JoinUs = () => {
                 variant="outline"
                 size="lg"
                 onClick={() => window.location.href = '/#contact'}
-                className="border-primary/20 hover:bg-primary/10"
+                className="border-primary/20 hover:bg-yellow-200 hover:text-black hover:border-yellow-300"
               >
                 Send Open Application
                 <ArrowDown className="ml-2 h-4 w-4" />

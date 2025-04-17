@@ -15,6 +15,7 @@ interface TeamMember {
 
 const TeamSection = () => {
   const containerRef = useRef<HTMLDivElement>(null);
+  const scrollTrackRef = useRef<HTMLDivElement>(null);
   const [activeSlide, setActiveSlide] = useState(0);
   
   const teamMembers: TeamMember[] = [{
@@ -73,32 +74,37 @@ const TeamSection = () => {
     gsap.registerPlugin(ScrollTrigger);
     
     const container = containerRef.current;
-    if (!container) return;
-
-    const sections = gsap.utils.toArray<HTMLElement>(container.querySelectorAll('.team-member-card'));
+    const scrollTrack = scrollTrackRef.current;
     
-    gsap.to(sections, {
-      xPercent: -100 * (sections.length - 1),
+    if (!container || !scrollTrack) return;
+
+    const totalWidth = teamMembers.length * 100;
+    
+    const animation = gsap.to(scrollTrack, {
+      x: () => -(scrollTrack.scrollWidth - container.offsetWidth),
       ease: "none",
       scrollTrigger: {
         trigger: container,
+        start: "top top",
+        end: () => `+=${scrollTrack.scrollWidth - container.offsetWidth}`,
         pin: true,
+        anticipatePin: 1,
         scrub: 1,
-        end: () => "+=" + container.offsetWidth * (sections.length - 1),
+        invalidateOnRefresh: true,
+        onUpdate: (self) => {
+          const newIndex = Math.round(self.progress * (teamMembers.length - 1));
+          setActiveSlide(newIndex);
+        },
       }
     });
 
-    // Update active slide based on scroll position
-    ScrollTrigger.create({
-      trigger: container,
-      start: 'top top',
-      end: () => "+=" + container.offsetWidth * (sections.length - 1),
-      onUpdate: (self) => {
-        const newIndex = Math.round(self.progress * (sections.length - 1));
-        setActiveSlide(newIndex);
+    return () => {
+      if (animation.scrollTrigger) {
+        animation.scrollTrigger.kill();
       }
-    });
-  }, []);
+      animation.kill();
+    };
+  }, [teamMembers.length]);
 
   return (
     <>
@@ -123,13 +129,16 @@ const TeamSection = () => {
           className="relative overflow-hidden"
           style={{ height: '600px' }}
         >
-          <div className="flex">
+          <div 
+            ref={scrollTrackRef} 
+            className="flex absolute top-0 left-0 w-fit"
+          >
             {teamMembers.map((member, index) => (
               <div 
                 key={index}
-                className="team-member-card min-w-full px-4"
+                className="team-member-card w-screen px-4 box-border"
               >
-                <div className="bg-card rounded-xl overflow-hidden shadow-md transition-all duration-500 transform hover:scale-[1.02] h-full">
+                <div className="bg-card rounded-xl overflow-hidden shadow-md transition-all duration-500 transform hover:scale-[1.02] h-full max-w-5xl mx-auto">
                   <div className="grid md:grid-cols-2 gap-6 h-full">
                     <div className="aspect-square overflow-hidden">
                       <img 

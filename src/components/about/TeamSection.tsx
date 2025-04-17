@@ -1,14 +1,8 @@
-
 import { Helmet } from "react-helmet-async";
-import {
-  Carousel,
-  CarouselContent,
-  CarouselItem,
-  CarouselNext,
-  CarouselPrevious,
-} from "@/components/ui/carousel";
+import { useEffect, useRef, useState } from "react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { cn } from "@/lib/utils";
-import { useState } from "react";
 
 interface TeamMember {
   name: string;
@@ -20,6 +14,7 @@ interface TeamMember {
 }
 
 const TeamSection = () => {
+  const containerRef = useRef<HTMLDivElement>(null);
   const [activeSlide, setActiveSlide] = useState(0);
   
   const teamMembers: TeamMember[] = [{
@@ -74,6 +69,37 @@ const TeamSection = () => {
     }))
   };
 
+  useEffect(() => {
+    gsap.registerPlugin(ScrollTrigger);
+    
+    const container = containerRef.current;
+    if (!container) return;
+
+    const sections = gsap.utils.toArray<HTMLElement>(container.querySelectorAll('.team-member-card'));
+    
+    gsap.to(sections, {
+      xPercent: -100 * (sections.length - 1),
+      ease: "none",
+      scrollTrigger: {
+        trigger: container,
+        pin: true,
+        scrub: 1,
+        end: () => "+=" + container.offsetWidth * (sections.length - 1),
+      }
+    });
+
+    // Update active slide based on scroll position
+    ScrollTrigger.create({
+      trigger: container,
+      start: 'top top',
+      end: () => "+=" + container.offsetWidth * (sections.length - 1),
+      onUpdate: (self) => {
+        const newIndex = Math.round(self.progress * (sections.length - 1));
+        setActiveSlide(newIndex);
+      }
+    });
+  }, []);
+
   return (
     <>
       <Helmet>
@@ -82,7 +108,7 @@ const TeamSection = () => {
         </script>
       </Helmet>
       
-      <div className="py-16 sm:py-20 container mx-auto px-4 sm:px-6 md:px-12 animate-on-scroll">
+      <div className="py-16 sm:py-20 animate-on-scroll">
         <div className="text-center mb-10 sm:mb-16">
           <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4 sm:mb-6">The Minds Behind Gen0</h2>
           <p className="text-base sm:text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto px-4">
@@ -92,92 +118,74 @@ const TeamSection = () => {
           </p>
         </div>
 
-        <div className="relative px-12">
-          <Carousel 
-            className="w-full max-w-5xl mx-auto"
-            opts={{
-              align: "start",
-              loop: true,
-            }}
-            onSelect={(api) => {
-              setActiveSlide(api.selectedScrollSnap());
-            }}
-          >
-            <CarouselContent>
-              {teamMembers.map((member, index) => (
-                <CarouselItem key={index} className="md:basis-1/1">
-                  <div className="p-1">
-                    <div className="bg-card rounded-xl overflow-hidden shadow-md transition-all duration-500 transform hover:scale-[1.02]">
-                      <div className="grid md:grid-cols-2 gap-6">
-                        <div className="aspect-square overflow-hidden">
-                          <img 
-                            src={member.imgUrl} 
-                            alt={`${member.name} - ${member.position} at Gen0`} 
-                            className="w-full h-full object-cover transition-transform hover:scale-105" 
-                            loading="lazy"
-                            itemProp="image" 
-                          />
-                        </div>
-                        <div className="p-6 flex flex-col justify-between">
-                          <div>
-                            <h3 className="text-2xl font-semibold mb-2" itemProp="name">{member.name}</h3>
-                            <p className="text-primary font-medium mb-4" itemProp="jobTitle">{member.position}</p>
-                            <p className="text-muted-foreground mb-6" itemProp="description">{member.bio}</p>
-                            {member.expertise && (
-                              <div className="flex flex-wrap gap-2 mb-4">
-                                {member.expertise.map((skill, idx) => (
-                                  <span 
-                                    key={idx} 
-                                    className="text-xs bg-primary/10 text-primary rounded-full px-3 py-1"
-                                    itemProp="knowsAbout"
-                                  >
-                                    {skill}
-                                  </span>
-                                ))}
-                              </div>
-                            )}
+        <div 
+          ref={containerRef} 
+          className="relative overflow-hidden"
+          style={{ height: '600px' }}
+        >
+          <div className="flex">
+            {teamMembers.map((member, index) => (
+              <div 
+                key={index}
+                className="team-member-card min-w-full px-4"
+              >
+                <div className="bg-card rounded-xl overflow-hidden shadow-md transition-all duration-500 transform hover:scale-[1.02] h-full">
+                  <div className="grid md:grid-cols-2 gap-6 h-full">
+                    <div className="aspect-square overflow-hidden">
+                      <img 
+                        src={member.imgUrl} 
+                        alt={`${member.name} - ${member.position} at Gen0`} 
+                        className="w-full h-full object-cover transition-transform hover:scale-105" 
+                        loading="lazy"
+                        itemProp="image" 
+                      />
+                    </div>
+                    <div className="p-6 flex flex-col justify-between">
+                      <div>
+                        <h3 className="text-2xl font-semibold mb-2" itemProp="name">{member.name}</h3>
+                        <p className="text-primary font-medium mb-4" itemProp="jobTitle">{member.position}</p>
+                        <p className="text-muted-foreground mb-6" itemProp="description">{member.bio}</p>
+                        {member.expertise && (
+                          <div className="flex flex-wrap gap-2 mb-4">
+                            {member.expertise.map((skill, idx) => (
+                              <span 
+                                key={idx} 
+                                className="text-xs bg-primary/10 text-primary rounded-full px-3 py-1"
+                                itemProp="knowsAbout"
+                              >
+                                {skill}
+                              </span>
+                            ))}
                           </div>
-                          <p className="text-sm italic border-t border-border pt-4">
-                            {member.personalDetail}
-                          </p>
-                        </div>
+                        )}
                       </div>
+                      <p className="text-sm italic border-t border-border pt-4">
+                        {member.personalDetail}
+                      </p>
                     </div>
                   </div>
-                </CarouselItem>
-              ))}
-            </CarouselContent>
-            
-            <CarouselPrevious className="left-0" />
-            <CarouselNext className="right-0" />
-          </Carousel>
-
-          <div className="flex justify-center gap-2 mt-8">
-            {teamMembers.map((member, index) => (
-              <button
-                key={index}
-                onClick={() => {
-                  const carousel = document.querySelector('[role="region"]');
-                  if (carousel) {
-                    const api = Object.getOwnPropertyDescriptor(carousel, 'embla')?.value;
-                    if (api) {
-                      api.scrollTo(index);
-                    }
-                  }
-                }}
-                className={cn(
-                  "w-12 h-12 rounded-full overflow-hidden border-2 transition-all duration-300 hover:scale-110",
-                  activeSlide === index ? "border-primary" : "border-transparent opacity-70"
-                )}
-              >
-                <img
-                  src={member.imgUrl}
-                  alt={member.name}
-                  className="w-full h-full object-cover"
-                />
-              </button>
+                </div>
+              </div>
             ))}
           </div>
+        </div>
+
+        <div className="flex justify-center gap-2 mt-8">
+          {teamMembers.map((member, index) => (
+            <button
+              key={index}
+              className={cn(
+                "w-12 h-12 rounded-full overflow-hidden border-2 transition-all duration-300 hover:scale-110",
+                activeSlide === index ? "border-primary" : "border-transparent opacity-70"
+              )}
+            >
+              <img
+                src={member.imgUrl}
+                alt={member.name}
+                className="w-full h-full object-cover"
+              />
+            </button>
+          ))}
         </div>
       </div>
     </>

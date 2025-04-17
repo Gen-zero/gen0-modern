@@ -100,8 +100,7 @@ const TeamSection = () => {
               loop: true,
             }}
             onSelect={(api) => {
-              const selectedIndex = api.selectedScrollSnap();
-              setActiveSlide(selectedIndex);
+              setActiveSlide(api.selectedScrollSnap());
             }}
           >
             <CarouselContent>

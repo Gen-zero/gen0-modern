@@ -1,4 +1,3 @@
-
 import { motion } from "framer-motion";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/about/Footer";
@@ -15,8 +14,8 @@ const JoinUs = () => {
   const [activeTab, setActiveTab] = useState("culture");
   const navigate = useNavigate();
   
-  const goToContactSection = () => {
-    navigate('/#contact');
+  const goToContactSection = (positionType = "") => {
+    navigate(`/#contact${positionType ? `?formType=${positionType}` : ""}`);
   };
   
   const pageVariants = {
@@ -395,7 +394,7 @@ const JoinUs = () => {
       >
         <div className="container mx-auto px-4 md:px-8">
           <div className="text-center mb-16 max-w-3xl mx-auto">
-            <h2 className="text-3xl md:text-4xl font-bold mb-6">Open Positions</h2>
+            <h2 className="text-3xl md:text-4xl font-bold mb-6 font-condensed">Open Positions</h2>
             <p className="text-lg text-muted-foreground">
               We're always looking for passionate individuals to join our team. Check out our current openings below.
             </p>
@@ -417,7 +416,7 @@ const JoinUs = () => {
                   </div>
                   <Button 
                     className="shrink-0 hover:bg-cursor-glow hover:text-black hover:border-yellow-300 hover:shadow-[0_0_20px_rgba(254,240,138,0.7)]"
-                    onClick={goToContactSection}
+                    onClick={() => goToContactSection("intern")}
                   >
                     Apply Now
                   </Button>
@@ -440,7 +439,7 @@ const JoinUs = () => {
                   </div>
                   <Button 
                     className="shrink-0 hover:bg-cursor-glow hover:text-black hover:border-yellow-300 hover:shadow-[0_0_20px_rgba(254,240,138,0.7)]"
-                    onClick={goToContactSection}
+                    onClick={() => goToContactSection("intern")}
                   >
                     Apply Now
                   </Button>
@@ -463,7 +462,7 @@ const JoinUs = () => {
                   </div>
                   <Button 
                     className="shrink-0 hover:bg-cursor-glow hover:text-black hover:border-yellow-300 hover:shadow-[0_0_20px_rgba(254,240,138,0.7)]"
-                    onClick={goToContactSection}
+                    onClick={() => goToContactSection("intern")}
                   >
                     Apply Now
                   </Button>
@@ -479,7 +478,7 @@ const JoinUs = () => {
               <Button 
                 variant="outline"
                 size="lg"
-                onClick={goToContactSection}
+                onClick={() => goToContactSection("intern")}
                 className="border-primary/20 hover:bg-cursor-glow hover:text-black hover:border-yellow-300 hover:shadow-[0_0_20px_rgba(254,240,138,0.7)]"
               >
                 Send Open Application
@@ -500,13 +499,13 @@ const JoinUs = () => {
       >
         <div className="container mx-auto px-4 md:px-8 text-center">
           <div className="max-w-3xl mx-auto">
-            <h2 className="text-3xl md:text-4xl font-bold mb-6">Ready to Join Our Team?</h2>
+            <h2 className="text-3xl md:text-4xl font-bold mb-6 font-condensed">Ready to Join Our Team?</h2>
             <p className="text-lg text-muted-foreground mb-8">
               If you're passionate about building meaningful products and want to be part of a forward-thinking team, we'd love to hear from you.
             </p>
             <Button 
               size="lg"
-              onClick={goToContactSection}
+              onClick={() => goToContactSection("intern")}
               className="bg-primary text-white hover:bg-cursor-glow hover:text-black hover:shadow-[0_0_20px_rgba(254,240,138,0.7)]"
             >
               Apply Today

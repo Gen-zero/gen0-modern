@@ -2,7 +2,7 @@
 import { Form } from "@/components/ui/form";
 import { useToast } from "@/hooks/use-toast";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { FormValues, InquiryOption, InquiryType, Project, formSchema } from "./types";
 import InquiryTypeSelector from "./InquiryTypeSelector";
@@ -18,12 +18,13 @@ import InvestInquiryFields from "./inquiries/InvestInquiryFields";
 interface ContactFormProps {
   inquiryOptions: InquiryOption[];
   projectOptions: Project[];
+  initialFormType?: string | null;
 }
 
 // Google Apps Script deployment URL - REPLACE THIS WITH YOUR DEPLOYMENT URL
 const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzkd9YmAsmTLnYuL58YDatywu6i6Rqi4BlRQtPHVL00fi6eQ0KO_tj469EUzLxAesaiCw/exec";
 
-const ContactForm = ({ inquiryOptions, projectOptions }: ContactFormProps) => {
+const ContactForm = ({ inquiryOptions, projectOptions, initialFormType }: ContactFormProps) => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [selectedInquiry, setSelectedInquiry] = useState<InquiryType>('general');
   const [selectedProjects, setSelectedProjects] = useState<string[]>([]);
@@ -49,6 +50,14 @@ const ContactForm = ({ inquiryOptions, projectOptions }: ContactFormProps) => {
       linkedinProfile: '',
     },
   });
+
+  // Set initial form type based on URL parameter
+  useEffect(() => {
+    if (initialFormType && inquiryOptions.some(option => option.value === initialFormType)) {
+      setSelectedInquiry(initialFormType as InquiryType);
+      form.setValue('purpose', initialFormType);
+    }
+  }, [initialFormType, form, inquiryOptions]);
 
   const getCurrentInquiry = () => {
     return inquiryOptions.find(option => option.value === selectedInquiry) || inquiryOptions[0];
@@ -164,7 +173,7 @@ const ContactForm = ({ inquiryOptions, projectOptions }: ContactFormProps) => {
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
         <InquiryTypeSelector 
           inquiryOptions={inquiryOptions}
-          defaultValue="general"
+          defaultValue={selectedInquiry}
           onValueChange={handleInquiryChange}
         />
 

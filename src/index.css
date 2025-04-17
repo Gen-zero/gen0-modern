@@ -1,5 +1,6 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@300;400;500;600;700&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -112,6 +113,11 @@
     font-feature-settings: "cv02", "cv03", "cv04", "cv11";
   }
   
+  /* Section headers styling */
+  section h2 {
+    @apply font-condensed text-accent;
+  }
+  
   /* Glass effect */
   .glass {
     @apply bg-background/70 backdrop-blur-md border border-primary/20 shadow-sm;
@@ -220,5 +226,10 @@
     100% {
       transform: translateX(100%);
     }
+  }
+  
+  /* Font utility classes */
+  .font-condensed {
+    font-family: 'Roboto Condensed', sans-serif;
   }
 }

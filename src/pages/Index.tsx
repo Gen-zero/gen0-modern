@@ -43,6 +43,12 @@ const Index = () => {
       // Clear the state after scrolling
       window.history.replaceState({}, document.title);
     }
+    
+    // Add Roboto Condensed font
+    const link = document.createElement('link');
+    link.rel = 'stylesheet';
+    link.href = 'https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@300;400;500;600;700&display=swap';
+    document.head.appendChild(link);
   }, [location]);
 
   useEffect(() => {

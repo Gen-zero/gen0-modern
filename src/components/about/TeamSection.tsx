@@ -1,3 +1,4 @@
+
 import { Helmet } from "react-helmet-async";
 import {
   Carousel,
@@ -159,7 +160,10 @@ const TeamSection = () => {
                 onClick={() => {
                   const carousel = document.querySelector('[role="region"]');
                   if (carousel) {
-                    carousel.embla?.scrollTo(index);
+                    const api = Object.getOwnPropertyDescriptor(carousel, 'embla')?.value;
+                    if (api) {
+                      api.scrollTo(index);
+                    }
                   }
                 }}
                 className={cn(

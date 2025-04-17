@@ -33,6 +33,13 @@ const TeamSection = () => {
     imgUrl: "https://ik.imagekit.io/kalidaspem/yedhukrishnan.jpg",
     expertise: ["UI/UX Design", "Brand Strategy", "Design Systems", "User Research"]
   }, {
+    name: "Harshita Macom",
+    position: "Full-Stack Developer",
+    bio: "Just a student tryna figure out AIML, but don’t let that fool you—she’s out here stacking hackathon wins like they're daily quests. From the GDG Solution Challenge to Smart India Hackathon, she's been in the trenches and came out shining. Her project for GDG Solution Challenge 2024 even got the golden ticket to be showcased at Google's Build with AI event. A core member of GDG on Campus CMRIT, she recently turned her college into a hackathon battleground. She codes, she competes, she dreams—basically, she’s building her own AI-powered world, one line of code at a time.",
+    personalDetail: "When she’s not crushing it in AI and ML, you’ll find her flexing those competitive programming muscles on Leetcode and Codechef.",
+    imgUrl: "https://ik.imagekit.io/kalidaspem/yedhukrishnan.jpg",
+    expertise: ["Backend", "Front end", "RESTful APIs", "Automation"]
+  },{
     name: "Kannan S",
     position: "Backend Developer",
     bio: "Kannan excels at translating client needs into product strategies. His background in psychology gives him unique insight into user behavior and digital experiences.",

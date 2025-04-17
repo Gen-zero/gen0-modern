@@ -15,7 +15,7 @@ const JoinUs = () => {
   const navigate = useNavigate();
   
   const goToContactSection = (positionType = "") => {
-    navigate(`/#contact${positionType ? `?formType=${positionType}` : ""}`);
+    navigate(`/?formType=${positionType}#contact`);
   };
   
   const pageVariants = {

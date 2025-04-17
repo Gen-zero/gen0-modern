@@ -13,8 +13,24 @@ const Contact = () => {
   
   // Check for query parameters on component mount
   useEffect(() => {
+    // First check normal query params in the URL
     const params = new URLSearchParams(location.search);
     const formTypeParam = params.get('formType');
+    
+    // If no formType in standard query params, check if it's after the hash
+    if (!formTypeParam && location.hash) {
+      const hashParts = location.hash.split('?');
+      if (hashParts.length > 1) {
+        const hashParams = new URLSearchParams(hashParts[1]);
+        const hashFormType = hashParams.get('formType');
+        if (hashFormType) {
+          setFormType(hashFormType);
+          return;
+        }
+      }
+    }
+    
+    // Set from standard query param if found
     if (formTypeParam) {
       setFormType(formTypeParam);
     }

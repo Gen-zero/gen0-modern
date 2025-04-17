@@ -1,5 +1,13 @@
-
 import { Helmet } from "react-helmet-async";
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from "@/components/ui/carousel";
+import { cn } from "@/lib/utils";
+import { useState } from "react";
 
 interface TeamMember {
   name: string;
@@ -11,6 +19,8 @@ interface TeamMember {
 }
 
 const TeamSection = () => {
+  const [activeSlide, setActiveSlide] = useState(0);
+  
   const teamMembers: TeamMember[] = [{
     name: "Manu Narayanan",
     position: "Founder & Advisor",
@@ -48,7 +58,6 @@ const TeamSection = () => {
     expertise: ["Backend Development", "Database Architecture", "API Design", "System Integration"]
   }];
 
-  // Create structured data for the team
   const teamStructuredData = {
     "@context": "https://schema.org",
     "@type": "Organization",
@@ -81,47 +90,91 @@ const TeamSection = () => {
             and creating digital products for GenZ and beyond. ⚙️🌊✨
           </p>
         </div>
-        
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8">
-          {teamMembers.map((member, index) => (
-            <div 
-              key={index} 
-              className="bg-card rounded-xl overflow-hidden shadow-md hover:shadow-xl transition-shadow"
-              itemScope 
-              itemType="https://schema.org/Person"
-            >
-              <div className="aspect-square overflow-hidden">
-                <img 
-                  src={member.imgUrl} 
-                  alt={`${member.name} - ${member.position} at Gen0`} 
-                  className="w-full h-full object-cover transition-transform hover:scale-105" 
-                  loading="lazy"
-                  itemProp="image" 
-                />
-              </div>
-              <div className="p-4 sm:p-6">
-                <h3 className="text-lg sm:text-xl font-semibold mb-1" itemProp="name">{member.name}</h3>
-                <p className="text-primary font-medium mb-2 sm:mb-3" itemProp="jobTitle">{member.position}</p>
-                <p className="text-muted-foreground text-sm sm:text-base mb-3 sm:mb-4" itemProp="description">{member.bio}</p>
-                {member.expertise && (
-                  <div className="flex flex-wrap gap-1 sm:gap-2 mb-3 sm:mb-4">
-                    {member.expertise.map((skill, idx) => (
-                      <span 
-                        key={idx} 
-                        className="text-xs bg-primary/10 text-primary rounded-full px-2 sm:px-3 py-1"
-                        itemProp="knowsAbout"
-                      >
-                        {skill}
-                      </span>
-                    ))}
+
+        <div className="relative px-12">
+          <Carousel 
+            className="w-full max-w-5xl mx-auto"
+            opts={{
+              align: "start",
+              loop: true,
+            }}
+            onSelect={(api) => {
+              const selectedIndex = api.selectedScrollSnap();
+              setActiveSlide(selectedIndex);
+            }}
+          >
+            <CarouselContent>
+              {teamMembers.map((member, index) => (
+                <CarouselItem key={index} className="md:basis-1/1">
+                  <div className="p-1">
+                    <div className="bg-card rounded-xl overflow-hidden shadow-md transition-all duration-500 transform hover:scale-[1.02]">
+                      <div className="grid md:grid-cols-2 gap-6">
+                        <div className="aspect-square overflow-hidden">
+                          <img 
+                            src={member.imgUrl} 
+                            alt={`${member.name} - ${member.position} at Gen0`} 
+                            className="w-full h-full object-cover transition-transform hover:scale-105" 
+                            loading="lazy"
+                            itemProp="image" 
+                          />
+                        </div>
+                        <div className="p-6 flex flex-col justify-between">
+                          <div>
+                            <h3 className="text-2xl font-semibold mb-2" itemProp="name">{member.name}</h3>
+                            <p className="text-primary font-medium mb-4" itemProp="jobTitle">{member.position}</p>
+                            <p className="text-muted-foreground mb-6" itemProp="description">{member.bio}</p>
+                            {member.expertise && (
+                              <div className="flex flex-wrap gap-2 mb-4">
+                                {member.expertise.map((skill, idx) => (
+                                  <span 
+                                    key={idx} 
+                                    className="text-xs bg-primary/10 text-primary rounded-full px-3 py-1"
+                                    itemProp="knowsAbout"
+                                  >
+                                    {skill}
+                                  </span>
+                                ))}
+                              </div>
+                            )}
+                          </div>
+                          <p className="text-sm italic border-t border-border pt-4">
+                            {member.personalDetail}
+                          </p>
+                        </div>
+                      </div>
+                    </div>
                   </div>
+                </CarouselItem>
+              ))}
+            </CarouselContent>
+            
+            <CarouselPrevious className="left-0" />
+            <CarouselNext className="right-0" />
+          </Carousel>
+
+          <div className="flex justify-center gap-2 mt-8">
+            {teamMembers.map((member, index) => (
+              <button
+                key={index}
+                onClick={() => {
+                  const carousel = document.querySelector('[role="region"]');
+                  if (carousel) {
+                    carousel.embla?.scrollTo(index);
+                  }
+                }}
+                className={cn(
+                  "w-12 h-12 rounded-full overflow-hidden border-2 transition-all duration-300 hover:scale-110",
+                  activeSlide === index ? "border-primary" : "border-transparent opacity-70"
                 )}
-                <p className="text-xs sm:text-sm italic border-t border-border pt-2 sm:pt-3">
-                  {member.personalDetail}
-                </p>
-              </div>
-            </div>
-          ))}
+              >
+                <img
+                  src={member.imgUrl}
+                  alt={member.name}
+                  className="w-full h-full object-cover"
+                />
+              </button>
+            ))}
+          </div>
         </div>
       </div>
     </>

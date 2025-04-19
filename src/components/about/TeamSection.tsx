@@ -1,9 +1,5 @@
 
 import { Helmet } from "react-helmet-async";
-import { useEffect, useRef, useState } from "react";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { cn } from "@/lib/utils";
 
 interface TeamMember {
   name: string;
@@ -15,10 +11,6 @@ interface TeamMember {
 }
 
 const TeamSection = () => {
-  const containerRef = useRef<HTMLDivElement>(null);
-  const scrollTrackRef = useRef<HTMLDivElement>(null);
-  const [activeSlide, setActiveSlide] = useState(0);
-  
   const teamMembers: TeamMember[] = [{
     name: "Manu Narayanan",
     position: "Founder & Advisor",
@@ -56,6 +48,7 @@ const TeamSection = () => {
     expertise: ["Backend Development", "Database Architecture", "API Design", "System Integration"]
   }];
 
+  // Create structured data for the team
   const teamStructuredData = {
     "@context": "https://schema.org",
     "@type": "Organization",
@@ -71,45 +64,6 @@ const TeamSection = () => {
     }))
   };
 
-  useEffect(() => {
-    gsap.registerPlugin(ScrollTrigger);
-    
-    const container = containerRef.current;
-    const scrollTrack = scrollTrackRef.current;
-    
-    if (!container || !scrollTrack) return;
-    
-    // Set the initial width of the scrollTrack
-    const panelWidth = window.innerWidth;
-    const totalPanels = teamMembers.length;
-    
-    // Calculate the proper end point for the animation
-    const animation = gsap.to(scrollTrack, {
-      x: () => -(scrollTrack.offsetWidth - container.offsetWidth),
-      ease: "none",
-      scrollTrigger: {
-        trigger: container,
-        start: "top top",
-        end: () => `+=${scrollTrack.offsetWidth - container.offsetWidth + 100}`, // Add a little extra for better control
-        pin: true,
-        anticipatePin: 1,
-        scrub: 1,
-        invalidateOnRefresh: true,
-        onUpdate: (self) => {
-          const newIndex = Math.round(self.progress * (teamMembers.length - 1));
-          setActiveSlide(newIndex);
-        },
-      }
-    });
-
-    return () => {
-      if (animation.scrollTrigger) {
-        animation.scrollTrigger.kill();
-      }
-      animation.kill();
-    };
-  }, [teamMembers.length]);
-
   return (
     <>
       <Helmet>
@@ -118,7 +72,7 @@ const TeamSection = () => {
         </script>
       </Helmet>
       
-      <div className="py-16 sm:py-20 animate-on-scroll">
+      <div className="py-16 sm:py-20 container mx-auto px-4 sm:px-6 md:px-12 animate-on-scroll">
         <div className="text-center mb-10 sm:mb-16">
           <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4 sm:mb-6">The Minds Behind Gen0</h2>
           <p className="text-base sm:text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto px-4">
@@ -127,78 +81,46 @@ const TeamSection = () => {
             and creating digital products for GenZ and beyond. ⚙️🌊✨
           </p>
         </div>
-
-        <div 
-          ref={containerRef} 
-          className="relative overflow-hidden"
-          style={{ height: '600px' }}
-        >
-          <div 
-            ref={scrollTrackRef} 
-            className="flex absolute top-0 left-0"
-            style={{ width: `${teamMembers.length * 100}vw` }}
-          >
-            {teamMembers.map((member, index) => (
-              <div 
-                key={index}
-                className="team-member-card w-screen h-full px-4 box-border"
-              >
-                <div className="bg-card rounded-xl overflow-hidden shadow-md transition-all duration-500 transform hover:scale-[1.02] h-full max-w-5xl mx-auto">
-                  <div className="grid md:grid-cols-2 gap-6 h-full">
-                    <div className="aspect-square overflow-hidden">
-                      <img 
-                        src={member.imgUrl} 
-                        alt={`${member.name} - ${member.position} at Gen0`} 
-                        className="w-full h-full object-cover transition-transform hover:scale-105" 
-                        loading="lazy"
-                        itemProp="image" 
-                      />
-                    </div>
-                    <div className="p-6 flex flex-col justify-between">
-                      <div>
-                        <h3 className="text-2xl font-semibold mb-2" itemProp="name">{member.name}</h3>
-                        <p className="text-primary font-medium mb-4" itemProp="jobTitle">{member.position}</p>
-                        <p className="text-muted-foreground mb-6" itemProp="description">{member.bio}</p>
-                        {member.expertise && (
-                          <div className="flex flex-wrap gap-2 mb-4">
-                            {member.expertise.map((skill, idx) => (
-                              <span 
-                                key={idx} 
-                                className="text-xs bg-primary/10 text-primary rounded-full px-3 py-1"
-                                itemProp="knowsAbout"
-                              >
-                                {skill}
-                              </span>
-                            ))}
-                          </div>
-                        )}
-                      </div>
-                      <p className="text-sm italic border-t border-border pt-4">
-                        {member.personalDetail}
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-
-        <div className="flex justify-center gap-2 mt-8">
+        
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8">
           {teamMembers.map((member, index) => (
-            <button
-              key={index}
-              className={cn(
-                "w-12 h-12 rounded-full overflow-hidden border-2 transition-all duration-300 hover:scale-110",
-                activeSlide === index ? "border-primary" : "border-transparent opacity-70"
-              )}
+            <div 
+              key={index} 
+              className="bg-card rounded-xl overflow-hidden shadow-md hover:shadow-xl transition-shadow"
+              itemScope 
+              itemType="https://schema.org/Person"
             >
-              <img
-                src={member.imgUrl}
-                alt={member.name}
-                className="w-full h-full object-cover"
-              />
-            </button>
+              <div className="aspect-square overflow-hidden">
+                <img 
+                  src={member.imgUrl} 
+                  alt={`${member.name} - ${member.position} at Gen0`} 
+                  className="w-full h-full object-cover transition-transform hover:scale-105" 
+                  loading="lazy"
+                  itemProp="image" 
+                />
+              </div>
+              <div className="p-4 sm:p-6">
+                <h3 className="text-lg sm:text-xl font-semibold mb-1" itemProp="name">{member.name}</h3>
+                <p className="text-primary font-medium mb-2 sm:mb-3" itemProp="jobTitle">{member.position}</p>
+                <p className="text-muted-foreground text-sm sm:text-base mb-3 sm:mb-4" itemProp="description">{member.bio}</p>
+                {member.expertise && (
+                  <div className="flex flex-wrap gap-1 sm:gap-2 mb-3 sm:mb-4">
+                    {member.expertise.map((skill, idx) => (
+                      <span 
+                        key={idx} 
+                        className="text-xs bg-primary/10 text-primary rounded-full px-2 sm:px-3 py-1"
+                        itemProp="knowsAbout"
+                      >
+                        {skill}
+                      </span>
+                    ))}
+                  </div>
+                )}
+                <p className="text-xs sm:text-sm italic border-t border-border pt-2 sm:pt-3">
+                  {member.personalDetail}
+                </p>
+              </div>
+            </div>
           ))}
         </div>
       </div>

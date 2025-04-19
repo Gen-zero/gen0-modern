@@ -1,3 +1,4 @@
+
 import { Helmet } from "react-helmet-async";
 import { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
@@ -77,16 +78,19 @@ const TeamSection = () => {
     const scrollTrack = scrollTrackRef.current;
     
     if (!container || !scrollTrack) return;
-
-    const totalWidth = teamMembers.length * 100;
     
+    // Set the initial width of the scrollTrack
+    const panelWidth = window.innerWidth;
+    const totalPanels = teamMembers.length;
+    
+    // Calculate the proper end point for the animation
     const animation = gsap.to(scrollTrack, {
-      x: () => -(scrollTrack.scrollWidth - container.offsetWidth),
+      x: () => -(scrollTrack.offsetWidth - container.offsetWidth),
       ease: "none",
       scrollTrigger: {
         trigger: container,
         start: "top top",
-        end: () => `+=${scrollTrack.scrollWidth - container.offsetWidth}`,
+        end: () => `+=${scrollTrack.offsetWidth - container.offsetWidth + 100}`, // Add a little extra for better control
         pin: true,
         anticipatePin: 1,
         scrub: 1,
@@ -131,12 +135,13 @@ const TeamSection = () => {
         >
           <div 
             ref={scrollTrackRef} 
-            className="flex absolute top-0 left-0 w-fit"
+            className="flex absolute top-0 left-0"
+            style={{ width: `${teamMembers.length * 100}vw` }}
           >
             {teamMembers.map((member, index) => (
               <div 
                 key={index}
-                className="team-member-card w-screen px-4 box-border"
+                className="team-member-card w-screen h-full px-4 box-border"
               >
                 <div className="bg-card rounded-xl overflow-hidden shadow-md transition-all duration-500 transform hover:scale-[1.02] h-full max-w-5xl mx-auto">
                   <div className="grid md:grid-cols-2 gap-6 h-full">

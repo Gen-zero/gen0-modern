@@ -162,16 +162,6 @@
     -webkit-overflow-scrolling: touch;
   }
   
-  /* Hide scrollbar but keep functionality */
-  .hide-scrollbar {
-    -ms-overflow-style: none;
-    scrollbar-width: none;
-  }
-  
-  .hide-scrollbar::-webkit-scrollbar {
-    display: none;
-  }
-  
   /* New animation utilities */
   .hover-lift {
     @apply transition-transform duration-300 hover:-translate-y-1;

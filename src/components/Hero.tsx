@@ -1,18 +1,21 @@
 
 import { useEffect, useState, useRef } from 'react';
 import { Button } from './ui/button';
-import { ArrowRight, GraduationCap, TrendingUp, Users } from 'lucide-react';
+import { ArrowRight, GraduationCap, Users } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { useIsSmallScreen } from '@/hooks/use-small-screen';
+
 const words = ['BUILD', 'CODE', 'DESIGN', 'IDEATE'];
+
 const Hero = () => {
   const navigate = useNavigate();
   const isSmallScreen = useIsSmallScreen();
   const [currentWordIndex, setCurrentWordIndex] = useState(0);
   const [displayedWord, setDisplayedWord] = useState(words[0]);
-  const intervalRef = useRef<NodeJS.Timeout | null>(null);
   const heroRef = useRef<HTMLElement>(null);
   const vantaEffect = useRef<any>(null);
+  const [vantaInitialized, setVantaInitialized] = useState(false);
+  
   const scrambleWord = (finalWord: string) => {
     let iteration = 0;
     const totalIterations = finalWord.length;
@@ -33,6 +36,7 @@ const Hero = () => {
       }
     }, 50);
   };
+  
   useEffect(() => {
     setDisplayedWord(words[0]);
     const interval = setInterval(() => {
@@ -44,28 +48,40 @@ const Hero = () => {
     }, 1790);
     return () => clearInterval(interval);
   }, []);
+  
   useEffect(() => {
-    if (typeof window !== 'undefined' && window.VANTA) {
-      vantaEffect.current = window.VANTA.CELLS({
-        el: heroRef.current,
-        mouseControls: true,
-        touchControls: true,
-        gyroControls: false,
-        minHeight: 200.00,
-        minWidth: 200.00,
-        scale: 1.00,
-        color1: 0x0,
-        color2: 0x8c35f2,
-        size: isSmallScreen ? 1.00 : 3.00,
-        speed: 3.00
-      });
+    // Check if window, VANTA, and THREE are defined
+    if (typeof window !== 'undefined' && window.VANTA && window.THREE) {
+      if (!vantaInitialized && heroRef.current) {
+        try {
+          vantaEffect.current = window.VANTA.CELLS({
+            el: heroRef.current,
+            mouseControls: true,
+            touchControls: true,
+            gyroControls: false,
+            minHeight: 200.00,
+            minWidth: 200.00,
+            scale: 1.00,
+            color1: 0x0,
+            color2: 0x8c35f2,
+            size: isSmallScreen ? 1.00 : 3.00,
+            speed: 3.00,
+            THREE: window.THREE // Explicitly pass THREE
+          });
+          setVantaInitialized(true);
+        } catch (error) {
+          console.error("Error initializing VANTA:", error);
+        }
+      }
     }
+    
     return () => {
       if (vantaEffect.current) {
         vantaEffect.current.destroy();
       }
     };
-  }, [isSmallScreen]);
+  }, [isSmallScreen, vantaInitialized]);
+  
   const scrollToProjects = () => {
     const projectsSection = document.getElementById('projects');
     if (projectsSection) {
@@ -74,27 +90,29 @@ const Hero = () => {
       });
     }
   };
-  return <section ref={heroRef} id="home" className="min-h-screen flex items-center justify-center pt-8 overflow-hidden relative">
+  
+  return (
+    <section ref={heroRef} id="home" className="min-h-screen flex items-center justify-center pt-8 overflow-hidden relative">
       <div className="absolute inset-0 bg-gradient-to-br from-secondary/20 to-background -z-10"></div>
       
       <div className="absolute top-1/4 right-[10%] w-64 h-64 bg-primary/5 rounded-full blur-3xl animate-pulse-subtle"></div>
       <div className="absolute bottom-1/4 left-[5%] w-72 h-72 bg-primary/5 rounded-full blur-3xl animate-pulse-subtle" style={{
-      animationDelay: '1s'
-    }}></div>
+        animationDelay: '1s'
+      }}></div>
       
       {!isSmallScreen && <div className="absolute top-12 right-12 md:right-12 lg:right-12 z-40">
-          <Button onClick={() => navigate('/join-us')} variant="outline" className="uppercase font-medium text-sm px-6 py-2 bg-background/60 backdrop-blur-sm border border-muted
-                    hover:bg-yellow-100/80 hover:border-yellow-300 hover:text-yellow-600
-                    group transition-all duration-300 
-                    relative overflow-hidden
-                    after:content-[''] after:absolute after:bg-yellow-100/30 after:h-full after:w-full
-                    after:left-0 after:top-0 after:transform after:scale-x-0 after:origin-left 
-                    hover:after:scale-x-100 after:transition-transform after:duration-500
-                    hover:shadow-[0_0_20px_rgba(254,240,138,0.7)]">
-            <span className="relative z-10">JOIN US</span>
-            <Users className="ml-2 transition-all duration-300 group-hover:translate-x-1 relative z-10" size={16} />
-          </Button>
-        </div>}
+        <Button onClick={() => navigate('/join-us')} variant="outline" className="uppercase font-medium text-sm px-6 py-2 bg-background/60 backdrop-blur-sm border border-muted
+                  hover:bg-yellow-100/80 hover:border-yellow-300 hover:text-yellow-600
+                  group transition-all duration-300 
+                  relative overflow-hidden
+                  after:content-[''] after:absolute after:bg-yellow-100/30 after:h-full after:w-full
+                  after:left-0 after:top-0 after:transform after:scale-x-0 after:origin-left 
+                  hover:after:scale-x-100 after:transition-transform after:duration-500
+                  hover:shadow-[0_0_20px_rgba(254,240,138,0.7)]">
+          <span className="relative z-10">JOIN US</span>
+          <Users className="ml-2 transition-all duration-300 group-hover:translate-x-1 relative z-10" size={16} />
+        </Button>
+      </div>}
       
       <div className="container mx-auto px-6 py-12">
         <div className="relative h-[40vh] w-full rounded-2xl overflow-hidden shadow-2xl border border-[#1f2b87] animate-fade-in">
@@ -156,6 +174,8 @@ const Hero = () => {
             </Button>}
         </div>
       </div>
-    </section>;
+    </section>
+  );
 };
+
 export default Hero;

@@ -33,7 +33,13 @@
     <meta rel="canonical" href="https://gen0.xyz/" />
     
     <link rel="icon" type="image/png" href="/lovable-uploads/82543c4a-707b-40ad-9352-e934e6252d4f.png" />
+    
+    <!-- Make sure THREE.js loads BEFORE the VANTA effects -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
+    <script>
+      // Make THREE available globally
+      window.THREE = THREE;
+    </script>
     <script src="https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.cells.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.topology.min.js"></script>

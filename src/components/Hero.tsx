@@ -1,4 +1,3 @@
-
 import { useEffect, useState, useRef } from 'react';
 import { Button } from './ui/button';
 import { ArrowRight, GraduationCap, Users, TrendingUp } from 'lucide-react';
@@ -50,7 +49,6 @@ const Hero = () => {
   }, []);
   
   useEffect(() => {
-    // Check if window, VANTA, and THREE are defined
     if (typeof window !== 'undefined' && window.VANTA && window.THREE) {
       if (!vantaInitialized && heroRef.current) {
         try {
@@ -66,7 +64,7 @@ const Hero = () => {
             color2: 0x8c35f2,
             size: isSmallScreen ? 1.00 : 3.00,
             speed: 3.00,
-            THREE: window.THREE // Explicitly pass THREE
+            THREE: window.THREE
           });
           setVantaInitialized(true);
         } catch (error) {

@@ -1,3 +1,4 @@
+
 import { useEffect, useState, useRef } from 'react';
 import { Button } from './ui/button';
 import { ArrowRight, GraduationCap, Users, TrendingUp } from 'lucide-react';
@@ -14,6 +15,7 @@ const Hero = () => {
   const heroRef = useRef<HTMLElement>(null);
   const vantaEffect = useRef<any>(null);
   const [vantaInitialized, setVantaInitialized] = useState(false);
+  const [dependenciesLoaded, setDependenciesLoaded] = useState(false);
   
   const scrambleWord = (finalWord: string) => {
     let iteration = 0;
@@ -48,28 +50,52 @@ const Hero = () => {
     return () => clearInterval(interval);
   }, []);
   
+  // Check if dependencies are loaded
   useEffect(() => {
-    if (typeof window !== 'undefined' && window.VANTA && window.THREE) {
-      if (!vantaInitialized && heroRef.current) {
-        try {
-          vantaEffect.current = window.VANTA.CELLS({
-            el: heroRef.current,
-            mouseControls: true,
-            touchControls: true,
-            gyroControls: false,
-            minHeight: 200.00,
-            minWidth: 200.00,
-            scale: 1.00,
-            color1: 0x0,
-            color2: 0x8c35f2,
-            size: isSmallScreen ? 1.00 : 3.00,
-            speed: 3.00,
-            THREE: window.THREE
-          });
-          setVantaInitialized(true);
-        } catch (error) {
-          console.error("Error initializing VANTA:", error);
-        }
+    const checkDependencies = () => {
+      if (typeof window !== 'undefined' && window.THREE && window.VANTA) {
+        setDependenciesLoaded(true);
+        return true;
+      }
+      return false;
+    };
+
+    // Check immediately
+    if (checkDependencies()) return;
+
+    // If not loaded immediately, check every 100ms
+    const intervalId = setInterval(() => {
+      if (checkDependencies()) {
+        clearInterval(intervalId);
+      }
+    }, 100);
+
+    // Clean up interval if component unmounts
+    return () => clearInterval(intervalId);
+  }, []);
+  
+  // Initialize Vanta.js once dependencies are confirmed loaded
+  useEffect(() => {
+    if (dependenciesLoaded && heroRef.current && !vantaInitialized) {
+      try {
+        console.log("Initializing VANTA with THREE:", window.THREE);
+        vantaEffect.current = window.VANTA.CELLS({
+          el: heroRef.current,
+          mouseControls: true,
+          touchControls: true,
+          gyroControls: false,
+          minHeight: 200.00,
+          minWidth: 200.00,
+          scale: 1.00,
+          color1: 0x0,
+          color2: 0x8c35f2,
+          size: isSmallScreen ? 1.00 : 3.00,
+          speed: 3.00,
+          THREE: window.THREE
+        });
+        setVantaInitialized(true);
+      } catch (error) {
+        console.error("Error initializing VANTA:", error);
       }
     }
     
@@ -78,7 +104,7 @@ const Hero = () => {
         vantaEffect.current.destroy();
       }
     };
-  }, [isSmallScreen, vantaInitialized]);
+  }, [dependenciesLoaded, isSmallScreen, heroRef]);
   
   const scrollToProjects = () => {
     const projectsSection = document.getElementById('projects');

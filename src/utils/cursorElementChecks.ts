@@ -1,4 +1,3 @@
-
 /**
  * Utility functions for checking cursor interaction with different element types
  */
@@ -6,7 +5,8 @@
 export const isModalElement = (element: HTMLElement): boolean => {
   return !!(
     element.closest('[role="dialog"]') ||
-    element.closest('.team-member-modal')
+    element.closest('.team-member-modal') ||
+    element.closest('[data-state="open"]') // This catches both nav menu and employee modals
   );
 };
 

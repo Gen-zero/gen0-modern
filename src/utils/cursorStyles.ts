@@ -1,4 +1,3 @@
-
 import { cn } from '@/lib/utils';
 
 export const getCursorDotClasses = ({
@@ -59,7 +58,7 @@ export const getCursorRingClasses = ({
       'rounded-full transition-all duration-200 ease-out',
       clicking ? 'scale-90 opacity-70' : 'scale-100 opacity-100',
       hovering ? 'w-8 h-8 scale-150' : 'w-6 h-6',
-      menuOpen || hoveringDropdown ? 'animate-pulse-slow bg-accent shadow-[0_0_10px_rgba(255,215,0,0.7)]' : '',
+      (menuOpen || hoveringDropdown) ? 'animate-pulse-slow bg-accent shadow-[0_0_10px_rgba(255,215,0,0.7)]' : '',
       hoveringTextField ? 'w-[2px] h-[18px] bg-sky-400 shadow-[0_0_8px_rgba(56,189,248,0.8)] rounded-sm animate-blink' : 'bg-accent shadow-[0_0_10px_rgba(255,215,0,0.7)]'
     )
   };
@@ -88,4 +87,3 @@ export const getCursorRingStyles = ({
   animation: (menuOpen || hoveringDropdown) ? 'cursorRiseUp 0.9s cubic-bezier(0.34, 1.56, 0.64, 1) forwards' :
              hoveringTextField ? 'cursorTextFieldAnim 0.8s cubic-bezier(0.22, 1, 0.36, 1) forwards' : 'none'
 });
-

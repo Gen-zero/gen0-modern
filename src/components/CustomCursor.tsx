@@ -1,4 +1,3 @@
-
 import { useEffect, useState } from 'react';
 import { useNavbar } from '@/contexts/NavbarContext';
 
@@ -24,13 +23,15 @@ const CustomCursor = () => {
 
     const handleElementHover = (e: MouseEvent) => {
       const target = e.target as HTMLElement;
-      // Check if it's a link or button
+      
+      const isTeamModal = target.closest('[role="dialog"]') ||
+                         target.closest('.team-member-modal');
+      
       const isLink = target.tagName.toLowerCase() === 'a' || 
                     target.tagName.toLowerCase() === 'button' ||
                     target.closest('a') || 
                     target.closest('button');
       
-      // Check if it's a dropdown element - target is or is inside dropdown elements
       const isDropdown = target.classList.contains('dropdown-trigger') || 
                          target.closest('[data-state="open"]') ||
                          target.closest('[role="menu"]') ||
@@ -41,7 +42,6 @@ const CustomCursor = () => {
                          target.closest('[role="option"]') ||
                          target.closest('[data-radix-popper-content-wrapper]');
       
-      // Check if it's a text input field
       const isTextField = target.tagName.toLowerCase() === 'input' && 
                          (target.getAttribute('type') === 'text' || 
                           target.getAttribute('type') === 'email' ||
@@ -55,7 +55,7 @@ const CustomCursor = () => {
                          target.closest('textarea');
       
       setHovering(!!isLink);
-      setHoveringDropdown(!!isDropdown);
+      setHoveringDropdown(!!isDropdown || !!isTeamModal);
       setHoveringTextField(!!isTextField);
     };
 
@@ -66,7 +66,6 @@ const CustomCursor = () => {
     window.addEventListener('mouseleave', handleMouseLeave);
     window.addEventListener('mouseover', handleElementHover);
 
-    // Clean up
     return () => {
       window.removeEventListener('mousemove', updateCursorPosition);
       window.removeEventListener('mousedown', handleMouseDown);
@@ -79,13 +78,12 @@ const CustomCursor = () => {
 
   return (
     <>
-      {/* Main cursor */}
       <div 
         className={`fixed pointer-events-none transform -translate-x-1/2 -translate-y-1/2 transition-all duration-300 mix-blend-difference ${hidden ? 'opacity-0' : 'opacity-100'}`}
         style={{ 
           left: `${position.x}px`, 
           top: `${position.y}px`,
-          zIndex: hoveringDropdown || menuOpen || hoveringTextField ? 100 : 40,
+          zIndex: hoveringDropdown ? 100 : menuOpen ? 80 : hoveringTextField ? 70 : 40,
           transform: `translate(-50%, -50%) scale(${menuOpen || hoveringDropdown ? 1.2 : 1}) ${menuOpen || hoveringDropdown ? 'translateY(-10px)' : ''}`,
           transition: (menuOpen || hoveringDropdown) 
             ? 'transform 0.9s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.4s ease-out, background-color 0.4s ease-out, z-index 0s'
@@ -106,7 +104,6 @@ const CustomCursor = () => {
         />
       </div>
       
-      {/* Trail effect */}
       <div 
         className={`fixed pointer-events-none w-3 h-3 rounded-full bg-primary/70 transform -translate-x-1/2 -translate-y-1/2 ${hidden ? 'opacity-0' : 'opacity-60'} ${hoveringTextField ? 'opacity-0' : ''}`} 
         style={{ 
@@ -118,7 +115,6 @@ const CustomCursor = () => {
         }}
       />
 
-      {/* CSS Animation Keyframes */}
       <style>
         {`
         @keyframes cursorRiseUp {

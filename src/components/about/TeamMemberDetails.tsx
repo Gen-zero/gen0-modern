@@ -51,7 +51,7 @@ const TeamMemberDetails: React.FC<TeamMemberDetailsProps> = ({
     <AnimatePresence>
       {isOpen && (
         <motion.div
-          className="fixed inset-0 z-50 flex items-center justify-center bg-background/80 backdrop-blur-sm"
+          className="fixed inset-0 z-[60] flex items-center justify-center bg-background/80 backdrop-blur-sm"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
@@ -66,7 +66,7 @@ const TeamMemberDetails: React.FC<TeamMemberDetailsProps> = ({
             <Button
               variant="ghost"
               size="icon"
-              className="absolute right-4 top-4 z-10"
+              className="absolute right-4 top-4 z-[70]"
               onClick={onClose}
               aria-label="Close details"
             >

@@ -59,9 +59,9 @@ const TeamMemberCard: React.FC<TeamMemberCardProps> = ({ member, onClick }) => {
             loading="lazy"
           />
         </div>
-        <div className="p-5">
-          <h3 className="text-xl font-semibold mb-1">{member.name}</h3>
-          <p className="text-primary font-medium">{member.position}</p>
+        <div className="p-5 bg-gradient-to-br from-black/90 to-purple-900/90">
+          <h3 className="text-xl font-semibold mb-1 text-white">{member.name}</h3>
+          <p className="text-primary font-medium text-blue-300">{member.position}</p>
         </div>
       </Card>
     </motion.div>

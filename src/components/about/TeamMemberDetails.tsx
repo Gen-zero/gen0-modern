@@ -57,11 +57,13 @@ const TeamMemberDetails: React.FC<TeamMemberDetailsProps> = ({
           exit={{ opacity: 0 }}
         >
           <motion.div 
-            className="relative w-full max-w-4xl max-h-[90vh] overflow-auto rounded-xl bg-card shadow-lg"
+            className="relative w-full max-w-4xl max-h-[90vh] overflow-auto rounded-xl bg-card shadow-lg team-member-modal"
             initial={{ scale: 0.9, y: 20 }}
             animate={{ scale: 1, y: 0 }}
             exit={{ scale: 0.9, y: 20 }}
             transition={{ type: "spring", damping: 20 }}
+            role="dialog"
+            aria-modal="true"
           >
             <Button
               variant="ghost"

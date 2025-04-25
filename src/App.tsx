@@ -18,6 +18,7 @@ import { Toaster as SonnerToaster } from "@/components/ui/sonner";
 import Blog from "./pages/Blog";
 import BlogPost from "./pages/BlogPost";
 import CustomCursor from "./components/CustomCursor";
+import QuantumScrollbar from "./components/quantum-scrollbar/QuantumScrollbar";
 import useIsTouchDevice from "./hooks/useIsTouchDevice";
 import { NavbarProvider } from "@/contexts/NavbarContext";
 
@@ -30,6 +31,8 @@ function App() {
       <NavbarProvider>
         {/* Only show custom cursor on non-touch devices */}
         {!isTouchDevice && <CustomCursor />}
+        {/* Add quantum scrollbar */}
+        {!isTouchDevice && <QuantumScrollbar />}
         <Routes>
           <Route path="/" element={<Index />} />
           <Route path="/about" element={<AboutUs />} />

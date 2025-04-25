@@ -1,0 +1,143 @@
+
+/* Quantum Flux Rail Scrollbar Styles */
+
+/* Hide default scrollbar while keeping functionality */
+::-webkit-scrollbar {
+  width: 12px;
+  height: 12px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: transparent;
+}
+
+/* Main container for custom scrollbar */
+.quantum-scroll-container {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 12px;
+  height: 100vh;
+  z-index: 100;
+  pointer-events: none;
+}
+
+.quantum-scroll {
+  position: absolute;
+  right: 4px;
+  top: 0;
+  width: 8px;
+  height: 100%;
+}
+
+.quantum-scroll .rail {
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(180deg,
+    rgba(70,0,130,0.3),
+    rgba(0,206,209,0.3),
+    rgba(75,0,130,0.3)
+  );
+  border-radius: 4px;
+  animation: pulse 3s ease-in-out infinite;
+  box-shadow: inset 0 0 8px rgba(0,206,209,0.2);
+}
+
+.quantum-scroll .thumb {
+  position: absolute;
+  top: 0;
+  left: -4px;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: radial-gradient(circle,
+    rgba(255,255,255,1) 0%,
+    rgba(0,206,209,0.8) 70%
+  );
+  box-shadow: 0 0 16px rgba(0,206,209,0.7);
+  transform: translateY(0);
+  transition: transform 0.1s ease;
+  pointer-events: auto;
+  cursor: pointer;
+}
+
+/* Active state - when dragging */
+.quantum-scroll .thumb:active {
+  transform: scaleX(1.4);
+  box-shadow: 0 0 24px rgba(0,206,209,1);
+}
+
+/* Hover effects */
+.quantum-scroll .rail:hover {
+  animation: ripple 1.5s ease-out;
+}
+
+.quantum-scroll .thumb:hover {
+  box-shadow: 0 0 24px rgba(0,206,209,1);
+}
+
+/* Canvas for particle effects */
+.quantum-particles {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 30px;
+  height: 100%;
+  pointer-events: none;
+  z-index: 99;
+}
+
+/* Animations */
+@keyframes pulse {
+  0%, 100% { 
+    filter: brightness(0.8);
+    background-position: 0% 0%;
+  }
+  50% { 
+    filter: brightness(1.2);
+    background-position: 0% 100%;
+  }
+}
+
+@keyframes ripple {
+  0% { 
+    box-shadow: 0 0 0 0 rgba(0,206,209,0.2);
+  }
+  70% { 
+    box-shadow: 0 0 0 10px rgba(0,206,209,0);
+  }
+  100% { 
+    box-shadow: 0 0 0 0 rgba(0,206,209,0);
+  }
+}
+
+/* Media query for touch devices */
+@media (hover: none) and (pointer: coarse) {
+  .quantum-scroll-container {
+    display: none;
+  }
+  
+  /* Use native scrollbar on touch devices */
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+  
+  ::-webkit-scrollbar-track {
+    background: rgba(70,0,130,0.1);
+    border-radius: 4px;
+  }
+  
+  ::-webkit-scrollbar-thumb {
+    background: linear-gradient(180deg,
+      rgba(70,0,130,0.6),
+      rgba(0,206,209,0.6),
+      rgba(75,0,130,0.6)
+    );
+    border-radius: 4px;
+  }
+}

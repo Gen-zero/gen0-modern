@@ -3,10 +3,10 @@ import { CheckCircle } from 'lucide-react';
 
 const AboutSection: React.FC = () => {
   const values = [
-    'Evolution: Growing and getting better 🌱',
-    'Logical Thinking: Thinking clearly and smartly 🧠',
-    'Unity for Humanity: Working together with compassion 🤝',
-    'Innovation: Being brave to create new things 🚀',
+    'Evolution: Cultivating continuous growth through learning, iteration, and adaptation 🌱',
+    'Zeroth Thinking: Cultivating original insights by anchoring our reasoning in clear, foundational principles before complexity 🧠',
+    'Unity for Humanity: Fostering global solidarity that transcends borders and conflict 🤝',
+    'Loyalty: Fearlessly committing to pioneering new frontiers with unwavering dedication 🚀',
   ];
 
   // Use a fragment (<>) so we can return two siblings

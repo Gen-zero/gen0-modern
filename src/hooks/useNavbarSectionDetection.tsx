@@ -15,11 +15,11 @@ export const useNavbarSectionDetection = () => {
     scrollDirection
   } = useNavbar();
   
-  const { isHomePage, location } = useNavbarRoute();
+  const { isHomePage, isAboutPage, location } = useNavbarRoute();
 
   useEffect(() => {
-    // Only run section detection on the home page
-    if (!isHomePage) {
+    // Only run section detection on the home page or about page
+    if (!isHomePage && !isAboutPage) {
       return;
     }
     
@@ -55,7 +55,7 @@ export const useNavbarSectionDetection = () => {
       
       sections.forEach(section => {
         const { sectionId, visibilityRatio } = calculateSectionVisibility(section);
-        const formattedName = formatSectionName(sectionId, false);
+        const formattedName = formatSectionName(sectionId, isAboutPage);
         
         if (visibilityRatio > maxVisibility) {
           maxVisibility = visibilityRatio;
@@ -118,7 +118,8 @@ export const useNavbarSectionDetection = () => {
       }
     };
   }, [
-    isHomePage, 
+    isHomePage,
+    isAboutPage,
     location.pathname, 
     activeSection, 
     isTransitioning, 

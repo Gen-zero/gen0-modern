@@ -2,6 +2,8 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 import useIsTouchDevice from '@/hooks/useIsTouchDevice';
 import ParticleTrail from './ParticleTrail';
+import { useLocation } from 'react-router-dom';
+import { useNavbar } from '@/contexts/NavbarContext';
 import '../../styles/quantum-scrollbar.css';
 
 const QuantumScrollbar: React.FC = () => {
@@ -13,6 +15,11 @@ const QuantumScrollbar: React.FC = () => {
   const lastScrollTime = useRef<number>(Date.now());
   const thumbRef = useRef<HTMLDivElement>(null);
   const railRef = useRef<HTMLDivElement>(null);
+  const location = useLocation();
+  const { activeSection } = useNavbar();
+  
+  // Track if we're on the About page
+  const isAboutPage = location.pathname === '/about';
   
   // Calculate scroll position and velocity
   const updateScrollPosition = useCallback(() => {
@@ -101,18 +108,27 @@ const QuantumScrollbar: React.FC = () => {
   const thumbPositionStyle = {
     transform: `translateY(${scrollPercent}%)`
   };
+
+  // Determine rail gradient based on current page and active section
+  const getRailClass = () => {
+    if (isAboutPage) {
+      return "rail rail-about";
+    }
+    return "rail";
+  };
   
   return (
     <div className="quantum-scroll-container">
-      <div className="quantum-scroll">
+      <div className={`quantum-scroll ${isAboutPage ? 'about-page' : ''}`}>
         <div 
           ref={railRef} 
-          className="rail" 
+          className={getRailClass()}
           onClick={handleRailClick}
+          data-active-section={activeSection.toLowerCase()}
         ></div>
         <div 
           ref={thumbRef} 
-          className="thumb" 
+          className={`thumb ${isAboutPage ? 'thumb-about' : ''}`}
           style={thumbPositionStyle} 
           onMouseDown={handleMouseDown}
         ></div>
@@ -121,6 +137,7 @@ const QuantumScrollbar: React.FC = () => {
         thumbPosition={scrollPercent * window.innerHeight / 100} 
         scrollVelocity={scrollVelocity} 
         active={isDragging || Math.abs(scrollVelocity) > 0.5} 
+        isAboutPage={isAboutPage}
       />
     </div>
   );

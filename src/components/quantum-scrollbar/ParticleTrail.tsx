@@ -14,12 +14,14 @@ interface ParticleTrailProps {
   thumbPosition: number;
   scrollVelocity: number;
   active: boolean;
+  isAboutPage?: boolean;
 }
 
 const ParticleTrail: React.FC<ParticleTrailProps> = ({ 
   thumbPosition, 
   scrollVelocity,
-  active
+  active,
+  isAboutPage = false
 }) => {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const particles = useRef<Particle[]>([]);
@@ -54,13 +56,26 @@ const ParticleTrail: React.FC<ParticleTrailProps> = ({
           const size = Math.random() * 3 + 1;
           const velocityFactor = Math.min(Math.abs(scrollVelocity) / 10, 1);
           
+          // Different particle colors for About page
+          const aboutPageColors = [
+            `rgba(147, 51, 234, ${Math.random() * 0.7 + 0.3})`, // Purple
+            `rgba(236, 72, 153, ${Math.random() * 0.7 + 0.3})`, // Pink
+            `rgba(79, 70, 229, ${Math.random() * 0.7 + 0.3})`,  // Indigo
+          ];
+          
+          const defaultColors = [
+            `rgba(0, 206, 209, ${Math.random() * 0.7 + 0.3})`, 
+            `rgba(75, 0, 130, ${Math.random() * 0.7 + 0.3})`
+          ];
+          
+          const colorOptions = isAboutPage ? aboutPageColors : defaultColors;
+          const color = colorOptions[Math.floor(Math.random() * colorOptions.length)];
+          
           particles.current.push({
             x: canvas.width / 2 - 5 + Math.random() * 10,
             y: thumbPosition + Math.random() * 16,
             size,
-            color: Math.random() > 0.5 ? 
-              `rgba(0, 206, 209, ${Math.random() * 0.7 + 0.3})` : 
-              `rgba(75, 0, 130, ${Math.random() * 0.7 + 0.3})`,
+            color,
             alpha: 1,
             velocity: (Math.random() * 2 + 0.5) * velocityFactor
           });
@@ -97,7 +112,7 @@ const ParticleTrail: React.FC<ParticleTrailProps> = ({
       cancelAnimationFrame(animationRef.current);
       particles.current = [];
     };
-  }, [thumbPosition, scrollVelocity, active]);
+  }, [thumbPosition, scrollVelocity, active, isAboutPage]);
   
   return (
     <canvas ref={canvasRef} className="quantum-particles" />

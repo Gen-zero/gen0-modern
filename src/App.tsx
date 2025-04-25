@@ -18,6 +18,7 @@ import { Toaster as SonnerToaster } from "@/components/ui/sonner";
 import Blog from "./pages/Blog";
 import BlogPost from "./pages/BlogPost";
 import CustomCursor from "./components/CustomCursor";
+import CustomScrollbar from "./components/CustomScrollbar";
 import useIsTouchDevice from "./hooks/useIsTouchDevice";
 import { NavbarProvider } from "@/contexts/NavbarContext";
 
@@ -26,10 +27,10 @@ function App() {
 
   return (
     <div className="min-h-screen flex flex-col">
-      {/* Wrap the entire app with NavbarProvider to make context available everywhere */}
       <NavbarProvider>
         {/* Only show custom cursor on non-touch devices */}
         {!isTouchDevice && <CustomCursor />}
+        {!isTouchDevice && <CustomScrollbar />}
         <Routes>
           <Route path="/" element={<Index />} />
           <Route path="/about" element={<AboutUs />} />

@@ -1,7 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@300;400;500;600;700&display=swap');
-@import './styles/scrollbar.css';
-@import './styles/quantum-particles.css';
 
 @tailwind base;
 @tailwind components;
@@ -50,6 +48,7 @@
   }
 
   .dark {
+    /* Dark mode is already using dark colors, so just copy over the same values */
     --background: 0 0% 4%;
     --foreground: 0 0% 95%;
 
@@ -88,25 +87,49 @@
     --sidebar-ring: 276 76% 31%;
   }
 
-  @keyframes quantum-pulse {
-    0% {
-      opacity: 0.7;
-      box-shadow: 0 0 8px rgba(155, 135, 245, 0.7);
-    }
-    50% {
-      opacity: 1;
-      box-shadow: 0 0 18px rgba(14, 165, 233, 0.9), 0 0 28px rgba(139, 92, 246, 0.5);
-    }
-    100% {
-      opacity: 0.7;
-      box-shadow: 0 0 8px rgba(155, 135, 245, 0.7);
-    }
+  /* Custom Scrollbar Styles */
+  ::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
   }
 
-  html {
-    scroll-behavior: smooth;
+  ::-webkit-scrollbar-track {
+    background: hsl(var(--background));
+    border-radius: var(--radius);
   }
 
+  ::-webkit-scrollbar-thumb {
+    background: linear-gradient(180deg, hsl(var(--primary)) 0%, hsl(var(--secondary)) 100%);
+    border-radius: var(--radius);
+    border: 2px solid hsl(var(--background));
+    transition: all 0.3s ease;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(180deg, hsl(var(--secondary)) 0%, hsl(var(--primary)) 100%);
+    box-shadow: 0 0 10px hsl(var(--primary) / 0.5);
+  }
+
+  /* For Firefox */
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: hsl(var(--primary)) hsl(var(--background));
+  }
+
+  /* Smooth Scroll Animation */
+  .smooth-scroll {
+    @apply transition-all duration-300 ease-out;
+  }
+
+  body {
+    @apply bg-background text-foreground antialiased overflow-y-auto;
+  }
+
+  * {
+    @apply border-border;
+  }
+  
+  /* Hide default cursor when custom cursor is active */
   html:not(.touch) {
     cursor: none !important;
   }
@@ -125,31 +148,39 @@
     font-feature-settings: "cv02", "cv03", "cv04", "cv11";
   }
   
+  /* Section headers styling */
   section h2 {
     @apply font-condensed text-accent;
   }
   
+  /* Glass effect */
   .glass {
     @apply bg-background/70 backdrop-blur-md border border-primary/20 shadow-sm;
   }
   
+  /* Smooth section transitions */
   section {
     @apply transition-opacity duration-300;
   }
   
+  /* Transition for interactive elements */
   a, button {
     @apply transition-all duration-200;
   }
   
+  /* Animation for links */
   .animated-link {
     @apply relative after:absolute after:bottom-0 after:left-0 after:h-[2px] after:w-0 after:bg-accent after:transition-all after:duration-300 hover:after:w-full;
   }
   
+  /* Service card hover */
   .service-card {
     @apply transition-all duration-300 hover:translate-y-[-8px] hover:shadow-lg bg-card;
   }
   
+  /* Enhanced scrollbar hiding while maintaining scroll functionality */
   .no-scrollbar {
+    /* Hide scrollbar for Chrome, Safari and Opera */
     &::-webkit-scrollbar {
       display: none;
       width: 0;
@@ -157,13 +188,16 @@
       background: transparent;
     }
     
-    -ms-overflow-style: none;
-    scrollbar-width: none;
+    /* Hide scrollbar for IE, Edge and Firefox */
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
     
+    /* Ensure touch scrolling works */
     overflow-y: auto;
     -webkit-overflow-scrolling: touch;
   }
   
+  /* New animation utilities */
   .hover-lift {
     @apply transition-transform duration-300 hover:-translate-y-1;
   }
@@ -229,6 +263,7 @@
     }
   }
   
+  /* Font utility classes */
   .font-condensed {
     font-family: 'Roboto Condensed', sans-serif;
   }

@@ -1,0 +1,71 @@
+
+import React from 'react';
+import { motion } from 'framer-motion';
+import { Card } from '@/components/ui/card';
+import { cn } from '@/lib/utils';
+
+export interface TeamMemberProps {
+  id: number;
+  name: string;
+  position: string;
+  bio: string;
+  personalDetail: string;
+  imgUrl: string;
+  expertise?: string[];
+  backgroundColor?: string;
+}
+
+interface TeamMemberCardProps {
+  member: TeamMemberProps;
+  onClick: () => void;
+}
+
+const TeamMemberCard: React.FC<TeamMemberCardProps> = ({ member, onClick }) => {
+  // A set of background gradient styles for cards
+  const backgroundStyles = [
+    'bg-gradient-to-br from-purple-100/30 to-blue-100/30',
+    'bg-gradient-to-br from-blue-100/30 to-green-100/30',
+    'bg-gradient-to-br from-pink-100/30 to-purple-100/30',
+    'bg-gradient-to-br from-orange-100/30 to-yellow-100/30',
+    'bg-gradient-to-br from-green-100/30 to-teal-100/30',
+  ];
+
+  // Use the member id to select a background style
+  const backgroundStyle = backgroundStyles[member.id % backgroundStyles.length];
+
+  return (
+    <motion.div
+      whileHover={{ 
+        y: -5,
+        boxShadow: '0 10px 25px rgba(0, 0, 0, 0.08)',
+        transition: { duration: 0.2 } 
+      }}
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5, delay: member.id * 0.1 }}
+    >
+      <Card 
+        className={cn(
+          "h-full cursor-pointer overflow-hidden transition-all duration-300",
+          backgroundStyle
+        )}
+        onClick={onClick}
+      >
+        <div className="aspect-square overflow-hidden">
+          <img 
+            src={member.imgUrl} 
+            alt={`${member.name} - ${member.position}`} 
+            className="w-full h-full object-cover transition-transform hover:scale-105" 
+            loading="lazy"
+          />
+        </div>
+        <div className="p-5">
+          <h3 className="text-xl font-semibold mb-1">{member.name}</h3>
+          <p className="text-primary font-medium">{member.position}</p>
+        </div>
+      </Card>
+    </motion.div>
+  );
+};
+
+export default TeamMemberCard;

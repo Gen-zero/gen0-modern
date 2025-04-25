@@ -1,5 +1,7 @@
+
 import React from 'react';
 import { CheckCircle } from 'lucide-react';
+import { motion } from 'framer-motion';
 
 const AboutSection: React.FC = () => {
   const values = [
@@ -9,12 +11,36 @@ const AboutSection: React.FC = () => {
     'Loyalty: Fearlessly committing to pioneering new frontiers with unwavering dedication 🚀',
   ];
 
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.2
+      }
+    }
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: { 
+      opacity: 1, 
+      y: 0,
+      transition: { duration: 0.5 }
+    }
+  };
+
   // Use a fragment (<>) so we can return two siblings
   return (
     <>
       {/* Left "ABOUT US" block */}
-      <div className="animate-on-scroll w-full overflow-hidden px-4 p-8"
-           style={{ animationDelay: '0.2s' }}>
+      <motion.div 
+        className="w-full overflow-hidden px-4 p-8"
+        variants={itemVariants}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true }}
+      >
         <span className="block mb-3 text-gray-400 font-semibold text-4xl">
           ABOUT US
         </span>
@@ -26,19 +52,28 @@ const AboutSection: React.FC = () => {
           next-gen projects ✨ to level up humanity 🌏—They call us GenZ 🌀,
           but we are GenZero 🕉️.
         </p>
-      </div>
+      </motion.div>
 
       {/* Right "Our Values" block */}
-      <div className="animate-on-scroll w-full overflow-hidden px-4 p-8"
-           style={{ animationDelay: '0.2s' }}>
+      <motion.div 
+        className="w-full overflow-hidden px-4 p-8"
+        variants={containerVariants}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true }}
+      >
         <div className="mb-8">
           <h3 className="text-xl font-medium mb-4">Our Values</h3>
           <ul className="space-y-3">
             {values.map((value, index) => (
-              <li key={index} className="flex items-start">
+              <motion.li 
+                key={index} 
+                className="flex items-start"
+                variants={itemVariants}
+              >
                 <CheckCircle className="h-5 w-5 text-primary mr-3 mt-0.5 flex-shrink-0" />
                 <span>{value}</span>
-              </li>
+              </motion.li>
             ))}
           </ul>
         </div>
@@ -53,7 +88,7 @@ const AboutSection: React.FC = () => {
             just hit expectations—they smash them! 🔥
           </p>
         </div>
-      </div>
+      </motion.div>
     </>
   );
 };

@@ -1,5 +1,6 @@
 
 import React, { useEffect } from 'react';
+import { createParticle, createScrollParticles } from './quantumParticles';
 
 const QuantumScrollbar: React.FC = () => {
   useEffect(() => {
@@ -9,31 +10,6 @@ const QuantumScrollbar: React.FC = () => {
     // Track if scrolling is active
     let isScrolling = false;
     let scrollTimeout: NodeJS.Timeout;
-    
-    // Create particles during scroll
-    const createParticle = (y: number) => {
-      const particle = document.createElement('div');
-      particle.className = 'quantum-particle';
-      
-      // Position next to scrollbar
-      const scrollbarWidth = 14;
-      const right = Math.random() * 5 + 2; // Vary particle position slightly
-      const size = Math.random() * 6 + 3;  // Random size between 3-9px
-      
-      particle.style.width = `${size}px`;
-      particle.style.height = `${size}px`;
-      particle.style.right = `${scrollbarWidth + right}px`;
-      particle.style.top = `${y}px`;
-      
-      document.body.appendChild(particle);
-      
-      // Remove particle after animation completes
-      setTimeout(() => {
-        if (particle.parentNode === document.body) {
-          document.body.removeChild(particle);
-        }
-      }, 1200);
-    };
     
     // Handle scroll event
     const handleScroll = () => {
@@ -51,13 +27,9 @@ const QuantumScrollbar: React.FC = () => {
       const scrollRatio = scrollTop / (scrollHeight - clientHeight);
       const thumbPosition = scrollRatio * (clientHeight - 100); // Approximate thumb height
       
-      // Create 1-3 particles based on scroll speed
+      // Create particles based on scroll position
       const particleCount = Math.floor(Math.random() * 3) + 1;
-      for (let i = 0; i < particleCount; i++) {
-        setTimeout(() => {
-          createParticle(thumbPosition + Math.random() * 50);
-        }, i * 50);
-      }
+      createScrollParticles(thumbPosition, particleCount);
       
       // Reset scrolling state after timeout
       scrollTimeout = setTimeout(() => {
@@ -72,8 +44,6 @@ const QuantumScrollbar: React.FC = () => {
       
       // Only create effects when mouse is near scrollbar
       if (windowWidth - clientX < 30) {
-        const scrollThumbEl = document.querySelector('::-webkit-scrollbar-thumb') as HTMLElement;
-        
         // Add ripple effect to track
         const scrollTrackEl = document.querySelector('::-webkit-scrollbar-track') as HTMLElement;
         if (scrollTrackEl) {
@@ -88,7 +58,7 @@ const QuantumScrollbar: React.FC = () => {
           }, 3000);
         }
         
-        // Random chance to create particle for ambient effect
+        // Random chance to create ambient particle
         if (Math.random() > 0.92) {
           createParticle(clientY);
         }
@@ -118,3 +88,4 @@ const QuantumScrollbar: React.FC = () => {
 };
 
 export default QuantumScrollbar;
+

@@ -85,7 +85,7 @@ const Contact = () => {
       <div className="container mx-auto md:px-12 px-[50px] py-0">
         <div className="text-center mb-16 md:max-w-2xl mx-auto">
           <span className="block font-medium text-accent mb-3 text-8xl">Contact Us</span>
-          <h2 className="text-3xl font-semibold mb-6 md:text-3xl font-condensed">Let's start a conversation</h2>
+          <h2 className="text-3xl font-semibold mb-6 md:text-3xl font-condensed text-gray-50">Let's start a conversation</h2>
           <p className="text-muted-foreground text-lg">
             Have a project in mind or want to learn more about how we can help your business? We'd love to hear from you.
           </p>

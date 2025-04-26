@@ -1,5 +1,6 @@
 
-import { isElement } from '@/lib/utils';
+// Remove the import that's causing the error since it's not being used
+// import { isElement } from '@/lib/utils';
 
 export const isModalElement = (element: HTMLElement): boolean => {
   return element.closest('[role="dialog"]') !== null || 

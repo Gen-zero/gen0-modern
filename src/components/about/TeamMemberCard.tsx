@@ -1,8 +1,8 @@
-
-import React from 'react';
+import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Card } from '@/components/ui/card';
 import { cn } from '@/lib/utils';
+import TwinklingStars from './TwinklingStars';
 
 export interface TeamMemberProps {
   id: number;
@@ -21,7 +21,8 @@ interface TeamMemberCardProps {
 }
 
 const TeamMemberCard: React.FC<TeamMemberCardProps> = ({ member, onClick }) => {
-  // A set of background gradient styles for cards
+  const [isHovered, setIsHovered] = useState(false);
+  
   const backgroundStyles = [
     'bg-gradient-to-br from-purple-100/30 to-blue-100/30',
     'bg-gradient-to-br from-blue-100/30 to-green-100/30',
@@ -30,7 +31,6 @@ const TeamMemberCard: React.FC<TeamMemberCardProps> = ({ member, onClick }) => {
     'bg-gradient-to-br from-green-100/30 to-teal-100/30',
   ];
 
-  // Use the member id to select a background style
   const backgroundStyle = backgroundStyles[member.id % backgroundStyles.length];
 
   return (
@@ -46,10 +46,12 @@ const TeamMemberCard: React.FC<TeamMemberCardProps> = ({ member, onClick }) => {
     >
       <Card 
         className={cn(
-          "h-full cursor-pointer overflow-hidden transition-all duration-300",
+          "h-full cursor-pointer overflow-hidden transition-all duration-300 relative",
           backgroundStyle
         )}
         onClick={onClick}
+        onMouseEnter={() => setIsHovered(true)}
+        onMouseLeave={() => setIsHovered(false)}
       >
         <div className="aspect-square overflow-hidden">
           <img 
@@ -59,7 +61,8 @@ const TeamMemberCard: React.FC<TeamMemberCardProps> = ({ member, onClick }) => {
             loading="lazy"
           />
         </div>
-        <div className="p-5 bg-gradient-to-br from-black/90 to-purple-900/90">
+        <div className="p-5 bg-gradient-to-br from-black/90 to-purple-900/90 relative">
+          {isHovered && <TwinklingStars />}
           <h3 className="text-xl font-semibold mb-1 text-white">{member.name}</h3>
           <p className="text-primary font-medium text-blue-300">{member.position}</p>
         </div>

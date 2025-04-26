@@ -47,13 +47,13 @@ const ServiceHeader = ({
           type: "spring"
         }
       }} className="mb-6">
-          <div className="p-4 bg-gradient-to-tr from-primary/30 to-secondary/20 rounded-full shadow-lg">
+          <div className="p-4 bg-gradient-to-tr from-primary/30 to-secondary/20 rounded-full shadow-lg bg-yellow-400">
             <WandSparkles className="h-7 w-7 text-primary" />
           </div>
         </motion.div>
         
         <motion.h2 className="text-3xl md:text-5xl font-bold text-center" variants={itemVariants}>
-          <span className="bg-gradient-to-r from-secondary via-primary to-accent bg-clip-text text-yellow-400">
+          <span className="bg-gradient-to-r from-secondary via-primary to-accent bg-clip-text text-yellow-400 text-7xl font-semibold">
             Our Services
           </span>
         </motion.h2>
@@ -66,7 +66,7 @@ const ServiceHeader = ({
           delay: 0.5,
           duration: 0.6
         }
-      }} className="mt-4 w-24 h-1 via-primary to-accent bg-amber-50 rounded-full" />
+      }} className="mt-4 w-24 h-1 via-primary to-accent rounded-full bg-amber-400" />
         
         <motion.p className="mt-6 text-center text-gray-400 max-w-2xl mx-auto" variants={itemVariants}>
           We craft exceptional digital experiences that drive growth and deliver results. 

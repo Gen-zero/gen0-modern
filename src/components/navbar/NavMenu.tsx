@@ -83,7 +83,7 @@ const NavMenu = ({
                 <NavMenuLinks navLinks={navLinks} activeSection={activeSection} toggleMenu={toggleMenu} />
                 
                 <Button 
-                  className="w-full text-base py-6 px-8 mt-8 font-medium rounded-lg transition-all duration-300 hover:shadow-lg hover:shadow-accent/20 group" 
+                  className="join-us-btn w-full text-base py-6 px-8 mt-8 font-medium rounded-lg transition-all duration-300 hover:shadow-lg hover:shadow-accent/20 group" 
                   onClick={handleContactClick}
                 >
                   Get in Touch

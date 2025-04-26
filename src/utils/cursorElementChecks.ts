@@ -1,50 +1,31 @@
-/**
- * Utility functions for checking cursor interaction with different element types
- */
+
+import { isElement } from '@/lib/utils';
 
 export const isModalElement = (element: HTMLElement): boolean => {
-  return !!(
-    element.closest('[role="dialog"]') ||
-    element.closest('.team-member-modal') ||
-    element.closest('[data-state="open"]') ||  // This catches nav menu
-    element.closest('[aria-modal="true"]')     // Additional check for ARIA modal
-  );
+  return element.closest('[role="dialog"]') !== null || 
+         element.closest('.modal') !== null;
 };
 
 export const isInteractiveElement = (element: HTMLElement): boolean => {
-  const tag = element.tagName.toLowerCase();
-  return (
-    tag === 'a' ||
-    tag === 'button' ||
-    !!element.closest('a') ||
-    !!element.closest('button')
+  const interactiveSelectors = [
+    'a', 'button', 
+    '.join-us-btn', 
+    '.our-works-btn', 
+    '.about-us-btn'
+  ];
+  
+  return interactiveSelectors.some(selector => 
+    element.matches(selector) || 
+    element.closest(selector) !== null
   );
 };
 
 export const isDropdownElement = (element: HTMLElement): boolean => {
-  return !!(
-    element.classList.contains('dropdown-trigger') ||
-    element.closest('[data-state="open"]') ||
-    element.closest('[role="menu"]') ||
-    element.closest('[role="menuitem"]') ||
-    element.closest('.dropdown-content') ||
-    element.classList.contains('radix-dropdown-item') ||
-    element.closest('[role="listbox"]') ||
-    element.closest('[role="option"]') ||
-    element.closest('[data-radix-popper-content-wrapper]')
-  );
+  return element.closest('[role="menu"]') !== null || 
+         element.closest('.dropdown') !== null;
 };
 
 export const isTextInputElement = (element: HTMLElement): boolean => {
-  const tag = element.tagName.toLowerCase();
-  const isInputElement = tag === 'input';
-  const isTextArea = tag === 'textarea';
-  
-  if (isInputElement) {
-    const inputType = element.getAttribute('type');
-    const textInputTypes = ['text', 'email', 'search', 'tel', 'url', 'password', null];
-    return textInputTypes.includes(inputType);
-  }
-  
-  return isTextArea || !!element.closest('input') || !!element.closest('textarea');
+  return ['input', 'textarea'].includes(element.tagName.toLowerCase()) || 
+         element.getAttribute('contenteditable') === 'true';
 };

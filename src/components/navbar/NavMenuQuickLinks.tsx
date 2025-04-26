@@ -20,17 +20,20 @@ const NavMenuQuickLinks = ({ navLinks, toggleMenu, buttonClassName = "" }: NavMe
     {
       name: 'About Us',
       href: '/about',
-      icon: <Info className="h-4 w-4 text-accent" />
+      icon: <Info className="h-4 w-4 text-accent" />,
+      className: 'about-us-btn'
     },
     {
       name: 'Our Works',
       href: '/projects',
-      icon: <FileCode className="h-4 w-4 text-accent" />
+      icon: <FileCode className="h-4 w-4 text-accent" />,
+      className: 'our-works-btn'
     },
     {
       name: 'Blog',
       href: '/blog',
-      icon: <BookOpen className="h-4 w-4 text-accent" />
+      icon: <BookOpen className="h-4 w-4 text-accent" />,
+      className: ''
     }
   ];
   
@@ -48,7 +51,7 @@ const NavMenuQuickLinks = ({ navLinks, toggleMenu, buttonClassName = "" }: NavMe
               <Button 
                 variant="outline" 
                 size="sm" 
-                className={`w-full justify-between ${buttonClassName}`}
+                className={`w-full justify-between ${buttonClassName} ${link.className || ''}`}
               >
                 <div className="flex items-center gap-2">
                   {link.icon}

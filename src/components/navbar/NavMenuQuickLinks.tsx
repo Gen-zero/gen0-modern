@@ -1,6 +1,7 @@
 
 import { Link } from "react-router-dom";
-import { Info, FileCode, BookOpen } from "lucide-react";
+import { Info, FileCode, BookOpen, ArrowRight } from "lucide-react";
+import { Button } from "@/components/ui/button";
 
 interface NavLink {
   name: string;
@@ -11,9 +12,10 @@ interface NavLink {
 interface NavMenuQuickLinksProps {
   navLinks: NavLink[];
   toggleMenu: () => void;
+  buttonClassName?: string;
 }
 
-const NavMenuQuickLinks = ({ navLinks, toggleMenu }: NavMenuQuickLinksProps) => {
+const NavMenuQuickLinks = ({ navLinks, toggleMenu, buttonClassName = "" }: NavMenuQuickLinksProps) => {
   const quickLinks = [
     {
       name: 'About Us',
@@ -21,7 +23,7 @@ const NavMenuQuickLinks = ({ navLinks, toggleMenu }: NavMenuQuickLinksProps) => 
       icon: <Info className="h-4 w-4 text-accent" />
     },
     {
-      name: 'Projects',
+      name: 'Our Works',
       href: '/projects',
       icon: <FileCode className="h-4 w-4 text-accent" />
     },
@@ -40,11 +42,20 @@ const NavMenuQuickLinks = ({ navLinks, toggleMenu }: NavMenuQuickLinksProps) => 
           <li key={link.name}>
             <Link 
               to={link.href} 
-              className="relative inline-flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors duration-300 after:absolute after:w-full after:scale-x-0 after:h-[1px] after:bottom-0 after:left-0 after:bg-accent after:origin-bottom-right after:transition-transform after:duration-300 hover:after:scale-x-100 hover:after:origin-bottom-left text-sm md:text-base" 
+              className="block" 
               onClick={() => toggleMenu()}
             >
-              {link.icon}
-              {link.name}
+              <Button 
+                variant="outline" 
+                size="sm" 
+                className={`w-full justify-between ${buttonClassName}`}
+              >
+                <div className="flex items-center gap-2">
+                  {link.icon}
+                  {link.name}
+                </div>
+                <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
+              </Button>
             </Link>
           </li>
         ))}

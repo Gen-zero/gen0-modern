@@ -2,6 +2,7 @@
 import { motion } from "framer-motion";
 import { Sparkles, Users } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { ArrowRight } from "lucide-react";
 
 interface HeroSectionProps {
   scrollToPositions: () => void;
@@ -74,12 +75,24 @@ const HeroSection = ({ scrollToPositions, scrollToCulture }: HeroSectionProps) =
             transition={{ duration: 0.7, delay: 0.3 }}
             className="flex flex-col sm:flex-row gap-4 justify-center"
           >
-            <Button size="lg" onClick={scrollToPositions} className="bg-primary text-white hover:bg-primary/90">
-              See Open Positions
+            <Button 
+              variant="outline" 
+              size="lg" 
+              onClick={scrollToPositions} 
+              className="group"
+            >
+              <span>See Open Positions</span>
+              <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
             </Button>
             
-            <Button variant="outline" size="lg" onClick={scrollToCulture} className="border-primary/20 hover:bg-yellow-200 hover:text-black hover:border-yellow-300">
-              Learn About Our Culture
+            <Button 
+              variant="outline" 
+              size="lg" 
+              onClick={scrollToCulture} 
+              className="group border-primary/20 hover:bg-yellow-200 hover:text-black hover:border-yellow-300"
+            >
+              <span>Learn About Our Culture</span>
+              <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
             </Button>
           </motion.div>
         </div>

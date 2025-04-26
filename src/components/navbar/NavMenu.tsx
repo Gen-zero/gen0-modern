@@ -1,4 +1,3 @@
-
 import { X, ArrowRight, Sparkles, Home, Layers, Briefcase, Mail } from 'lucide-react';
 import { Button } from "../ui/button";
 import { Link } from 'react-router-dom';
@@ -40,7 +39,6 @@ const NavMenu = ({
     icon: <Mail size={18} />
   }];
   
-  // Function to handle scrolling to contact section
   const handleContactClick = () => {
     toggleMenu();
     // If already on home page, scroll to contact section
@@ -56,20 +54,16 @@ const NavMenu = ({
   };
   
   return <>
-      {/* Menu Overlay */}
       <div className={`fixed inset-0 bg-black/60 z-40 transition-opacity duration-500 ${menuOpen ? 'opacity-100' : 'opacity-0 pointer-events-none'}`} onClick={toggleMenu} />
       
-      {/* Modern Navigation Modal */}
       <div className={`fixed inset-0 z-50 flex items-center justify-center ${menuOpen ? 'opacity-100 visible' : 'opacity-0 invisible'} transition-all duration-500`}>
         <div className="absolute inset-0 bg-gradient-to-br from-background/95 via-background/98 to-background/90 backdrop-blur-md" onClick={toggleMenu}></div>
         
         <div className="relative w-full max-w-7xl mx-auto h-[90vh] overflow-y-auto no-scrollbar p-6 md:p-10 rounded-xl touch-auto">
-          {/* Close Button */}
           <button className="absolute top-6 right-6 z-50 text-foreground/80 hover:text-accent transition-colors duration-300 focus:outline-none" onClick={toggleMenu} aria-label="Close Menu">
             <X size={32} className="hover:rotate-90 transition-transform duration-300" />
           </button>
           
-          {/* Header */}
           <div className="flex flex-col mb-10 md:mb-16 px-[28px]">
             <Link to="/" className="flex items-center gap-4 mb-6" onClick={toggleMenu}>
               <img src="/lovable-uploads/a9bfe93b-b4a8-45e7-b6ec-0ccf561e4234.png" alt="Gen0 Logo" className="h-16 object-contain" />
@@ -79,7 +73,6 @@ const NavMenu = ({
               </div>
             </Link>
             
-            {/* Animated Punchline */}
             <h2 className="text-2xl lg:text-4xl font-bold max-w-3xl mb-4 bg-gradient-to-r from-foreground via-foreground/90 to-foreground/70 bg-clip-text text-gray-50 md:text-xl">✨ We ideate 💡, organize 🗂️, and execute 🚀 altruistic projects dedicated to levelling up humanity 🌏—From Bharat, for the world 🕉️.
           </h2>
           </div>
@@ -103,7 +96,11 @@ const NavMenu = ({
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
                 <NavMenuServices toggleMenu={toggleMenu} />
                 
-                <NavMenuQuickLinks navLinks={navLinks} toggleMenu={toggleMenu} />
+                <NavMenuQuickLinks 
+                  navLinks={navLinks} 
+                  toggleMenu={toggleMenu} 
+                  buttonClassName="group" 
+                />
                 
                 <NavMenuLegal toggleMenu={toggleMenu} />
               </div>

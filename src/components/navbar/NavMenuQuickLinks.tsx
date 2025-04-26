@@ -48,22 +48,13 @@ const NavMenuQuickLinks = ({ navLinks, toggleMenu, buttonClassName = "" }: NavMe
               <Button 
                 variant="outline" 
                 size="sm" 
-                className={`w-full justify-between 
-                  bg-background/60 backdrop-blur-sm border border-border/30
-                  hover:bg-yellow-100/80 hover:border-yellow-300 hover:text-yellow-600
-                  group transition-all duration-300
-                  hover:shadow-[0_0_20px_rgba(254,240,138,0.7)] 
-                  relative overflow-hidden
-                  after:content-[''] after:absolute after:bg-yellow-100/30 after:h-full after:w-full
-                  after:left-0 after:top-0 after:transform after:scale-x-0 after:origin-left 
-                  hover:after:scale-x-100 after:transition-transform after:duration-500 
-                  ${buttonClassName}`}
+                className={`w-full justify-between ${buttonClassName}`}
               >
-                <div className="flex items-center gap-2 relative z-10">
+                <div className="flex items-center gap-2">
                   {link.icon}
                   {link.name}
                 </div>
-                <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1 relative z-10" />
+                <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
               </Button>
             </Link>
           </li>

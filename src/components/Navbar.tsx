@@ -9,8 +9,6 @@ import { useNavbarScroll } from '@/hooks/useNavbarScroll';
 import { useIsMobile } from '@/hooks/use-mobile';
 import { useEffect } from 'react';
 import { useNavbarRoute } from '@/hooks/useNavbarRoute';
-import { Button } from './ui/button';
-import { ArrowRight } from 'lucide-react';
 
 const Navbar = () => {
   const { isScrolled, menuOpen, setMenuOpen, navbarExpanded, setActiveSection, setPrevActiveSection } = useNavbar();

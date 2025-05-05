@@ -44,10 +44,10 @@ const TeamSection = () => {
     id: 4,
     name: "Kannan S",
     position: "Backend Developer",
-    bio: "Kannan excels at translating client needs into product strategies. His background in psychology gives him unique insight into user behavior and digital experiences.",
-    personalDetail: "A devoted father of twins, Kannan is also working on his first science fiction novel.",
+    bio: "a product whisperer—he’s seen ideas go from scribbles on a napkin to full-scale deployments used by thousands. A senior software dev who's danced with deadlines across time zones and built with clients from every corner of the globe. He doesn’t just write code—he architects experiences, scales dreams, and bridges the gap between vision and version 1.0.",
+    personalDetail: "When he’s not shipping features or solving scalability puzzles, he’s probably deep in thought—mapping out the next big idea or musing over the poetry of clean code. He builds not just with skill, but with soul.",
     imgUrl: "https://ik.imagekit.io/kalidaspem/DeWatermark.ai_1742651326709.png",
-    expertise: ["Backend Development", "Database Architecture", "API Design", "System Integration"]
+    expertise: ["Full-Stack Engineering", "backend Architecture", "MVP Launch Strategy", "Product Development", "Client Collaboration"]
   }];
 
   // Create structured data for the team

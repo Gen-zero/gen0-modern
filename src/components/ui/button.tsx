@@ -19,7 +19,7 @@ const buttonVariants = cva(
           "bg-secondary text-secondary-foreground hover:bg-secondary/80",
         ghost: "hover:bg-accent hover:text-accent-foreground",
         link: "text-primary underline-offset-4 hover:underline",
-        custom: "uppercase font-medium bg-background/60 backdrop-blur-sm border border-border/30 hover:bg-yellow-100/80 hover:border-yellow-300 hover:text-yellow-600 transition-all duration-300 relative overflow-hidden hover:shadow-[0_0_20px_rgba(254,240,138,0.7)] after:content-[''] after:absolute after:bg-yellow-100/30 after:h-full after:w-full after:left-0 after:top-0 after:transform after:scale-x-0 after:origin-left hover:after:scale-x-100 after:transition-transform after:duration-500",
+        custom: "uppercase font-medium bg-background/60 backdrop-blur-sm border border-[#1f2b87]/30 hover:bg-[#1f2b87]/20 hover:border-[#1f2b87]/60 hover:text-primary transition-all duration-300 relative overflow-hidden hover:shadow-[0_0_15px_rgba(31,43,135,0.4)] after:content-[''] after:absolute after:bg-primary/10 after:h-full after:w-full after:left-0 after:top-0 after:transform after:scale-x-0 after:origin-left hover:after:scale-x-100 after:transition-transform after:duration-500",
       },
       size: {
         default: "h-10 px-4 py-2",

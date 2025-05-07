@@ -44,14 +44,14 @@ const RelatedProjects = ({ currentProjectId, projects }: RelatedProjectsProps) =
         
         {/* Category filter */}
         <Select 
-          value={selectedCategory || ""} 
-          onValueChange={(value) => setSelectedCategory(value || null)}
+          value={selectedCategory || "all"} 
+          onValueChange={(value) => setSelectedCategory(value === "all" ? null : value)}
         >
           <SelectTrigger className="w-[180px] mt-3 md:mt-0">
             <SelectValue placeholder="All Categories" />
           </SelectTrigger>
           <SelectContent>
-            <SelectItem value="">All Categories</SelectItem>
+            <SelectItem value="all">All Categories</SelectItem>
             {categories.map((category) => (
               <SelectItem key={category} value={category}>
                 {category}

@@ -30,10 +30,11 @@ const CTASection = ({ goToContactSection }: CTASectionProps) => {
           </p>
           <Button 
             size="lg"
+            variant="custom"
             onClick={() => goToContactSection("intern")}
-            className="bg-primary text-white hover:bg-cursor-glow hover:text-black hover:shadow-[0_0_20px_rgba(254,240,138,0.7)]"
+            className="group"
           >
-            Apply Today
+            <span className="relative z-10">Apply Today</span>
           </Button>
         </div>
       </div>

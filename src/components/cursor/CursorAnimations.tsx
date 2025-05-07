@@ -44,10 +44,10 @@ export const CursorAnimations = () => (
     
     @keyframes pulse-slow {
       0%, 100% {
-        box-shadow: 0 0 15px rgba(255, 215, 0, 0.7);
+        box-shadow: 0 0 15px rgba(140, 53, 242, 0.7);
       }
       50% {
-        box-shadow: 0 0 25px rgba(255, 215, 0, 1);
+        box-shadow: 0 0 25px rgba(140, 53, 242, 1);
       }
     }
     
@@ -89,15 +89,33 @@ export const CursorAnimations = () => (
     @keyframes dropdown-highlight {
       0% {
         transform: translate(-50%, -50%) scale(1);
-        box-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+        box-shadow: 0 0 10px rgba(140, 53, 242, 0.5);
       }
       50% {
         transform: translate(-50%, -50%) scale(1.3);
-        box-shadow: 0 0 20px rgba(255, 215, 0, 0.8);
+        box-shadow: 0 0 20px rgba(140, 53, 242, 0.8);
       }
       100% {
         transform: translate(-50%, -50%) scale(1.2);
-        box-shadow: 0 0 15px rgba(255, 215, 0, 0.7);
+        box-shadow: 0 0 15px rgba(140, 53, 242, 0.7);
+      }
+    }
+    
+    @keyframes neon-glow {
+      0%, 100% {
+        text-shadow: 0 0 10px rgba(140, 53, 242, 0.8), 0 0 20px rgba(140, 53, 242, 0.5), 0 0 30px rgba(140, 53, 242, 0.3);
+      }
+      50% {
+        text-shadow: 0 0 15px rgba(140, 53, 242, 1), 0 0 25px rgba(140, 53, 242, 0.7), 0 0 35px rgba(140, 53, 242, 0.5);
+      }
+    }
+    
+    @keyframes button-shimmer {
+      0% {
+        background-position: 200% center;
+      }
+      100% {
+        background-position: -200% center;
       }
     }
     `}

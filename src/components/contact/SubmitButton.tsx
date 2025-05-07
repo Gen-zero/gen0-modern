@@ -1,17 +1,22 @@
 
 import { Button } from "@/components/ui/button";
 import { Send, Loader2 } from "lucide-react";
+import { useLocation } from "react-router-dom";
 
 interface SubmitButtonProps {
   isSubmitting: boolean;
 }
 
 const SubmitButton = ({ isSubmitting }: SubmitButtonProps) => {
+  const location = useLocation();
+  const isJoinUsPage = location.pathname === "/join-us";
+  
   return (
     <Button 
       type="submit" 
       className="w-full md:w-auto"
       disabled={isSubmitting}
+      variant={isJoinUsPage ? "holo" : "default"}
     >
       {isSubmitting ? (
         <>

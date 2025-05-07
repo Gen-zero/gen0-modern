@@ -134,6 +134,20 @@ export default {
 					'0%': { boxShadow: '0 0 0 0 rgba(100, 200, 255, 0.5), inset 0 0 0 0 rgba(100, 200, 255, 0.4)' },
 					'70%': { boxShadow: '0 0 0 10px rgba(100, 200, 255, 0), inset 0 0 0 3px rgba(100, 200, 255, 0.6)' },
 					'100%': { boxShadow: '0 0 0 0 rgba(100, 200, 255, 0), inset 0 0 0 0 rgba(100, 200, 255, 0.2)' }
+				},
+				// New animations for holographic button
+				'neonShift': {
+					'0%': { backgroundPosition: '0% 50%' },
+					'50%': { backgroundPosition: '100% 50%' },
+					'100%': { backgroundPosition: '0% 50%' }
+				},
+				'gridFade': {
+					'0%, 100%': { opacity: '0' },
+					'50%': { opacity: '0.2' }
+				},
+				'gridSweep': {
+					'0%': { backgroundPosition: '0 0', opacity: '0.3' },
+					'100%': { backgroundPosition: '100% 100%', opacity: '0' }
 				}
 			},
 			animation: {

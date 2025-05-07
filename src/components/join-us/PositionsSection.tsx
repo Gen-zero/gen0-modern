@@ -48,7 +48,8 @@ const PositionsSection = ({ goToContactSection }: PositionsSectionProps) => {
                   </p>
                 </div>
                 <Button 
-                  className="shrink-0 hover:bg-cursor-glow hover:text-black hover:border-yellow-300 hover:shadow-[0_0_20px_rgba(254,240,138,0.7)]"
+                  variant="holo"
+                  className="shrink-0"
                   onClick={() => goToContactSection("intern")}
                 >
                   Apply Now
@@ -71,7 +72,8 @@ const PositionsSection = ({ goToContactSection }: PositionsSectionProps) => {
                   </p>
                 </div>
                 <Button 
-                  className="shrink-0 hover:bg-cursor-glow hover:text-black hover:border-yellow-300 hover:shadow-[0_0_20px_rgba(254,240,138,0.7)]"
+                  variant="holo"
+                  className="shrink-0"
                   onClick={() => goToContactSection("intern")}
                 >
                   Apply Now
@@ -94,7 +96,8 @@ const PositionsSection = ({ goToContactSection }: PositionsSectionProps) => {
                   </p>
                 </div>
                 <Button 
-                  className="shrink-0 hover:bg-cursor-glow hover:text-black hover:border-yellow-300 hover:shadow-[0_0_20px_rgba(254,240,138,0.7)]"
+                  variant="holo"
+                  className="shrink-0"
                   onClick={() => goToContactSection("intern")}
                 >
                   Apply Now
@@ -109,10 +112,10 @@ const PositionsSection = ({ goToContactSection }: PositionsSectionProps) => {
               Don't see a position that matches your skills? We're always looking for talented individuals.
             </p>
             <Button 
-              variant="outline"
+              variant="holo"
               size="lg"
               onClick={() => goToContactSection("intern")}
-              className="border-primary/20 hover:bg-cursor-glow hover:text-black hover:border-yellow-300 hover:shadow-[0_0_20px_rgba(254,240,138,0.7)]"
+              className="px-6"
             >
               Send Open Application
               <ArrowDown className="ml-2 h-4 w-4" />

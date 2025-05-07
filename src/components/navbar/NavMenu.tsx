@@ -1,3 +1,4 @@
+
 import { X, ArrowRight, Sparkles, Home, Layers, Briefcase, Mail } from 'lucide-react';
 import { Button } from "../ui/button";
 import { Link } from 'react-router-dom';
@@ -54,10 +55,12 @@ const NavMenu = ({
   };
   
   return <>
-      <div className={`fixed inset-0 bg-black/60 z-40 transition-opacity duration-500 ${menuOpen ? 'opacity-100' : 'opacity-0 pointer-events-none'}`} onClick={toggleMenu} />
+      {/* Overlay with slight transparency for glass effect */}
+      <div className={`fixed inset-0 bg-black/30 z-40 transition-opacity duration-500 ${menuOpen ? 'opacity-100' : 'opacity-0 pointer-events-none'}`} onClick={toggleMenu} />
       
       <div className={`fixed inset-0 z-50 flex items-center justify-center ${menuOpen ? 'opacity-100 visible' : 'opacity-0 invisible'} transition-all duration-500`}>
-        <div className="absolute inset-0 bg-gradient-to-br from-background/95 via-background/98 to-background/90 backdrop-blur-md" onClick={toggleMenu}></div>
+        {/* Glass morphism background */}
+        <div className="absolute inset-0 bg-gradient-to-br from-background/80 via-background/70 to-background/80 backdrop-blur-md" onClick={toggleMenu}></div>
         
         <div className="relative w-full max-w-7xl mx-auto h-[90vh] overflow-y-auto no-scrollbar p-6 md:p-10 rounded-xl touch-auto">
           <button className="absolute top-6 right-6 z-50 text-foreground/80 hover:text-accent transition-colors duration-300 focus:outline-none" onClick={toggleMenu} aria-label="Close Menu">
@@ -69,7 +72,6 @@ const NavMenu = ({
               <img src="/lovable-uploads/a9bfe93b-b4a8-45e7-b6ec-0ccf561e4234.png" alt="Gen0 Logo" className="h-16 object-contain" />
               <div className="flex items-center gap-3">
                 <Sparkles className="text-accent h-6 w-6 animate-pulse-subtle" />
-                
               </div>
             </Link>
             
@@ -83,6 +85,7 @@ const NavMenu = ({
                 <NavMenuLinks navLinks={navLinks} activeSection={activeSection} toggleMenu={toggleMenu} />
                 
                 <Button 
+                  variant="custom"
                   className="join-us-btn w-full text-base py-6 px-8 mt-8 font-medium rounded-lg transition-all duration-300 hover:shadow-lg hover:shadow-accent/20 group" 
                   onClick={handleContactClick}
                 >

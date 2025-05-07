@@ -1,3 +1,4 @@
+
 import React, { useEffect, useState, useRef } from 'react';
 import { Button } from './ui/button';
 import { ArrowRight, GraduationCap, Users, TrendingUp } from 'lucide-react';
@@ -119,14 +120,18 @@ const Hero = () => {
       }}></div>
       
       {!isSmallScreen && <div className="absolute top-12 right-12 md:right-12 lg:right-12 z-40">
-        <Button onClick={() => navigate('/join-us')} variant="outline" className="uppercase font-medium text-sm px-6 py-2 bg-background/60 backdrop-blur-sm border border-muted
-                  hover:bg-yellow-100/80 hover:border-yellow-300 hover:text-yellow-600
-                  group transition-all duration-300 
-                  relative overflow-hidden
-                  after:content-[''] after:absolute after:bg-yellow-100/30 after:h-full after:w-full
-                  after:left-0 after:top-0 after:transform after:scale-x-0 after:origin-left 
-                  hover:after:scale-x-100 after:transition-transform after:duration-500
-                  hover:shadow-[0_0_20px_rgba(254,240,138,0.7)]">
+        <Button 
+          onClick={() => navigate('/join-us')} 
+          variant="outline" 
+          className="join-us-btn uppercase font-medium text-sm px-6 py-2 bg-background/60 backdrop-blur-sm border border-muted
+                    hover:bg-yellow-100/80 hover:border-yellow-300 hover:text-yellow-600
+                    group transition-all duration-300 
+                    relative overflow-hidden
+                    after:content-[''] after:absolute after:bg-yellow-100/30 after:h-full after:w-full
+                    after:left-0 after:top-0 after:transform after:scale-x-0 after:origin-left 
+                    hover:after:scale-x-100 after:transition-transform after:duration-500
+                    hover:shadow-[0_0_20px_rgba(254,240,138,0.7)]"
+        >
           <span className="relative z-10">JOIN US</span>
           <Users className="ml-2 transition-all duration-300 group-hover:translate-x-1 relative z-10" size={16} />
         </Button>

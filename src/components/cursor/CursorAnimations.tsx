@@ -85,6 +85,21 @@ export const CursorAnimations = () => (
         opacity: 0.3;
       }
     }
+
+    @keyframes dropdown-highlight {
+      0% {
+        transform: translate(-50%, -50%) scale(1);
+        box-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+      }
+      50% {
+        transform: translate(-50%, -50%) scale(1.3);
+        box-shadow: 0 0 20px rgba(255, 215, 0, 0.8);
+      }
+      100% {
+        transform: translate(-50%, -50%) scale(1.2);
+        box-shadow: 0 0 15px rgba(255, 215, 0, 0.7);
+      }
+    }
     `}
   </style>
 );

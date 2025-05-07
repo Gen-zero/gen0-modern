@@ -1,6 +1,4 @@
 
-import { isElement } from '@/lib/utils';
-
 export const isModalElement = (element: HTMLElement): boolean => {
   return element.closest('[role="dialog"]') !== null || 
          element.closest('.modal') !== null;
@@ -11,7 +9,12 @@ export const isInteractiveElement = (element: HTMLElement): boolean => {
     'a', 'button', 
     '.join-us-btn', 
     '.our-works-btn', 
-    '.about-us-btn'
+    '.about-us-btn',
+    'select',
+    '[role="combobox"]',
+    '[role="listbox"]',
+    '.InquiryTypeSelector',
+    '.project-selector'
   ];
   
   return interactiveSelectors.some(selector => 
@@ -22,7 +25,12 @@ export const isInteractiveElement = (element: HTMLElement): boolean => {
 
 export const isDropdownElement = (element: HTMLElement): boolean => {
   return element.closest('[role="menu"]') !== null || 
-         element.closest('.dropdown') !== null;
+         element.closest('.dropdown') !== null ||
+         element.closest('[role="combobox"]') !== null ||
+         element.closest('[role="listbox"]') !== null ||
+         element.closest('select') !== null ||
+         element.closest('.InquiryTypeSelector') !== null ||
+         element.closest('.project-selector') !== null;
 };
 
 export const isTextInputElement = (element: HTMLElement): boolean => {

@@ -123,7 +123,7 @@ const Hero = () => {
         <Button 
           onClick={() => navigate('/join-us')} 
           variant="wave"
-          className="join-us-btn"
+          className="join-us-btn rounded-md"
         >
           <span className="relative z-10">JOIN US</span>
           <Users className="ml-2 transition-all duration-300 group-hover:translate-x-1 relative z-10" size={16} />
@@ -158,7 +158,7 @@ const Hero = () => {
         <div className="flex flex-col sm:flex-row items-center justify-center mt-8 gap-8">
           <Button 
             variant="wave"
-            className="our-works-btn w-40 sm:w-40"
+            className="our-works-btn w-40 sm:w-40 rounded-md"
             onClick={scrollToProjects}
           >
             <span className="relative z-10">Our Works</span>
@@ -167,7 +167,7 @@ const Hero = () => {
           
           <Button 
             variant="wave"
-            className="about-us-btn w-40 sm:w-40"
+            className="about-us-btn w-40 sm:w-40 rounded-md"
             onClick={() => navigate('/about')} 
           >
             <span className="relative z-10">About Us</span>
@@ -176,7 +176,7 @@ const Hero = () => {
           
           {isSmallScreen && <Button 
             variant="wave"
-            className="join-us-btn w-40"
+            className="join-us-btn w-40 rounded-md"
             onClick={() => navigate('/join-us')} 
           >
             <span className="relative z-10">JOIN US</span>

@@ -1,4 +1,3 @@
-
 import { useParams, Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 import Navbar from "@/components/Navbar";
@@ -213,8 +212,9 @@ const ProductPage = () => {
               Let's collaborate on your next project. Our team is ready to bring your vision to life.
             </p>
             <Link to="/#contact">
-              <Button size="lg" className="px-8">
-                Get in Touch
+              <Button variant="wave" size="lg" className="px-8">
+                <span className="relative z-10">Get in Touch</span>
+                <ArrowRight className="ml-2 h-5 w-5 relative z-10" />
               </Button>
             </Link>
           </div>

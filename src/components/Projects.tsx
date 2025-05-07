@@ -25,12 +25,12 @@ const Projects = () => {
           </div>
           <Link to="/projects">
             <Button 
-              variant="wave" 
+              variant="default" 
               size="lg" 
               className="our-works-btn group"
             >
-              <span className="relative z-10">View all projects</span>
-              <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1 relative z-10" />
+              <span>View all projects</span>
+              <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
             </Button>
           </Link>
         </div>

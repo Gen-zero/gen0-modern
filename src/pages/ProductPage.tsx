@@ -1,9 +1,10 @@
+
 import { useParams, Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 import Navbar from "@/components/Navbar";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Button } from "@/components/ui/button";
-import { ArrowLeft, ExternalLink, Tag } from "lucide-react";
+import { ArrowLeft, ExternalLink, Tag, ArrowRight } from "lucide-react";
 import { projects } from "@/data/projectsData";
 import SEO from "@/components/SEO";
 import { Card, CardContent } from "@/components/ui/card";

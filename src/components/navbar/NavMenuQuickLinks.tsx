@@ -49,7 +49,7 @@ const NavMenuQuickLinks = ({ navLinks, toggleMenu, buttonClassName = "" }: NavMe
               onClick={() => toggleMenu()}
             >
               <Button 
-                variant="custom"
+                variant="wave"
                 size="sm" 
                 className={`w-full justify-between ${buttonClassName} ${link.className || ''}`}
               >

@@ -25,7 +25,7 @@ const Projects = () => {
           </div>
           <Link to="/projects">
             <Button 
-              variant="custom" 
+              variant="wave" 
               size="lg" 
               className="our-works-btn group"
             >

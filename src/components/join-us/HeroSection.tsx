@@ -76,20 +76,18 @@ const HeroSection = ({ scrollToPositions, scrollToCulture }: HeroSectionProps) =
             className="flex flex-col sm:flex-row gap-4 justify-center"
           >
             <Button 
-              variant="custom"
+              variant="wave"
               size="lg" 
               onClick={scrollToPositions} 
-              className="group"
             >
               <span className="relative z-10">See Open Positions</span>
               <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1 relative z-10" />
             </Button>
             
             <Button 
-              variant="custom"
+              variant="wave"
               size="lg" 
               onClick={scrollToCulture} 
-              className="group"
             >
               <span className="relative z-10">Learn About Our Culture</span>
               <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1 relative z-10" />

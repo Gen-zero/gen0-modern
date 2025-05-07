@@ -118,6 +118,85 @@ export const CursorAnimations = () => (
         background-position: -200% center;
       }
     }
+    
+    @keyframes wave-animation {
+      0% {
+        background-position-x: 0;
+      }
+      100% {
+        background-position-x: 100px;
+      }
+    }
+    
+    @keyframes ripple {
+      0% { 
+        box-shadow: 0 0 0 0 rgba(100, 200, 255, 0.7);
+        opacity: 1;
+      }
+      100% { 
+        box-shadow: 0 0 0 15px rgba(100, 200, 255, 0);
+        opacity: 0;
+      }
+    }
+    
+    @keyframes pulse-focus {
+      0% {
+        box-shadow: 0 0 0 0 rgba(100, 200, 255, 0.5), inset 0 0 0 0 rgba(100, 200, 255, 0.4);
+      }
+      70% {
+        box-shadow: 0 0 0 10px rgba(100, 200, 255, 0), inset 0 0 0 3px rgba(100, 200, 255, 0.6);
+      }
+      100% {
+        box-shadow: 0 0 0 0 rgba(100, 200, 255, 0), inset 0 0 0 0 rgba(100, 200, 255, 0.2);
+      }
+    }
+    
+    .wave-btn {
+      background: linear-gradient(45deg, rgba(30,30,60,0.4), rgba(30,30,80,0.4));
+    }
+    
+    .wave-btn::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(90deg, 
+        rgba(37, 99, 235, 0), 
+        rgba(51, 195, 240, 0.3), 
+        rgba(139, 92, 246, 0.3), 
+        rgba(37, 99, 235, 0)
+      );
+      background-size: 200% 100%;
+      animation: button-shimmer 3s infinite;
+      z-index: -1;
+      opacity: 0.5;
+    }
+    
+    .wave-btn::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border-radius: 2rem;
+      opacity: 0;
+    }
+    
+    .wave-btn:active::after {
+      animation: ripple 0.8s ease-out;
+    }
+    
+    .wave-btn:hover {
+      box-shadow: 0 0 20px rgba(100, 200, 255, 0.6),
+                  0 0 40px rgba(100, 200, 255, 0.2);
+    }
+    
+    .wave-btn:hover::before {
+      opacity: 0.8;
+    }
     `}
   </style>
 );

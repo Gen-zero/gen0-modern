@@ -20,6 +20,7 @@ const buttonVariants = cva(
         ghost: "hover:bg-accent hover:text-accent-foreground",
         link: "text-primary underline-offset-4 hover:underline",
         custom: "uppercase font-medium bg-[#1f1f3f]/50 text-white backdrop-blur-sm border border-[#8c35f2]/40 hover:border-[#8c35f2] hover:text-[#e5deff] transition-all duration-500 relative overflow-hidden hover:shadow-[0_0_25px_rgba(140,53,242,0.6)] before:content-[''] before:absolute before:inset-0 before:bg-gradient-to-r before:from-[#8c35f2]/0 before:via-[#8c35f2]/30 before:to-[#8c35f2]/0 before:translate-x-[-100%] hover:before:translate-x-[100%] before:transition-transform before:duration-1000 before:ease-in-out after:content-[''] after:absolute after:inset-0 after:scale-[1.05] after:rounded-md after:opacity-0 after:border after:border-[#8c35f2] hover:after:scale-100 hover:after:opacity-100 after:transition-all after:duration-500",
+        wave: "font-mono uppercase tracking-widest text-[#e0e0ff] relative overflow-hidden backdrop-filter backdrop-blur-xl bg-[rgba(30,30,60,0.4)] border border-[rgba(100,200,255,0.2)] rounded-[2rem] transition-all duration-300 hover:scale-105 hover:shadow-[0_0_20px_rgba(100,200,255,0.6)] hover:border-[rgba(100,200,255,0.8)] focus:animate-pulse-focus active:after:animate-ripple after:content-[''] after:absolute after:inset-0 after:rounded-[2rem] after:pointer-events-none wave-btn",
       },
       size: {
         default: "h-10 px-4 py-2",

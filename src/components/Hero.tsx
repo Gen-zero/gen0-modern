@@ -1,3 +1,4 @@
+
 import React, { useEffect, useState, useRef } from 'react';
 import { Button } from './ui/button';
 import { ArrowRight, GraduationCap, Users, TrendingUp } from 'lucide-react';
@@ -121,7 +122,7 @@ const Hero = () => {
       {!isSmallScreen && <div className="absolute top-12 right-12 md:right-12 lg:right-12 z-40">
         <Button 
           onClick={() => navigate('/join-us')} 
-          variant="custom"
+          variant="wave"
           className="join-us-btn"
         >
           <span className="relative z-10">JOIN US</span>
@@ -156,7 +157,7 @@ const Hero = () => {
 
         <div className="flex flex-col sm:flex-row items-center justify-center mt-8 gap-8">
           <Button 
-            variant="custom"
+            variant="wave"
             className="our-works-btn w-40 sm:w-40"
             onClick={scrollToProjects}
           >
@@ -165,7 +166,7 @@ const Hero = () => {
           </Button>
           
           <Button 
-            variant="custom"
+            variant="wave"
             className="about-us-btn w-40 sm:w-40"
             onClick={() => navigate('/about')} 
           >
@@ -174,7 +175,7 @@ const Hero = () => {
           </Button>
           
           {isSmallScreen && <Button 
-            variant="custom"
+            variant="wave"
             className="join-us-btn w-40"
             onClick={() => navigate('/join-us')} 
           >

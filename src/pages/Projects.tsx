@@ -8,6 +8,7 @@ import { ScrollArea } from "@/components/ui/scroll-area";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { projects } from "@/data/projectsData";
 import SEO from "@/components/SEO";
+import ProjectPageBreadcrumb from "@/components/project/ProjectPageBreadcrumb";
 
 const ProjectsPage = () => {
   const [hoveredProject, setHoveredProject] = useState<number | null>(null);
@@ -46,6 +47,9 @@ const ProjectsPage = () => {
         <main className="pt-32 pb-20">
           <div className="container mx-auto px-6 md:px-12">
             <div className="flex flex-col gap-2 mb-16">
+              {/* Add breadcrumb navigation */}
+              <ProjectPageBreadcrumb />
+              
               <Link to="/" className="flex items-center text-sm text-muted-foreground hover:text-accent transition-colors mb-4">
                 <ArrowLeft className="mr-2 h-4 w-4" />
                 Back to Home

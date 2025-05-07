@@ -1,4 +1,3 @@
-
 import { useParams, Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { ArrowLeft } from "lucide-react";
@@ -14,6 +13,7 @@ import CTASection from "@/components/product/CTASection";
 import ProjectNotFound from "@/components/product/ProjectNotFound";
 import ProjectFooter from "@/components/product/ProjectFooter";
 import ProjectSEO from "@/components/product/ProjectSEO";
+import ProjectBreadcrumb from "@/components/product/ProjectBreadcrumb";
 
 const ProductPage = () => {
   const { id } = useParams();
@@ -53,6 +53,9 @@ const ProductPage = () => {
         <main className="pt-32 pb-20">
           <div className="container mx-auto px-6 md:px-12">
             {/* Breadcrumb navigation */}
+            <ProjectBreadcrumb project={project} />
+            
+            {/* Back button (we'll keep this too for mobile users) */}
             <Link to="/projects" className="flex items-center text-sm text-muted-foreground hover:text-accent transition-colors mb-8">
               <ArrowLeft className="mr-2 h-4 w-4" />
               Back to Projects

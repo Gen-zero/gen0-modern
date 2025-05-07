@@ -49,18 +49,9 @@ const NavMenuQuickLinks = ({ navLinks, toggleMenu, buttonClassName = "" }: NavMe
               onClick={() => toggleMenu()}
             >
               <Button 
-                variant="outline" 
+                variant="custom"
                 size="sm" 
-                className={`w-full justify-between group
-                  uppercase font-medium px-4 py-2 bg-background/60 backdrop-blur-sm border border-border/30
-                  hover:bg-yellow-100/80 hover:border-yellow-300 hover:text-yellow-600
-                  transition-all duration-300 
-                  relative overflow-hidden
-                  after:content-[''] after:absolute after:bg-yellow-100/30 after:h-full after:w-full
-                  after:left-0 after:top-0 after:transform after:scale-x-0 after:origin-left 
-                  hover:after:scale-x-100 after:transition-transform after:duration-500
-                  hover:shadow-[0_0_20px_rgba(254,240,138,0.7)]
-                  ${buttonClassName} ${link.className || ''}`}
+                className={`w-full justify-between ${buttonClassName} ${link.className || ''}`}
               >
                 <div className="flex items-center gap-2 relative z-10">
                   {link.icon}

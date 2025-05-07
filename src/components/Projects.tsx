@@ -1,16 +1,20 @@
+
 import { useState } from 'react';
 import { ArrowRight } from 'lucide-react';
 import { Button } from './ui/button';
 import { Link } from 'react-router-dom';
 import { useIsMobile } from '@/hooks/use-mobile';
 import { projects } from '@/data/projectsData';
+
 const Projects = () => {
   const [hoveredProject, setHoveredProject] = useState<number | null>(null);
   const isMobile = useIsMobile();
 
   // Use the first 3 projects from the data file
   const featuredProjects = projects.filter(project => project.featured !== false).slice(0, 3);
-  return <section id="projects" className="py-20 md:py-32">
+  
+  return (
+    <section id="projects" className="py-20 md:py-32">
       <div className="container mx-auto px-6 md:px-12">
         <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-16">
           <div className="md:max-w-lg mb-8 md:mb-0">
@@ -20,9 +24,13 @@ const Projects = () => {
             </p>
           </div>
           <Link to="/projects">
-            <Button variant="outline" size="lg" className="group">
-              <span>View all projects</span>
-              <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
+            <Button 
+              variant="custom" 
+              size="lg" 
+              className="our-works-btn group"
+            >
+              <span className="relative z-10">View all projects</span>
+              <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1 relative z-10" />
             </Button>
           </Link>
         </div>
@@ -62,6 +70,8 @@ const Projects = () => {
             </div>)}
         </div>
       </div>
-    </section>;
+    </section>
+  );
 };
+
 export default Projects;

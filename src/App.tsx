@@ -31,7 +31,14 @@ function App() {
     <div className="min-h-screen flex flex-col">
       <NavbarProvider>
         {!isTouchDevice && <CustomCursor />}
-        <Suspense fallback={<LoadingSpinner />}>
+        <Suspense fallback={
+          <LoadingSpinner 
+            lines={7} 
+            noscriptContent={
+              <p className="text-center py-8">Loading the application...</p>
+            }
+          />
+        }>
           <Routes>
             <Route path="/" element={<Index />} />
             <Route path="/about" element={<AboutUs />} />

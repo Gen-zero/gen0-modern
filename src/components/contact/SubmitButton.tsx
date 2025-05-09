@@ -1,8 +1,9 @@
 
 import { Button } from "@/components/ui/button";
-import { Send, Loader2 } from "lucide-react";
+import { Send } from "lucide-react";
 import { useLocation } from "react-router-dom";
 import { memo } from "react";
+import usePerformanceMode from "@/hooks/usePerformanceMode";
 
 interface SubmitButtonProps {
   isSubmitting: boolean;
@@ -12,6 +13,7 @@ interface SubmitButtonProps {
 const SubmitButton = memo(({ isSubmitting }: SubmitButtonProps) => {
   const location = useLocation();
   const isJoinUsPage = location.pathname === "/join-us";
+  const { shouldReduceMotion } = usePerformanceMode();
   
   return (
     <Button 
@@ -22,7 +24,16 @@ const SubmitButton = memo(({ isSubmitting }: SubmitButtonProps) => {
     >
       {isSubmitting ? (
         <>
-          <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+          <div className="code-skeleton mr-2 w-16 h-4">
+            <div 
+              className="line" 
+              style={{
+                margin: '0',
+                height: '100%',
+                animationDuration: shouldReduceMotion ? '3s' : '1.8s'
+              }}
+            />
+          </div>
           Sending...
         </>
       ) : (

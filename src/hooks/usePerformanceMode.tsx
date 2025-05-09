@@ -31,6 +31,7 @@ export function usePerformanceMode(): PerformanceState {
     // Check user preference for reduced motion
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     
+    // Set appropriate animation speeds and complexity based on device capabilities
     setPerformance({
       isLowEndDevice: checkLowEndDevice(),
       shouldReduceMotion: prefersReducedMotion

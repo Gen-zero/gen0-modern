@@ -10,12 +10,22 @@ import { motion, AnimatePresence } from "framer-motion";
 import useScrollAnimation from "@/hooks/useScrollAnimation";
 import SEO from "@/components/SEO";
 import usePerformanceMode from "@/hooks/usePerformanceMode";
-import { Loader2 } from "lucide-react";
+import LoadingSpinner from "@/components/LoadingSpinner";
 
 // Simple Loading component for lazy loaded sections
 const SectionLoader = () => (
   <div className="flex justify-center py-12">
-    <Loader2 className="h-8 w-8 animate-spin text-primary" />
+    <div className="code-skeleton w-full max-w-md mx-auto px-4">
+      {Array.from({ length: 3 }, (_, i) => (
+        <div 
+          key={i} 
+          className={`line ${i === 1 ? 'short' : ''}`} 
+          style={{ 
+            width: i === 1 ? '60%' : '90%'
+          }}
+        />
+      ))}
+    </div>
   </div>
 );
 

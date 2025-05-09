@@ -267,4 +267,26 @@
   .font-condensed {
     font-family: 'Roboto Condensed', sans-serif;
   }
+  
+  /* Code Skeleton Loading Animation */
+  .code-skeleton .line {
+    height: 1rem;
+    margin: 0.6rem 0;
+    border-radius: 4px;
+    background: linear-gradient(
+      to right,
+      hsl(var(--muted) / 0.3) 0%,
+      hsl(var(--accent) / 0.2) 50%,
+      hsl(var(--muted) / 0.3) 100%
+    );
+    background-size: 200% 100%;
+    animation: shimmer 1.8s infinite ease-in-out;
+  }
+  
+  @keyframes shimmer {
+    0%   { background-position: -150% 0; }
+    100% { background-position: 150% 0; }
+  }
+  
+  .code-skeleton .short { width: 60%; }
 }

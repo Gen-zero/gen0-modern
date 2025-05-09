@@ -26,7 +26,13 @@ const LoadingSpinner: React.FC<LoadingSpinnerProps> = ({
         className={`line ${isShort ? 'short' : ''}`} 
         style={{ 
           width: isShort ? `${width * 0.6}%` : `${width}%`,
-          animationDuration: shouldReduceMotion ? '3s' : '1.8s'
+          animationDuration: shouldReduceMotion ? '3s' : '1.8s',
+          height: '1rem',
+          margin: '0.6rem 0',
+          borderRadius: '4px',
+          background: 'linear-gradient(to right, hsl(var(--muted) / 0.3) 0%, hsl(var(--accent) / 0.2) 50%, hsl(var(--muted) / 0.3) 100%)',
+          backgroundSize: '200% 100%',
+          animation: `shimmer ${shouldReduceMotion ? '3s' : '1.8s'} infinite ${shouldReduceMotion ? 'linear' : 'ease-in-out'}`
         }}
       />
     );
@@ -45,28 +51,16 @@ const LoadingSpinner: React.FC<LoadingSpinnerProps> = ({
         )}
       </div>
       
-      <style jsx>{`
-        .code-skeleton .line {
-          height: 1rem;
-          margin: 0.6rem 0;
-          border-radius: 4px;
-          background: linear-gradient(
-            to right,
-            hsl(var(--muted) / 0.3) 0%,
-            hsl(var(--accent) / 0.2) 50%,
-            hsl(var(--muted) / 0.3) 100%
-          );
-          background-size: 200% 100%;
-          animation: shimmer 1.8s infinite ${props => props.shouldReduceMotion ? 'linear' : 'ease-in-out'};
-        }
-        
-        @keyframes shimmer {
-          0%   { background-position: -150% 0; }
-          100% { background-position: 150% 0; }
-        }
-        
-        .code-skeleton .short { width: 60%; }
-      `}</style>
+      <style>
+        {`
+          @keyframes shimmer {
+            0%   { background-position: -150% 0; }
+            100% { background-position: 150% 0; }
+          }
+          
+          .code-skeleton .short { width: 60%; }
+        `}
+      </style>
     </div>
   );
 };

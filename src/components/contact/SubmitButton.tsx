@@ -30,7 +30,9 @@ const SubmitButton = memo(({ isSubmitting }: SubmitButtonProps) => {
               style={{
                 margin: '0',
                 height: '100%',
-                animationDuration: shouldReduceMotion ? '3s' : '1.8s'
+                backgroundImage: 'linear-gradient(to right, hsl(var(--muted) / 0.3) 0%, hsl(var(--accent) / 0.2) 50%, hsl(var(--muted) / 0.3) 100%)',
+                backgroundSize: '200% 100%',
+                animation: `shimmer ${shouldReduceMotion ? '3s' : '1.8s'} infinite ${shouldReduceMotion ? 'linear' : 'ease-in-out'}`
               }}
             />
           </div>

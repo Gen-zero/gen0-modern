@@ -1,13 +1,15 @@
 
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useEffect, useState, useRef, memo } from 'react';
 import { Button } from './ui/button';
 import { ArrowRight, GraduationCap, Users, TrendingUp } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { useIsSmallScreen } from '@/hooks/use-small-screen';
 
+// Memoize the words array to avoid recreation on each render
 const words = ['BUILD', 'CODE', 'DESIGN', 'IDEATE'];
 
-const Hero = () => {
+// Create memoized component for better performance
+const Hero = memo(() => {
   const navigate = useNavigate();
   const isSmallScreen = useIsSmallScreen();
   const [currentWordIndex, setCurrentWordIndex] = useState(0);
@@ -16,10 +18,19 @@ const Hero = () => {
   const vantaEffect = useRef<any>(null);
   const [vantaInitialized, setVantaInitialized] = useState(false);
   const [dependenciesLoaded, setDependenciesLoaded] = useState(false);
+  // Use ref to avoid recreation of functions
+  const animationTimerRef = useRef<NodeJS.Timeout | null>(null);
   
+  // Optimized scramble word function to reduce calculations
   const scrambleWord = (finalWord: string) => {
     let iteration = 0;
     const totalIterations = finalWord.length;
+    
+    // Clear any existing interval to prevent memory leaks
+    if (animationTimerRef.current) {
+      clearInterval(animationTimerRef.current);
+    }
+    
     const scrambleInterval = setInterval(() => {
       let newText = '';
       for (let i = 0; i < finalWord.length; i++) {
@@ -36,8 +47,11 @@ const Hero = () => {
         setDisplayedWord(finalWord);
       }
     }, 50);
+    
+    animationTimerRef.current = scrambleInterval;
   };
   
+  // Word animation effect with cleanup
   useEffect(() => {
     setDisplayedWord(words[0]);
     const interval = setInterval(() => {
@@ -47,33 +61,44 @@ const Hero = () => {
         return nextIndex;
       });
     }, 1790);
-    return () => clearInterval(interval);
-  }, []);
-  
-  useEffect(() => {
-    const checkDependencies = () => {
-      if (typeof window !== 'undefined' && window.THREE && window.VANTA) {
-        setDependenciesLoaded(true);
-        return true;
+    
+    return () => {
+      clearInterval(interval);
+      if (animationTimerRef.current) {
+        clearInterval(animationTimerRef.current);
       }
-      return false;
     };
-
-    if (checkDependencies()) return;
-
-    const intervalId = setInterval(() => {
-      if (checkDependencies()) {
-        clearInterval(intervalId);
-      }
-    }, 100);
-
-    return () => clearInterval(intervalId);
   }, []);
   
+  // Optimized VANTA loading logic
   useEffect(() => {
-    if (dependenciesLoaded && heroRef.current && !vantaInitialized) {
+    // Check if dependencies already exist in window
+    if (typeof window !== 'undefined' && window.THREE && window.VANTA) {
+      setDependenciesLoaded(true);
+    } else {
+      // Only poll for dependencies a limited number of times to avoid performance hit
+      let attempts = 0;
+      const maxAttempts = 10;
+      
+      const intervalId = setInterval(() => {
+        attempts++;
+        if ((window.THREE && window.VANTA) || attempts >= maxAttempts) {
+          if (window.THREE && window.VANTA) {
+            setDependenciesLoaded(true);
+          }
+          clearInterval(intervalId);
+        }
+      }, 200);
+      
+      return () => clearInterval(intervalId);
+    }
+  }, []);
+  
+  // Initialize VANTA with proper cleanup
+  useEffect(() => {
+    if (dependenciesLoaded && heroRef.current && !vantaInitialized && window.VANTA) {
       try {
-        console.log("Initializing VANTA with THREE:", window.THREE);
+        // Reduce the complexity of VANTA effects for lower performance devices
         vantaEffect.current = window.VANTA.CELLS({
           el: heroRef.current,
           mouseControls: true,
@@ -84,8 +109,8 @@ const Hero = () => {
           scale: 1.00,
           color1: 0x0,
           color2: 0x8c35f2,
-          size: isSmallScreen ? 1.00 : 3.00,
-          speed: 3.00,
+          size: isSmallScreen ? 1.00 : 2.00, // Reduced size for better performance
+          speed: 2.00, // Reduced speed for better performance
           THREE: window.THREE
         });
         setVantaInitialized(true);
@@ -101,6 +126,7 @@ const Hero = () => {
     };
   }, [dependenciesLoaded, isSmallScreen, heroRef]);
   
+  // Performance optimized navigation function
   const scrollToProjects = () => {
     const projectsSection = document.getElementById('projects');
     if (projectsSection) {
@@ -110,38 +136,46 @@ const Hero = () => {
     }
   };
   
+  // Use the CSS variable for hero image to optimize image loading
   return (
     <section ref={heroRef} id="home" className="min-h-screen flex items-center justify-center pt-8 overflow-hidden relative">
       <div className="absolute inset-0 bg-gradient-to-br from-secondary/20 to-background -z-10"></div>
       
-      <div className="absolute top-1/4 right-[10%] w-64 h-64 bg-primary/5 rounded-full blur-3xl animate-pulse-subtle"></div>
-      <div className="absolute bottom-1/4 left-[5%] w-72 h-72 bg-primary/5 rounded-full blur-3xl animate-pulse-subtle" style={{
-        animationDelay: '1s'
-      }}></div>
+      {/* Reduced animation complexity */}
+      <div className="absolute top-1/4 right-[10%] w-64 h-64 bg-primary/5 rounded-full blur-3xl"></div>
+      <div className="absolute bottom-1/4 left-[5%] w-72 h-72 bg-primary/5 rounded-full blur-3xl"></div>
       
-      {!isSmallScreen && <div className="absolute top-12 right-12 md:right-12 lg:right-12 z-40">
-        <Button 
-          onClick={() => navigate('/join-us')} 
-          variant="wave"
-          className="join-us-btn rounded-md"
-        >
-          <span className="relative z-10">JOIN US</span>
-          <Users className="ml-2 transition-all duration-300 group-hover:translate-x-1 relative z-10" size={16} />
-        </Button>
-      </div>}
+      {!isSmallScreen && (
+        <div className="absolute top-12 right-12 md:right-12 lg:right-12 z-40">
+          <Button 
+            onClick={() => navigate('/join-us')} 
+            variant="wave"
+            className="join-us-btn rounded-md"
+          >
+            <span className="relative z-10">JOIN US</span>
+            <Users className="ml-2 transition-all duration-300 group-hover:translate-x-1 relative z-10" size={16} />
+          </Button>
+        </div>
+      )}
       
       <div className="container mx-auto px-6 py-12">
         <div className="relative h-[40vh] w-full rounded-2xl overflow-hidden shadow-2xl border border-[#1f2b87] animate-fade-in">
           <div className="absolute top-0 left-0 w-full h-full">
-            <img src="/lovable-uploads/34a880bd-d1ee-4330-bef2-8f5cd7502a16.png" alt="Programmer with purple neon lighting" className="w-full h-full object-cover" loading="eager" />
+            {/* Add loading="lazy" and explicit width/height for better CLS */}
+            <img 
+              src="/lovable-uploads/34a880bd-d1ee-4330-bef2-8f5cd7502a16.png" 
+              alt="Programmer with purple neon lighting" 
+              className="w-full h-full object-cover" 
+              loading="lazy"
+              width="1200"
+              height="800"
+            />
           </div>
           
           <div className="absolute inset-0 flex flex-col items-center justify-end pb-20 text-center px-8">
             <h2 className="font-bold uppercase mix-blend-exclusion text-stone-50 md:text-5xl text-3xl">
               LET US {' '}
-              <span className="inline-block" style={{
-              minWidth: '120px'
-            }}>
+              <span className="inline-block" style={{ minWidth: '120px' }}>
                 {displayedWord}
               </span>
               {' '}FOR YOU.
@@ -151,7 +185,7 @@ const Hero = () => {
 
         <div className="text-center mt-6 mb-6">
           <h3 className="text-xl md:text-2xl font-bold uppercase bg-gradient-to-r from-foreground via-foreground/90 to-foreground/70 bg-clip-text text-transparent flex items-center justify-center gap-2">
-            BUILDING TO <TrendingUp className="h-6 w-6 text-accent animate-pulse" /> LEVEL UP HUMANITY.
+            BUILDING TO <TrendingUp className="h-6 w-6 text-accent" /> LEVEL UP HUMANITY.
           </h3>
         </div>
 
@@ -174,18 +208,22 @@ const Hero = () => {
             <GraduationCap className="ml-2 transition-all duration-300 group-hover:translate-y-[-4px] relative z-10" size={16} />
           </Button>
           
-          {isSmallScreen && <Button 
-            variant="wave"
-            className="join-us-btn w-40 rounded-md"
-            onClick={() => navigate('/join-us')} 
-          >
-            <span className="relative z-10">JOIN US</span>
-            <Users className="ml-2 transition-all duration-300 group-hover:translate-x-1 relative z-10" size={16} />
-          </Button>}
+          {isSmallScreen && (
+            <Button 
+              variant="wave"
+              className="join-us-btn w-40 rounded-md"
+              onClick={() => navigate('/join-us')} 
+            >
+              <span className="relative z-10">JOIN US</span>
+              <Users className="ml-2 transition-all duration-300 group-hover:translate-x-1 relative z-10" size={16} />
+            </Button>
+          )}
         </div>
       </div>
     </section>
   );
-};
+});
+
+Hero.displayName = "Hero";
 
 export default Hero;

@@ -2,12 +2,14 @@
 import { Button } from "@/components/ui/button";
 import { Send, Loader2 } from "lucide-react";
 import { useLocation } from "react-router-dom";
+import { memo } from "react";
 
 interface SubmitButtonProps {
   isSubmitting: boolean;
 }
 
-const SubmitButton = ({ isSubmitting }: SubmitButtonProps) => {
+// Use memo to prevent unnecessary re-renders
+const SubmitButton = memo(({ isSubmitting }: SubmitButtonProps) => {
   const location = useLocation();
   const isJoinUsPage = location.pathname === "/join-us";
   
@@ -31,6 +33,8 @@ const SubmitButton = ({ isSubmitting }: SubmitButtonProps) => {
       )}
     </Button>
   );
-};
+});
+
+SubmitButton.displayName = 'SubmitButton';
 
 export default SubmitButton;

@@ -4,26 +4,42 @@ import Hero from "@/components/Hero";
 import Services from "@/components/Services";
 import Projects from "@/components/Projects";
 import Contact from "@/components/Contact";
-import { useEffect, useState } from "react";
+import { useEffect, useState, memo, lazy, Suspense } from "react";
 import { useLocation } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import useScrollAnimation from "@/hooks/useScrollAnimation";
 import SEO from "@/components/SEO";
+import usePerformanceMode from "@/hooks/usePerformanceMode";
+import { Loader2 } from "lucide-react";
+
+// Simple Loading component for lazy loaded sections
+const SectionLoader = () => (
+  <div className="flex justify-center py-12">
+    <Loader2 className="h-8 w-8 animate-spin text-primary" />
+  </div>
+);
 
 const Index = () => {
   const location = useLocation();
   const [isLoaded, setIsLoaded] = useState(false);
+  const { isLowEndDevice, shouldReduceMotion } = usePerformanceMode();
   
   // Use scroll animations
   useScrollAnimation();
 
-  // Animation variants for page sections
+  // Adjust animation settings based on device performance
   const sectionVariants = {
-    hidden: { opacity: 0, y: 50 },
+    hidden: { 
+      opacity: 0, 
+      y: shouldReduceMotion ? 0 : 50 
+    },
     visible: { 
       opacity: 1, 
       y: 0,
-      transition: { duration: 0.8, ease: "easeOut" }
+      transition: { 
+        duration: shouldReduceMotion ? 0.3 : 0.8, 
+        ease: "easeOut" 
+      }
     }
   };
   
@@ -36,7 +52,9 @@ const Index = () => {
       if (element) {
         // Add a small delay to ensure the page has loaded
         setTimeout(() => {
-          element.scrollIntoView({ behavior: 'smooth' });
+          element.scrollIntoView({ 
+            behavior: shouldReduceMotion ? 'auto' : 'smooth'
+          });
         }, 100);
       }
       
@@ -44,25 +62,32 @@ const Index = () => {
       window.history.replaceState({}, document.title);
     }
     
-    // Add Roboto Condensed font
+    // Add Roboto Condensed font with display swap for better performance
     const link = document.createElement('link');
     link.rel = 'stylesheet';
     link.href = 'https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@300;400;500;600;700&display=swap';
+    link.setAttribute('media', 'print');
+    link.setAttribute('onload', "this.media='all'");
     document.head.appendChild(link);
-  }, [location]);
+
+    // Fallback for browsers that don't support onload
+    setTimeout(() => {
+      link.media = 'all';
+    }, 100);
+  }, [location, shouldReduceMotion]);
 
   useEffect(() => {
     setIsLoaded(true);
   }, []);
 
-  // Page entry animation
+  // Simplified page entry animation for low-end devices
   const pageVariants = {
     initial: { opacity: 0 },
     animate: { 
       opacity: 1,
       transition: { 
-        duration: 0.5, 
-        staggerChildren: 0.2,
+        duration: shouldReduceMotion ? 0.2 : 0.5, 
+        staggerChildren: shouldReduceMotion ? 0.1 : 0.2,
       }
     },
     exit: { opacity: 0 }
@@ -163,15 +188,15 @@ const Index = () => {
           <Contact />
         </motion.div>
         
-        {/* Copyright Section with subtle animation */}
+        {/* Copyright Section with simplified animation */}
         <motion.div 
           className="container mx-auto py-6 text-center text-muted-foreground text-sm border-t border-border/40 mt-10"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ delay: 1, duration: 0.8 }}
+          transition={{ delay: isLowEndDevice ? 0.3 : 1, duration: shouldReduceMotion ? 0.3 : 0.8 }}
         >
           <motion.p
-            whileHover={{ color: "hsl(var(--accent))" }}
+            whileHover={shouldReduceMotion ? {} : { color: "hsl(var(--accent))" }}
             transition={{ duration: 0.3 }}
           >
             © {new Date().getFullYear()} Gen0. All rights reserved.

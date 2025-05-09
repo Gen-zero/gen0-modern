@@ -12,16 +12,16 @@ const TeamSection = () => {
     id: 0,
     name: "Manu Narayanan",
     position: "Founder & Advisor",
-    bio: "Lowkey a scientist, highkey a visionary—he's all about building cool stuff that actually moves humanity forward. Obsessed with innovation, stacked with ideas, and always clocking what's really going on around him. He gets the daily grind Gen Z pros go through (been there, felt that) and is out here tryna flip the game with solutions that actually hit.",
-    personalDetail: "He's the guru Gen Z didn't know they needed—got a knack for spotting untapped potential and bringing it to the surface just by vibing with people.",
+    bio: "A visionary leader with a deep-rooted curiosity for human evolution, biotech, and spirituality. Manu is the brother who dreams beyond boundaries, pushing the edges of possibility while grounding his insights in scientific rigor. With a mind tuned to the deeper mysteries of life, he combines the metaphysical with the practical, creating solutions that bridge the seen and the unseen, the known and the unknown. His journey is a testament to growth, consciousness, and the relentless pursuit of progress.",
+    personalDetail: "When he's not solving complex problems, he's conjuring up new visions, exploring the frontiers of thought, and finding fresh perspectives on the art of creation.",
     imgUrl: "https://ik.imagekit.io/kalidaspem/c46019ce-faea-4d33-b80c-b78d9da6d500.jpg?updatedAt=1742559972141",
     expertise: ["Prompt Engineering", "0 to 1 Product Development", "UX Designer", "Strategic Planning", "Branding", "Sales"]
   }, {
     id: 1,
     name: "Kalidasan P E M",
     position: "Co-Founder and CTO",
-    bio: "Once a freelancer stacking wins with websites and webapps, now a full-time dream chaser who dropped out of college to build this vision from the ground up. He codes like a wizard, thinks like a strategist, and lives like it's all one big open-world game—where even failures just level him up with extra XP.",
-    personalDetail: "When he's not building worlds in code, he's conjuring them in words—poems and tales that stir souls and leave echoes in the hearts of those who read them.",
+    bio: "An avid gamer, coder, and the builder of visions. Kalidasan is the brother who thrives in the realm of logic and code, transforming abstract ideas into tangible realities. While his brother pushes the boundaries of possibility, he fine-tunes those visions into gamified environments, enabling people to evolve into something much more. He lives to build, to create, and to code his way through challenges, turning every project into a leveled-up experience.",
+    personalDetail: "When he's not building worlds in code, he's having fun bringing his brother's crazy visions to life, stacking XP in the game of creation.",
     imgUrl: "https://ik.imagekit.io/kalidaspem/894146aa-4ab3-4820-b55b-55478d7507a9.jpg?updatedAt=1742559972090",
     expertise: ["Web Development", "MVP Building", "Prompt Engineering", "Backend Systems", "UI Design"]
   }, {

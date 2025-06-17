@@ -1,3 +1,4 @@
+
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@300;400;500;600;700&display=swap');
 
@@ -87,7 +88,14 @@
     --sidebar-ring: 276 76% 31%;
   }
 
-  /* Custom Scrollbar Styles */
+  /* Cross-browser font rendering */
+  * {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
+
+  /* Custom Scrollbar Styles with cross-browser support */
   ::-webkit-scrollbar {
     width: 10px;
     height: 10px;
@@ -102,11 +110,17 @@
     background: linear-gradient(180deg, hsl(var(--primary)) 0%, hsl(var(--secondary)) 100%);
     border-radius: var(--radius);
     border: 2px solid hsl(var(--background));
+    -webkit-transition: all 0.3s ease;
+    -moz-transition: all 0.3s ease;
+    -ms-transition: all 0.3s ease;
+    -o-transition: all 0.3s ease;
     transition: all 0.3s ease;
   }
 
   ::-webkit-scrollbar-thumb:hover {
     background: linear-gradient(180deg, hsl(var(--secondary)) 0%, hsl(var(--primary)) 100%);
+    -webkit-box-shadow: 0 0 10px hsl(var(--primary) / 0.5);
+    -moz-box-shadow: 0 0 10px hsl(var(--primary) / 0.5);
     box-shadow: 0 0 10px hsl(var(--primary) / 0.5);
   }
 
@@ -116,9 +130,13 @@
     scrollbar-color: hsl(var(--primary)) hsl(var(--background));
   }
 
-  /* Smooth Scroll Animation */
+  /* Smooth Scroll Animation with cross-browser support */
   .smooth-scroll {
-    @apply transition-all duration-300 ease-out;
+    -webkit-transition: all 0.3s ease-out;
+    -moz-transition: all 0.3s ease-out;
+    -ms-transition: all 0.3s ease-out;
+    -o-transition: all 0.3s ease-out;
+    transition: all 0.3s ease-out;
   }
 
   body {
@@ -127,25 +145,43 @@
 
   * {
     @apply border-border;
+    /* Cross-browser box-sizing */
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
   }
   
-  /* Hide default cursor when custom cursor is active */
+  /* Hide default cursor when custom cursor is active - cross-browser support */
   html:not(.touch) {
     cursor: none !important;
+    /* Webkit browsers */
+    -webkit-cursor: none !important;
+    /* Mozilla browsers */
+    -moz-cursor: none !important;
   }
   
   html:not(.touch) * {
     cursor: none !important;
+    -webkit-cursor: none !important;
+    -moz-cursor: none !important;
   }
   
   html {
     font-family: 'Inter', sans-serif;
     scroll-behavior: smooth;
+    /* Cross-browser scroll behavior */
+    -webkit-scroll-behavior: smooth;
+    -moz-scroll-behavior: smooth;
+    -ms-scroll-behavior: smooth;
   }
   
   body {
     @apply bg-background text-foreground antialiased;
     font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+    /* Cross-browser font feature settings */
+    -webkit-font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+    -moz-font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+    -ms-font-feature-settings: "cv02", "cv03", "cv04", "cv11";
   }
   
   /* Section headers styling */
@@ -153,32 +189,83 @@
     @apply font-condensed text-accent;
   }
   
-  /* Glass effect */
+  /* Glass effect with cross-browser backdrop-filter */
   .glass {
-    @apply bg-background/70 backdrop-blur-md border border-primary/20 shadow-sm;
+    @apply bg-background/70 border border-primary/20 shadow-sm;
+    /* Cross-browser backdrop-filter */
+    -webkit-backdrop-filter: blur(12px);
+    -moz-backdrop-filter: blur(12px);
+    -ms-backdrop-filter: blur(12px);
+    backdrop-filter: blur(12px);
+    /* Fallback for older browsers */
+    background-color: rgba(10, 10, 10, 0.8);
   }
   
-  /* Smooth section transitions */
+  /* Smooth section transitions with cross-browser support */
   section {
-    @apply transition-opacity duration-300;
+    -webkit-transition: opacity 0.3s ease;
+    -moz-transition: opacity 0.3s ease;
+    -ms-transition: opacity 0.3s ease;
+    -o-transition: opacity 0.3s ease;
+    transition: opacity 0.3s ease;
   }
   
-  /* Transition for interactive elements */
+  /* Transition for interactive elements with cross-browser support */
   a, button {
-    @apply transition-all duration-200;
+    -webkit-transition: all 0.2s ease;
+    -moz-transition: all 0.2s ease;
+    -ms-transition: all 0.2s ease;
+    -o-transition: all 0.2s ease;
+    transition: all 0.2s ease;
   }
   
-  /* Animation for links */
+  /* Animation for links with cross-browser pseudo-element support */
   .animated-link {
-    @apply relative after:absolute after:bottom-0 after:left-0 after:h-[2px] after:w-0 after:bg-accent after:transition-all after:duration-300 hover:after:w-full;
+    @apply relative;
+    position: relative;
   }
   
-  /* Service card hover */
+  .animated-link::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 2px;
+    width: 0;
+    background: hsl(var(--accent));
+    -webkit-transition: all 0.3s ease;
+    -moz-transition: all 0.3s ease;
+    -ms-transition: all 0.3s ease;
+    -o-transition: all 0.3s ease;
+    transition: all 0.3s ease;
+  }
+  
+  .animated-link:hover::after {
+    width: 100%;
+  }
+  
+  /* Service card hover with cross-browser transform support */
   .service-card {
-    @apply transition-all duration-300 hover:translate-y-[-8px] hover:shadow-lg bg-card;
+    -webkit-transition: all 0.3s ease;
+    -moz-transition: all 0.3s ease;
+    -ms-transition: all 0.3s ease;
+    -o-transition: all 0.3s ease;
+    transition: all 0.3s ease;
+    @apply bg-card;
   }
   
-  /* Enhanced scrollbar hiding while maintaining scroll functionality */
+  .service-card:hover {
+    -webkit-transform: translateY(-8px);
+    -moz-transform: translateY(-8px);
+    -ms-transform: translateY(-8px);
+    -o-transform: translateY(-8px);
+    transform: translateY(-8px);
+    -webkit-box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+    -moz-box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+  }
+  
+  /* Enhanced scrollbar hiding with cross-browser support */
   .no-scrollbar {
     /* Hide scrollbar for Chrome, Safari and Opera */
     &::-webkit-scrollbar {
@@ -197,17 +284,65 @@
     -webkit-overflow-scrolling: touch;
   }
   
-  /* New animation utilities */
+  /* New animation utilities with cross-browser support */
   .hover-lift {
-    @apply transition-transform duration-300 hover:-translate-y-1;
+    -webkit-transition: transform 0.3s ease;
+    -moz-transition: transform 0.3s ease;
+    -ms-transition: transform 0.3s ease;
+    -o-transition: transform 0.3s ease;
+    transition: transform 0.3s ease;
+  }
+  
+  .hover-lift:hover {
+    -webkit-transform: translateY(-4px);
+    -moz-transform: translateY(-4px);
+    -ms-transform: translateY(-4px);
+    -o-transform: translateY(-4px);
+    transform: translateY(-4px);
   }
   
   .hover-glow {
-    @apply transition-all duration-300 hover:shadow-lg hover:shadow-primary/20;
+    -webkit-transition: all 0.3s ease;
+    -moz-transition: all 0.3s ease;
+    -ms-transition: all 0.3s ease;
+    -o-transition: all 0.3s ease;
+    transition: all 0.3s ease;
+  }
+  
+  .hover-glow:hover {
+    -webkit-box-shadow: 0 10px 25px hsl(var(--primary) / 0.2);
+    -moz-box-shadow: 0 10px 25px hsl(var(--primary) / 0.2);
+    box-shadow: 0 10px 25px hsl(var(--primary) / 0.2);
   }
   
   .pulse-accent {
+    -webkit-animation: pulse-accent 3s ease-in-out infinite;
+    -moz-animation: pulse-accent 3s ease-in-out infinite;
+    -ms-animation: pulse-accent 3s ease-in-out infinite;
     animation: pulse-accent 3s ease-in-out infinite;
+  }
+  
+  /* Cross-browser keyframes */
+  @-webkit-keyframes pulse-accent {
+    0%, 100% {
+      opacity: 1;
+      color: hsl(var(--foreground));
+    }
+    50% {
+      opacity: 0.7;
+      color: hsl(var(--accent));
+    }
+  }
+  
+  @-moz-keyframes pulse-accent {
+    0%, 100% {
+      opacity: 1;
+      color: hsl(var(--foreground));
+    }
+    50% {
+      opacity: 0.7;
+      color: hsl(var(--accent));
+    }
   }
   
   @keyframes pulse-accent {
@@ -222,7 +357,33 @@
   }
   
   .float-element {
+    -webkit-animation: float 6s ease-in-out infinite;
+    -moz-animation: float 6s ease-in-out infinite;
+    -ms-animation: float 6s ease-in-out infinite;
     animation: float 6s ease-in-out infinite;
+  }
+  
+  /* Cross-browser float animation */
+  @-webkit-keyframes float {
+    0%, 100% {
+      -webkit-transform: translateY(0);
+      transform: translateY(0);
+    }
+    50% {
+      -webkit-transform: translateY(-10px);
+      transform: translateY(-10px);
+    }
+  }
+  
+  @-moz-keyframes float {
+    0%, 100% {
+      -moz-transform: translateY(0);
+      transform: translateY(0);
+    }
+    50% {
+      -moz-transform: translateY(-10px);
+      transform: translateY(-10px);
+    }
   }
   
   @keyframes float {
@@ -246,6 +407,10 @@
     right: 0;
     bottom: 0;
     left: 0;
+    -webkit-transform: translateX(-100%);
+    -moz-transform: translateX(-100%);
+    -ms-transform: translateX(-100%);
+    -o-transform: translateX(-100%);
     transform: translateX(-100%);
     background-image: linear-gradient(
       90deg,
@@ -254,7 +419,25 @@
       rgba(255, 255, 255, 0.1) 60%,
       rgba(255, 255, 255, 0)
     );
+    -webkit-animation: shimmer 3s infinite;
+    -moz-animation: shimmer 3s infinite;
+    -ms-animation: shimmer 3s infinite;
     animation: shimmer 3s infinite;
+  }
+  
+  /* Cross-browser shimmer animation */
+  @-webkit-keyframes shimmer {
+    100% {
+      -webkit-transform: translateX(100%);
+      transform: translateX(100%);
+    }
+  }
+  
+  @-moz-keyframes shimmer {
+    100% {
+      -moz-transform: translateX(100%);
+      transform: translateX(100%);
+    }
   }
   
   @keyframes shimmer {
@@ -268,25 +451,72 @@
     font-family: 'Roboto Condensed', sans-serif;
   }
   
-  /* Code Skeleton Loading Animation */
+  /* Code Skeleton Loading Animation with cross-browser support */
   .code-skeleton .line {
     height: 1rem;
     margin: 0.6rem 0;
     border-radius: 4px;
     background: linear-gradient(
       to right,
-      hsl(var(--muted) / 0.3) 0%,
-      hsl(var(--accent) / 0.2) 50%,
-      hsl(var(--muted) / 0.3) 100%
+      rgba(30, 174, 219, 0.3) 0%,
+      rgba(51, 195, 240, 0.5) 50%,
+      rgba(15, 160, 206, 0.3) 100%
     );
     background-size: 200% 100%;
-    animation: shimmer 1.8s infinite ease-in-out;
+    -webkit-animation: shimmer-blue 1.8s infinite ease-in-out;
+    -moz-animation: shimmer-blue 1.8s infinite ease-in-out;
+    -ms-animation: shimmer-blue 1.8s infinite ease-in-out;
+    animation: shimmer-blue 1.8s infinite ease-in-out;
   }
   
-  @keyframes shimmer {
+  /* Cross-browser shimmer-blue animation */
+  @-webkit-keyframes shimmer-blue {
+    0%   { background-position: -150% 0; }
+    100% { background-position: 150% 0; }
+  }
+  
+  @-moz-keyframes shimmer-blue {
+    0%   { background-position: -150% 0; }
+    100% { background-position: 150% 0; }
+  }
+  
+  @keyframes shimmer-blue {
     0%   { background-position: -150% 0; }
     100% { background-position: 150% 0; }
   }
   
   .code-skeleton .short { width: 60%; }
+
+  /* Cross-browser input and button focus states */
+  input:focus, button:focus, textarea:focus, select:focus {
+    outline: none;
+    -webkit-box-shadow: 0 0 0 2px hsl(var(--ring));
+    -moz-box-shadow: 0 0 0 2px hsl(var(--ring));
+    box-shadow: 0 0 0 2px hsl(var(--ring));
+  }
+
+  /* Cross-browser placeholder styling */
+  input::-webkit-input-placeholder,
+  textarea::-webkit-input-placeholder {
+    color: hsl(var(--muted-foreground));
+    opacity: 1;
+  }
+  
+  input::-moz-placeholder,
+  textarea::-moz-placeholder {
+    color: hsl(var(--muted-foreground));
+    opacity: 1;
+  }
+  
+  input:-ms-input-placeholder,
+  textarea:-ms-input-placeholder {
+    color: hsl(var(--muted-foreground));
+    opacity: 1;
+  }
+  
+  input::placeholder,
+  textarea::placeholder {
+    color: hsl(var(--muted-foreground));
+    opacity: 1;
+  }
 }

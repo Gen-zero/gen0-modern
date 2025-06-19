@@ -15,6 +15,18 @@ export interface Project {
 export const projects: Project[] = [
   {
     id: 1,
+    title: 'Status Bar',
+    category: 'AI OS',
+    image: 'https://ik.imagekit.io/kalidaspem/ChatGPT%20Image%20Jun%2019,%202025,%2007_18_23%20PM.png',
+    description: "Status Bar turns your life into a game—track tasks, earn XP, unlock levels, and evolve your real-world self like an RPG character.",
+    longDescription: "Status Bar is a gamified life dashboard that transforms your routines, goals, and habits into an RPG-style progression system. Every action earns XP, levels, and achievements—giving you real-time feedback on your growth across multiple dimensions. It syncs with tools like Trello, Notion, and Slack to gamify both personal and team workflows. Whether you're building a startup, learning new skills, or chasing high-performance goals, Status Bar keeps score and helps you level up like a character in a game. It’s not just productivity—it’s your life, gamified.",
+    technologies: ['React', 'Node.js', 'MongoDB', 'Socket.io', 'n8n'],
+    url: 'https://guildboard.com',
+    keywords: ['Life RPG', 'Productivity tool', 'Life Management', 'guild management', 'Skill Coin'],
+    featured: true
+  },
+  {
+    id: 2,
     title: 'Guild Board',
     category: 'Web App',
     image: '/lovable-uploads/611c98b6-d6c7-4eef-8c6e-2adb0ecc29ef.png',
@@ -26,7 +38,7 @@ export const projects: Project[] = [
     featured: true
   },
   {
-    id: 2,
+    id: 3,
     title: 'Saadhana Board',
     category: 'Web App',
     image: 'https://ik.imagekit.io/kalidaspem/d1660e9c-7a59-4119-9b87-992fd0e28886.jpg',
@@ -38,7 +50,7 @@ export const projects: Project[] = [
     featured: true
   },
   {
-    id: 3,
+    id: 4,
     title: 'Fuel Unit',
     category: 'Web App',
     image: 'https://ik.imagekit.io/kalidaspem/b8a842e9-0b59-4687-8b15-ea15a15a2a0d.jpg',
@@ -50,19 +62,19 @@ export const projects: Project[] = [
     featured: true
   },
   {
-    id: 4,
+    id: 5,
     title: 'Kaali Punk',
-    category: 'Web3 Project',
+    category: 'Virtual Influencer',
     image: 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8YWJzdHJhY3QlMjBkYXJrfGVufDB8fDB8fHww',
     description: 'A Web3 platform merging traditional cultural elements with modern blockchain technology.',
     longDescription: "Kaali Punk is a groundbreaking Web3 project that explores the intersection of traditional cultural elements and modern blockchain technology. It features a unique NFT collection that draws inspiration from ancient deities while embracing a futuristic cyberpunk aesthetic. Beyond just digital art, Kaali Punk creates a community-driven ecosystem with governance tokens, virtual events, and collaborative creative projects.",
     technologies: ['Ethereum', 'Solidity', 'IPFS', 'React', 'Three.js'],
     url: 'https://kaalipunk.io',
-    keywords: ['NFT project', 'web3 platform', 'blockchain art', 'cultural NFTs', 'digital collectibles'],
+    keywords: ['Story Telling', 'Virtual Influencer', 'Vedic Education', 'cultural Education', 'Awareness Spreading'],
     featured: false
   },
   {
-    id: 5,
+    id: 6,
     title: 'Prompt Engineering Course',
     category: 'E-Learning',
     image: 'https://images.unsplash.com/photo-1620712943543-bcc4688e7485?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8YWklMjBhcnR8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&w=800&q=60',

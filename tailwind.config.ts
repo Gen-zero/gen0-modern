@@ -1,4 +1,3 @@
-
 import type { Config } from "tailwindcss";
 
 export default {
@@ -20,8 +19,17 @@ export default {
 		},
 		extend: {
 			fontFamily: {
-				'condensed': ['"Roboto Condensed"', 'sans-serif'],
-				'mono': ['"JetBrains Mono"', '"Space Mono"', 'monospace'],
+				'sans': ['"Helvetica Now Pro Display"', '"Helvetica Neue"', 'Helvetica', 'Arial', 'sans-serif'],
+				'condensed': ['"Helvetica Now Pro Display"', '"Helvetica Neue"', 'Helvetica', 'Arial', 'sans-serif'],
+				'mono': ['"Helvetica Now Pro Display"', '"Helvetica Neue"', 'Helvetica', 'Arial', 'monospace'],
+				'helvetica': ['"Helvetica Now Pro Display"', '"Helvetica Neue"', 'Helvetica', 'Arial', 'sans-serif'],
+			},
+			fontWeight: {
+				'normal': '700',
+				'medium': '700',
+				'semibold': '700',
+				'bold': '700',
+				'extrabold': '700',
 			},
 			colors: {
 				border: 'hsl(var(--border))',
@@ -71,6 +79,12 @@ export default {
 				cursor: {
 					glow: '#FEF7CD' // Yellowish glow color
 				}
+			},
+			letterSpacing: {
+				'tighter': '-0.03em',
+				'tight': '-0.02em',
+				'normal': '-0.01em',
+				'wide': '0.02em',
 			},
 			borderRadius: {
 				lg: 'var(--radius)',

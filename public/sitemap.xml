@@ -1,45 +1,104 @@
 
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:news="http://www.google.com/schemas/sitemap-news/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1" xmlns:video="http://www.google.com/schemas/sitemap-video/1.1">
+  <!-- Main Pages -->
   <url>
     <loc>https://gen0.xyz/</loc>
-    <lastmod>2023-01-01</lastmod>
+    <lastmod>2024-12-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
     <loc>https://gen0.xyz/about</loc>
-    <lastmod>2023-01-01</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://gen0.xyz/projects</loc>
-    <lastmod>2023-01-01</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://gen0.xyz/services</loc>
-    <lastmod>2023-01-01</lastmod>
+    <lastmod>2024-12-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://gen0.xyz/contact</loc>
-    <lastmod>2023-01-01</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://gen0.xyz/blog</loc>
-    <lastmod>2023-06-15</lastmod>
+    <loc>https://gen0.xyz/projects</loc>
+    <lastmod>2024-12-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
+    <loc>https://gen0.xyz/join-us</loc>
+    <lastmod>2024-12-24</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://gen0.xyz/blog</loc>
+    <lastmod>2024-12-24</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <!-- Individual Project Pages -->
+  <url>
+    <loc>https://gen0.xyz/projects/1</loc>
+    <lastmod>2024-12-24</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://ik.imagekit.io/kalidaspem/ChatGPT%20Image%20Jun%2019,%202025,%2007_18_23%20PM.png</image:loc>
+      <image:title>Status Bar - Life RPG Dashboard</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://gen0.xyz/projects/2</loc>
+    <lastmod>2024-12-24</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>/lovable-uploads/611c98b6-d6c7-4eef-8c6e-2adb0ecc29ef.png</image:loc>
+      <image:title>Guild Board - Community Platform</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://gen0.xyz/projects/3</loc>
+    <lastmod>2024-12-24</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://ik.imagekit.io/kalidaspem/d1660e9c-7a59-4119-9b87-992fd0e28886.jpg</image:loc>
+      <image:title>Saadhana Board - Digital Spiritual Platform</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://gen0.xyz/projects/4</loc>
+    <lastmod>2024-12-24</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://ik.imagekit.io/kalidaspem/b8a842e9-0b59-4687-8b15-ea15a15a2a0d.jpg</image:loc>
+      <image:title>Fuel Unit - Fuel Price Tracking App</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://gen0.xyz/projects/5</loc>
+    <lastmod>2024-12-24</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <image:image>
+      <image:loc>https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8YWJzdHJhY3QlMjBkYXJrfGVufDB8fDB8fHww</image:loc>
+      <image:title>Kaali Punk - Web3 Virtual Influencer</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://gen0.xyz/projects/6</loc>
+    <lastmod>2024-12-24</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <image:image>
+      <image:loc>https://images.unsplash.com/photo-1620712943543-bcc4688e7485?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8YWklMjBhcnR8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&w=800&q=60</image:loc>
+      <image:title>Prompt Engineering Course</image:title>
+    </image:image>
+  </url>
+
+  <!-- Blog Posts -->
+  <url>
     <loc>https://gen0.xyz/blog/chatgpt-image-generation-entertainment-impact</loc>
-    <lastmod>2023-06-15</lastmod>
+    <lastmod>2024-12-15</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.8</priority>
     <image:image>
@@ -47,21 +106,37 @@
       <image:title>ChatGPT Image Generation Impact on Entertainment</image:title>
     </image:image>
   </url>
+
+  <!-- Service Pages (sections on main page) -->
+  <url>
+    <loc>https://gen0.xyz/#services</loc>
+    <lastmod>2024-12-24</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://gen0.xyz/#contact</loc>
+    <lastmod>2024-12-24</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <!-- Legal Pages -->
   <url>
     <loc>https://gen0.xyz/privacy-policy</loc>
-    <lastmod>2023-01-01</lastmod>
+    <lastmod>2024-12-24</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>
   <url>
     <loc>https://gen0.xyz/terms-of-service</loc>
-    <lastmod>2023-01-01</lastmod>
+    <lastmod>2024-12-24</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>
   <url>
     <loc>https://gen0.xyz/cookie-policy</loc>
-    <lastmod>2023-01-01</lastmod>
+    <lastmod>2024-12-24</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>

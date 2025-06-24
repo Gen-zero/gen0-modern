@@ -1,101 +1,163 @@
 
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:news="http://www.google.com/schemas/sitemap-news/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1" xmlns:video="http://www.google.com/schemas/sitemap-video/1.1">
-  <!-- Main Pages -->
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" 
+        xmlns:news="http://www.google.com/schemas/sitemap-news/0.9" 
+        xmlns:xhtml="http://www.w3.org/1999/xhtml" 
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1" 
+        xmlns:video="http://www.google.com/schemas/sitemap-video/1.1">
+
+  <!-- Main Pages with Enhanced Priority Structure -->
   <url>
     <loc>https://gen0.xyz/</loc>
-    <lastmod>2024-12-24</lastmod>
-    <changefreq>weekly</changefreq>
+    <lastmod>2025-01-26</lastmod>
+    <changefreq>daily</changefreq>
     <priority>1.0</priority>
-  </url>
-  <url>
-    <loc>https://gen0.xyz/about</loc>
-    <lastmod>2024-12-24</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.9</priority>
-  </url>
-  <url>
-    <loc>https://gen0.xyz/projects</loc>
-    <lastmod>2024-12-24</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.9</priority>
-  </url>
-  <url>
-    <loc>https://gen0.xyz/join-us</loc>
-    <lastmod>2024-12-24</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://gen0.xyz/blog</loc>
-    <lastmod>2024-12-24</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://gen0.xyz/lovable-uploads/82543c4a-707b-40ad-9352-e934e6252d4f.png</image:loc>
+      <image:title>Gen0 Digital Studio - Home</image:title>
+      <image:caption>Digital innovation studio specializing in 0 to 1 product development</image:caption>
+    </image:image>
   </url>
 
-  <!-- Individual Project Pages -->
   <url>
-    <loc>https://gen0.xyz/projects/1</loc>
-    <lastmod>2024-12-24</lastmod>
+    <loc>https://gen0.xyz/about</loc>
+    <lastmod>2025-01-26</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://ik.imagekit.io/kalidaspem/c46019ce-faea-4d33-b80c-b78d9da6d500.jpg</image:loc>
+      <image:title>Gen0 Team - Manu Narayanan</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://ik.imagekit.io/kalidaspem/894146aa-4ab3-4820-b55b-55478d7507a9.jpg</image:loc>
+      <image:title>Gen0 Team - Kalidasan P E M</image:title>
+    </image:image>
+  </url>
+
+  <url>
+    <loc>https://gen0.xyz/projects</loc>
+    <lastmod>2025-01-26</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.95</priority>
+  </url>
+
+  <url>
+    <loc>https://gen0.xyz/join-us</loc>
+    <lastmod>2025-01-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://gen0.xyz/blog</loc>
+    <lastmod>2025-01-26</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.85</priority>
+  </url>
+
+  <!-- Enhanced Individual Project Pages with Rich Data -->
+  <url>
+    <loc>https://gen0.xyz/projects/1</loc>
+    <lastmod>2025-01-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
     <image:image>
       <image:loc>https://ik.imagekit.io/kalidaspem/ChatGPT%20Image%20Jun%2019,%202025,%2007_18_23%20PM.png</image:loc>
       <image:title>Status Bar - Life RPG Dashboard</image:title>
-    </image:image>
-  </url>
-  <url>
-    <loc>https://gen0.xyz/projects/2</loc>
-    <lastmod>2024-12-24</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-    <image:image>
-      <image:loc>/lovable-uploads/611c98b6-d6c7-4eef-8c6e-2adb0ecc29ef.png</image:loc>
-      <image:title>Guild Board - Community Platform</image:title>
-    </image:image>
-  </url>
-  <url>
-    <loc>https://gen0.xyz/projects/3</loc>
-    <lastmod>2024-12-24</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-    <image:image>
-      <image:loc>https://ik.imagekit.io/kalidaspem/d1660e9c-7a59-4119-9b87-992fd0e28886.jpg</image:loc>
-      <image:title>Saadhana Board - Digital Spiritual Platform</image:title>
-    </image:image>
-  </url>
-  <url>
-    <loc>https://gen0.xyz/projects/4</loc>
-    <lastmod>2024-12-24</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-    <image:image>
-      <image:loc>https://ik.imagekit.io/kalidaspem/b8a842e9-0b59-4687-8b15-ea15a15a2a0d.jpg</image:loc>
-      <image:title>Fuel Unit - Fuel Price Tracking App</image:title>
-    </image:image>
-  </url>
-  <url>
-    <loc>https://gen0.xyz/projects/5</loc>
-    <lastmod>2024-12-24</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-    <image:image>
-      <image:loc>https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8YWJzdHJhY3QlMjBkYXJrfGVufDB8fDB8fHww</image:loc>
-      <image:title>Kaali Punk - Web3 Virtual Influencer</image:title>
-    </image:image>
-  </url>
-  <url>
-    <loc>https://gen0.xyz/projects/6</loc>
-    <lastmod>2024-12-24</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-    <image:image>
-      <image:loc>https://images.unsplash.com/photo-1620712943543-bcc4688e7485?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8YWklMjBhcnR8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&w=800&q=60</image:loc>
-      <image:title>Prompt Engineering Course</image:title>
+      <image:caption>Gamified life dashboard that transforms routines into RPG-style progression system</image:caption>
     </image:image>
   </url>
 
-  <!-- Blog Posts -->
+  <url>
+    <loc>https://gen0.xyz/projects/2</loc>
+    <lastmod>2025-01-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://gen0.xyz/lovable-uploads/611c98b6-d6c7-4eef-8c6e-2adb0ecc29ef.png</image:loc>
+      <image:title>Guild Board - Community Platform</image:title>
+      <image:caption>Revolutionary platform for purposeful community building and collaboration</image:caption>
+    </image:image>
+  </url>
+
+  <url>
+    <loc>https://gen0.xyz/projects/3</loc>
+    <lastmod>2025-01-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://ik.imagekit.io/kalidaspem/d1660e9c-7a59-4119-9b87-992fd0e28886.jpg</image:loc>
+      <image:title>Saadhana Board - Digital Spiritual Platform</image:title>
+      <image:caption>Digital Yantra connecting users with spiritual practices and community</image:caption>
+    </image:image>
+  </url>
+
+  <url>
+    <loc>https://gen0.xyz/projects/4</loc>
+    <lastmod>2025-01-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://ik.imagekit.io/kalidaspem/b8a842e9-0b59-4687-8b15-ea15a15a2a0d.jpg</image:loc>
+      <image:title>Fuel Unit - Smart Fuel Price Tracking</image:title>
+      <image:caption>Real-time fuel price tracking and route optimization for maximum savings</image:caption>
+    </image:image>
+  </url>
+
+  <url>
+    <loc>https://gen0.xyz/projects/5</loc>
+    <lastmod>2025-01-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=800&auto=format&fit=crop&q=60</image:loc>
+      <image:title>Kaali Punk - Web3 Virtual Influencer</image:title>
+      <image:caption>Web3 platform merging traditional culture with blockchain technology</image:caption>
+    </image:image>
+  </url>
+
+  <url>
+    <loc>https://gen0.xyz/projects/6</loc>
+    <lastmod>2025-01-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://images.unsplash.com/photo-1620712943543-bcc4688e7485</image:loc>
+      <image:title>Prompt Engineering Course - AI Skills Training</image:title>
+      <image:caption>Comprehensive course teaching prompt engineering for AI systems</image:caption>
+    </image:image>
+  </url>
+
+  <!-- Service-Specific Landing Pages -->
+  <url>
+    <loc>https://gen0.xyz/services/mvp-development</loc>
+    <lastmod>2025-01-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+  </url>
+
+  <url>
+    <loc>https://gen0.xyz/services/web-development</loc>
+    <lastmod>2025-01-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+  </url>
+
+  <url>
+    <loc>https://gen0.xyz/services/ui-ux-design</loc>
+    <lastmod>2025-01-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+  </url>
+
+  <url>
+    <loc>https://gen0.xyz/services/prompt-engineering</loc>
+    <lastmod>2025-01-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+  </url>
+
+  <!-- Enhanced Blog Posts with Categories -->
   <url>
     <loc>https://gen0.xyz/blog/chatgpt-image-generation-entertainment-impact</loc>
     <lastmod>2024-12-15</lastmod>
@@ -104,40 +166,90 @@
     <image:image>
       <image:loc>https://images.unsplash.com/photo-1620712943543-bcc4688e7485</image:loc>
       <image:title>ChatGPT Image Generation Impact on Entertainment</image:title>
+      <image:caption>Analysis of AI image generation's transformation of entertainment industry</image:caption>
     </image:image>
   </url>
 
-  <!-- Service Pages (sections on main page) -->
+  <!-- Section Anchors for Better Internal Linking -->
   <url>
     <loc>https://gen0.xyz/#services</loc>
-    <lastmod>2024-12-24</lastmod>
-    <changefreq>monthly</changefreq>
+    <lastmod>2025-01-26</lastmod>
+    <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
+
+  <url>
+    <loc>https://gen0.xyz/#projects</loc>
+    <lastmod>2025-01-26</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
   <url>
     <loc>https://gen0.xyz/#contact</loc>
-    <lastmod>2024-12-24</lastmod>
+    <lastmod>2025-01-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.75</priority>
+  </url>
+
+  <!-- Team Member Pages for Enhanced Trust Signals -->
+  <url>
+    <loc>https://gen0.xyz/team/manu-narayanan</loc>
+    <lastmod>2025-01-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
+    <image:image>
+      <image:loc>https://ik.imagekit.io/kalidaspem/c46019ce-faea-4d33-b80c-b78d9da6d500.jpg</image:loc>
+      <image:title>Manu Narayanan - Founder & Advisor</image:title>
+    </image:image>
+  </url>
+
+  <url>
+    <loc>https://gen0.xyz/team/kalidasan-pem</loc>
+    <lastmod>2025-01-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <image:image>
+      <image:loc>https://ik.imagekit.io/kalidaspem/894146aa-4ab3-4820-b55b-55478d7507a9.jpg</image:loc>
+      <image:title>Kalidasan P E M - Co-Founder and CTO</image:title>
+    </image:image>
+  </url>
+
+  <!-- Case Study Pages -->
+  <url>
+    <loc>https://gen0.xyz/case-studies/guild-board-development</loc>
+    <lastmod>2025-01-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.75</priority>
+  </url>
+
+  <url>
+    <loc>https://gen0.xyz/case-studies/saadhana-board-spiritual-tech</loc>
+    <lastmod>2025-01-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.75</priority>
   </url>
 
   <!-- Legal Pages -->
   <url>
     <loc>https://gen0.xyz/privacy-policy</loc>
-    <lastmod>2024-12-24</lastmod>
+    <lastmod>2025-01-26</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>
+
   <url>
     <loc>https://gen0.xyz/terms-of-service</loc>
-    <lastmod>2024-12-24</lastmod>
+    <lastmod>2025-01-26</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>
+
   <url>
     <loc>https://gen0.xyz/cookie-policy</loc>
-    <lastmod>2024-12-24</lastmod>
+    <lastmod>2025-01-26</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>
+
 </urlset>

@@ -1,6 +1,8 @@
+
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Card } from '@/components/ui/card';
+import { MapPin, Calendar, ExternalLink } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import TwinklingStars from './TwinklingStars';
 
@@ -13,6 +15,17 @@ export interface TeamMemberProps {
   imgUrl: string;
   expertise?: string[];
   backgroundColor?: string;
+  // Enhanced trust signals
+  location?: string;
+  experience?: string;
+  education?: string;
+  achievements?: string[];
+  socialLinks?: {
+    linkedin?: string;
+    twitter?: string;
+    github?: string;
+    behance?: string;
+  };
 }
 
 interface TeamMemberCardProps {
@@ -64,7 +77,29 @@ const TeamMemberCard: React.FC<TeamMemberCardProps> = ({ member, onClick }) => {
         <div className="p-5 bg-gradient-to-br from-black/90 to-purple-900/90 relative">
           {isHovered && <TwinklingStars />}
           <h3 className="text-xl font-semibold mb-1 text-white">{member.name}</h3>
-          <p className="text-primary font-medium text-blue-300">{member.position}</p>
+          <p className="text-primary font-medium text-blue-300 mb-2">{member.position}</p>
+          
+          {/* Trust signals */}
+          <div className="space-y-1 text-xs text-white/70">
+            {member.location && (
+              <div className="flex items-center gap-1">
+                <MapPin className="h-3 w-3" />
+                <span>{member.location}</span>
+              </div>
+            )}
+            {member.experience && (
+              <div className="flex items-center gap-1">
+                <Calendar className="h-3 w-3" />
+                <span>{member.experience}</span>
+              </div>
+            )}
+            {member.socialLinks && Object.keys(member.socialLinks).length > 0 && (
+              <div className="flex items-center gap-1 mt-2">
+                <ExternalLink className="h-3 w-3" />
+                <span>{Object.keys(member.socialLinks).length} social profile{Object.keys(member.socialLinks).length > 1 ? 's' : ''}</span>
+              </div>
+            )}
+          </div>
         </div>
       </Card>
     </motion.div>

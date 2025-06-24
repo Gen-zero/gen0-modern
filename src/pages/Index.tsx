@@ -8,9 +8,15 @@ import { useEffect, useState, memo, lazy, Suspense } from "react";
 import { useLocation } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import useScrollAnimation from "@/hooks/useScrollAnimation";
-import SEO from "@/components/SEO";
+import EnhancedSEO from "@/components/EnhancedSEO";
 import usePerformanceMode from "@/hooks/usePerformanceMode";
+import { usePerformanceOptimization, useLazyLoad } from "@/hooks/usePerformanceOptimization";
 import LoadingSpinner from "@/components/LoadingSpinner";
+
+// Lazy load heavy components for better performance
+const LazyServices = lazy(() => import("@/components/Services"));
+const LazyProjects = lazy(() => import("@/components/Projects"));
+const LazyContact = lazy(() => import("@/components/Contact"));
 
 // Simple Loading component for lazy loaded sections
 const SectionLoader = () => (
@@ -33,9 +39,15 @@ const Index = () => {
   const location = useLocation();
   const [isLoaded, setIsLoaded] = useState(false);
   const { isLowEndDevice, shouldReduceMotion } = usePerformanceMode();
+  const performanceMetrics = usePerformanceOptimization();
   
   // Use scroll animations
   useScrollAnimation();
+
+  // Lazy loading refs for sections
+  const { ref: servicesRef, shouldLoad: shouldLoadServices } = useLazyLoad(0.1);
+  const { ref: projectsRef, shouldLoad: shouldLoadProjects } = useLazyLoad(0.1);
+  const { ref: contactRef, shouldLoad: shouldLoadContact } = useLazyLoad(0.1);
 
   // Adjust animation settings based on device performance
   const sectionVariants = {
@@ -72,7 +84,7 @@ const Index = () => {
       window.history.replaceState({}, document.title);
     }
     
-    // Add Roboto Condensed font with display swap for better performance
+    // Add fonts with better loading strategy
     const link = document.createElement('link');
     link.rel = 'stylesheet';
     link.href = 'https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@300;400;500;600;700&display=swap';
@@ -104,43 +116,60 @@ const Index = () => {
   };
 
   const homeTitle = "Gen0 | Digital Studio for 0 to 1 Transformation & Product Development";
-  const homeDescription = "Turn your ideas into reality with Gen0's specialized 0 to 1 development services. We build MVPs, design UIs, and develop web applications that stand out.";
-  const homeKeywords = "Gen0, Gen zero, 0 to 1, MVP building, web development, UI UX designing, prompt engineering, digital transformation, Guild Board, Saadhana Board, Fuel Unit";
+  const homeDescription = "Turn your ideas into reality with Gen0's specialized 0 to 1 development services. We build MVPs, design UIs, and develop web applications that stand out. Featured projects: Guild Board, Saadhana Board, Fuel Unit.";
+  const homeKeywords = "Gen0, Gen zero, 0 to 1, MVP building, web development, UI UX designing, prompt engineering, digital transformation, Guild Board, Saadhana Board, Fuel Unit, GenZ products, digital studio India";
   const canonicalUrl = "https://gen0.xyz/";
 
-  // Structured data for services
+  // Enhanced structured data for homepage
   const structuredData = {
     "@context": "https://schema.org",
     "@type": "WebPage",
-    "name": "Gen0 Digital Studio",
-    "description": "Digital studio specializing in 0 to 1 product development, MVP building, web development, and UI/UX design.",
-    "provider": {
+    "name": "Gen0 Digital Studio - Home",
+    "description": homeDescription,
+    "url": canonicalUrl,
+    "mainEntity": {
       "@type": "Organization",
       "name": "Gen0",
-      "url": "https://gen0.xyz/"
+      "description": "Digital innovation studio specializing in 0 to 1 product development",
+      "hasOfferCatalog": {
+        "@type": "OfferCatalog",
+        "name": "Gen0 Services",
+        "itemListElement": [
+          {
+            "@type": "Offer",
+            "name": "0 to 1 Product Development",
+            "description": "Transform your ideas into reality with our MVP development services",
+            "category": "Software Development"
+          },
+          {
+            "@type": "Offer", 
+            "name": "Web Development",
+            "description": "Custom web applications built with modern technologies",
+            "category": "Web Development"
+          },
+          {
+            "@type": "Offer",
+            "name": "UI/UX Design", 
+            "description": "User-centered design that delivers exceptional experiences",
+            "category": "Design"
+          },
+          {
+            "@type": "Offer",
+            "name": "Prompt Engineering",
+            "description": "Master AI communication with our specialized training",
+            "category": "AI Training"
+          }
+        ]
+      }
     },
-    "offers": {
-      "@type": "Offer",
-      "itemOffered": [
+    "breadcrumb": {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
         {
-          "@type": "Service",
-          "name": "0 to 1 Product Development",
-          "description": "Transform your ideas into reality with our MVP development services"
-        },
-        {
-          "@type": "Service",
-          "name": "Web Development",
-          "description": "Custom web applications built with modern technologies"
-        },
-        {
-          "@type": "Service",
-          "name": "UI/UX Design",
-          "description": "User-centered design that delivers exceptional experiences"
-        },
-        {
-          "@type": "Service",
-          "name": "SEO Optimization",
-          "description": "Boost your online visibility and drive traffic to your website"
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": canonicalUrl
         }
       ]
     }
@@ -155,7 +184,7 @@ const Index = () => {
         exit="exit"
         variants={pageVariants}
       >
-        <SEO 
+        <EnhancedSEO 
           title={homeTitle}
           description={homeDescription}
           keywords={homeKeywords}
@@ -168,6 +197,9 @@ const Index = () => {
           linkedinTitle="Gen0 | Digital Innovation Studio"
           linkedinDescription="Transforming ideas into impactful digital products. Specializing in MVP development, web design, UI/UX, and prompt engineering."
           structuredData={structuredData}
+          breadcrumbs={[
+            { name: "Home", url: "https://gen0.xyz/" }
+          ]}
         />
         
         <Navbar />
@@ -176,27 +208,60 @@ const Index = () => {
           <Hero />
         </motion.div>
         
-        <motion.div variants={sectionVariants}>
-          <Services />
-        </motion.div>
+        {/* Services section with lazy loading */}
+        <div ref={servicesRef}>
+          <motion.div variants={sectionVariants}>
+            {shouldLoadServices ? (
+              <Suspense fallback={<SectionLoader />}>
+                <LazyServices />
+              </Suspense>
+            ) : (
+              <div className="h-96"> {/* Placeholder height */}
+                <SectionLoader />
+              </div>
+            )}
+          </motion.div>
+        </div>
         
-        <motion.div
-          variants={sectionVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, amount: 0.2 }}
-        >
-          <Projects />
-        </motion.div>
+        {/* Projects section with lazy loading */}
+        <div ref={projectsRef}>
+          <motion.div
+            variants={sectionVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.2 }}
+          >
+            {shouldLoadProjects ? (
+              <Suspense fallback={<SectionLoader />}>
+                <LazyProjects />
+              </Suspense>
+            ) : (
+              <div className="h-96"> {/* Placeholder height */}
+                <SectionLoader />
+              </div>
+            )}
+          </motion.div>
+        </div>
         
-        <motion.div
-          variants={sectionVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, amount: 0.2 }}
-        >
-          <Contact />
-        </motion.div>
+        {/* Contact section with lazy loading */}
+        <div ref={contactRef}>
+          <motion.div
+            variants={sectionVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.2 }}
+          >
+            {shouldLoadContact ? (
+              <Suspense fallback={<SectionLoader />}>
+                <LazyContact />
+              </Suspense>
+            ) : (
+              <div className="h-96"> {/* Placeholder height */}
+                <SectionLoader />
+              </div>
+            )}
+          </motion.div>
+        </div>
         
         {/* Copyright Section with simplified animation */}
         <motion.div 
@@ -212,6 +277,25 @@ const Index = () => {
             © {new Date().getFullYear()} Gen0. All rights reserved.
           </motion.p>
         </motion.div>
+
+        {/* Performance monitoring script for production */}
+        {process.env.NODE_ENV === 'production' && (
+          <script>
+            {`
+              // Monitor Core Web Vitals
+              window.addEventListener('load', () => {
+                if ('PerformanceObserver' in window) {
+                  // Monitor LCP
+                  new PerformanceObserver((entryList) => {
+                    const entries = entryList.getEntries();
+                    const lastEntry = entries[entries.length - 1];
+                    console.log('LCP:', lastEntry.startTime);
+                  }).observe({entryTypes: ['largest-contentful-paint']});
+                }
+              });
+            `}
+          </script>
+        )}
       </motion.div>
     </AnimatePresence>
   );

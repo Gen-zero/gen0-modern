@@ -54,10 +54,10 @@ const ServiceCard = ({
       <motion.div
         layout
         className={cn(
-          "rounded-xl overflow-hidden transition-all duration-500 h-full relative z-20",
+          "rounded-xl overflow-hidden transition-all duration-500 h-full relative z-20 border border-orange-400/20",
           isActive 
-            ? "shadow-lg shadow-primary/20" 
-            : "hover:shadow-md hover:shadow-primary/10"
+            ? "shadow-lg shadow-orange-400/20" 
+            : "hover:shadow-md hover:shadow-orange-400/10"
         )}
       >
         <CardHeader 
@@ -127,8 +127,8 @@ const CardHeader = ({
             className={cn(
               "p-4 rounded-lg mr-4 transition-all",
               isActive 
-                ? "bg-gradient-to-br from-primary to-primary/80 text-white" 
-                : "bg-primary/20 text-primary/80 group-hover:bg-primary/30"
+                ? "bg-gradient-to-br from-orange-400 to-yellow-400 text-white" 
+                : "bg-orange-400/20 text-orange-400 group-hover:bg-orange-400/30"
             )}
             whileHover={{ rotate: 10 }}
             transition={{ duration: 0.3, ease: "easeInOut" }}
@@ -145,7 +145,7 @@ const CardHeader = ({
             <Zap className={cn(
               "h-5 w-5 transition-colors",
               isActive 
-                ? "text-primary" 
+                ? "text-orange-400" 
                 : "text-white/40"
             )} />
           </motion.div>
@@ -175,7 +175,7 @@ const CardHeader = ({
           >
             {description}
           </motion.p>
-        </motion.div>
+        </div>
       </div>
     </motion.div>
   );

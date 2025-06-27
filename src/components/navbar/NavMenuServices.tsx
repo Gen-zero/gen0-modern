@@ -1,5 +1,5 @@
 
-import { Code, Layout, Palette, Search, Rocket } from 'lucide-react';
+import { Brain, Cpu, Network, Shield } from 'lucide-react';
 import { motion } from 'framer-motion';
 
 interface ServiceLink {
@@ -15,24 +15,24 @@ interface NavMenuServicesProps {
 const NavMenuServices = ({ toggleMenu }: NavMenuServicesProps) => {
   const services: ServiceLink[] = [
     {
-      name: '0 TO 1',
+      name: 'AGI Research',
       href: '#services',
-      icon: <Rocket className="h-4 w-4 text-accent" />
+      icon: <Brain className="h-4 w-4 text-accent" />
     }, 
     {
-      name: 'Web Development',
+      name: 'Infrastructure',
       href: '#services',
-      icon: <Code className="h-4 w-4 text-accent" />
+      icon: <Cpu className="h-4 w-4 text-accent" />
     }, 
     {
-      name: 'UI/UX Design',
+      name: 'Applications',
       href: '#services',
-      icon: <Palette className="h-4 w-4 text-accent" />
+      icon: <Network className="h-4 w-4 text-accent" />
     }, 
     {
-      name: 'SEO Optimization',
+      name: 'Ethics & Safety',
       href: '#services',
-      icon: <Search className="h-4 w-4 text-accent" />
+      icon: <Shield className="h-4 w-4 text-accent" />
     }
   ];
 
@@ -66,7 +66,7 @@ const NavMenuServices = ({ toggleMenu }: NavMenuServicesProps) => {
         className="text-base md:text-lg font-semibold mb-2 text-accent"
         variants={itemVariants}
       >
-        Services
+        AGI Development
       </motion.h3>
       <motion.ul 
         className="space-y-2"

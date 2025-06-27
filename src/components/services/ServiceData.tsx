@@ -1,6 +1,6 @@
 
 import React, { ReactElement } from 'react';
-import { Code, Layout, Database, Globe, Rocket } from 'lucide-react';
+import { Brain, Cpu, Network, Shield } from 'lucide-react';
 
 export interface ServiceFeature {
   title: string;
@@ -18,55 +18,55 @@ export interface ServiceData {
 }
 
 export const services: ServiceData[] = [{
-  title: '0 TO 1',
-  icon: <Rocket className="h-16 w-16 md:h-20 md:w-20" />,
-  description: "Transform your ideas into reality swiftly with our '0 to 1' service—rapid, robust MVPs built to validate your vision.",
-  longDescription: "Our '0 to 1' service is designed for entrepreneurs and businesses looking to quickly transform their ideas into tangible products. We focus on building rapid, robust MVPs that validate your vision and accelerate your journey to market.",
-  backgroundGradient: 'linear-gradient(135deg, #4F2398 0%, #7c43ea 100%)',
-  features: ['Branding', 'MVP Development', 'Product Website', 'Product Documentation'],
+  title: 'AGI RESEARCH & DEVELOPMENT',
+  icon: <Brain className="h-16 w-16 md:h-20 md:w-20" />,
+  description: "Pioneering the next generation of artificial intelligence through advanced neural architectures and cognitive computing systems built from India's innovation hubs.",
+  longDescription: "Our AGI Research & Development division is at the forefront of creating truly intelligent systems that can understand, learn, and adapt like humans. Based in India's thriving tech ecosystem, we're developing foundational models that will power the next wave of AI applications across industries.",
+  backgroundGradient: 'linear-gradient(135deg, #4F2398 0%, #FF6B35 100%)',
+  features: ['Neural Architecture Research', 'Multi-Modal AI Systems', 'Cognitive Computing', 'Advanced ML Models'],
   detailedFeatures: [
-    { title: "Strategic Branding", description: "Create a compelling brand identity that resonates with your target audience and differentiates you from competitors." },
-    { title: "Rapid MVP Development", description: "Build a functional minimum viable product within weeks, not months, focusing on core features that deliver immediate value." },
-    { title: "Product Website", description: "Launch a professional, conversion-focused website that effectively communicates your product's value proposition." },
-    { title: "Comprehensive Documentation", description: "Develop clear, structured documentation to support user onboarding and facilitate future development." }
+    { title: "Neural Architecture Research", description: "Developing breakthrough neural network architectures that mimic human cognitive processes for enhanced reasoning and learning capabilities." },
+    { title: "Multi-Modal AI Systems", description: "Creating AI systems that can process and understand text, images, audio, and video simultaneously for comprehensive intelligence." },
+    { title: "Cognitive Computing", description: "Building systems that can think, reason, and make decisions using human-like cognitive processes and knowledge representation." },
+    { title: "Advanced ML Models", description: "Researching and developing cutting-edge machine learning models that push the boundaries of what's possible in artificial intelligence." }
   ]
 }, {
-  title: 'WEB DEVELOPMENT',
-  icon: <Code className="h-16 w-16 md:h-20 md:w-20" />,
-  description: 'Building performant, scalable web applications with modern technologies and best practices.',
-  longDescription: "Our web development services deliver performant, scalable applications built with modern technologies and best practices. We focus on creating solutions that are not only technically excellent but also intuitive and user-friendly.",
-  backgroundGradient: 'linear-gradient(135deg, #4F2398 0%, #9b59b6 100%)',
-  features: ['Frontend Development', 'Backend Systems', 'API Integration', 'Performance Optimization'],
+  title: 'AGI INFRASTRUCTURE & SCALING',
+  icon: <Cpu className="h-16 w-16 md:h-20 md:w-20" />,
+  description: 'Building robust, scalable infrastructure to support AGI development and deployment at scale across India and globally.',
+  longDescription: "Our infrastructure team creates the backbone that enables AGI systems to scale efficiently. We design and implement high-performance computing solutions, distributed training systems, and deployment frameworks that can handle the computational demands of next-generation AI.",
+  backgroundGradient: 'linear-gradient(135deg, #4F2398 0%, #E67E22 100%)',
+  features: ['High-Performance Computing', 'Distributed Training', 'Model Optimization', 'Scalable Deployment'],
   detailedFeatures: [
-    { title: "Frontend Development", description: "Create responsive, accessible user interfaces using modern frameworks like React, Vue, or Angular that deliver exceptional user experiences." },
-    { title: "Backend Systems", description: "Build robust, secure backend infrastructure using Node.js, Python, or other technologies tailored to your specific requirements." },
-    { title: "API Integration", description: "Seamlessly connect your application with third-party services and data sources through well-designed API integrations." },
-    { title: "Performance Optimization", description: "Optimize loading times, responsiveness, and resource usage to ensure your application performs flawlessly across all devices." }
+    { title: "High-Performance Computing", description: "Designing and implementing HPC clusters optimized for AI workloads, leveraging India's growing computational infrastructure." },
+    { title: "Distributed Training Systems", description: "Creating efficient distributed training frameworks that can scale AGI model training across multiple nodes and cloud environments." },
+    { title: "Model Optimization", description: "Developing techniques to optimize AGI models for various hardware configurations while maintaining performance and accuracy." },
+    { title: "Scalable Deployment", description: "Building deployment pipelines that can efficiently serve AGI models at scale, from edge devices to cloud infrastructure." }
   ]
 }, {
-  title: 'UI/UX DESIGN',
-  icon: <Layout className="h-16 w-16 md:h-20 md:w-20" />,
-  description: 'Creating intuitive interfaces and experiences that delight users and achieve business goals.',
-  longDescription: "Our UI/UX design services focus on creating intuitive interfaces and experiences that not only delight users but also drive business success. We combine aesthetic appeal with functional design to create memorable digital experiences.",
-  backgroundGradient: 'linear-gradient(135deg, #4F2398 0%, #8e44ad 100%)',
-  features: ['User Research', 'Wireframing', 'Prototyping', 'Usability Testing'],
+  title: 'AGI APPLICATIONS & INTEGRATION',
+  icon: <Network className="h-16 w-16 md:h-20 md:w-20" />,
+  description: 'Translating AGI research into practical applications that solve real-world problems across industries.',
+  longDescription: "We bridge the gap between AGI research and practical applications by developing industry-specific solutions, APIs, and integration frameworks. Our team specializes in making advanced AI accessible through well-designed interfaces and human-AI collaboration tools.",
+  backgroundGradient: 'linear-gradient(135deg, #4F2398 0%, #D35400 100%)',
+  features: ['Industry Solutions', 'API Development', 'Custom Implementations', 'Human-AI Collaboration'],
   detailedFeatures: [
-    { title: "Comprehensive User Research", description: "Understand your users' needs, behaviors, and pain points through in-depth research and analysis to inform design decisions." },
-    { title: "Strategic Wireframing", description: "Develop the blueprint of your digital product with clear information architecture and user flows that optimize conversion paths." },
-    { title: "Interactive Prototyping", description: "Create clickable prototypes that simulate the real user experience, allowing for early testing and refinement." },
-    { title: "Iterative Usability Testing", description: "Conduct thorough usability tests to identify issues, gather user feedback, and continuously improve the design." }
+    { title: "Industry-Specific Solutions", description: "Developing tailored AGI applications for healthcare, finance, education, and other sectors, addressing unique industry challenges." },
+    { title: "API & SDK Development", description: "Creating developer-friendly APIs and SDKs that make AGI capabilities accessible to businesses and developers worldwide." },
+    { title: "Custom AGI Implementations", description: "Building bespoke AGI solutions that integrate seamlessly with existing business processes and technology stacks." },
+    { title: "Human-AI Collaboration Tools", description: "Designing interfaces and workflows that enhance human capabilities through intelligent AI assistance and augmentation." }
   ]
 }, {
-  title: 'SEO OPTIMIZATION',
-  icon: <Globe className="h-16 w-16 md:h-20 md:w-20" />,
-  description: 'Boost your online visibility and drive more traffic to your website with our SEO services.',
-  longDescription: "Our SEO optimization services are designed to boost your online visibility and drive qualified traffic to your website. We use data-driven strategies that adapt to the constantly evolving search engine algorithms.",
-  backgroundGradient: 'linear-gradient(135deg, #4F2398 0%, #6c3483 100%)',
-  features: ['Keyword Research', 'On-Page SEO', 'Technical SEO', 'Content Strategy'],
+  title: 'AGI ETHICS & SAFETY',
+  icon: <Shield className="h-16 w-16 md:h-20 md:w-20" />,
+  description: 'Ensuring responsible AGI development through comprehensive safety protocols, ethical frameworks, and alignment research.',
+  longDescription: "As we advance toward AGI, ensuring safety and ethical development is paramount. Our ethics and safety team works on AI alignment, bias mitigation, and responsible development practices that prioritize human welfare and societal benefit.",
+  backgroundGradient: 'linear-gradient(135deg, #4F2398 0%, #C0392B 100%)',
+  features: ['AI Safety Protocols', 'Bias Mitigation', 'Alignment Research', 'Regulatory Compliance'],
   detailedFeatures: [
-    { title: "Strategic Keyword Research", description: "Identify high-value keywords that your target audience is actively searching for, balancing search volume and competition." },
-    { title: "Comprehensive On-Page SEO", description: "Optimize all on-page elements including meta tags, headings, content, and internal linking to improve search engine rankings." },
-    { title: "Technical SEO Audits", description: "Identify and fix technical issues that may be hindering your site's performance in search engines, such as site speed, mobile-friendliness, and crawlability." },
-    { title: "Content Strategy Development", description: "Create a content plan that addresses user intent at each stage of the buyer's journey, establishing your brand as an authority." }
+    { title: "AI Safety Protocols", description: "Developing comprehensive safety frameworks to ensure AGI systems operate reliably and predictably in all scenarios." },
+    { title: "Bias Detection & Mitigation", description: "Creating tools and methodologies to identify, measure, and eliminate bias in AGI systems for fair and equitable outcomes." },
+    { title: "AGI Alignment Research", description: "Researching methods to ensure AGI systems remain aligned with human values and objectives as they become more capable." },
+    { title: "Regulatory Compliance", description: "Working with policymakers and regulators to establish responsible AI governance frameworks for safe AGI deployment." }
   ]
 }];

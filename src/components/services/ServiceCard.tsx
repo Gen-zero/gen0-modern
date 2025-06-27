@@ -175,7 +175,7 @@ const CardHeader = ({
           >
             {description}
           </motion.p>
-        </div>
+        </motion.div>
       </div>
     </motion.div>
   );

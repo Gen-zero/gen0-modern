@@ -1,14 +1,11 @@
-
 import React, { useState } from "react";
 import { Helmet } from "react-helmet-async";
 import { motion } from "framer-motion";
 import { ExternalLink, Award, MapPin, Calendar } from "lucide-react";
 import TeamMemberCard, { TeamMemberProps } from "./TeamMemberCard";
 import TeamMemberDetails from "./TeamMemberDetails";
-
 const TeamSection = () => {
   const [selectedMember, setSelectedMember] = useState<TeamMemberProps | null>(null);
-
   const teamMembers: TeamMemberProps[] = [{
     id: 0,
     name: "Manu Narayanan",
@@ -59,7 +56,7 @@ const TeamSection = () => {
       linkedin: "https://linkedin.com/in/yedhu-krishna",
       behance: "https://behance.net/yedhukrishna"
     }
-  }, { 
+  }, {
     id: 3,
     name: "Harshita Macom",
     position: "Full-Stack Developer",
@@ -122,9 +119,7 @@ const TeamSection = () => {
     "numberOfEmployees": "5-10",
     "slogan": "From 0 to 1 - Digital Innovation Studio"
   };
-
-  return (
-    <>
+  return <>
       <Helmet>
         <script type="application/ld+json">
           {JSON.stringify(teamStructuredData)}
@@ -143,69 +138,36 @@ const TeamSection = () => {
           {/* Trust signals section */}
           <div className="flex flex-wrap justify-center gap-6 mt-8 text-sm text-muted-foreground">
             <div className="flex items-center gap-2">
-              <MapPin className="h-4 w-4 text-accent" />
-              <span>Based in India</span>
+              
+              
             </div>
             <div className="flex items-center gap-2">
-              <Calendar className="h-4 w-4 text-accent" />
-              <span>Founded 2023</span>
+              
+              
             </div>
             <div className="flex items-center gap-2">
-              <Award className="h-4 w-4 text-accent" />
-              <span>20+ Projects Delivered</span>
+              
+              
             </div>
           </div>
         </div>
         
-        <motion.div 
-          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 sm:gap-8"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.5 }}
-        >
-          {teamMembers.map((member) => (
-            <TeamMemberCard
-              key={member.id}
-              member={member}
-              onClick={() => setSelectedMember(member)}
-            />
-          ))}
+        <motion.div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 sm:gap-8" initial={{
+        opacity: 0
+      }} animate={{
+        opacity: 1
+      }} transition={{
+        duration: 0.5
+      }}>
+          {teamMembers.map(member => <TeamMemberCard key={member.id} member={member} onClick={() => setSelectedMember(member)} />)}
         </motion.div>
 
         {/* Additional trust signals */}
-        <div className="mt-16 text-center">
-          <h3 className="text-xl font-semibold mb-6">Our Collective Expertise</h3>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-4xl mx-auto">
-            <div className="p-4 bg-card rounded-lg">
-              <div className="text-2xl font-bold text-accent">25+</div>
-              <div className="text-sm text-muted-foreground">Years Combined Experience</div>
-            </div>
-            <div className="p-4 bg-card rounded-lg">
-              <div className="text-2xl font-bold text-accent">6</div>
-              <div className="text-sm text-muted-foreground">In-house Products</div>
-            </div>
-            <div className="p-4 bg-card rounded-lg">
-              <div className="text-2xl font-bold text-accent">15+</div>
-              <div className="text-sm text-muted-foreground">Technologies Mastered</div>
-            </div>
-            <div className="p-4 bg-card rounded-lg">
-              <div className="text-2xl font-bold text-accent">100%</div>
-              <div className="text-sm text-muted-foreground">Remote-First Team</div>
-            </div>
-          </div>
-        </div>
+        
       </div>
 
       {/* Expanded team member details */}
-      {selectedMember && (
-        <TeamMemberDetails
-          member={selectedMember}
-          isOpen={!!selectedMember}
-          onClose={() => setSelectedMember(null)}
-        />
-      )}
-    </>
-  );
+      {selectedMember && <TeamMemberDetails member={selectedMember} isOpen={!!selectedMember} onClose={() => setSelectedMember(null)} />}
+    </>;
 };
-
 export default TeamSection;

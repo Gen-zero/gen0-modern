@@ -1,4 +1,3 @@
-
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
 import Services from "@/components/Services";
@@ -115,51 +114,66 @@ const Index = () => {
     exit: { opacity: 0 }
   };
 
-  const homeTitle = "Gen0 | Digital Studio for 0 to 1 Transformation & Product Development";
-  const homeDescription = "Turn your ideas into reality with Gen0's specialized 0 to 1 development services. We build MVPs, design UIs, and develop web applications that stand out. Featured projects: Guild Board, Saadhana Board, Fuel Unit.";
-  const homeKeywords = "Gen0, Gen zero, 0 to 1, MVP building, web development, UI UX designing, prompt engineering, digital transformation, Guild Board, Saadhana Board, Fuel Unit, GenZ products, digital studio India";
+  // Updated SEO content for AGI focus
+  const homeTitle = "Gen0 | Building AGI from India - Artificial General Intelligence Development";
+  const homeDescription = "Pioneering Artificial General Intelligence development from India's innovation ecosystem. Gen0 specializes in AGI research, infrastructure, applications, and ethics & safety. Building the future of AI that thinks, learns, and evolves.";
+  const homeKeywords = "Gen0, Gen zero, AGI, Artificial General Intelligence, AI development India, AGI research, AI infrastructure, AI applications, AI ethics, AI safety, machine learning, deep learning, neural networks, AI innovation India, Bharat AI, Indian AI startup";
   const canonicalUrl = "https://gen0.xyz/";
 
-  // Enhanced structured data for homepage
+  // Enhanced structured data for AGI-focused homepage
   const structuredData = {
     "@context": "https://schema.org",
     "@type": "WebPage",
-    "name": "Gen0 Digital Studio - Home",
+    "name": "Gen0 - Building AGI from India",
     "description": homeDescription,
     "url": canonicalUrl,
     "mainEntity": {
       "@type": "Organization",
       "name": "Gen0",
-      "description": "Digital innovation studio specializing in 0 to 1 product development",
+      "description": "Artificial General Intelligence development company pioneering the future of AI from India",
       "hasOfferCatalog": {
         "@type": "OfferCatalog",
-        "name": "Gen0 Services",
+        "name": "Gen0 AGI Services",
         "itemListElement": [
           {
             "@type": "Offer",
-            "name": "0 to 1 Product Development",
-            "description": "Transform your ideas into reality with our MVP development services",
-            "category": "Software Development"
+            "name": "AGI Research",
+            "description": "Fundamental research in artificial general intelligence, cognitive architectures, and advanced AI systems",
+            "category": "AI Research"
           },
           {
             "@type": "Offer", 
-            "name": "Web Development",
-            "description": "Custom web applications built with modern technologies",
-            "category": "Web Development"
+            "name": "AGI Infrastructure",
+            "description": "Scalable computing infrastructure and frameworks for AGI development and deployment",
+            "category": "AI Infrastructure"
           },
           {
             "@type": "Offer",
-            "name": "UI/UX Design", 
-            "description": "User-centered design that delivers exceptional experiences",
-            "category": "Design"
+            "name": "AGI Applications", 
+            "description": "Real-world applications of artificial general intelligence across industries and domains",
+            "category": "AI Applications"
           },
           {
             "@type": "Offer",
-            "name": "Prompt Engineering",
-            "description": "Master AI communication with our specialized training",
-            "category": "AI Training"
+            "name": "Ethics & Safety",
+            "description": "Responsible AI development with focus on safety, alignment, and ethical considerations",
+            "category": "AI Ethics"
           }
         ]
+      },
+      "knowsAbout": [
+        "Artificial General Intelligence",
+        "Machine Learning",
+        "Deep Learning", 
+        "Neural Networks",
+        "AI Safety",
+        "AI Ethics",
+        "Cognitive Architectures",
+        "AI Research"
+      ],
+      "areaServed": {
+        "@type": "Country",
+        "name": "India"
       }
     },
     "breadcrumb": {
@@ -189,13 +203,13 @@ const Index = () => {
           description={homeDescription}
           keywords={homeKeywords}
           canonicalUrl={canonicalUrl}
-          ogTitle="Gen0 | Digital Product Development Studio"
-          ogDescription="We transform ideas into digital products. Specializing in 0 to 1 MVP development, web design, and UI/UX for startups and enterprises."
+          ogTitle="Gen0 | Building AGI from India - The Future of Artificial Intelligence"
+          ogDescription="Pioneering Artificial General Intelligence from India. We're building AI that thinks, learns, and evolves - transforming the future of technology from Bharat to the world."
           ogType="website"
-          twitterTitle="Gen0 | From 0 to 1 Digital Studio"
-          twitterDescription="Digital product development, MVP building, web design, prompt engineering, and more - all under one roof."
-          linkedinTitle="Gen0 | Digital Innovation Studio"
-          linkedinDescription="Transforming ideas into impactful digital products. Specializing in MVP development, web design, UI/UX, and prompt engineering."
+          twitterTitle="Gen0 | Building AGI from India 🇮🇳🧠"
+          twitterDescription="Pioneering Artificial General Intelligence development from India's innovation ecosystem. Building the future of AI that truly understands and adapts."
+          linkedinTitle="Gen0 | Artificial General Intelligence Development from India"
+          linkedinDescription="Leading AGI research and development from India. Specializing in cognitive architectures, AI safety, and next-generation artificial intelligence systems."
           structuredData={structuredData}
           breadcrumbs={[
             { name: "Home", url: "https://gen0.xyz/" }

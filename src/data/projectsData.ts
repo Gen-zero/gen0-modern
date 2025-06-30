@@ -1,4 +1,3 @@
-
 export interface Project {
   id: number;
   title: string;
@@ -19,9 +18,9 @@ export const projects: Project[] = [
     category: 'AI OS',
     image: 'https://ik.imagekit.io/kalidaspem/ChatGPT%20Image%20Jun%2025,%202025,%2002_04_36%20PM.png?updatedAt=1750840658762',
     description: "Status Bar turns your life into a game—track tasks, earn XP, unlock levels, and evolve your real-world self like an RPG character.",
-    longDescription: "Status Bar is a gamified life dashboard that transforms your routines, goals, and habits into an RPG-style progression system. Every action earns XP, levels, and achievements—giving you real-time feedback on your growth across multiple dimensions. It syncs with tools like Trello, Notion, and Slack to gamify both personal and team workflows. Whether you're building a startup, learning new skills, or chasing high-performance goals, Status Bar keeps score and helps you level up like a character in a game. It’s not just productivity—it’s your life, gamified.",
+    longDescription: "Status Bar is a gamified life dashboard that transforms your routines, goals, and habits into an RPG-style progression system. Every action earns XP, levels, and achievements—giving you real-time feedback on your growth across multiple dimensions. It syncs with tools like Trello, Notion, and Slack to gamify both personal and team workflows. Whether you're building a startup, learning new skills, or chasing high-performance goals, Status Bar keeps score and helps you level up like a character in a game. It's not just productivity—it's your life, gamified.",
     technologies: ['React', 'Node.js', 'MongoDB', 'Socket.io', 'n8n'],
-    url: 'https://guildboard.com',
+    url: 'https://statusbar.xyz/',
     keywords: ['Life RPG', 'Productivity tool', 'Life Management', 'guild management', 'Skill Coin'],
     featured: true
   },

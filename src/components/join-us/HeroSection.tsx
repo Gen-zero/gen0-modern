@@ -61,7 +61,7 @@ const HeroSection = ({ scrollToPositions, scrollToCulture }: HeroSectionProps) =
           </motion.h1>
           
           <motion.p 
-            className="text-lg md:text-xl text-muted-foreground mb-12 max-w-2xl mx-auto"
+            className="text-lg md:text-xl text-muted-foreground mb-8 max-w-2xl mx-auto"
             initial={{ y: 20, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             transition={{ duration: 0.7, delay: 0.2 }}

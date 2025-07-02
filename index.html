@@ -4,6 +4,64 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    
+    <!-- DNS prefetch for external resources -->
+    <link rel="dns-prefetch" href="//fonts.googleapis.com">
+    <link rel="dns-prefetch" href="//fonts.gstatic.com">
+    <link rel="dns-prefetch" href="//cdnjs.cloudflare.com">
+    <link rel="dns-prefetch" href="//cdn.jsdelivr.net">
+    
+    <!-- Preload critical resources -->
+    <link rel="preload" href="/src/main.tsx" as="script">
+    
+    <!-- Critical CSS inlined for instant rendering -->
+    <style>
+      :root {
+        --background: 222.2 84% 4.9%;
+        --foreground: 210 40% 98%;
+        --muted: 217.2 32.6% 17.5%;
+        --muted-foreground: 215 20.2% 65.1%;
+        --primary: 210 40% 98%;
+        --accent: 217.2 91.2% 59.8%;
+      }
+      
+      * { box-sizing: border-box; margin: 0; padding: 0; }
+      
+      body {
+        font-family: system-ui, -apple-system, sans-serif;
+        background-color: hsl(var(--background));
+        color: hsl(var(--foreground));
+        line-height: 1.5;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+      }
+      
+      #root { min-height: 100vh; }
+      
+      /* Critical loading skeleton */
+      .code-skeleton { position: relative; overflow: hidden; }
+      .code-skeleton .line {
+        height: 1rem;
+        background: linear-gradient(90deg, hsl(var(--muted)) 25%, hsl(var(--muted)/0.5) 50%, hsl(var(--muted)) 75%);
+        background-size: 200% 100%;
+        animation: shimmer 1.8s ease-in-out infinite;
+        border-radius: 4px;
+        margin-bottom: 0.5rem;
+      }
+      
+      @keyframes shimmer {
+        0% { background-position: -200% 0; }
+        100% { background-position: 200% 0; }
+      }
+      
+      /* Prevent cumulative layout shift */
+      img { height: auto; width: 100%; }
+      
+      /* Critical performance styles */
+      * { will-change: auto; }
+      .animate-on-scroll { transform: translateZ(0); }
+    </style>
+    
     <title>Gen0 | Digital Studio for 0 to 1 Transformation & Product Development</title>
     <meta name="description" content="Gen0 is a digital design studio that takes your ideas from 0 to 1. We specialize in MVP development, web design, UI/UX design, prompt engineering, and digital transformation services." />
     <meta name="author" content="Gen0 Digital Studio" />

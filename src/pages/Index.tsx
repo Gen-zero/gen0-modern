@@ -1,8 +1,3 @@
-import Navbar from "@/components/Navbar";
-import Hero from "@/components/Hero";
-import Services from "@/components/Services";
-import Projects from "@/components/Projects";
-import Contact from "@/components/Contact";
 import { useEffect, useState, memo, lazy, Suspense } from "react";
 import { useLocation } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
@@ -10,9 +5,10 @@ import useScrollAnimation from "@/hooks/useScrollAnimation";
 import EnhancedSEO from "@/components/EnhancedSEO";
 import usePerformanceMode from "@/hooks/usePerformanceMode";
 import { usePerformanceOptimization, useLazyLoad } from "@/hooks/usePerformanceOptimization";
-import LoadingSpinner from "@/components/LoadingSpinner";
 
-// Lazy load heavy components for better performance
+// Aggressive code splitting - lazy load ALL heavy components
+const LazyNavbar = lazy(() => import("@/components/Navbar"));
+const LazyHero = lazy(() => import("@/components/Hero"));
 const LazyServices = lazy(() => import("@/components/Services"));
 const LazyProjects = lazy(() => import("@/components/Projects"));
 const LazyContact = lazy(() => import("@/components/Contact"));
@@ -64,37 +60,58 @@ const Index = () => {
     }
   };
   
-  // Handle scrolling to sections
+  // Optimized resource loading and scrolling
   useEffect(() => {
+    // Preload critical resources
+    const preloadResources = () => {
+      // Preload fonts with optimized loading
+      const fontLink = document.createElement('link');
+      fontLink.rel = 'preload';
+      fontLink.as = 'font';
+      fontLink.type = 'font/woff2';
+      fontLink.href = 'https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@300;400;500;600;700&display=swap';
+      fontLink.crossOrigin = 'anonymous';
+      document.head.appendChild(fontLink);
+
+      // Add stylesheet with optimized loading
+      const styleLink = document.createElement('link');
+      styleLink.rel = 'stylesheet';
+      styleLink.href = 'https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@300;400;500;600;700&display=swap';
+      styleLink.media = 'print';
+      styleLink.onload = () => { styleLink.media = 'all'; };
+      document.head.appendChild(styleLink);
+
+      // Prefetch likely next pages
+      const prefetchPages = ['/about-us', '/projects', '/join-us'];
+      prefetchPages.forEach(page => {
+        const link = document.createElement('link');
+        link.rel = 'prefetch';
+        link.href = page;
+        document.head.appendChild(link);
+      });
+    };
+
     // Check if we have a section to scroll to from navigation
     const state = location.state as { scrollTo?: string } | null;
     if (state && state.scrollTo) {
       const element = document.getElementById(state.scrollTo);
       if (element) {
-        // Add a small delay to ensure the page has loaded
-        setTimeout(() => {
+        // Use requestAnimationFrame for better performance
+        requestAnimationFrame(() => {
           element.scrollIntoView({ 
             behavior: shouldReduceMotion ? 'auto' : 'smooth'
           });
-        }, 100);
+        });
       }
       
       // Clear the state after scrolling
       window.history.replaceState({}, document.title);
     }
-    
-    // Add fonts with better loading strategy
-    const link = document.createElement('link');
-    link.rel = 'stylesheet';
-    link.href = 'https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@300;400;500;600;700&display=swap';
-    link.setAttribute('media', 'print');
-    link.setAttribute('onload', "this.media='all'");
-    document.head.appendChild(link);
 
-    // Fallback for browsers that don't support onload
-    setTimeout(() => {
-      link.media = 'all';
-    }, 100);
+    // Load resources after a short delay to prioritize critical rendering
+    const timeoutId = setTimeout(preloadResources, 100);
+    
+    return () => clearTimeout(timeoutId);
   }, [location, shouldReduceMotion]);
 
   useEffect(() => {
@@ -216,10 +233,14 @@ const Index = () => {
           ]}
         />
         
-        <Navbar />
+        <Suspense fallback={<SectionLoader />}>
+          <LazyNavbar />
+        </Suspense>
         
         <motion.div variants={sectionVariants}>
-          <Hero />
+          <Suspense fallback={<SectionLoader />}>
+            <LazyHero />
+          </Suspense>
         </motion.div>
         
         {/* Services section with lazy loading */}
@@ -292,23 +313,40 @@ const Index = () => {
           </motion.p>
         </motion.div>
 
-        {/* Performance monitoring script for production */}
+        {/* Performance monitoring and optimization script */}
         {process.env.NODE_ENV === 'production' && (
-          <script>
-            {`
-              // Monitor Core Web Vitals
-              window.addEventListener('load', () => {
-                if ('PerformanceObserver' in window) {
-                  // Monitor LCP
-                  new PerformanceObserver((entryList) => {
-                    const entries = entryList.getEntries();
-                    const lastEntry = entries[entries.length - 1];
-                    console.log('LCP:', lastEntry.startTime);
-                  }).observe({entryTypes: ['largest-contentful-paint']});
+          <script
+            dangerouslySetInnerHTML={{
+              __html: `
+                // Optimize performance
+                if ('requestIdleCallback' in window) {
+                  requestIdleCallback(() => {
+                    // Monitor Core Web Vitals
+                    if ('PerformanceObserver' in window) {
+                      new PerformanceObserver((entryList) => {
+                        const entries = entryList.getEntries();
+                        const lastEntry = entries[entries.length - 1];
+                        console.log('LCP:', lastEntry.startTime);
+                      }).observe({entryTypes: ['largest-contentful-paint']});
+                    }
+                    
+                    // Preload likely resources
+                    const preloadImages = () => {
+                      const images = document.querySelectorAll('img[data-src]');
+                      images.forEach(img => {
+                        if (img.dataset.src) {
+                          const imageObj = new Image();
+                          imageObj.src = img.dataset.src;
+                        }
+                      });
+                    };
+                    
+                    setTimeout(preloadImages, 2000);
+                  });
                 }
-              });
-            `}
-          </script>
+              `
+            }}
+          />
         )}
       </motion.div>
     </AnimatePresence>

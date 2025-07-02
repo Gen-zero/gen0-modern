@@ -61,7 +61,7 @@ const HeroSection = ({ scrollToPositions, scrollToCulture }: HeroSectionProps) =
           </motion.h1>
           
           <motion.p 
-            className="text-lg md:text-xl text-muted-foreground mb-8 max-w-2xl mx-auto"
+            className="text-lg md:text-xl text-muted-foreground mb-12 max-w-2xl mx-auto"
             initial={{ y: 20, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             transition={{ duration: 0.7, delay: 0.2 }}
@@ -70,37 +70,12 @@ const HeroSection = ({ scrollToPositions, scrollToCulture }: HeroSectionProps) =
             Join our remote-first team and be part of something greater.
           </motion.p>
           
-          <motion.div
-            initial={{ y: 20, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            transition={{ duration: 0.7, delay: 0.3 }}
-            className="flex flex-col sm:flex-row gap-4 justify-center"
-          >
-            <Button 
-              variant="wave"
-              size="lg" 
-              onClick={scrollToPositions} 
-            >
-              <span className="relative z-10">See Open Positions</span>
-              <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1 relative z-10" />
-            </Button>
-            
-            <Button 
-              variant="wave"
-              size="lg" 
-              onClick={scrollToCulture} 
-            >
-              <span className="relative z-10">Learn About Our Culture</span>
-              <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1 relative z-10" />
-            </Button>
-          </motion.div>
-          
           {/* World Map */}
           <motion.div
             initial={{ y: 30, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
-            transition={{ duration: 0.8, delay: 0.5 }}
-            className="mt-16 max-w-4xl mx-auto"
+            transition={{ duration: 0.8, delay: 0.3 }}
+            className="mb-12 max-w-4xl mx-auto"
           >
             <WorldMap
               lineColor="hsl(var(--accent))"
@@ -137,6 +112,31 @@ const HeroSection = ({ scrollToPositions, scrollToCulture }: HeroSectionProps) =
                 },
               ]}
             />
+          </motion.div>
+          
+          <motion.div
+            initial={{ y: 20, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ duration: 0.7, delay: 0.5 }}
+            className="flex flex-col sm:flex-row gap-4 justify-center"
+          >
+            <Button 
+              variant="wave"
+              size="lg" 
+              onClick={scrollToPositions} 
+            >
+              <span className="relative z-10">See Open Positions</span>
+              <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1 relative z-10" />
+            </Button>
+            
+            <Button 
+              variant="wave"
+              size="lg" 
+              onClick={scrollToCulture} 
+            >
+              <span className="relative z-10">Learn About Our Culture</span>
+              <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1 relative z-10" />
+            </Button>
           </motion.div>
         </div>
       </div>

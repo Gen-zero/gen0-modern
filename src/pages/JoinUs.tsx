@@ -12,7 +12,6 @@ import CultureSection from "@/components/join-us/CultureSection";
 import WorkProcessSection from "@/components/join-us/WorkProcessSection";
 import ToolsSection from "@/components/join-us/ToolsSection";
 import PositionsSection from "@/components/join-us/PositionsSection";
-import CTASection from "@/components/join-us/CTASection";
 
 const JoinUs = () => {
   useScrollAnimation();
@@ -101,9 +100,6 @@ const JoinUs = () => {
       
       {/* Open Positions */}
       <PositionsSection goToContactSection={goToContactSection} />
-      
-      {/* CTA Section */}
-      <CTASection goToContactSection={goToContactSection} />
       
       <Footer />
     </motion.div>

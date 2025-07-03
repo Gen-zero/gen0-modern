@@ -4,17 +4,15 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/about/Footer";
 import SEO from "@/components/SEO";
 import useScrollAnimation from "@/hooks/useScrollAnimation";
-import { useState, Suspense, lazy } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import SectionLoader from "@/components/page/SectionLoader";
 
-// Lazy load components for better performance
-const HeroSection = lazy(() => import("@/components/join-us/HeroSection"));
-const CultureSection = lazy(() => import("@/components/join-us/CultureSection"));
-const WorkProcessSection = lazy(() => import("@/components/join-us/WorkProcessSection"));
-const ToolsSection = lazy(() => import("@/components/join-us/ToolsSection"));
-const PositionsSection = lazy(() => import("@/components/join-us/PositionsSection"));
-const CTASection = lazy(() => import("@/components/join-us/CTASection"));
+import HeroSection from "@/components/join-us/HeroSection";
+import CultureSection from "@/components/join-us/CultureSection";
+import WorkProcessSection from "@/components/join-us/WorkProcessSection";
+import ToolsSection from "@/components/join-us/ToolsSection";
+import PositionsSection from "@/components/join-us/PositionsSection";
+import CTASection from "@/components/join-us/CTASection";
 
 const JoinUs = () => {
   useScrollAnimation();
@@ -87,37 +85,25 @@ const JoinUs = () => {
       <Navbar />
       
       {/* Hero Section */}
-      <Suspense fallback={<SectionLoader />}>
-        <HeroSection 
-          scrollToPositions={scrollToPositions}
-          scrollToCulture={scrollToCulture}
-        />
-      </Suspense>
+      <HeroSection 
+        scrollToPositions={scrollToPositions}
+        scrollToCulture={scrollToCulture}
+      />
       
       {/* Our Culture Section */}
-      <Suspense fallback={<SectionLoader />}>
-        <CultureSection />
-      </Suspense>
+      <CultureSection />
       
       {/* How We Work Section */}
-      <Suspense fallback={<SectionLoader />}>
-        <WorkProcessSection />
-      </Suspense>
+      <WorkProcessSection />
       
       {/* Tools and Communication */}
-      <Suspense fallback={<SectionLoader />}>
-        <ToolsSection />
-      </Suspense>
+      <ToolsSection />
       
       {/* Open Positions */}
-      <Suspense fallback={<SectionLoader />}>
-        <PositionsSection goToContactSection={goToContactSection} />
-      </Suspense>
+      <PositionsSection goToContactSection={goToContactSection} />
       
       {/* CTA Section */}
-      <Suspense fallback={<SectionLoader />}>
-        <CTASection goToContactSection={goToContactSection} />
-      </Suspense>
+      <CTASection goToContactSection={goToContactSection} />
       
       <Footer />
     </motion.div>

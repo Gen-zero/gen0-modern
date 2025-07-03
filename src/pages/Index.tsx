@@ -2,42 +2,49 @@ import { useEffect, useState, lazy, Suspense } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import useScrollAnimation from "@/hooks/useScrollAnimation";
 import usePerformanceMode from "@/hooks/usePerformanceMode";
-import { usePerformanceOptimization, useLazyLoad } from "@/hooks/usePerformanceOptimization";
-import { useIndexPageSetup } from "@/hooks/useIndexPageSetup";
-import { createSectionVariants, createPageVariants } from "@/utils/animationVariants";
-import HomePageSEO from "@/components/seo/HomePageSEO";
-import PerformanceMonitor from "@/components/performance/PerformanceMonitor";
-import SectionLoader from "@/components/page/SectionLoader";
-import LazySection from "@/components/page/LazySection";
+import LoadingSpinner from "@/components/LoadingSpinner";
+import SEO from "@/components/SEO";
 
-// Aggressive code splitting - lazy load ALL heavy components
-const LazyNavbar = lazy(() => import("@/components/Navbar"));
-const LazyHero = lazy(() => import("@/components/Hero"));
-const LazyServices = lazy(() => import("@/components/Services"));
-const LazyProjects = lazy(() => import("@/components/Projects"));
-const LazyContact = lazy(() => import("@/components/Contact"));
+// Lazy load components for better performance
+const Navbar = lazy(() => import("@/components/Navbar"));
+const Hero = lazy(() => import("@/components/Hero"));
+const Services = lazy(() => import("@/components/Services"));
+const Projects = lazy(() => import("@/components/Projects"));
+const Contact = lazy(() => import("@/components/Contact"));
 
 const Index = () => {
-  const [isLoaded, setIsLoaded] = useState(false);
-  const { isLowEndDevice, shouldReduceMotion } = usePerformanceMode();
-  const performanceMetrics = usePerformanceOptimization();
+  const { shouldReduceMotion } = usePerformanceMode();
   
-  // Use scroll animations and page setup
+  // Use scroll animations
   useScrollAnimation();
-  useIndexPageSetup(shouldReduceMotion);
-
-  // Lazy loading refs for sections
-  const { ref: servicesRef, shouldLoad: shouldLoadServices } = useLazyLoad(0.1);
-  const { ref: projectsRef, shouldLoad: shouldLoadProjects } = useLazyLoad(0.1);
-  const { ref: contactRef, shouldLoad: shouldLoadContact } = useLazyLoad(0.1);
 
   // Animation variants
-  const sectionVariants = createSectionVariants(shouldReduceMotion);
-  const pageVariants = createPageVariants(shouldReduceMotion);
+  const sectionVariants = {
+    hidden: { 
+      opacity: 0, 
+      y: shouldReduceMotion ? 0 : 50 
+    },
+    visible: { 
+      opacity: 1, 
+      y: 0,
+      transition: { 
+        duration: shouldReduceMotion ? 0.3 : 0.8, 
+        ease: "easeOut" 
+      }
+    }
+  };
 
-  useEffect(() => {
-    setIsLoaded(true);
-  }, []);
+  const pageVariants = {
+    initial: { opacity: 0 },
+    animate: { 
+      opacity: 1,
+      transition: { 
+        duration: shouldReduceMotion ? 0.2 : 0.5, 
+        staggerChildren: shouldReduceMotion ? 0.1 : 0.2,
+      }
+    },
+    exit: { opacity: 0 }
+  };
 
 
   return (
@@ -49,67 +56,67 @@ const Index = () => {
         exit="exit"
         variants={pageVariants}
       >
-        <HomePageSEO />
+        <SEO 
+          title="Gen0 | Building AGI from India - Artificial General Intelligence Development"
+          description="Pioneering Artificial General Intelligence development from India's innovation ecosystem. Gen0 specializes in AGI research, infrastructure, applications, and ethics & safety."
+          keywords="Gen0, AGI, Artificial General Intelligence, AI development India, AGI research, AI infrastructure"
+          canonicalUrl="https://gen0.xyz/"
+        />
         
-        <Suspense fallback={<SectionLoader />}>
-          <LazyNavbar />
+        <Suspense fallback={<LoadingSpinner />}>
+          <Navbar />
         </Suspense>
         
         <motion.div variants={sectionVariants}>
-          <Suspense fallback={<SectionLoader />}>
-            <LazyHero />
+          <Suspense fallback={<LoadingSpinner />}>
+            <Hero />
           </Suspense>
         </motion.div>
         
-        {/* Services section with lazy loading */}
-        <LazySection 
+        <motion.div 
           variants={sectionVariants}
-          shouldLoad={shouldLoadServices}
-          className=""
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.2 }}
         >
-          <div ref={servicesRef}>
-            <LazyServices />
-          </div>
-        </LazySection>
+          <Suspense fallback={<LoadingSpinner />}>
+            <Services />
+          </Suspense>
+        </motion.div>
         
-        {/* Projects section with lazy loading */}
-        <LazySection 
+        <motion.div 
           variants={sectionVariants}
-          shouldLoad={shouldLoadProjects}
-          useViewport={true}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.2 }}
         >
-          <div ref={projectsRef}>
-            <LazyProjects />
-          </div>
-        </LazySection>
+          <Suspense fallback={<LoadingSpinner />}>
+            <Projects />
+          </Suspense>
+        </motion.div>
         
-        {/* Contact section with lazy loading */}
-        <LazySection 
+        <motion.div 
           variants={sectionVariants}
-          shouldLoad={shouldLoadContact}
-          useViewport={true}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.2 }}
         >
-          <div ref={contactRef}>
-            <LazyContact />
-          </div>
-        </LazySection>
+          <Suspense fallback={<LoadingSpinner />}>
+            <Contact />
+          </Suspense>
+        </motion.div>
         
-        {/* Copyright Section with simplified animation */}
+        {/* Copyright Section */}
         <motion.div 
           className="container mx-auto py-6 text-center text-muted-foreground text-sm border-t border-border/40 mt-10"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ delay: isLowEndDevice ? 0.3 : 1, duration: shouldReduceMotion ? 0.3 : 0.8 }}
+          transition={{ delay: 1, duration: shouldReduceMotion ? 0.3 : 0.8 }}
         >
-          <motion.p
-            whileHover={shouldReduceMotion ? {} : { color: "hsl(var(--accent))" }}
-            transition={{ duration: 0.3 }}
-          >
+          <p>
             © {new Date().getFullYear()} Gen0. All rights reserved.
-          </motion.p>
+          </p>
         </motion.div>
-
-        <PerformanceMonitor />
       </motion.div>
     </AnimatePresence>
   );

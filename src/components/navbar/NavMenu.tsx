@@ -68,9 +68,9 @@ const NavMenu = ({
           </button>
           
           <div className="flex flex-col mb-10 md:mb-16 px-[28px]">
-            <Link to="/" className="flex items-center gap-4 mb-6" onClick={toggleMenu}>
+            <Link to="/" className="flex items-center justify-start mb-6" onClick={toggleMenu}>
               <img src="/lovable-uploads/a9bfe93b-b4a8-45e7-b6ec-0ccf561e4234.png" alt="Gen0 Logo" className="h-16 object-contain" />
-              <div className="flex items-center gap-3">
+              <div className="flex items-center gap-3 ml-4">
                 <Sparkles className="text-accent h-6 w-6 animate-pulse-subtle" />
               </div>
             </Link>

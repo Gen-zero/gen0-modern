@@ -2,7 +2,9 @@ import { motion } from "framer-motion";
 import { Sparkles, Users } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
-import { WorldMap } from "@/components/ui/world-map";
+import { Suspense, lazy } from "react";
+
+const WorldMap = lazy(() => import("@/components/ui/world-map").then(module => ({ default: module.WorldMap })));
 interface HeroSectionProps {
   scrollToPositions: () => void;
   scrollToCulture: () => void;
@@ -84,67 +86,28 @@ const HeroSection = ({
           duration: 0.8,
           delay: 0.3
         }} className="mb-12 max-w-4xl mx-auto">
-            <WorldMap lineColor="hsl(var(--accent))" dots={[{
-            start: {
-              lat: 64.2008,
-              lng: -149.4937
-            },
-            // Alaska (Fairbanks)
-            end: {
-              lat: 34.0522,
-              lng: -118.2437
-            } // Los Angeles
-          }, {
-            start: {
-              lat: 64.2008,
-              lng: -149.4937
-            },
-            // Alaska (Fairbanks)
-            end: {
-              lat: -15.7975,
-              lng: -47.8919
-            } // Brazil (Brasília)
-          }, {
-            start: {
-              lat: -15.7975,
-              lng: -47.8919
-            },
-            // Brazil (Brasília)
-            end: {
-              lat: 38.7223,
-              lng: -9.1393
-            } // Lisbon
-          }, {
-            start: {
-              lat: 51.5074,
-              lng: -0.1278
-            },
-            // London
-            end: {
-              lat: 28.6139,
-              lng: 77.209
-            } // New Delhi
-          }, {
-            start: {
-              lat: 28.6139,
-              lng: 77.209
-            },
-            // New Delhi
-            end: {
-              lat: 43.1332,
-              lng: 131.9113
-            } // Vladivostok
-          }, {
-            start: {
-              lat: 28.6139,
-              lng: 77.209
-            },
-            // New Delhi
-            end: {
-              lat: -1.2921,
-              lng: 36.8219
-            } // Nairobi
-          }]} />
+            <Suspense fallback={
+              <div className="w-full aspect-[2/1] bg-muted/20 rounded-lg flex items-center justify-center">
+                <div className="code-skeleton w-32 h-16">
+                  <div className="line w-full h-4 mb-2" />
+                  <div className="line w-3/4 h-4" />
+                </div>
+              </div>
+            }>
+              <WorldMap 
+                lineColor="hsl(var(--accent))" 
+                dots={[
+                  {
+                    start: { lat: 28.6139, lng: 77.209 },
+                    end: { lat: 51.5074, lng: -0.1278 }
+                  },
+                  {
+                    start: { lat: 28.6139, lng: 77.209 },
+                    end: { lat: 34.0522, lng: -118.2437 }
+                  }
+                ]} 
+              />
+            </Suspense>
           </motion.div>
           
           <motion.div initial={{

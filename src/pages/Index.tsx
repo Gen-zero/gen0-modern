@@ -1,8 +1,8 @@
-import { useEffect, useState, lazy, Suspense } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { lazy, Suspense } from "react";
+import { MotionDiv, AnimatePresence } from "@/components/animations/LightweightMotion";
 import useScrollAnimation from "@/hooks/useScrollAnimation";
 import usePerformanceMode from "@/hooks/usePerformanceMode";
-import LoadingSpinner from "@/components/LoadingSpinner";
+import LoadingSpinnerLight from "@/components/LoadingSpinnerLight";
 import SEO from "@/components/SEO";
 
 // Lazy load components for better performance
@@ -35,26 +35,21 @@ const Index = () => {
   };
 
   const pageVariants = {
-    initial: { opacity: 0 },
-    animate: { 
-      opacity: 1,
-      transition: { 
-        duration: shouldReduceMotion ? 0.2 : 0.5, 
-        staggerChildren: shouldReduceMotion ? 0.1 : 0.2,
-      }
-    },
-    exit: { opacity: 0 }
+    hidden: { opacity: 0 },
+    visible: { 
+      opacity: 1
+    }
   };
 
 
   return (
-    <AnimatePresence mode="wait">
-      <motion.div 
+    <AnimatePresence>
+      <MotionDiv 
         className="min-h-screen bg-background"
-        initial="initial"
-        animate="animate"
-        exit="exit"
+        initial="hidden"
+        animate="visible"
         variants={pageVariants}
+        transition={{ duration: shouldReduceMotion ? 0.2 : 0.5 }}
       >
         <SEO 
           title="Gen0 | Building AGI from India - Artificial General Intelligence Development"
@@ -63,61 +58,65 @@ const Index = () => {
           canonicalUrl="https://gen0.xyz/"
         />
         
-        <Suspense fallback={<LoadingSpinner />}>
+        <Suspense fallback={<LoadingSpinnerLight />}>
           <Navbar />
         </Suspense>
         
-        <motion.div variants={sectionVariants}>
-          <Suspense fallback={<LoadingSpinner />}>
+        <MotionDiv variants={sectionVariants} transition={{ duration: shouldReduceMotion ? 0.3 : 0.8 }}>
+          <Suspense fallback={<LoadingSpinnerLight />}>
             <Hero />
           </Suspense>
-        </motion.div>
+        </MotionDiv>
         
-        <motion.div 
+        <MotionDiv 
           variants={sectionVariants}
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, amount: 0.2 }}
+          transition={{ duration: shouldReduceMotion ? 0.3 : 0.8 }}
         >
-          <Suspense fallback={<LoadingSpinner />}>
+          <Suspense fallback={<LoadingSpinnerLight />}>
             <Services />
           </Suspense>
-        </motion.div>
+        </MotionDiv>
         
-        <motion.div 
+        <MotionDiv 
           variants={sectionVariants}
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, amount: 0.2 }}
+          transition={{ duration: shouldReduceMotion ? 0.3 : 0.8 }}
         >
-          <Suspense fallback={<LoadingSpinner />}>
+          <Suspense fallback={<LoadingSpinnerLight />}>
             <Projects />
           </Suspense>
-        </motion.div>
+        </MotionDiv>
         
-        <motion.div 
+        <MotionDiv 
           variants={sectionVariants}
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, amount: 0.2 }}
+          transition={{ duration: shouldReduceMotion ? 0.3 : 0.8 }}
         >
-          <Suspense fallback={<LoadingSpinner />}>
+          <Suspense fallback={<LoadingSpinnerLight />}>
             <Contact />
           </Suspense>
-        </motion.div>
+        </MotionDiv>
         
         {/* Copyright Section */}
-        <motion.div 
+        <MotionDiv 
           className="container mx-auto py-6 text-center text-muted-foreground text-sm border-t border-border/40 mt-10"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
+          initial="hidden"
+          animate="visible"
+          variants={{ hidden: { opacity: 0 }, visible: { opacity: 1 } }}
           transition={{ delay: 1, duration: shouldReduceMotion ? 0.3 : 0.8 }}
         >
           <p>
             © {new Date().getFullYear()} Gen0. All rights reserved.
           </p>
-        </motion.div>
-      </motion.div>
+        </MotionDiv>
+      </MotionDiv>
     </AnimatePresence>
   );
 };

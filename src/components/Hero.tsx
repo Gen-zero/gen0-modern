@@ -1,9 +1,10 @@
 
-import React, { useEffect, useState, useRef, memo } from 'react';
+import React, { useEffect, useState, memo } from 'react';
 import { Button } from './ui/button';
 import { ArrowRight, GraduationCap, Users, TrendingUp } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { useIsSmallScreen } from '@/hooks/use-small-screen';
+import { useFadeIn } from '@/hooks/useLightweightAnimation';
 
 // Memoize the words array to avoid recreation on each render
 const words = ['BUILD', 'CODE', 'DESIGN', 'IDEATE'];
@@ -14,21 +15,15 @@ const Hero = memo(() => {
   const isSmallScreen = useIsSmallScreen();
   const [currentWordIndex, setCurrentWordIndex] = useState(0);
   const [displayedWord, setDisplayedWord] = useState(words[0]);
-  const heroRef = useRef<HTMLElement>(null);
-  const vantaEffect = useRef<any>(null);
-  const [vantaInitialized, setVantaInitialized] = useState(false);
-  const [dependenciesLoaded, setDependenciesLoaded] = useState(false);
-  // Use ref to avoid recreation of functions
-  const animationTimerRef = useRef<NodeJS.Timeout | null>(null);
+  const [animationTimerRef, setAnimationTimerRef] = useState<NodeJS.Timeout | null>(null);
+  const fadeIn = useFadeIn(true, { duration: 800 });
   
-  // Optimized scramble word function to reduce calculations
   const scrambleWord = (finalWord: string) => {
     let iteration = 0;
     const totalIterations = finalWord.length;
     
-    // Clear any existing interval to prevent memory leaks
-    if (animationTimerRef.current) {
-      clearInterval(animationTimerRef.current);
+    if (animationTimerRef) {
+      clearInterval(animationTimerRef);
     }
     
     const scrambleInterval = setInterval(() => {
@@ -48,10 +43,9 @@ const Hero = memo(() => {
       }
     }, 50);
     
-    animationTimerRef.current = scrambleInterval;
+    setAnimationTimerRef(scrambleInterval);
   };
   
-  // Word animation effect with cleanup
   useEffect(() => {
     setDisplayedWord(words[0]);
     const interval = setInterval(() => {
@@ -64,67 +58,11 @@ const Hero = memo(() => {
     
     return () => {
       clearInterval(interval);
-      if (animationTimerRef.current) {
-        clearInterval(animationTimerRef.current);
+      if (animationTimerRef) {
+        clearInterval(animationTimerRef);
       }
     };
   }, []);
-  
-  // Optimized VANTA loading logic
-  useEffect(() => {
-    // Check if dependencies already exist in window
-    if (typeof window !== 'undefined' && window.THREE && window.VANTA) {
-      setDependenciesLoaded(true);
-    } else {
-      // Only poll for dependencies a limited number of times to avoid performance hit
-      let attempts = 0;
-      const maxAttempts = 10;
-      
-      const intervalId = setInterval(() => {
-        attempts++;
-        if ((window.THREE && window.VANTA) || attempts >= maxAttempts) {
-          if (window.THREE && window.VANTA) {
-            setDependenciesLoaded(true);
-          }
-          clearInterval(intervalId);
-        }
-      }, 200);
-      
-      return () => clearInterval(intervalId);
-    }
-  }, []);
-  
-  // Initialize VANTA with proper cleanup
-  useEffect(() => {
-    if (dependenciesLoaded && heroRef.current && !vantaInitialized && window.VANTA) {
-      try {
-        // Reduce the complexity of VANTA effects for lower performance devices
-        vantaEffect.current = window.VANTA.CELLS({
-          el: heroRef.current,
-          mouseControls: true,
-          touchControls: true,
-          gyroControls: false,
-          minHeight: 200.00,
-          minWidth: 200.00,
-          scale: 1.00,
-          color1: 0x0,
-          color2: 0x8c35f2,
-          size: isSmallScreen ? 1.00 : 2.00, // Reduced size for better performance
-          speed: 2.00, // Reduced speed for better performance
-          THREE: window.THREE
-        });
-        setVantaInitialized(true);
-      } catch (error) {
-        console.error("Error initializing VANTA:", error);
-      }
-    }
-    
-    return () => {
-      if (vantaEffect.current) {
-        vantaEffect.current.destroy();
-      }
-    };
-  }, [dependenciesLoaded, isSmallScreen, heroRef]);
   
   // Performance optimized navigation function
   const scrollToProjects = () => {
@@ -136,9 +74,12 @@ const Hero = memo(() => {
     }
   };
   
-  // Use the CSS variable for hero image to optimize image loading
   return (
-    <section ref={heroRef} id="home" className="min-h-screen flex items-center justify-center pt-8 overflow-hidden relative">
+    <section 
+      id="home" 
+      className="min-h-screen flex items-center justify-center pt-8 overflow-hidden relative"
+      style={{ opacity: fadeIn.opacity }}
+    >
       <div className="absolute inset-0 bg-gradient-to-br from-secondary/20 to-background -z-10"></div>
       
       {/* Reduced animation complexity */}

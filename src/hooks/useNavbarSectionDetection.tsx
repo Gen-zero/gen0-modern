@@ -15,7 +15,36 @@ export const useNavbarSectionDetection = () => {
     scrollDirection
   } = useNavbar();
   
-  const { isHomePage, location } = useNavbarRoute();
+  const { 
+    isHomePage, 
+    isJoinUsPage, 
+    isAboutPage,
+    isProjectsPage,
+    isPrivacyPage,
+    isTermsPage,
+    isCookiePage,
+    isBlogPage,
+    location 
+  } = useNavbarRoute();
+
+  // Set fixed section titles for non-home pages
+  useEffect(() => {
+    if (isJoinUsPage && activeSection !== 'Join Us') {
+      setActiveSection('Join Us');
+    } else if (isAboutPage && activeSection !== 'Our Story') {
+      setActiveSection('Our Story');
+    } else if (isProjectsPage && activeSection !== 'Projects') {
+      setActiveSection('Projects');
+    } else if (isPrivacyPage && activeSection !== 'Privacy') {
+      setActiveSection('Privacy');
+    } else if (isTermsPage && activeSection !== 'Terms') {
+      setActiveSection('Terms');
+    } else if (isCookiePage && activeSection !== 'Cookies') {
+      setActiveSection('Cookies');
+    } else if (isBlogPage && activeSection !== 'Blog') {
+      setActiveSection('Blog');
+    }
+  }, [location.pathname, isJoinUsPage, isAboutPage, isProjectsPage, isPrivacyPage, isTermsPage, isCookiePage, isBlogPage, activeSection, setActiveSection]);
 
   useEffect(() => {
     // Only run section detection on the home page

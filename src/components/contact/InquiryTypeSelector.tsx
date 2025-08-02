@@ -18,7 +18,7 @@ const InquiryTypeSelector = ({
     <div className="mb-6">
       <FormItem>
         <FormLabel>What can we help you with?</FormLabel>
-        <Select value={defaultValue} onValueChange={onValueChange}>
+        <Select defaultValue={defaultValue} onValueChange={onValueChange}>
           <FormControl>
             <SelectTrigger>
               <SelectValue placeholder="Select your inquiry type" />

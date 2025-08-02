@@ -51,16 +51,13 @@ const ContactForm = ({ inquiryOptions, projectOptions, initialFormType }: Contac
     },
   });
 
-  // Sync form type with URL parameter changes
+  // Set initial form type based on URL parameter
   useEffect(() => {
     if (initialFormType && inquiryOptions.some(option => option.value === initialFormType)) {
-      // Only update if the current selection doesn't match the URL parameter
-      if (selectedInquiry !== initialFormType) {
-        setSelectedInquiry(initialFormType as InquiryType);
-        form.setValue('purpose', initialFormType);
-      }
+      setSelectedInquiry(initialFormType as InquiryType);
+      form.setValue('purpose', initialFormType);
     }
-  }, [initialFormType, form, inquiryOptions, selectedInquiry]);
+  }, [initialFormType, form, inquiryOptions]);
 
   const getCurrentInquiry = () => {
     return inquiryOptions.find(option => option.value === selectedInquiry) || inquiryOptions[0];

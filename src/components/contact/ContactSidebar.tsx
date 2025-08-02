@@ -40,6 +40,38 @@ const ContactSidebar = () => {
       }
     }
   };
-  return;
+  return (
+    <motion.div 
+      className="animate-fade-in"
+      variants={containerVariants}
+      initial="hidden"
+      animate="visible"
+    >
+      <div className="space-y-8">
+        <div>
+          <div className="flex items-center gap-2 mb-6">
+            <Sparkles className="h-5 w-5 text-accent" />
+            <h3 className="text-xl font-semibold font-condensed">Get in Touch</h3>
+          </div>
+          
+          <div className="space-y-6">
+            {contactInfo.map((info, index) => (
+              <motion.div key={index} variants={itemVariants}>
+                <ContactInfo 
+                  icon={info.icon}
+                  title={info.title}
+                  details={info.details}
+                />
+              </motion.div>
+            ))}
+          </div>
+        </div>
+        
+        <motion.div variants={itemVariants}>
+          <SocialLinks />
+        </motion.div>
+      </div>
+    </motion.div>
+  );
 };
 export default ContactSidebar;

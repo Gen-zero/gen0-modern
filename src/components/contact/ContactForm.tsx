@@ -28,6 +28,7 @@ const ContactForm = ({ inquiryOptions, projectOptions, initialFormType }: Contac
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [selectedInquiry, setSelectedInquiry] = useState<InquiryType>('general');
   const [selectedProjects, setSelectedProjects] = useState<string[]>([]);
+  const [isExternallyTriggered, setIsExternallyTriggered] = useState(false);
   const { toast } = useToast();
 
   const form = useForm<FormValues>({
@@ -51,11 +52,17 @@ const ContactForm = ({ inquiryOptions, projectOptions, initialFormType }: Contac
     },
   });
 
-  // Set initial form type based on URL parameter
+  // Set initial form type based on URL parameter (external navigation only)
   useEffect(() => {
     if (initialFormType && inquiryOptions.some(option => option.value === initialFormType)) {
       setSelectedInquiry(initialFormType as InquiryType);
       form.setValue('purpose', initialFormType);
+      setIsExternallyTriggered(true);
+    } else {
+      // Always default to general if no external trigger
+      setSelectedInquiry('general');
+      form.setValue('purpose', 'general');
+      setIsExternallyTriggered(false);
     }
   }, [initialFormType, form, inquiryOptions]);
 
@@ -64,8 +71,15 @@ const ContactForm = ({ inquiryOptions, projectOptions, initialFormType }: Contac
   };
 
   const handleInquiryChange = (value: string) => {
-    setSelectedInquiry(value as InquiryType);
-    form.setValue('purpose', value);
+    // Only allow change if externally triggered, otherwise keep general
+    if (isExternallyTriggered) {
+      setSelectedInquiry(value as InquiryType);
+      form.setValue('purpose', value);
+    } else {
+      // Reset to general if user tries to change via dropdown
+      setSelectedInquiry('general');
+      form.setValue('purpose', 'general');
+    }
   };
 
   const handleProjectSelectionChange = (projectId: string) => {
@@ -173,7 +187,8 @@ const ContactForm = ({ inquiryOptions, projectOptions, initialFormType }: Contac
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
         <InquiryTypeSelector 
           inquiryOptions={inquiryOptions}
-          defaultValue={selectedInquiry}
+          defaultValue="general"
+          value={selectedInquiry}
           onValueChange={handleInquiryChange}
         />
 

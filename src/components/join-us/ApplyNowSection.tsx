@@ -56,7 +56,7 @@ const ApplyNowSection = () => {
         <div className="text-center mb-16 md:max-w-2xl mx-auto">
           <span className="block font-medium text-accent mb-3 text-8xl">Apply Now</span>
           
-          <p className="text-muted-foreground text-lg">
+          <p className="text-muted-foreground text-lg mx-0 my-[28px]">
             Take the next step in your career journey. We're excited to learn about your skills and how you can contribute to our mission.
           </p>
         </div>

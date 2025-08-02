@@ -2,7 +2,6 @@ import { GraduationCap, Handshake, HeartHandshake, MailQuestion, TrendingUp, Use
 import ContactForm from '../contact/ContactForm';
 import ContactSidebar from '../contact/ContactSidebar';
 import { InquiryOption, Project } from '../contact/types';
-
 const ApplyNowSection = () => {
   const projectOptions: Project[] = [{
     id: '1',
@@ -21,7 +20,6 @@ const ApplyNowSection = () => {
     name: 'Kaali Punk',
     description: 'Kaali Punk is the first real superhero VI, a mix of human and AI, your mentor, big bro, and truth-seeker in a world of illusions 🕉️.'
   }];
-
   const inquiryOptions: InquiryOption[] = [{
     value: 'general',
     label: 'General Inquiry',
@@ -53,13 +51,11 @@ const ApplyNowSection = () => {
     icon: <TrendingUp className="h-4 w-4" />,
     placeholder: "I'm interested in investment opportunities with your company..."
   }];
-
-  return (
-    <section id="apply-now" className="py-20 md:py-32 bg-background">
+  return <section id="apply-now" className="py-20 md:py-32 bg-background">
       <div className="container mx-auto md:px-12 px-[50px] py-0">
         <div className="text-center mb-16 md:max-w-2xl mx-auto">
           <span className="block font-medium text-accent mb-3 text-8xl">Apply Now</span>
-          <h2 className="text-3xl font-semibold mb-6 md:text-3xl font-condensed text-gray-50">Ready to join our team?</h2>
+          
           <p className="text-muted-foreground text-lg">
             Take the next step in your career journey. We're excited to learn about your skills and how you can contribute to our mission.
           </p>
@@ -74,8 +70,6 @@ const ApplyNowSection = () => {
           <ContactSidebar />
         </div>
       </div>
-    </section>
-  );
+    </section>;
 };
-
 export default ApplyNowSection;

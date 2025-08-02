@@ -40,47 +40,6 @@ const ContactSidebar = () => {
       }
     }
   };
-  return <motion.div className="space-y-10" initial="hidden" animate="visible" variants={containerVariants}>
-      <motion.div variants={itemVariants}>
-        <h3 className="text-xl font-semibold mb-6 flex items-center gap-2">
-          Get in touch
-          <motion.span animate={{
-          rotate: 10
-        }} transition={{
-          duration: 2,
-          repeat: Infinity,
-          repeatType: "reverse"
-        }}>
-            <Sparkles className="h-4 w-4 text-accent" />
-          </motion.span>
-        </h3>
-        <div className="space-y-6">
-          {contactInfo.map((info, index) => <motion.div key={index} initial={{
-          x: -20,
-          opacity: 0
-        }} animate={{
-          x: 0,
-          opacity: 1
-        }} transition={{
-          delay: 0.3 + index * 0.1,
-          duration: 0.5
-        }} whileHover={{
-          scale: 1.03,
-          transition: {
-            duration: 0.2
-          }
-        }}>
-              <ContactInfo icon={info.icon} title={info.title} details={info.details} />
-            </motion.div>)}
-        </div>
-      </motion.div>
-      
-      
-      
-      <motion.div variants={itemVariants}>
-        <h3 className="text-xl font-semibold mb-6">Follow us</h3>
-        <SocialLinks />
-      </motion.div>
-    </motion.div>;
+  return;
 };
 export default ContactSidebar;

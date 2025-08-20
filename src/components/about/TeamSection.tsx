@@ -26,7 +26,7 @@ const TeamSection = () => {
   }, {
     id: 1,
     name: "Kalidasan P E M",
-    position: "Co-Founder and CTO",
+    position: "Co-Founder and CEO",
     bio: "An avid gamer, coder, and the builder of visions. Kalidasan is the brother who thrives in the realm of logic and code, transforming abstract ideas into tangible realities. While his brother pushes the boundaries of possibility, he fine-tunes those visions into gamified environments, enabling people to evolve into something much more. He lives to build, to create, and to code his way through challenges, turning every project into a leveled-up experience.",
     personalDetail: "When he's not building worlds in code, he's having fun bringing his brother's crazy visions to life, stacking XP in the game of creation.",
     imgUrl: "https://ik.imagekit.io/kalidaspem/894146aa-4ab3-4820-b55b-55478d7507a9.jpg?updatedAt=1742559972090",
@@ -56,7 +56,7 @@ const TeamSection = () => {
       linkedin: "https://linkedin.com/in/yedhu-krishna",
       behance: "https://behance.net/yedhukrishna"
     }
-  }, {
+  }, /* {
     id: 3,
     name: "Harshita Macom",
     position: "Full-Stack Developer",
@@ -71,6 +71,22 @@ const TeamSection = () => {
     socialLinks: {
       linkedin: "https://linkedin.com/in/harshita-macom",
       github: "https://github.com/harshitamacom"
+    } */
+   {
+    id: 3,
+    name: "Vaibhav Kumar",
+    position: "Full-Stack Developer",
+    bio: "A coder at heart, he transforms raw ideas into seamless, intelligent systems. Passionate about automation, AI, and problem-solving, he treats every project like a new level to conquer. For him, challenges are opportunities, and code is the tool to shape possibilities into realities—always creating, always evolving, always leveling up.",
+    personalDetail: "When he's not coding, he's meditating",
+    imgUrl: "https://ik.imagekit.io/kalidaspem/a-soft-studio-portrait-of-the-referenced_9giUqaejQDOqEXcuXm9Tww_-cUbXmeiQ7Kp2GBlH52lEQ.jpeg?updatedAt=1755694225759",
+    expertise: ["python","java","springboot","n8n","Mysql"],
+    location: "Jharkhand, India",
+    experience: "Fresher",
+    education: "Computer Science (Final Year)",
+    achievements: ["GDG Solution Challenge Finalist", "Smart India Hackathon Winner", "Google Build with AI Showcase"],
+    socialLinks: {
+      linkedin: "https://linkedin.com/in/harshita-macom",
+      github: "https://github.com/harshitamacom"
     }
   }, {
     id: 4,
@@ -80,7 +96,7 @@ const TeamSection = () => {
     personalDetail: "When he's not shipping features or solving scalability puzzles, he's probably deep in thought—mapping out the next big idea or musing over the poetry of clean code. He builds not just with skill, but with soul.",
     imgUrl: "https://ik.imagekit.io/kalidaspem/DeWatermark.ai_1742651326709.png",
     expertise: ["Full-Stack Engineering", "backend Architecture", "MVP Launch Strategy", "Product Development", "Client Collaboration"],
-    location: "Tamil Nadu, India",
+    location: "Kerala, India",
     experience: "7+ years",
     education: "Software Engineering",
     achievements: ["Scaled products to 10K+ users", "Global client portfolio", "Technical mentor"],

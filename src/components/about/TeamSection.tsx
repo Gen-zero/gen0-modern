@@ -12,7 +12,7 @@ const TeamSection = () => {
     position: "Founder & Advisor",
     bio: "A visionary leader with a deep-rooted curiosity for human evolution, biotech, and spirituality. Manu is the brother who dreams beyond boundaries, pushing the edges of possibility while grounding his insights in scientific rigor. With a mind tuned to the deeper mysteries of life, he combines the metaphysical with the practical, creating solutions that bridge the seen and the unseen, the known and the unknown. His journey is a testament to growth, consciousness, and the relentless pursuit of progress.",
     personalDetail: "When he's not solving complex problems, he's conjuring up new visions, exploring the frontiers of thought, and finding fresh perspectives on the art of creation.",
-    imgUrl: "https://ik.imagekit.io/kalidaspem/c46019ce-faea-4d33-b80c-b78d9da6d500.jpg?updatedAt=1742559972141",
+    imgUrl: "https://ik.imagekit.io/kalidaspem/a-striking-studio-portrait-photograph-of_rrjcGP-7QJ64dnsrj0iIWQ_pUV6Tgr0QEq8p4V5UbcMag(1).jpeg",
     expertise: ["Prompt Engineering", "0 to 1 Product Development", "UX Designer", "Strategic Planning", "Branding", "Sales"],
     // Enhanced trust signals
     location: "India",
@@ -29,7 +29,7 @@ const TeamSection = () => {
     position: "Co-Founder and CEO",
     bio: "An avid gamer, coder, and the builder of visions. Kalidasan is the brother who thrives in the realm of logic and code, transforming abstract ideas into tangible realities. While his brother pushes the boundaries of possibility, he fine-tunes those visions into gamified environments, enabling people to evolve into something much more. He lives to build, to create, and to code his way through challenges, turning every project into a leveled-up experience.",
     personalDetail: "When he's not building worlds in code, he's having fun bringing his brother's crazy visions to life, stacking XP in the game of creation.",
-    imgUrl: "https://ik.imagekit.io/kalidaspem/894146aa-4ab3-4820-b55b-55478d7507a9.jpg?updatedAt=1742559972090",
+    imgUrl: "https://ik.imagekit.io/kalidaspem/a-cinematic-studio-portrait-of-a-young-s_tjZqzAj-QR2XUaQMR1INcQ_HGzMm9-HT7-Al9-0bg5Vpw.jpeg",
     expertise: ["Web Development", "MVP Building", "Prompt Engineering", "Backend Systems", "UI Design"],
     // Enhanced trust signals
     location: "India",

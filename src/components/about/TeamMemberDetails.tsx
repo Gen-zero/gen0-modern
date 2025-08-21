@@ -1,7 +1,7 @@
 
 import React, { useEffect, useState, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { X } from 'lucide-react';
+import { X, ChevronLeft, ChevronRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { type TeamMemberProps } from './TeamMemberCard';
@@ -11,12 +11,20 @@ interface TeamMemberDetailsProps {
   member: TeamMemberProps;
   isOpen: boolean;
   onClose: () => void;
+  onPrevious?: () => void;
+  onNext?: () => void;
+  hasPrevious?: boolean;
+  hasNext?: boolean;
 }
 
 const TeamMemberDetails: React.FC<TeamMemberDetailsProps> = ({ 
   member, 
   isOpen, 
-  onClose 
+  onClose,
+  onPrevious,
+  onNext,
+  hasPrevious = false,
+  hasNext = false
 }) => {
   const [typedBio, setTypedBio] = useState('');
   const bioRef = useRef<HTMLParagraphElement>(null);
@@ -38,15 +46,25 @@ const TeamMemberDetails: React.FC<TeamMemberDetailsProps> = ({
     return () => clearInterval(timer);
   }, [isOpen, member.bio]);
   
-  // Handle escape key press
+  // Handle keyboard navigation
   useEffect(() => {
-    const handleEscape = (e: KeyboardEvent) => {
-      if (e.key === 'Escape' && isOpen) onClose();
+    const handleKeydown = (e: KeyboardEvent) => {
+      if (!isOpen) return;
+      
+      if (e.key === 'Escape') {
+        onClose();
+      } else if (e.key === 'ArrowLeft' && hasPrevious && onPrevious) {
+        e.preventDefault();
+        onPrevious();
+      } else if (e.key === 'ArrowRight' && hasNext && onNext) {
+        e.preventDefault();
+        onNext();
+      }
     };
     
-    window.addEventListener('keydown', handleEscape);
-    return () => window.removeEventListener('keydown', handleEscape);
-  }, [isOpen, onClose]);
+    window.addEventListener('keydown', handleKeydown);
+    return () => window.removeEventListener('keydown', handleKeydown);
+  }, [isOpen, onClose, onPrevious, onNext, hasPrevious, hasNext]);
   
   return (
     <AnimatePresence>
@@ -75,6 +93,31 @@ const TeamMemberDetails: React.FC<TeamMemberDetailsProps> = ({
             >
               <X className="h-4 w-4" />
             </Button>
+            
+            {/* Navigation arrows */}
+            {hasPrevious && onPrevious && (
+              <Button
+                variant="ghost"
+                size="icon"
+                className="absolute left-4 top-1/2 -translate-y-1/2 z-[70] bg-background/80 hover:bg-background/90 backdrop-blur-sm"
+                onClick={onPrevious}
+                aria-label="Previous team member"
+              >
+                <ChevronLeft className="h-5 w-5" />
+              </Button>
+            )}
+            
+            {hasNext && onNext && (
+              <Button
+                variant="ghost"
+                size="icon"
+                className="absolute right-4 top-1/2 -translate-y-1/2 z-[70] bg-background/80 hover:bg-background/90 backdrop-blur-sm"
+                onClick={onNext}
+                aria-label="Next team member"
+              >
+                <ChevronRight className="h-5 w-5" />
+              </Button>
+            )}
             
             <div className="grid grid-cols-1 md:grid-cols-2 h-full">
               {/* Image section - Fixed */}

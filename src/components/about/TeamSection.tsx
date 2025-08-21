@@ -6,6 +6,34 @@ import TeamMemberCard, { TeamMemberProps } from "./TeamMemberCard";
 import TeamMemberDetails from "./TeamMemberDetails";
 const TeamSection = () => {
   const [selectedMember, setSelectedMember] = useState<TeamMemberProps | null>(null);
+  const [selectedMemberIndex, setSelectedMemberIndex] = useState<number>(-1);
+  
+  const handleMemberSelect = (member: TeamMemberProps) => {
+    const index = teamMembers.findIndex(m => m.id === member.id);
+    setSelectedMember(member);
+    setSelectedMemberIndex(index);
+  };
+  
+  const navigateToPrevious = () => {
+    if (selectedMemberIndex > 0) {
+      const newIndex = selectedMemberIndex - 1;
+      setSelectedMember(teamMembers[newIndex]);
+      setSelectedMemberIndex(newIndex);
+    }
+  };
+  
+  const navigateToNext = () => {
+    if (selectedMemberIndex < teamMembers.length - 1) {
+      const newIndex = selectedMemberIndex + 1;
+      setSelectedMember(teamMembers[newIndex]);
+      setSelectedMemberIndex(newIndex);
+    }
+  };
+  
+  const handleClose = () => {
+    setSelectedMember(null);
+    setSelectedMemberIndex(-1);
+  };
   const teamMembers: TeamMemberProps[] = [{
     id: 0,
     name: "Manu Narayanan",
@@ -203,7 +231,7 @@ const TeamSection = () => {
       }} transition={{
         duration: 0.5
       }}>
-          {teamMembers.map(member => <TeamMemberCard key={member.id} member={member} onClick={() => setSelectedMember(member)} />)}
+          {teamMembers.map(member => <TeamMemberCard key={member.id} member={member} onClick={() => handleMemberSelect(member)} />)}
         </motion.div>
 
         {/* Additional trust signals */}
@@ -211,7 +239,17 @@ const TeamSection = () => {
       </div>
 
       {/* Expanded team member details */}
-      {selectedMember && <TeamMemberDetails member={selectedMember} isOpen={!!selectedMember} onClose={() => setSelectedMember(null)} />}
+      {selectedMember && (
+        <TeamMemberDetails 
+          member={selectedMember} 
+          isOpen={!!selectedMember} 
+          onClose={handleClose}
+          onPrevious={navigateToPrevious}
+          onNext={navigateToNext}
+          hasPrevious={selectedMemberIndex > 0}
+          hasNext={selectedMemberIndex < teamMembers.length - 1}
+        />
+      )}
     </>;
 };
 export default TeamSection;

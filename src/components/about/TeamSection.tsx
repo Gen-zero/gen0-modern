@@ -103,6 +103,34 @@ const TeamSection = () => {
     socialLinks: {
       linkedin: "https://linkedin.com/in/kannan-s-gen0"
     }
+  }, {
+    id: 5,
+    name: "Anubind C Biju",
+    position: "Video Editor",
+    bio: "Anubind is a visual storyteller with a strong creative core. With a passion for photography, video editing, and cinematic expression, he sees the world through a lens that blends detail with emotion. Whether he's crafting sharp visuals, refining a timeline, or designing something that feels right, his work speaks with clarity and style.",
+    personalDetail: "When he’s not immersed in the creative grind, Anubind dives into the things that fuel his spirit — watching anime, getting lost in movies, or gaming to unwind.",
+    imgUrl: "https://ik.imagekit.io/kalidaspem/0002_4_a-sophisticated-studio-portrait-showcasi_40G6JMuoQLC8OL5fIDglbA_Yy06_F_kRkOBYwls83blzQ.jpeg",
+    expertise: ["Photography","Videography","Video Editing","Photo Editing","Creative Direction","Basic Programming & Tools"],
+    experience: "Student",
+    education: "Software Engineering",
+    achievements: ["Lead media team of IEDC", "Organize Events"],
+    socialLinks: {
+      linkedin: "https://www.linkedin.com/in/anubind-c-biju-b54577291/"
+    }
+  }, {
+    id: 6,
+    name: "Adityan B",
+    position: "Video Editor",
+    bio: "A creator at heart, a builder by nature. Adhithyan blends logic with imagination to bring bold ideas to life—whether it’s coding smart systems, designing intuitive interfaces, or crafting visuals that speak louder than words. From web apps to IoT gadgets, he thrives at the intersection of tech and creativity. Driven by the belief that learning should feel like play, he’s on a mission to make innovation more accessible, one project at a time.",
+    personalDetail: "When he’s not soldering wires or sketching out user flows, Adhithyan’s editing timelines or designing posters, turning even the smallest ideas into experiences that pop. For him, every build is a chance to explore, experiment, and evolve.",
+    imgUrl: "https://ik.imagekit.io/kalidaspem/0001_3_a-sophisticated-studio-portrait-in-a-fas_PzOl_NciTZSqQnPb_owQ5w_Z1IzDrWYRVCWWA4p7vybvA.jpeg",
+    expertise: ["IoT & Embedded Systems","Web Development","Graphic Design", "Video Editing"],
+    experience: "Student",
+    education: "Computer Science",
+    achievements: ["Scaled products to 10K+ users", "Global client portfolio", "Technical mentor"],
+    socialLinks: {
+      linkedin: "https://linkedin.com/in/kannan-s-gen0"
+    }
   }];
 
   // Enhanced structured data with more trust signals

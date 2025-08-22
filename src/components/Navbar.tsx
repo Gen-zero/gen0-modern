@@ -72,7 +72,7 @@ const Navbar = () => {
             : 'bg-background/30 backdrop-blur-md'
         } p-3 rounded-lg border border-white/10 overflow-hidden`}
         style={{ 
-          width: '200px',
+          width: '300px',
           transition: 'width 0.4s ease-in-out',
           boxShadow: isScrolled ? '0 4px 20px rgba(0, 0, 0, 0.1)' : '0 2px 10px rgba(0, 0, 0, 0.05)'
         }}

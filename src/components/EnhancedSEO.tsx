@@ -32,11 +32,11 @@ const EnhancedSEO = ({
   canonicalUrl = 'https://gen0.xyz',
   ogTitle,
   ogDescription,
-  ogImage = '/lovable-uploads/82543c4a-707b-40ad-9352-e934e6252d4f.png',
+  ogImage = '/lovable-uploads/ee84fdfe-ba5d-4ccf-acad-c575de3d4633.png',
   ogType = 'website',
   twitterTitle,
   twitterDescription,
-  twitterImage = '/lovable-uploads/82543c4a-707b-40ad-9352-e934e6252d4f.png',
+  twitterImage = '/lovable-uploads/ee84fdfe-ba5d-4ccf-acad-c575de3d4633.png',
   linkedinTitle,
   linkedinDescription,
   linkedinImage,
@@ -57,7 +57,7 @@ const EnhancedSEO = ({
     "url": "https://gen0.xyz",
     "logo": {
       "@type": "ImageObject",
-      "url": "https://gen0.xyz/lovable-uploads/82543c4a-707b-40ad-9352-e934e6252d4f.png"
+      "url": "https://gen0.xyz/lovable-uploads/ee84fdfe-ba5d-4ccf-acad-c575de3d4633.png"
     },
     "description": "Digital innovation studio specializing in 0 to 1 product development, MVP building, and GenZ-focused solutions.",
     "founder": [

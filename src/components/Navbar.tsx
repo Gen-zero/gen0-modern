@@ -83,7 +83,7 @@ const Navbar = () => {
           </button>
           
           <Link to="/" className="flex items-center justify-center mx-4">
-            <img src="/lovable-uploads/ee84fdfe-ba5d-4ccf-acad-c575de3d4633.png" alt="Gen0 Logo" className="h-11 object-contain" />
+            <img src="/lovable-uploads/ee84fdfe-ba5d-4ccf-acad-c575de3d4633.png" alt="Gen0 Logo" className="h-15 object-contain" />
           </Link>
           
           <div className="flex items-center gap-2">

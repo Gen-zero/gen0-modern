@@ -69,8 +69,8 @@ const ServiceHeader = ({
       }} className="mt-4 w-24 h-1 bg-gradient-to-r from-orange-400 to-yellow-400 rounded-full" />
         
         <motion.p className="mt-6 text-center text-gray-400 max-w-3xl mx-auto text-lg" variants={itemVariants}>
-          Pioneering the future of Artificial General Intelligence from India's innovation ecosystem. 
-          We're building the next generation of AI that thinks, learns, and evolves like never before.
+          Pioneering the future of <span className="line-through decoration-orange-400">Artificial</span> Aligned General Intelligence from India's
+          innovation ecosystem. We're building the next generation of AI that thinks, learns, and evolves like never before.
         </motion.p>
         
         <motion.div className="mt-4 flex items-center gap-2 text-sm text-orange-400" variants={itemVariants}>

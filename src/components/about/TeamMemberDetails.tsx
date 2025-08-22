@@ -1,7 +1,7 @@
 
 import React, { useEffect, useState, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { X, ChevronLeft, ChevronRight } from 'lucide-react';
+import { X, ChevronLeft, ChevronRight, Linkedin } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { type TeamMemberProps } from './TeamMemberCard';
@@ -185,6 +185,20 @@ const TeamMemberDetails: React.FC<TeamMemberDetailsProps> = ({
                       {member.personalDetail}
                     </div>
                   </motion.div>
+
+                  {member.socialLinks?.linkedin && (
+                    <div className="mt-6">
+                      <a
+                        href={member.socialLinks.linkedin}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center p-2 rounded-full text-muted-foreground bg-primary/5 hover:bg-primary/10 hover:text-primary transition-colors duration-200"
+                      >
+                        <Linkedin className="h-5 w-5 transition-transform hover:scale-105" />
+                        <span className="sr-only">LinkedIn</span>
+                      </a>
+                    </div>
+                  )}
                 </div>
               </ScrollArea>
             </div>

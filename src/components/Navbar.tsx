@@ -72,7 +72,7 @@ const Navbar = () => {
             : 'bg-background/30 backdrop-blur-md'
         } p-3 rounded-lg border border-white/10 overflow-hidden`}
         style={{ 
-          width: '300px',
+          width: '250px',
           transition: 'width 0.4s ease-in-out',
           boxShadow: isScrolled ? '0 4px 20px rgba(0, 0, 0, 0.1)' : '0 2px 10px rgba(0, 0, 0, 0.05)'
         }}
@@ -83,7 +83,7 @@ const Navbar = () => {
           </button>
           
           <Link to="/" className="flex items-center justify-center mx-4">
-            <img src="/lovable-uploads/a9bfe93b-b4a8-45e7-b6ec-0ccf561e4234.png" alt="Gen0 Logo" className="h-11 object-contain" />
+            <img src="/lovable-uploads/ee84fdfe-ba5d-4ccf-acad-c575de3d4633.png" alt="Gen0 Logo" className="h-11 object-contain" />
           </Link>
           
           <div className="flex items-center gap-2">

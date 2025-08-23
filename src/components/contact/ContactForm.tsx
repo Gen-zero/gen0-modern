@@ -60,8 +60,10 @@ const ContactForm = ({ inquiryOptions, projectOptions, initialFormType }: Contac
       setIsExternallyTriggered(true);
     } else {
       // Always default to general if no external trigger
-      setSelectedInquiry('general');
-      form.setValue('purpose', 'general');
+      // Set first available option as default if no general option
+      const firstOption = inquiryOptions[0]?.value || 'general';
+      setSelectedInquiry(firstOption as InquiryType);
+      form.setValue('purpose', firstOption);
       setIsExternallyTriggered(false);
     }
   }, [initialFormType, form, inquiryOptions]);
@@ -71,15 +73,10 @@ const ContactForm = ({ inquiryOptions, projectOptions, initialFormType }: Contac
   };
 
   const handleInquiryChange = (value: string) => {
-    // Only allow change if externally triggered, otherwise keep general
-    if (isExternallyTriggered) {
-      setSelectedInquiry(value as InquiryType);
-      form.setValue('purpose', value);
-    } else {
-      // Reset to general if user tries to change via dropdown
-      setSelectedInquiry('general');
-      form.setValue('purpose', 'general');
-    }
+    setSelectedInquiry(value as InquiryType);
+    form.setValue('purpose', value);
+    // Clear external trigger state when user manually selects
+    setIsExternallyTriggered(false);
   };
 
   const handleProjectSelectionChange = (projectId: string) => {
@@ -167,7 +164,8 @@ const ContactForm = ({ inquiryOptions, projectOptions, initialFormType }: Contac
         linkedinProfile: '',
       });
       
-      setSelectedInquiry('general');
+      const firstOption = inquiryOptions[0]?.value || 'general';
+      setSelectedInquiry(firstOption as InquiryType);
       setSelectedProjects([]);
       
     } catch (error) {

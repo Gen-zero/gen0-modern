@@ -48,7 +48,7 @@ const TeamSection = () => {
     education: "Biotechnology & Spiritual Studies",
     achievements: ["Published researcher in biotech", "Spiritual wellness advocate", "Product strategy consultant"],
     socialLinks: {
-      linkedin: "https://linkedin.com/in/manu-narayanan-gen0",
+      linkedin: "https://www.linkedin.com/in/manu-narayanan-027525276/",
       twitter: "https://twitter.com/manu_gen0"
     }
   }, {
@@ -65,7 +65,7 @@ const TeamSection = () => {
     education: "Computer Science & Engineering",
     achievements: ["Full-stack architect for 10+ products", "Open source contributor", "Gaming technology innovator"],
     socialLinks: {
-      linkedin: "https://linkedin.com/in/kalidasan-pem",
+      linkedin: "https://www.linkedin.com/in/kalidas-75b323298/",
       github: "https://github.com/kalidaspem"
     }
   }, {
@@ -113,7 +113,7 @@ const TeamSection = () => {
     education: "Computer Science (Final Year)",
     achievements: ["GDG Solution Challenge Finalist", "Smart India Hackathon Winner", "Google Build with AI Showcase"],
     socialLinks: {
-      linkedin: "https://linkedin.com/in/harshita-macom",
+      linkedin: "https://www.linkedin.com/in/vaibhav-kumar-9404461b0/",
       github: "https://github.com/harshitamacom"
     }
   }, {
@@ -157,7 +157,7 @@ const TeamSection = () => {
     education: "Computer Science",
     achievements: ["Scaled products to 10K+ users", "Global client portfolio", "Technical mentor"],
     socialLinks: {
-      linkedin: "https://linkedin.com/in/kannan-s-gen0"
+      linkedin: "https://www.linkedin.com/in/adhithyan-h-nair/"
     }
   }];
 

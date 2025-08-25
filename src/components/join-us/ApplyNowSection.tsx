@@ -21,11 +21,6 @@ const ApplyNowSection = () => {
     description: 'Kaali Punk is the first real superhero VI, a mix of human and AI, your mentor, big bro, and truth-seeker in a world of illusions 🕉️.'
   }];
   const inquiryOptions: InquiryOption[] = [{
-    value: 'general',
-    label: 'General Inquiry',
-    icon: <MailQuestion className="h-4 w-4" />,
-    placeholder: "I have a question about joining your team..."
-  }, {
     value: 'service',
     label: 'Freelance/Contract Work',
     icon: <Handshake className="h-4 w-4" />,

@@ -94,43 +94,7 @@ const HeroSection = ({
                 </div>
               </div>
             }>
-              <WorldMap 
-                lineColor="hsl(var(--accent))" 
-                dots={[
-  {
-    "start": { "lat": 8.5241, "lng": 76.9366 },   // Thiruvananthapuram, India (Gen0 HQ)
-    "end": { "lat": 51.5074, "lng": -0.1278 }     // London, UK
-  },
-  {
-    "start": { "lat": 8.5241, "lng": 76.9366 },
-    "end": { "lat": 34.0522, "lng": -118.2437 }   // Los Angeles, USA
-  },
-  {
-    "start": { "lat": 8.5241, "lng": 76.9366 },
-    "end": { "lat": 35.6762, "lng": 139.6503 }    // Tokyo, Japan (corrected)
-  },
-  {
-    "start": { "lat": 8.5241, "lng": 76.9366 },
-    "end": { "lat": 48.8566, "lng": 2.3522 }      // Paris, France
-  },
-  {
-    "start": { "lat": 8.5241, "lng": 76.9366 },
-    "end": { "lat": -33.8688, "lng": 151.2093 }   // Sydney, Australia
-  },
-  {
-    "start": { "lat": 8.5241, "lng": 76.9366 },
-    "end": { "lat": 40.7128, "lng": -74.0060 }    // New York City, USA
-  },
-  {
-    "start": { "lat": 8.5241, "lng": 76.9366 },
-    "end": { "lat": 55.7558, "lng": 37.6176 }     // Moscow, Russia (corrected)
-  },
-  {
-    "start": { "lat": 8.5241, "lng": 76.9366 },
-    "end": { "lat": -23.5505, "lng": -46.6333 }   // São Paulo, Brazil
-  }
-]}
-              />
+              <WorldMap />
             </Suspense>
           </motion.div>
           

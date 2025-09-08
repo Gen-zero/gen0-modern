@@ -64,24 +64,13 @@ export function WorldMap({
           const endPoint = projectPoint(dot.end.lat, dot.end.lng);
           return (
             <g key={`path-group-${i}`}>
-              <motion.path
+              <path
                 d={createCurvedPath(startPoint, endPoint)}
                 fill="none"
                 stroke="url(#path-gradient)"
                 strokeWidth="1"
-                initial={{
-                  pathLength: 0,
-                }}
-                animate={{
-                  pathLength: 1,
-                }}
-                transition={{
-                  duration: 2,
-                  delay: 0.3 * i,
-                  ease: "easeInOut",
-                }}
                 key={`start-upper-${i}`}
-              ></motion.path>
+              />
             </g>
           );
         })}

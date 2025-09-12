@@ -84,7 +84,7 @@ const Contact = () => {
   return <section id="contact" className="py-20 md:py-32">
       <div className="container mx-auto md:px-12 px-[50px] py-0">
         <div className="text-center mb-16 md:max-w-2xl mx-auto">
-          <span className="block font-medium text-accent mb-3 text-7xl md:text-8xl lg:text-9xl xl:text-[10rem] 2xl:text-[12rem]">Contact Us</span>
+          <span className="block font-medium text-accent mb-3 text-6xl md:text-7xl lg:text-8xl xl:text-[8rem] 2xl:text-[10rem]">Contact Us</span>
           <h2 className="text-3xl font-semibold mb-6 md:text-3xl font-condensed text-gray-50">Let's start a conversation</h2>
           <p className="text-muted-foreground text-lg">
             Have a project in mind or want to learn more about how we can help your business? We'd love to hear from you.

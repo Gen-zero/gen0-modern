@@ -58,7 +58,7 @@ const HeroSection = ({
           delay: 0.1
         }}>
             Join Us in Building <br className="hidden md:block" />
-            
+            the Future
           </motion.h1>
           
           <motion.p className="text-lg md:text-xl text-muted-foreground mt-4 mb-8 max-w-2xl mx-auto" initial={{

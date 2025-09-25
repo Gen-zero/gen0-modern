@@ -11,6 +11,7 @@ import HeroSection from "@/components/join-us/HeroSection";
 import CultureSection from "@/components/join-us/CultureSection";
 import WorkProcessSection from "@/components/join-us/WorkProcessSection";
 import ToolsSection from "@/components/join-us/ToolsSection";
+import WhoWeAreLookingForSection from "@/components/join-us/WhoWeAreLookingForSection";
 import PositionsSection from "@/components/join-us/PositionsSection";
 import ApplyNowSection from "@/components/join-us/ApplyNowSection";
 
@@ -98,6 +99,9 @@ const JoinUs = () => {
       
       {/* Tools and Communication */}
       <ToolsSection />
+      
+      {/* Who We're Looking For */}
+      <WhoWeAreLookingForSection />
       
       {/* Open Positions */}
       <PositionsSection goToContactSection={goToContactSection} />

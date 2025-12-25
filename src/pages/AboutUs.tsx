@@ -66,11 +66,6 @@ const AboutUs = () => {
       "employee": [
         {
           "@type": "Person",
-          "name": "Yedhu Krishna",
-          "jobTitle": "Creative Director"
-        },
-        {
-          "@type": "Person",
           "name": "Kannan S",
           "jobTitle": "Backend Developer"
         }
